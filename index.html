@@ -28,13 +28,18 @@
             width: 100%;
             background: linear-gradient(135deg, #d32f2f, #b71c1c);
             color: white;
-            padding: 35px 20px;
+            padding: 20px 20px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             box-shadow: none;
             z-index: 1000;
-			min-height: 90px;
+            min-height: 110px;
+        }
+        
+        .header-content {
+            flex-grow: 1;
+            text-align: center;
         }
         
         .logo {
@@ -43,9 +48,16 @@
             color: #FFFFFF;
             text-shadow: none;
             text-align: center;
-            flex-grow: 1;
-			margin-top: -5px;
-			line-height: 0.3;
+            line-height: 1.1;
+            margin-top: 0;
+        }
+        
+        .tagline {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 5px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
         
         /* Hamburger Menu */
@@ -58,7 +70,7 @@
             padding: 5px 10px;
             border-radius: 4px;
             transition: background-color 0.3s;
-			margin-top: 0;
+            margin-top: 0;
         }
         
         .hamburger:hover {
@@ -82,6 +94,7 @@
             border-radius: 4px;
             overflow: hidden;
             z-index: 1001;
+            border: 1px solid #eee;
         }
         
         .dropdown-content a {
@@ -104,7 +117,7 @@
         /* Main Content Area */
         .main-content {
             flex: 1;
-            margin-top: 90px;
+            margin-top: 130px;
             margin-bottom: 10px;
             background-color: white;
             padding: 30px 20px;
@@ -158,12 +171,22 @@
         
         /* Responsive Design */
         @media (max-width: 768px) {
+            header {
+                padding: 15px 15px;
+                min-height: 100px;
+            }
+            
             .logo {
-                font-size: 22px;
+                font-size: 28px;
+            }
+            
+            .tagline {
+                font-size: 12px;
+                margin-top: 4px;
             }
             
             .main-content {
-                margin-top: 90px;
+                margin-top: 115px;
                 padding: 30px 15px;
             }
             
@@ -174,26 +197,37 @@
         
         @media (max-width: 480px) {
             header {
-                padding: 18px 15px;
+                padding: 12px 12px;
+                min-height: 90px;
             }
             
             .logo {
                 font-size: 24px;
             }
             
+            .tagline {
+                font-size: 11px;
+                margin-top: 3px;
+                letter-spacing: 0.3px;
+            }
+            
             .hamburger {
                 font-size: 20px;
             }
-			.main-content {
-			margin-top: 80px;
-    }
+            
+            .main-content {
+                margin-top: 105px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Fixed Header -->
     <header>
-        <div class="logo">Sanjay Paras Medical Equipment</div>
+        <div class="header-content">
+            <div class="logo">Sanjay Paras</div>
+            <div class="tagline">Kolkata's Most Trusted Laboratory Equipment Supplier</div>
+        </div>
         
         <!-- Hamburger Menu with Dropdown -->
         <div class="dropdown">

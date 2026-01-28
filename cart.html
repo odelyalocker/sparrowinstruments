@@ -1,1 +1,279 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanjay Paras Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+        
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            color: white;
+            padding: 7px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: none;
+            z-index: 1000;
+            min-height: 50px;
+        }
+        
+        .header-content {
+            flex-grow: 1;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 35px;
+            font-weight: bold;
+            color: #FFFFFF;
+            text-shadow: none;
+            text-align: center;
+            line-height: 1.1;
+            margin-top: 0;
+        }
+        
+        .tagline {
+            font-size: 16px;
+            color: #FFFFFF;
+            margin-top: 5px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Black Header Section - NEW */
+        .black-header {
+            position: fixed;
+            top: 75px;
+            left: 0;
+            width: 100%;
+            background-color: #000000;
+            color: white;
+            padding: 7px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            min-height: 50px;
+        }
+        
+        .black-header-left {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .black-header-link {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .black-header-link:hover {
+            color: #FFFFFF;
+        }
+        
+        
+        /* Main Content Area - UPDATED margin-top */
+        .main-content {
+            flex: 1;
+            margin-top: 100px;
+            margin-bottom: 10px;
+            background-color: white;
+            padding: 30px 20px;
+            text-align: center;
+            color: #555;
+        }
+        
+        .content-placeholder {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        
+        .content-placeholder h2 {
+            color: #444;
+            margin-bottom: 15px;
+        }
+        
+        .content-placeholder p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            color: white;
+            text-align: center;
+            padding: 7px;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-title {
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+        
+        .copyright {
+            font-size: 14px;
+            color: #FFFFFF;
+        }
+        
+        /* Responsive Design - UPDATED */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 15px;
+                min-height: 100px;
+            }
+            
+            .logo {
+                font-size: 28px;
+            }
+            
+            .tagline {
+                font-size: 12px;
+                margin-top: 4px;
+                color: #FFFFFF;
+            }
+            
+            .black-header {
+                top: 100px; /* Updated to match red header height */
+                padding: 10px 15px;
+                min-height: 45px;
+            }
+            
+            .black-header-left {
+                gap: 15px;
+            }
+            
+            .black-header-link {
+                font-size: 14px;
+				color: #FFFFFF;
+            }
+            
+            
+            .main-content {
+                margin-top: 145px; /* 100px (red header) + 45px (black header) = 145px */
+                padding: 30px 15px;
+            }
+            
+        }
+        
+        @media (max-width: 480px) {
+            header {
+                padding: 12px 12px;
+                min-height: 90px;
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+            
+            .tagline {
+                font-size: 11px;
+                margin-top: 3px;
+                letter-spacing: 0.3px;
+                color: #FFFFFF;
+            }
+            
+            .black-header {
+                top: 90px; /* Updated to match red header height */
+                padding: 8px 12px;
+                min-height: 40px;
+            }
+            
+            .black-header-left {
+                gap: 10px;
+                justify-content: space-around;
+            }
+            
+            .black-header-link {
+                font-size: 12px;
+				color: #FFFFFF;
+            }
+            
+            .black-header-right {
+                gap: 10px;
+            }
+            
+            .main-content {
+                margin-top: 130px; /* 90px (red header) + 40px (black header) = 130px */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">Sanjay Paras - Your Order & Cart</div>
+            <div class="tagline">Physics, Chemistry and Biology Laboratory Equipment Retail Supplier in Kolkata</div>
+        </div>
+        
+    </header>
+    
+    <!-- Black Header Section - NEW -->
+    <div class="black-header">
+    <div class="black-header-left">
+        <a href="/sanjayparas/index.html" class="black-header-link">Home</a>
+        <a href="/sanjayparas/biolab.html" class="black-header-link">Bio Lab</a>
+        <a href="/sanjayparas/physlab.html" class="black-header-link">Phys Lab</a>
+        <a href="/sanjayparas/chemlab.html" class="black-header-link">Chem Lab</a>
+        <a href="/sanjayparas/contact.html" class="black-header-link">Contact</a>
+        <a href="/sanjayparas/about.html" class="black-header-link">About</a>
+    </div>
+</div>
+    
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <div class="content-placeholder">
+            <h2>Welcome to Sanjay Paras Website</h2>
+            <p>This is a pure white content area ready for your content.</p>
+            <p>You can add text, images, videos, or any other HTML elements here later.</p>
+            <p>The header and footer have a red gradient background with fixed positioning.</p>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-title">A product of Sanjay Paras</div>
+            <div class="copyright">© 2023 All rights reserved.</div>
+        </div>
+    </footer>
 
+</body>
+</html>

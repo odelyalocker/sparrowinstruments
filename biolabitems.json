@@ -22,27 +22,7 @@
     ],
     "keywords": ["microscope", "biology", "compound", "magnification", "lab equipment"]
 },
-  {
-    "id": 2,
-    "name": "Digital Centrifuge Machine",
-    "category": "Biology Lab",
-    "image": "/sanjayparas/bioimg/centrifuge1.jpg",
-    "price": "₹28,500",
-    "originalPrice": "₹32,000",
-    "discount": "-11%",
-    "warranty": "3 Years Service Warranty",
-    "description": [
-      "Digital display centrifuge with precise speed control",
-      "Maximum speed: 6000 RPM, Capacity: 6 x 15ml tubes",
-      "Stainless steel rotor with automatic imbalance detection",
-      "Timer function with memory storage"
-    ],
-    "specifications": [
-      "Max Speed: 6000 RPM",
-      "Capacity: 6 x 15ml tubes",
-      "Timer: 1-99 minutes",
-      "Power: 220V, 50Hz"
-    ],
-    "keywords": ["centrifuge", "digital", "biology", "lab machine", "separator"]
-  },
+
+
+  
 ]

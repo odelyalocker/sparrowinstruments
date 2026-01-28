@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-IN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,7 +60,46 @@
             letter-spacing: 0.5px;
         }
         
-        /* Black Header Section - NEW */
+        /* Cart Button - UPDATED */
+        .cart-button {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #FFFFFF; /* White background */
+            color: #d32f2f; /* Red text color */
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: bold; /* Bold font */
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-button:hover {
+            background-color: #f8f8f8; /* Slightly darker white on hover */
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .cart-button i {
+            font-size: 18px;
+            color: #d32f2f; /* Red icon color */
+            font-weight: bold;
+        }
+        
+        .cart-button span {
+            color: #d32f2f; /* Red text color */
+            font-weight: bold;
+        }
+        
+        /* Black Header Section */
         .black-header {
             position: fixed;
             top: 75px;
@@ -97,7 +136,7 @@
         }
         
         
-        /* Main Content Area - UPDATED margin-top */
+        /* Main Content Area */
         .main-content {
             flex: 1;
             margin-top: 100px;
@@ -152,7 +191,7 @@
             color: #FFFFFF;
         }
         
-        /* Responsive Design - UPDATED */
+        /* Responsive Design */
         @media (max-width: 768px) {
             header {
                 padding: 15px 15px;
@@ -169,8 +208,18 @@
                 color: #FFFFFF;
             }
             
+            .cart-button {
+                right: 15px;
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+            
+            .cart-button i {
+                font-size: 16px;
+            }
+            
             .black-header {
-                top: 100px; /* Updated to match red header height */
+                top: 100px;
                 padding: 10px 15px;
                 min-height: 45px;
             }
@@ -181,15 +230,13 @@
             
             .black-header-link {
                 font-size: 14px;
-				color: #FFFFFF;
+                color: #FFFFFF;
             }
-            
             
             .main-content {
-                margin-top: 145px; /* 100px (red header) + 45px (black header) = 145px */
+                margin-top: 145px;
                 padding: 30px 15px;
             }
-            
         }
         
         @media (max-width: 480px) {
@@ -209,8 +256,19 @@
                 color: #FFFFFF;
             }
             
+            .cart-button {
+                right: 12px;
+                padding: 5px 10px;
+                font-size: 12px;
+                gap: 5px;
+            }
+            
+            .cart-button i {
+                font-size: 14px;
+            }
+            
             .black-header {
-                top: 90px; /* Updated to match red header height */
+                top: 90px;
                 padding: 8px 12px;
                 min-height: 40px;
             }
@@ -222,15 +280,11 @@
             
             .black-header-link {
                 font-size: 12px;
-				color: #FFFFFF;
-            }
-            
-            .black-header-right {
-                gap: 10px;
+                color: #FFFFFF;
             }
             
             .main-content {
-                margin-top: 130px; /* 90px (red header) + 40px (black header) = 130px */
+                margin-top: 130px;
             }
         }
     </style>
@@ -243,19 +297,24 @@
             <div class="tagline">Physics, Chemistry and Biology Laboratory Equipment Retail Supplier in Kolkata</div>
         </div>
         
+        <!-- Cart Button - UPDATED -->
+        <a href="cart.html" class="cart-button">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Cart</span>
+        </a>
     </header>
     
-    <!-- Black Header Section - NEW -->
+    <!-- Black Header Section -->
     <div class="black-header">
-    <div class="black-header-left">
-        <a href="/sanjayparas/index.html" class="black-header-link">Home</a>
-        <a href="/sanjayparas/biolab.html" class="black-header-link">Bio Lab</a>
-        <a href="/sanjayparas/physlab.html" class="black-header-link">Phys Lab</a>
-        <a href="/sanjayparas/chemlab.html" class="black-header-link">Chem Lab</a>
-        <a href="/sanjayparas/contact.html" class="black-header-link">Contact</a>
-        <a href="/sanjayparas/about.html" class="black-header-link">About</a>
+        <div class="black-header-left">
+            <a href="index.html" class="black-header-link">Home</a>
+            <a href="biolab.html" class="black-header-link">Bio Lab</a>
+            <a href="physlab.html" class="black-header-link">Phys Lab</a>
+            <a href="chemlab.html" class="black-header-link">Chem Lab</a>
+            <a href="contact.html" class="black-header-link">Contact</a>
+            <a href="about.html" class="black-header-link">About</a>
+        </div>
     </div>
-</div>
     
     <!-- Main Content Area -->
     <main class="main-content">
@@ -277,7 +336,3 @@
 
 </body>
 </html>
-
-
-
-

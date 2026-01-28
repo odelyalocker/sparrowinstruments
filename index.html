@@ -439,6 +439,14 @@
             font-weight: bold;
         }
 
+        .discount-badge {
+            background: #ff4444;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+        }
 
         /* Center Column: Name + Specifications + Warranty */
         .result-center {
@@ -953,48 +961,25 @@ function searchItems() {
                     ? item.specifications.map(spec => `<li>${spec}</li>`).join('')
                     : '';
                 
-resultItem.innerHTML = `
-    <div class="result-content">
-        <!-- Left: Image + Price -->
-        <div class="result-left">
-            <div class="result-image">
-                <img src="${item.image || 'placeholder.jpg'}" alt="${item.name}" onerror="this.src='placeholder.jpg'">
-            </div>
-            <div class="price-box">
-                <div class="mrp-line">
-                    <span class="mrp-label">M.R.P.</span>
-                    <span class="mrp-price">INR ${item.mrpPrice || '0'}/-</span>
-                </div>
-                <div class="bestbuy-line">
-                    <span class="bestbuy-label">Buy : </span>
-                    <span class="bestbuy-price" style="font-size: 17px;">INR ${item.bestBuyPrice || '0'}/-</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Center: Name + Specs + Warranty -->
-        <div class="result-center">
-            <h4 class="item-name">${item.name}</h4>
-            
-            <div class="specs-section">
-                ${specsHTML ? `
-                <strong>Specifications:</strong>
-                <ul>${specsHTML}</ul>` : ''}
-                
-                <strong>Warranty:</strong> ${item.warranty || 'Not specified'}
-            </div>
-        </div>
-        
-        <!-- Right: Description -->
-        <div class="result-right">
-            <div class="description-section">
-                <strong>Descriptions:</strong>
-                <ul>${descriptionHTML}</ul>
-            </div>
-        </div>
-    </div>
-`;
-
+                resultItem.innerHTML = `
+                    <div class="result-content">
+                        <!-- Left: Image + Price -->
+                        <div class="result-left">
+                            <div class="result-image">
+                                <img src="${item.image || 'placeholder.jpg'}" alt="${item.name}" onerror="this.src='placeholder.jpg'">
+                            </div>
+                            <div class="price-box">
+                                <div class="mrp-line">
+                                    <span class="mrp-label">M.R.P.</span>
+                                    <span class="mrp-price">INR ${item.mrpPrice || '0'}/-</span>
+                                </div>
+                                <div class="bestbuy-line">
+    <span class="bestbuy-label">Buy</span>
+    <span class="bestbuy-price" style="font-size: 17px;">INR ${item.bestBuyPrice || '0'}/-</span>
+    <span class="discount-badge">(-${item.discount || '0'}%)</span>
+</div>
+                            </div>
+                        </div>
                         
                         <!-- Center: Name + Specs + Warranty -->
                         <div class="result-center">
@@ -1073,4 +1058,3 @@ window.addEventListener('DOMContentLoaded', loadJSONFiles);
 
 </body>
 </html>
-

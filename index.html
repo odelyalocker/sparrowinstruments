@@ -361,153 +361,159 @@
             color: #FFFFFF;
         }
 
-        /* ===== SEARCH RESULTS LAYOUT ===== */
-        .result-item {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            border: 2px solid #000000;
-            margin-bottom: 20px;
-            width: 100%;
-        }
+/* ===== SEARCH RESULTS LAYOUT ===== */
+.result-item {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    border: 2px solid #000000;
+    margin-bottom: 20px;
+    width: 100%;
+}
 
-        .result-content {
-            display: grid;
+.result-content {
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 30px;
     align-items: start;
-        }
+}
 
-        /* Left Column: Image + Price */
-        grid-column: 1; /* First column */
-    	display: flex;
-    	flex-direction: column;
-    	gap: 15px;
-        }
+/* Left Column: Image + Price */
+.result-left {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
-        .result-image {
-            margin-bottom: 15px;
-        }
+.result-image {
+    margin-bottom: 15px;
+}
 
-        .result-image img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-        }
+.result-image img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
 
-        .price-box {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
-        }
+.price-box {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
 
-        .mrp-line {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            padding-bottom: 10px;
-            border-bottom: 1px dashed #ccc;
-        }
+.mrp-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ccc;
+}
 
-        .mrp-label {
-            color: #666;
-            font-size: 14px;
-            font-weight: 500;
-        }
+.mrp-label {
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+}
 
-        .mrp-price {
-            color: #888;
-            text-decoration: line-through;
-            font-size: 16px;
-        }
+.mrp-price {
+    color: #888;
+    text-decoration: line-through;
+    font-size: 16px;
+}
 
-        .bestbuy-line {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.bestbuy-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .bestbuy-label {
-            color: #d32f2f;
-            font-weight: bold;
-            font-size: 16px;
-        }
+.bestbuy-label {
+    color: #d32f2f;
+    font-weight: bold;
+    font-size: 16px;
+}
 
-        .bestbuy-price {
-            color: #d32f2f;
-            font-size: 17px;
-            font-weight: bold;
-        }
+.bestbuy-price {
+    color: #d32f2f;
+    font-size: 17px;
+    font-weight: bold;
+}
 
-        /* Center Column: Name + Specifications + Warranty */
-        .result-center {
-            grid-column: 2;
-   			 min-width: 0;
-        }
+/* Center Column: Name + Specifications + Warranty */
+.result-center {
+    grid-column: 2;
+    min-width: 0;
+}
 
-        .item-name {
-            color: #1565c0;
-            font-size: 24px;
-            font-weight: 800;
-            margin: 0 0 20px 0;
-            line-height: 1.2;
-        }
+.item-name {
+    color: #1565c0;
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0 0 15px 0;
+    line-height: 1.2;
+}
 
-        .specs-section {
-            margin-bottom: 20px;
-        }
+.specs-section {
+    margin-bottom: 0; /* Changed from 20px to 0 */
+}
 
-        .specs-section strong {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-size: 16px;
-        }
+.specs-section strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 16px;
+}
 
-        .specs-section ul {
-            margin: 5px 0 5px 20px;
-            color: #555;
-        }
+.specs-section ul {
+    margin: 5px 0 5px 20px;
+    color: #555;
+}
 
-        .specs-section li {
-            margin-bottom: 6px;
-            line-height: 1.4;
-        }
+.specs-section li {
+    margin-bottom: 6px;
+    line-height: 1.4;
+}
 
-        /* Right Column: Description */
-        .result-right {
-            grid-column: 3;
-            min-width: 0;
-        }
+/* Right Column: Description */
+.result-right {
+    grid-column: 3;
+    min-width: 0;
+    margin-top: 35px; /* Added to align with specifications */
+}
 
-        .description-section {
-            margin-top: 0;
-        }
+.description-section {
+    margin-top: 0;
+}
 
-        .description-section strong {
-            display: block;
-            margin-bottom: 10px;
-            color: #333;
-            font-size: 16px;
-        }
+.description-section strong {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 16px;
+}
 
-        .description-section ul {
-            margin: 5px 0 5px 20px;
-            color: #555;
-        }
+.description-section ul {
+    margin: 5px 0 5px 20px;
+    color: #555;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
 
-        .description-section li {
-            margin-bottom: 8px;
-            line-height: 1.5;
-        }
+.description-section li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+    word-break: break-word;
+}
 
-        /* Hide category */
-        .category {
-            display: none !important;
-        }
+/* Hide category */
+.category {
+    display: none !important;
+}
+	
 .description-section ul {
     margin: 5px 0 5px 20px;
     color: #555;
@@ -1073,3 +1079,4 @@ window.addEventListener('DOMContentLoaded', loadJSONFiles);
 
 </body>
 </html>
+

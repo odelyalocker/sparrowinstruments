@@ -1,1 +1,18 @@
-
+[
+  {
+    "id": 1,
+    "name": "Bunsen Burner",
+    "category": "Chemistry",
+    "price": "₹1,800",
+    "description": "Laboratory Bunsen burner with adjustable flame",
+    "keywords": ["bunsen", "burner", "chemistry", "flame", "heat"]
+  },
+  {
+    "id": 2,
+    "name": "Test Tube Set",
+    "category": "Chemistry",
+    "price": "₹950",
+    "description": "Set of 12 borosilicate test tubes",
+    "keywords": ["test tube", "chemistry", "glassware", "lab"]
+  }
+]

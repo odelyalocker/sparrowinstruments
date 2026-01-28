@@ -997,101 +997,29 @@ document.querySelector('.search-box').addEventListener('keydown', function(event
 
 // Function to load JSON files
 async function loadJSONFiles() {
-    console.log('Attempting to load JSON files...');
-    
-    // List of files to load
-    const jsonFiles = [
-        { name: 'biolabitems.json', data: null },
-        { name: 'physlabitems.json', data: null },
-        { name: 'chemlabitems.json', data: null },
-        { name: 'scientificlabitems.json', data: null }
-    ];
-    
     try {
-        // Try to load each file
-        for (let file of jsonFiles) {
-            try {
-                console.log(`Trying to load: ${file.name}`);
-                const response = await fetch(file.name);
-                
-                if (!response.ok) {
-                    console.warn(`File ${file.name} not found or error: ${response.status}`);
-                    continue; // Skip this file
-                }
-                
-                file.data = await response.json();
-                console.log(`✓ Successfully loaded: ${file.name}`);
-                
-            } catch (fileError) {
-                console.warn(`Could not load ${file.name}:`, fileError.message);
-            }
-        }
+        // Load all JSON files
+        const [biolab, physlab, chemlab, scientific] = await Promise.all([
+            fetch('biolabitems.json').then(r => r.json()),
+            fetch('physlabitems.json').then(r => r.json()),
+            fetch('chemlabitems.json').then(r => r.json()),
+            fetch('scientificlabitems.json').then(r => r.json())
+        ]);
         
-        // Combine all loaded data
-        allItems = [];
-        for (let file of jsonFiles) {
-            if (file.data && Array.isArray(file.data)) {
-                allItems = allItems.concat(file.data);
-            }
-        }
+        // Combine all items
+        allItems = [...biolab, ...physlab, ...chemlab, ...scientific];
         
-        console.log('JSON loading complete.');
-        console.log(`Total items loaded: ${allItems.length}`);
-        
-        // If no items loaded, use sample data
-        if (allItems.length === 0) {
-            console.log('No JSON files found. Loading sample data...');
-            allItems = [{
-                id: 1,
-                name: "Sample Compound Microscope",
-                category: "Biology Lab",
-                image: "placeholder.jpg",
-                bestBuyPrice: "15,500",
-                mrpPrice: "17,000",
-                discount: "-9%",
-                warranty: "2 Years Manufacturer Warranty",
-                specifications: ["Magnification: 40x to 1000x", "Light Source: LED 3W"],
-                description: ["Professional compound microscope", "1000x magnification"],
-                keywords: ["microscope", "biology", "test"]
-            }];
-            
-            console.log('Sample data loaded:', allItems[0]);
-        }
-        
-        // Test the search with sample data
-        setTimeout(() => {
-            console.log('Testing search with loaded items...');
-            document.querySelector('.search-box').value = 'microscope';
-            searchItems();
-        }, 1000);
-        
+        console.log('JSON files loaded successfully');
+        console.log('Total items loaded:', allItems.length);
     } catch (error) {
-        console.error('Critical error in loadJSONFiles:', error);
-        
-        // Always have fallback data
-        allItems = [{
-            id: 1,
-            name: "Fallback Microscope",
-            category: "Biology",
-            image: "",
-            bestBuyPrice: "10,000",
-            mrpPrice: "12,000",
-            discount: "-17%",
-            warranty: "1 Year",
-            specifications: ["Test specification"],
-            description: ["Test description"],
-            keywords: ["test"]
-        }];
-        
-        console.log('Using fallback data:', allItems[0]);
+        console.error('Error loading JSON files:', error);
+        alert('Could not load product data. Please check if JSON files exist.');
     }
 }
 
 // Load JSON files when page loads
-window.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, starting JSON load...');
-    loadJSONFiles();
-});
+window.addEventListener('DOMContentLoaded', loadJSONFiles);
+	
 </script>
 </body>
 </html>

@@ -1,1 +1,18 @@
-
+[
+  {
+    "id": 1,
+    "name": "Laser Optics Kit",
+    "category": "Physics",
+    "price": "₹9,800",
+    "description": "Complete laser and optics experiment set",
+    "keywords": ["laser", "optics", "physics", "light", "experiment"]
+  },
+  {
+    "id": 2,
+    "name": "Magnet Set",
+    "category": "Physics",
+    "price": "₹2,500",
+    "description": "Assorted magnets for physics experiments",
+    "keywords": ["magnet", "physics", "magnetic", "experiment"]
+  }
+]

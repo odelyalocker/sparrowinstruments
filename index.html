@@ -1057,16 +1057,33 @@ document.querySelector('.search-box').addEventListener('keydown', function(event
     }
 });
 
+// Function to load JSON files
+async function loadJSONFiles() {
+    try {
+        // Load all JSON files
+        const [biolab, physlab, chemlab, scientific] = await Promise.all([
+            fetch('biolabitems.json').then(r => r.json()),
+            fetch('physlabitems.json').then(r => r.json()),
+            fetch('chemlabitems.json').then(r => r.json()),
+            fetch('scientificlabitems.json').then(r => r.json())
+        ]);
+        
+        // Combine all items
+        allItems = [...biolab, ...physlab, ...chemlab, ...scientific];
+        
+        console.log('JSON files loaded successfully');
+        console.log('Total items loaded:', allItems.length);
+    } catch (error) {
+        console.error('Error loading JSON files:', error);
+        alert('Could not load product data. Please check if JSON files exist.');
+    }
+}
+
 // Load JSON files when page loads
 window.addEventListener('DOMContentLoaded', loadJSONFiles);
-
-// Test search after 2 seconds
-setTimeout(() => {
-    console.log('✅ Page fully loaded');
-    console.log('🔄 Type "microscope" in search box to test');
-}, 2000);
 
 </script>	
 
 </body>
 </html>
+

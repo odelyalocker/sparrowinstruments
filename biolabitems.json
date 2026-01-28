@@ -1,1 +1,18 @@
-
+[
+  {
+    "id": 1,
+    "name": "Compound Microscope",
+    "category": "Biology",
+    "price": "₹12,500",
+    "description": "Professional compound microscope with 1000x magnification",
+    "keywords": ["microscope", "biology", "lab", "magnification", "compound"]
+  },
+  {
+    "id": 2,
+    "name": "Centrifuge Machine",
+    "category": "Biology",
+    "price": "₹28,000",
+    "description": "Digital centrifuge with speed control",
+    "keywords": ["centrifuge", "spin", "biology", "separator"]
+  }
+]

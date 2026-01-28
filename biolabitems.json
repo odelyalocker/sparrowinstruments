@@ -21,7 +21,7 @@
       "Mechanical stage with coaxial controls"
     ],
     "keywords": ["microscope", "biology", "compound", "magnification", "lab equipment"]
-}
+},
   {
     "id": 2,
     "name": "Digital Centrifuge Machine",
@@ -44,5 +44,5 @@
       "Power: 220V, 50Hz"
     ],
     "keywords": ["centrifuge", "digital", "biology", "lab machine", "separator"]
-  }
+  },
 ]

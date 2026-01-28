@@ -848,66 +848,225 @@
         </div>
     </footer>
 
-	<script>
-	
-// Function to load JSON files - NO FALLBACK DATA
+<script>
+// Global variables
+let allItems = [];
+let searchTimeout;
+
+// Function to load JSON files with better error handling
 async function loadJSONFiles() {
-    console.log('Starting JSON file loading...');
+    console.log('🚀 Starting JSON file loading...');
     
-    // List of JSON files to load
-    const jsonFiles = [
-        'biolabitems.json',
-        'physlabitems.json', 
-        'chemlabitems.json',
-        'scientificlabitems.json'
-    ];
-    
-    // Load each file
-    const loadPromises = jsonFiles.map(async (fileName) => {
-        try {
-            console.log(`Loading: ${fileName}`);
-            const response = await fetch(fileName);
+    try {
+        // Load all JSON files
+        const [biolab, physlab, chemlab, scientific] = await Promise.all([
+            fetch('biolabitems.json').then(response => {
+                if (!response.ok) throw new Error(`biolabitems.json: ${response.status}`);
+                return response.json();
+            }).catch(error => {
+                console.error('Failed to load biolabitems.json:', error);
+                return [];
+            }),
             
-            if (!response.ok) {
-                console.warn(`⚠️ File not found: ${fileName}`);
-                return []; // Return empty array if file not found
-            }
+            fetch('physlabitems.json').then(response => {
+                if (!response.ok) throw new Error(`physlabitems.json: ${response.status}`);
+                return response.json();
+            }).catch(error => {
+                console.error('Failed to load physlabitems.json:', error);
+                return [];
+            }),
             
-            const data = await response.json();
-            console.log(`✅ Loaded: ${fileName} (${data.length} items)`);
-            return data;
+            fetch('chemlabitems.json').then(response => {
+                if (!response.ok) throw new Error(`chemlabitems.json: ${response.status}`);
+                return response.json();
+            }).catch(error => {
+                console.error('Failed to load chemlabitems.json:', error);
+                return [];
+            }),
             
-        } catch (fileError) {
-            console.warn(`⚠️ Error loading ${fileName}:`, fileError.message);
-            return []; // Return empty array on error
+            fetch('scientificlabitems.json').then(response => {
+                if (!response.ok) throw new Error(`scientificlabitems.json: ${response.status}`);
+                return response.json();
+            }).catch(error => {
+                console.error('Failed to load scientificlabitems.json:', error);
+                return [];
+            })
+        ]);
+        
+        // Combine all items
+        allItems = [...biolab, ...physlab, ...chemlab, ...scientific];
+        
+        console.log('✅ JSON files loaded successfully');
+        console.log(`📊 Total items loaded: ${allItems.length}`);
+        
+        if (allItems.length > 0) {
+            console.log('📝 First item:', allItems[0].name);
         }
-    });
-    
-    // Wait for all files to load
-    const [biolab, physlab, chemlab, scientific] = await Promise.all(loadPromises);
-    
-    // Combine all items (filter out null/undefined)
-    allItems = []
-        .concat(biolab || [])
-        .concat(physlab || [])
-        .concat(chemlab || [])
-        .concat(scientific || []);
-    
-    console.log('✅ All JSON files processed');
-    console.log(`📊 Total items loaded: ${allItems.length}`);
-    
-    // Show sample of first item to verify format
-    if (allItems.length > 0) {
-        console.log('📝 Sample item structure:', {
-            name: allItems[0].name,
-            bestBuyPrice: allItems[0].bestBuyPrice,
-            mrpPrice: allItems[0].mrpPrice,
-            discount: allItems[0].discount,
-            hasSpecifications: Array.isArray(allItems[0].specifications),
-            hasDescription: Array.isArray(allItems[0].description)
-        });
+        
+    } catch (error) {
+        console.error('❌ Error loading JSON files:', error);
+        allItems = []; // Set to empty array on error
     }
 }
-				</script>	
+
+// Search function
+function searchItems() {
+    clearTimeout(searchTimeout);
+    
+    searchTimeout = setTimeout(() => {
+        const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
+        const resultsList = document.getElementById('resultsList');
+        const searchResults = document.getElementById('searchResults');
+        const resultsTitle = document.getElementById('resultsTitle');
+        
+        console.log('🔍 Searching for:', searchTerm);
+        console.log('📦 Available items:', allItems.length);
+        
+        // Clear previous results
+        resultsList.innerHTML = '';
+        
+        // Hide results if search term is too short
+        if (searchTerm.length < 2) {
+            searchResults.style.display = 'none';
+            return;
+        }
+        
+        // Filter items
+        const matchedItems = allItems.filter(item => {
+            // Check if description is array or string
+            const descriptionText = Array.isArray(item.description) 
+                ? item.description.join(' ') 
+                : item.description || '';
+            
+            return item.name.toLowerCase().includes(searchTerm) ||
+                   descriptionText.toLowerCase().includes(searchTerm) ||
+                   (item.keywords && item.keywords.some(keyword => 
+                       keyword.toLowerCase().includes(searchTerm))) ||
+                   item.category.toLowerCase().includes(searchTerm);
+        });
+        
+        console.log('🎯 Found items:', matchedItems.length);
+        
+        // Display results
+        if (matchedItems.length > 0) {
+            resultsTitle.textContent = `Found ${matchedItems.length} item(s) for "${searchTerm}"`;
+            
+            matchedItems.forEach(item => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'result-item';
+                
+                // Create description HTML as bullet points
+                const descriptionHTML = Array.isArray(item.description) 
+                    ? item.description.map(point => `<li>${point}</li>`).join('')
+                    : `<li>${item.description || ''}</li>`;
+                
+                // Create specifications HTML as bullet points
+                const specsHTML = item.specifications && Array.isArray(item.specifications)
+                    ? item.specifications.map(spec => `<li>${spec}</li>`).join('')
+                    : '';
+                
+                resultItem.innerHTML = `
+                    <div class="result-content">
+                        <!-- Left: Image + Price -->
+                        <div class="result-left">
+                            <div class="result-image">
+                                <img src="${item.image || 'placeholder.jpg'}" alt="${item.name}" onerror="this.src='placeholder.jpg'">
+                            </div>
+                            <div class="price-box">
+                                <div class="mrp-line">
+                                    <span class="mrp-label">M.R.P.</span>
+                                    <span class="mrp-price">INR ${item.mrpPrice || '0'}/-</span>
+                                </div>
+                                <div class="bestbuy-line">
+                                    <span class="bestbuy-label">Best Buy</span>
+                                    <span class="bestbuy-price">INR ${item.bestBuyPrice || '0'}/-</span>
+                                    <span class="discount-badge">${item.discount || '0%'}</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Center: Name + Specs + Warranty -->
+                        <div class="result-center">
+                            <h4 class="item-name">${item.name}</h4>
+                            
+                            ${specsHTML ? `
+                            <div class="specs-section">
+                                <strong>Specifications:</strong>
+                                <ul>${specsHTML}</ul>
+                            </div>` : ''}
+                            
+                            <div class="warranty">
+                                <strong>Warranty:</strong> ${item.warranty || 'Not specified'}
+                            </div>
+                        </div>
+                        
+                        <!-- Right: Description -->
+                        <div class="result-right">
+                            <div class="description-section">
+                                <strong>Descriptions:</strong>
+                                <ul>${descriptionHTML}</ul>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                resultsList.appendChild(resultItem);
+            });
+            
+            searchResults.style.display = 'block';
+        } else {
+            resultsTitle.textContent = `No results found for "${searchTerm}"`;
+            resultsList.innerHTML = '<div class="no-results">Try different keywords</div>';
+            searchResults.style.display = 'block';
+        }
+    }, 300);
+}
+
+// Close results function
+document.getElementById('closeResults').addEventListener('click', function() {
+    document.getElementById('searchResults').style.display = 'none';
+    document.querySelector('.search-box').value = '';
+});
+
+// Close results when clicking outside
+document.addEventListener('click', function(event) {
+    const searchResults = document.getElementById('searchResults');
+    const searchBox = document.querySelector('.search-box');
+    
+    if (searchResults.style.display === 'block' && 
+        !searchResults.contains(event.target) && 
+        !searchBox.contains(event.target)) {
+        searchResults.style.display = 'none';
+    }
+});
+
+// Add event listener to search box
+document.querySelector('.search-box').addEventListener('input', searchItems);
+
+// Keyboard navigation
+document.querySelector('.search-box').addEventListener('keydown', function(event) {
+    const searchResults = document.getElementById('searchResults');
+    
+    // Escape key closes results
+    if (event.key === 'Escape' && searchResults.style.display === 'block') {
+        searchResults.style.display = 'none';
+    }
+    
+    // Enter key performs search
+    if (event.key === 'Enter') {
+        searchItems();
+    }
+});
+
+// Load JSON files when page loads
+window.addEventListener('DOMContentLoaded', loadJSONFiles);
+
+// Test search after 2 seconds
+setTimeout(() => {
+    console.log('✅ Page fully loaded');
+    console.log('🔄 Type "microscope" in search box to test');
+}, 2000);
+
+</script>	
+
 </body>
 </html>

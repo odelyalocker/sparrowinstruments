@@ -1,1 +1,18 @@
-
+[
+  {
+    "id": 1,
+    "name": "Digital Balance",
+    "category": "Scientific",
+    "price": "₹15,000",
+    "description": "Electronic digital weighing balance 0.01g accuracy",
+    "keywords": ["balance", "weighing", "digital", "scientific", "scale"]
+  },
+  {
+    "id": 2,
+    "name": "pH Meter",
+    "category": "Scientific",
+    "price": "₹6,500",
+    "description": "Digital pH meter with electrode",
+    "keywords": ["ph meter", "digital", "scientific", "measurement"]
+  }
+]

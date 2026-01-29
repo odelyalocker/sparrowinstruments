@@ -129,11 +129,6 @@
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) brightness(1.05);
         }
         
-        /* Adjust black-header position */
-        .black-header {
-            top: 85px;
-        }
-        
         /* Adjust main content position */
         .main-content {
             margin-top: 140px;
@@ -151,6 +146,7 @@
             align-items: center;
             z-index: 999;
             min-height: 70px;
+            top: 70px;
         }
         
         /* Home button on left */
@@ -233,7 +229,7 @@
         /* Search Results Section - FIXED */
     .search-results {
     position: fixed;
-    top: 155px; 
+    top: 140px; 
     left: 0;
     width: 100%;
     background: white;
@@ -241,7 +237,7 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     display: none;
     border-top: 2px solid #d32f2f;
-    max-height: calc(100vh - 155px);
+    max-height: calc(100vh - 140px);
     overflow-y: auto;
         }
 
@@ -665,9 +661,9 @@
 @media (max-width: 768px) {
     /* REDUCED HEADER HEIGHT ON MOBILE */
     header {
-        padding: 6px 15px; /* Reduced padding */
-        min-height: 65px; /* Reduced from 110px */
-        flex-wrap: nowrap; /* CHANGED: wrap → nowrap */
+        padding: 6px 15px; 
+        min-height: 65px; 
+        flex-wrap: nowrap; 
         align-items: center;
         justify-content: space-between;
         position: relative;
@@ -736,7 +732,7 @@
     
     /* Adjust black header position */
     .black-header {
-        top: 80px; 
+        top: 65px; 
         padding: 6px 15px; 
         min-height: 55px; 
         flex-wrap: nowrap; /* KEEP as nowrap */
@@ -911,7 +907,7 @@
     }
     
     .black-header {
-        top: 75px;
+        top: 60px;
         padding: 5px 12px;
         min-height: 50px;
         flex-wrap: nowrap; /* ADDED: Prevents breaking */
@@ -988,7 +984,7 @@
     }
     
     .black-header {
-        top: 70px;
+        top: 55px;
         min-height: 45px;
         padding: 4px 8px; /* CHANGED: 10px → 8px */
         flex-wrap: nowrap; /* ADDED: Prevents breaking */
@@ -1308,6 +1304,7 @@ container.addEventListener('touchcancel', () => {
 </script>
 </body>
 </html>
+
 
 
 

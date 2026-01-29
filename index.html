@@ -228,7 +228,7 @@
         
         /* Search Results Section - FIXED */
     .search-results {
-    position: fixed;
+    position: absolute;
     top: 140px; 
     left: 0;
     width: 100%;
@@ -237,7 +237,7 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     display: none;
     border-top: 2px solid #d32f2f;
-    max-height: calc(100vh - 140px);
+    
     overflow-y: auto;
         }
 
@@ -1306,6 +1306,16 @@ container.addEventListener('touchcancel', () => {
     };
 
     window.addEventListener('DOMContentLoaded', loadJSONFiles);
+
+    // Add this inside your <script> to handle the close button
+    document.getElementById('closeResults').addEventListener('click', function() {
+    document.getElementById('searchResults').style.display = 'none';
+    document.querySelector('.search-box').value = '';
+    // Ensure scroll returns to top
+    window.scrollTo(0, 0);
+});
+
 </script>
 </body>
 </html>
+

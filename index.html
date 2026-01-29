@@ -1464,6 +1464,51 @@
         window.addEventListener('resize', function() {
             setTimeout(initializeAmazonStyleZoom, 100);
         });
+
+        function setupZoom(resultItem) {
+    const container = resultItem.querySelector('.result-image');
+    const img = container.querySelector('img');
+    const lens = document.createElement('div');
+    lens.className = 'zoom-lens';
+    container.appendChild(lens);
+
+    const zoomWindow = document.createElement('div');
+    zoomWindow.className = 'zoom-container';
+    const zoomedImg = document.createElement('img');
+    zoomedImg.className = 'zoomed-image';
+    zoomedImg.src = img.src; // Uses the product's specific image
+    zoomWindow.appendChild(zoomedImg);
+    container.appendChild(zoomWindow);
+
+    container.addEventListener('mousemove', (e) => {
+        lens.style.display = 'block';
+        zoomWindow.style.display = 'block';
+        const rect = container.getBoundingClientRect();
+        let x = e.clientX - rect.left;
+        let y = e.clientY - rect.top;
+
+        x = Math.max(0, Math.min(x - lens.offsetWidth / 2, container.offsetWidth - lens.offsetWidth));
+        y = Math.max(0, Math.min(y - lens.offsetHeight / 2, container.offsetHeight - lens.offsetHeight));
+
+        lens.style.left = x + 'px';
+        lens.style.top = y + 'px';
+
+        const cx = zoomWindow.offsetWidth / lens.offsetWidth;
+        const cy = zoomWindow.offsetHeight / lens.offsetHeight;
+
+        zoomedImg.style.width = (container.offsetWidth * cx) + 'px';
+        zoomedImg.style.height = (container.offsetHeight * cy) + 'px';
+        zoomedImg.style.left = `-${x * cx}px`;
+        zoomedImg.style.top = `-${y * cy}px`;
+    });
+
+    container.addEventListener('mouseleave', () => {
+        lens.style.display = 'none';
+        zoomWindow.style.display = 'none';
+    });
+}
+        
     </script>
 </body>
 </html>
+

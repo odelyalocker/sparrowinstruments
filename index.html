@@ -36,20 +36,26 @@
             min-height: 85px;
         }
         
-        /* Logo container in top-left corner */
+        /* Logo container in top-left corner - IMPROVED */
         .logo-container {
             margin-right: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 80%;
-            min-height: 56px;
+            height: 65px;
+            width: 65px;
+            overflow: hidden;
+            border-radius: 50%;
+            background: transparent;
         }
 
         .logo-container img {
-            height: 60px;
-            width: auto;
+            height: 100%;
+            width: 100%;
             object-fit: contain;
+            background: transparent;
+            border: none;
+            box-shadow: none;
         }
 
         /* Center content */
@@ -83,26 +89,41 @@
             margin-top: 5px;
         }
         
-        /* Cart Image Container - UPDATED */
+        /* Cart Image Container - IMPROVED */
         .cart-image-container {
             margin-left: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 80%;
-            min-height: 56px;
+            height: 60px;
+            width: 60px;
+            overflow: hidden;
+            border-radius: 50%;
+            background: transparent;
+        }
+
+        .cart-image-container a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
         }
 
         .cart-image-container img {
-            height: 50px;
-            width: auto;
+            height: 100%;
+            width: 100%;
             object-fit: contain;
+            background: transparent;
+            border: none;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
 
         .cart-image-container img:hover {
-            transform: scale(1.05);
+            transform: scale(1.08);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) brightness(1.05);
         }
         
         /* Adjust black-header position */
@@ -694,20 +715,14 @@
             
             .logo-container {
                 margin-right: 15px;
-                min-height: 48px;
-            }
-            
-            .logo-container img {
-                height: 50px;
+                height: 55px;
+                width: 55px;
             }
             
             .cart-image-container {
                 margin-left: 15px;
-                min-height: 48px;
-            }
-            
-            .cart-image-container img {
-                height: 45px;
+                height: 50px;
+                width: 50px;
             }
             
             .trusted-tagline {
@@ -815,20 +830,14 @@
             
             .logo-container {
                 margin-right: 10px;
-                min-height: 40px;
-            }
-            
-            .logo-container img {
-                height: 40px;
+                height: 45px;
+                width: 45px;
             }
             
             .cart-image-container {
                 margin-left: 10px;
-                min-height: 40px;
-            }
-            
-            .cart-image-container img {
-                height: 35px;
+                height: 45px;
+                width: 45px;
             }
             
             .trusted-tagline {
@@ -897,7 +906,7 @@
     <header>
         <!-- Logo in top-left corner -->
         <div class="logo-container">
-            <img src="/sanjayparas/images/pnlogo.jpg" alt="Paras International Logo">
+            <img src="/sanjayparas/images/pnlogo.jpg" alt="Paras International Logo" style="background: transparent;">
         </div>
         
         <!-- Center content with centered tagline -->
@@ -911,7 +920,7 @@
         <!-- Cart Image in top-right corner -->
         <div class="cart-image-container">
             <a href="cart.html">
-                <img src="/sanjayparas/images/cart.jpg" alt="Shopping Cart">
+                <img src="/sanjayparas/images/cart.jpg" alt="Shopping Cart" style="background: transparent;">
             </a>
         </div>
     </header>

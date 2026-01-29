@@ -20,5 +20,28 @@
       "Mechanical stage with coaxial controls"
     ],
     "keywords": ["microscope", "biology", "compound", "magnification", "lab equipment"]
+  },
+
+  {
+    "name": "Centrifuge Machine",
+    "category": "Biology Lab",
+    "image": "/sanjayparas/bioimg/bio3.jpg",
+    "bestBuyPrice": "45,000",
+    "mrpPrice": "50,000",
+    "discount": "-10%",
+    "warranty": "3 Years Warranty",
+    "specifications": [
+      "Max Speed: 6000 rpm",
+      "Capacity: 12 x 15ml tubes",
+      "Timer: 0-60 minutes",
+      "Display: Digital speed display"
+    ],
+    "description": [
+      "Laboratory centrifuge for separating liquids",
+      "Digital speed and time control",
+      "Safety lid lock system",
+      "Quiet operation"
+    ],
+    "keywords": ["centrifuge", "machine", "biology", "lab", "separator"]
   }
 ]

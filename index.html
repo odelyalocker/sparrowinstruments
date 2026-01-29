@@ -1244,98 +1244,45 @@
             }, 300);
         }
         
-// Fixed image zoom functionality
-function initializeImageZoomForResults() {
+// IMAGE ZOOM LOGIC
     const imageModal = document.getElementById('imageModal');
-    const modalImage = document.getElementById('modalImage');
-    
-    // Track if modal is open
-    let isModalOpen = false;
-    
+    const modalImg = document.getElementById('modalImage');
+
     // Function to open modal
-    function openModal(imgSrc, altText) {
-        modalImage.src = imgSrc;
-        modalImage.alt = altText;
+    function openModal(src) {
         imageModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        isModalOpen = true;
+        modalImg.src = src;
     }
-    
-    // Function to close modal
-    function closeModalFunc() {
-        imageModal.classList.remove('active');
-        document.body.style.overflow = '';
-        isModalOpen = false;
-    }
-    
-    // Close modal when clicking on the overlay (dark background)
+
+    // UPDATED: Close modal logic
     imageModal.addEventListener('click', function(e) {
-        // Only close if clicking directly on the modal overlay (not the image)
-        if (e.target === imageModal) {
-            closeModalFunc();
+        // Only close the modal, stop the click from reaching the 'window'
+        imageModal.classList.remove('active');
+        e.stopPropagation(); 
+    });
+
+    // SEARCH RESULTS CLOSING LOGIC
+    const searchResults = document.getElementById('searchResults');
+    const closeResultsBtn = document.getElementById('closeResults');
+    const searchInput = document.querySelector('.search-box');
+
+    // Close results only when the specific "Close" button is clicked
+    closeResultsBtn.addEventListener('click', () => {
+        searchResults.style.display = 'none';
+        searchInput.value = '';
+    });
+
+    // Handle clicks outside the search box
+    document.addEventListener('click', function(event) {
+        const isClickInsideSearch = searchInput.contains(event.target);
+        const isClickInsideResults = searchResults.contains(event.target);
+        const isClickInsideModal = imageModal.contains(event.target);
+
+        // ONLY hide results if the click is outside search, results, AND the zoom modal
+        if (!isClickInsideSearch && !isClickInsideResults && !isClickInsideModal) {
+            searchResults.style.display = 'none';
         }
     });
-    
-    // Don't close when clicking the image itself
-    modalImage.addEventListener('click', function(e) {
-        e.stopPropagation();
-    });
-    
-    // Set up image click events for search results
-    const resultImages = document.querySelectorAll('.result-image img');
-    
-    resultImages.forEach(img => {
-        // Clone to remove old listeners
-        const newImg = img.cloneNode(true);
-        img.parentNode.replaceChild(newImg, img);
-        
-        newImg.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation(); // IMPORTANT: Stop event from bubbling up
-            openModal(this.src, this.alt);
-        });
-        
-        // Desktop hover effects
-        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            const resultImageDiv = newImg.closest('.result-image');
-            
-            resultImageDiv.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.02)';
-                newImg.style.transform = 'scale(1.1)';
-            });
-            
-            resultImageDiv.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
-                newImg.style.transform = 'scale(1)';
-            });
-        }
-    });
-    
-    // ESC key closes modal
-    document.addEventListener('keydown', function(e) {
-        if (isModalOpen && e.key === 'Escape') {
-            closeModalFunc();
-        }
-    });
-    
-    // Close modal on swipe down (mobile)
-    let startY;
-    imageModal.addEventListener('touchstart', function(e) {
-        startY = e.touches[0].clientY;
-    });
-    
-    imageModal.addEventListener('touchmove', function(e) {
-        if (!startY) return;
-        
-        const currentY = e.touches[0].clientY;
-        const diffY = currentY - startY;
-        
-        if (diffY > 50) {
-            closeModalFunc();
-            startY = null;
-        }
-    });
-}
         
         // Keep the existing event listeners
         document.querySelector('.search-box').addEventListener('input', searchItems);
@@ -1382,6 +1329,7 @@ function initializeImageZoomForResults() {
     </script>
 </body>
 </html>
+
 
 
 

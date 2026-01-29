@@ -825,6 +825,19 @@
                 opacity: 0.8;
                 font-size: 11px;
             }
+            .zoom-container {
+        position: absolute;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 10;
+        pointer-events: none; /* Allows touch to pass through to the image */
+    }
+    .zoom-lens {
+        width: 100px; /* Smaller lens for mobile */
+        height: 100px;
+    }
         }
         
         @media (max-width: 480px) {
@@ -1146,50 +1159,69 @@
         }, 300);
     }
 
-    // 3. ZOOM ENGINE
-    function setupZoom(resultItem) {
-        const container = resultItem.querySelector('.result-image');
-        const img = container.querySelector('img');
+// 3. UPDATED ZOOM ENGINE (Desktop + Mobile)
+function setupZoom(resultItem) {
+    const container = resultItem.querySelector('.result-image');
+    const img = container.querySelector('img');
+    if (!container || !img) return;
+
+    const lens = document.createElement('div');
+    lens.className = 'zoom-lens';
+    const zoomWin = document.createElement('div');
+    zoomWin.className = 'zoom-container';
+    const zImg = document.createElement('img');
+    zImg.className = 'zoomed-image';
+    zImg.src = img.src;
+    
+    zoomWin.appendChild(zImg);
+    container.appendChild(lens);
+    container.appendChild(zoomWin);
+
+    function handleMove(e) {
+        // Stop the page from scrolling when the user is trying to zoom on mobile
+        if (e.type === 'touchmove') e.preventDefault();
+
+        lens.style.display = 'block';
+        zoomWin.style.display = 'block';
+
+        const rect = container.getBoundingClientRect();
         
-        const lens = document.createElement('div');
-        lens.className = 'zoom-lens';
-        const zoomWin = document.createElement('div');
-        zoomWin.className = 'zoom-container';
-        const zImg = document.createElement('img');
-        zImg.className = 'zoomed-image';
-        zImg.src = img.src;
-        
-        zoomWin.appendChild(zImg);
-        container.appendChild(lens);
-        container.appendChild(zoomWin);
+        // Logic to get coordinates whether it's a finger touch or a mouse click
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
-        container.addEventListener('mousemove', (e) => {
-            lens.style.display = 'block';
-            zoomWin.style.display = 'block';
-            const rect = container.getBoundingClientRect();
-            let x = e.clientX - rect.left - (lens.offsetWidth / 2);
-            let y = e.clientY - rect.top - (lens.offsetHeight / 2);
+        let x = clientX - rect.left - (lens.offsetWidth / 2);
+        let y = clientY - rect.top - (lens.offsetHeight / 2);
 
-            x = Math.max(0, Math.min(x, rect.width - lens.offsetWidth));
-            y = Math.max(0, Math.min(y, rect.height - lens.offsetHeight));
+        x = Math.max(0, Math.min(x, rect.width - lens.offsetWidth));
+        y = Math.max(0, Math.min(y, rect.height - lens.offsetHeight));
 
-            lens.style.left = x + 'px';
-            lens.style.top = y + 'px';
+        lens.style.left = x + 'px';
+        lens.style.top = y + 'px';
 
-            const cx = zoomWin.offsetWidth / lens.offsetWidth;
-            const cy = zoomWin.offsetHeight / lens.offsetHeight;
+        const cx = zoomWin.offsetWidth / lens.offsetWidth;
+        const cy = zoomWin.offsetHeight / lens.offsetHeight;
 
-            zImg.style.width = (rect.width * cx) + 'px';
-            zImg.style.height = (rect.height * cy) + 'px';
-            zImg.style.left = `-${x * cx}px`;
-            zImg.style.top = `-${y * cy}px`;
-        });
-
-        container.addEventListener('mouseleave', () => {
-            lens.style.display = 'none';
-            zoomWin.style.display = 'none';
-        });
+        zImg.style.width = (rect.width * cx) + 'px';
+        zImg.style.height = (rect.height * cy) + 'px';
+        zImg.style.left = `-${x * cx}px`;
+        zImg.style.top = `-${y * cy}px`;
     }
+
+    function handleEnd() {
+        lens.style.display = 'none';
+        zoomWin.style.display = 'none';
+    }
+
+    // DESKTOP Events
+    container.addEventListener('mousemove', handleMove);
+    container.addEventListener('mouseleave', handleEnd);
+
+    // MOBILE Events
+    container.addEventListener('touchstart', handleMove, { passive: false });
+    container.addEventListener('touchmove', handleMove, { passive: false });
+    container.addEventListener('touchend', handleEnd);
+}
 
     // 4. EVENT LISTENERS
     document.querySelector('.search-box').addEventListener('input', searchItems);
@@ -1201,4 +1233,5 @@
 </script>
 </body>
 </html>
+
 

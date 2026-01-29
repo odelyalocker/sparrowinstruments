@@ -23,25 +23,25 @@
   },
 
   {
-    "name": "Centrifuge Machine",
+    "name": "Isoprofile",
     "category": "Biology Lab",
-    "image": "/sanjayparas/bioimg/bio3.jpg",
-    "bestBuyPrice": "45,000",
-    "mrpPrice": "50,000",
-    "discount": "-10%",
-    "warranty": "3 Years Warranty",
+    "image": "/sanjayparas/bioimg/bio2.jpg",
+    "mrpPrice": "2,000",
+    "discount": "-5%",
+    "bestBuyPrice": "1,800",
+    "warranty": "None",
     "specifications": [
-      "Max Speed: 6000 rpm",
-      "Capacity: 12 x 15ml tubes",
-      "Timer: 0-60 minutes",
-      "Display: Digital speed display"
+      "Magnification: 40x to 1000x",
+      "Light Source: LED 3W",
+      "Eyepiece: WF10x/18mm",
+      "Objectives: Achromatic 4x, 10x, 40x(s), 100x(s) oil"
     ],
     "description": [
-      "Laboratory centrifuge for separating liquids",
-      "Digital speed and time control",
-      "Safety lid lock system",
-      "Quiet operation"
+      "Fresh",
+      "Quality",
+      "Good",
+      "For All"
     ],
-    "keywords": ["centrifuge", "machine", "biology", "lab", "separator"]
+    "keywords": ["microscope", "biology", "compound", "magnification", "lab equipment"]
   }
 ]

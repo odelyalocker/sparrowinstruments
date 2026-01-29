@@ -83,40 +83,26 @@
             margin-top: 5px;
         }
         
-        /* Cart Button */
-        .cart-button {
-            background-color: #FFFFFF;
-            color: #d32f2f;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
+        /* Cart Image Container - UPDATED */
+        .cart-image-container {
+            margin-left: 20px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin-left: 20px;
+            justify-content: center;
+            height: 80%;
+            min-height: 56px;
         }
-        
-        .cart-button:hover {
-            background-color: #f8f8f8;
+
+        .cart-image-container img {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .cart-image-container img:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
-        
-        .cart-button i {
-            font-size: 18px;
-            color: #000000;
-            font-weight: bold;
-        }
-        
-        .cart-button span {
-            color: #000000;
-            font-weight: bold;
         }
         
         /* Adjust black-header position */
@@ -715,6 +701,15 @@
                 height: 50px;
             }
             
+            .cart-image-container {
+                margin-left: 15px;
+                min-height: 48px;
+            }
+            
+            .cart-image-container img {
+                height: 45px;
+            }
+            
             .trusted-tagline {
                 font-size: 14px;
                 margin-top: 3px;
@@ -731,17 +726,6 @@
                 color: #FFFFFF;
                 white-space: normal;
                 line-height: 1.2;
-            }
-            
-            .cart-button {
-                padding: 6px 12px;
-                font-size: 14px;
-                order: 2;
-                margin-left: auto;
-            }
-            
-            .cart-button i {
-                font-size: 16px;
             }
             
             .black-header {
@@ -838,6 +822,15 @@
                 height: 40px;
             }
             
+            .cart-image-container {
+                margin-left: 10px;
+                min-height: 40px;
+            }
+            
+            .cart-image-container img {
+                height: 35px;
+            }
+            
             .trusted-tagline {
                 font-size: 12px;
             }
@@ -851,16 +844,6 @@
                 letter-spacing: 0.3px;
                 color: #FFFFFF;
                 line-height: 1.1;
-            }
-            
-            .cart-button {
-                padding: 5px 10px;
-                font-size: 12px;
-                gap: 5px;
-            }
-            
-            .cart-button i {
-                font-size: 14px;
             }
             
             .black-header {
@@ -925,11 +908,12 @@
             <div class="trusted-tagline">Buy Genuine Trusted Laboratory Equipment at Retail Price</div>
         </div>
         
-        <!-- Cart Button -->
-        <a href="cart.html" class="cart-button">
-            <i class="fas fa-shopping-cart"></i>
-            <span>Cart</span>
-        </a>
+        <!-- Cart Image in top-right corner -->
+        <div class="cart-image-container">
+            <a href="cart.html">
+                <img src="/sanjayparas/images/cart.jpg" alt="Shopping Cart">
+            </a>
+        </div>
     </header>
     
     <!-- Black Header Section - MODIFIED -->

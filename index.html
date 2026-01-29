@@ -670,7 +670,11 @@
         justify-content: space-between;
         position: relative;
     }
-    
+    /* Prevent browser from auto-hiding headers */
+    header, .black-header {
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+    }
     /* Keep the original structure but adjust sizes */
     .logo-container {
         margin-right: 15px;
@@ -788,6 +792,7 @@
     .search-results {
         top: 130px;
         max-height: calc(100vh - 130px);
+        padding-bottom: 40px;
     }
     
     .results-container {
@@ -1308,14 +1313,21 @@ container.addEventListener('touchcancel', () => {
     };
 
     window.addEventListener('DOMContentLoaded', loadJSONFiles);
+    // Prevent excessive scrolling past content
+let lastScrollTop = 0;
+
+window.addEventListener('scroll', function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > lastScrollTop) {
+        // Scrolling down
+        if ((window.innerHeight + scrollTop) >= document.body.offsetHeight - 50) {
+            // Near bottom, prevent further scrolling
+            window.scrollTo(0, document.body.offsetHeight - window.innerHeight);
+        }
+    }
+    lastScrollTop = scrollTop;
+}, { passive: true });
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-

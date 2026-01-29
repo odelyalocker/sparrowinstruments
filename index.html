@@ -228,7 +228,7 @@
         
         /* Search Results Section - FIXED */
     .search-results {
-    position: absolute;
+    position: fixed;
     top: 140px; 
     left: 0;
     width: 100%;
@@ -237,7 +237,9 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     display: none;
     border-top: 2px solid #d32f2f;
-    }
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+        }
 
         .results-container {
             padding: 20px;
@@ -669,11 +671,6 @@
         position: relative;
     }
     
-    /* Prevent browser from auto-hiding headers */
-    header, .black-header {
-        transform: translateZ(0);
-        -webkit-transform: translateZ(0);
-    }
     /* Keep the original structure but adjust sizes */
     .logo-container {
         margin-right: 15px;
@@ -790,7 +787,7 @@
     /* Adjust search results position */
     .search-results {
         top: 130px;
-        position: absolute; 
+        max-height: calc(100vh - 130px);
     }
     
     .results-container {
@@ -936,7 +933,7 @@
     
     .search-results {
         top: 120px;
-        position: absolute;
+        max-height: calc(100vh - 120px);
     }
     
     .main-content {
@@ -1015,7 +1012,7 @@
     
     .search-results {
         top: 110px;
-        position: absolute;
+        max-height: calc(100vh - 110px);
     }
     .main-content {
         margin-top: 110px;
@@ -1311,8 +1308,6 @@ container.addEventListener('touchcancel', () => {
     };
 
     window.addEventListener('DOMContentLoaded', loadJSONFiles);
-
 </script>
 </body>
 </html>
-

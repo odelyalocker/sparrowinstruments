@@ -597,28 +597,6 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
         }
 
-        /* Modal close button */
-        .close-modal {
-            position: absolute;
-            top: -40px;
-            right: -10px;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2001;
-        }
-
-        .close-modal:hover {
-            color: #ff5555;
-        }
-
         /* Mobile back button indicator */
         .mobile-back-hint {
             position: absolute;
@@ -641,16 +619,7 @@
                 display: block;
             }
             
-            .close-modal {
-                top: 20px;
-                right: 20px;
-                background: rgba(0, 0, 0, 0.7);
-                border-radius: 50%;
-                width: 50px;
-                height: 50px;
-                font-size: 35px;
-            }
-            
+
             .modal-content {
                 max-width: 95%;
                 max-height: 95%;
@@ -1038,13 +1007,12 @@
     </footer>
     
     <!-- Image Zoom Modal -->
-    <div class="image-modal" id="imageModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeModal">&times;</button>
-            <img id="modalImage" src="" alt="Zoomed Image">
-            <div class="mobile-back-hint">Press back button or tap anywhere to close</div>
-        </div>
+<div class="image-modal" id="imageModal">
+    <div class="modal-content">
+        <img id="modalImage" src="" alt="Zoomed Image">
+        <div class="mobile-back-hint">Tap anywhere to close</div>
     </div>
+</div>
 
     <script>
         // Global variables
@@ -1276,15 +1244,10 @@
             }, 300);
         }
         
-// Image zoom functionality
+// Simplified image zoom functionality
 function initializeImageZoomForResults() {
     const imageModal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
-    const closeModal = document.getElementById('closeModal');
-    
-    // Check if device is mobile/tablet
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    let modalStatePushed = false;
     
     // Function to open modal
     function openModal(imgSrc, altText) {
@@ -1292,44 +1255,22 @@ function initializeImageZoomForResults() {
         modalImage.alt = altText;
         imageModal.classList.add('active');
         document.body.style.overflow = 'hidden'; // Prevent scrolling
-        
-        // Push state for back button on mobile
-        if (isMobile) {
-            history.pushState({ modalOpen: true }, '');
-            modalStatePushed = true;
-        }
     }
     
     // Function to close modal
-    function closeModalFunc(fromBackButton = false) {
+    function closeModalFunc() {
         imageModal.classList.remove('active');
         document.body.style.overflow = ''; // Restore scrolling
-        
-        // Only go back if we pushed a state AND this isn't from a back button
-        if (isMobile && modalStatePushed && !fromBackButton) {
-            history.back();
-        }
-        modalStatePushed = false;
     }
     
-    // Close modal when clicking X
-    closeModal.addEventListener('click', function() {
+    // Close modal when clicking anywhere
+    imageModal.addEventListener('click', function(e) {
         closeModalFunc();
     });
     
-    // Close modal when clicking outside image
-    imageModal.addEventListener('click', function(e) {
-        if (e.target === imageModal || e.target.classList.contains('mobile-back-hint')) {
-            closeModalFunc();
-        }
-    });
-    
-    // Handle back button on mobile
-    window.addEventListener('popstate', function(e) {
-        if (imageModal.classList.contains('active')) {
-            // This is from a back button press
-            closeModalFunc(true);
-        }
+    // Don't close when clicking the image itself
+    modalImage.addEventListener('click', function(e) {
+        e.stopPropagation();
     });
     
     // Set up image click events
@@ -1347,7 +1288,7 @@ function initializeImageZoomForResults() {
         });
         
         // Add hover effect for desktop
-        if (!isMobile) {
+        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             const resultImageDiv = newImg.closest('.result-image');
             
             resultImageDiv.addEventListener('mouseenter', function() {
@@ -1362,12 +1303,10 @@ function initializeImageZoomForResults() {
         }
     });
     
-    // Set up keyboard shortcuts
+    // Set up keyboard shortcuts - ESC closes modal
     document.addEventListener('keydown', function(e) {
-        if (imageModal.classList.contains('active')) {
-            if (e.key === 'Escape') {
-                closeModalFunc();
-            }
+        if (imageModal.classList.contains('active') && e.key === 'Escape') {
+            closeModalFunc();
         }
     });
     
@@ -1375,6 +1314,7 @@ function initializeImageZoomForResults() {
     let startY;
     imageModal.addEventListener('touchstart', function(e) {
         startY = e.touches[0].clientY;
+        e.stopPropagation();
     });
     
     imageModal.addEventListener('touchmove', function(e) {
@@ -1388,6 +1328,7 @@ function initializeImageZoomForResults() {
             closeModalFunc();
             startY = null;
         }
+        e.stopPropagation();
     });
 }
         
@@ -1430,6 +1371,7 @@ function initializeImageZoomForResults() {
     </script>
 </body>
 </html>
+
 
 
 

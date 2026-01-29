@@ -20,55 +20,5 @@
       "Mechanical stage with coaxial controls"
     ],
     "keywords": ["microscope", "biology", "compound", "magnification", "lab equipment"]
-},
-
-{
-  "name": "Test",
-  "category": "Biology Lab",
-  "image": "sadsad",
-  "bestBuyPrice": "21321",
-  "mrpPrice": "121321",
-  "discount": "3",
-  "warranty": "adsfsadf",
-  "specifications": [
-    "dsfd",
-    "df",
-    "df",
-    "d",
-    "dsf"
-  ],
-  "description": [
-    "tyrt",
-    "try",
-    "rt",
-    "ytr",
-    "htr",
-    "htrh"
-  ],
-  "keywords": [
-    "dfd",
-    "wefwe",
-    "ewrewr"
-  ]
-}
-
-{
-  "name": "Bio Test",
-  "category": "Biology Lab",
-  "image": "gg/nb/100.jpg",
-  "bestBuyPrice": "200",
-  "mrpPrice": "1000",
-  "discount": "2%",
-  "warranty": "No",
-  "specifications": [
-    "Hi"
-  ],
-  "description": [
-    "Hello"
-  ],
-  "keywords": [
-    "kolkata"
-  ]
-}
+  }
 ]
-

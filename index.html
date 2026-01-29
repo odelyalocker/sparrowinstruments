@@ -36,14 +36,14 @@
             min-height: 85px;
         }
         
-        /* Logo container in top-left corner - IMPROVED */
+        /* Logo container in top-left corner - REDUCED SIZE BY 10px */
         .logo-container {
             margin-right: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 50px;
-            width: 50px;
+            height: 55px; /* Reduced from 65px */
+            width: 55px; /* Reduced from 65px */
             overflow: hidden;
             border-radius: 50%;
             background: transparent;
@@ -91,14 +91,14 @@
             margin-top: 5px;
         }
         
-        /* Cart Image Container - IMPROVED */
+        /* Cart Image Container - REDUCED SIZE BY 10px */
         .cart-image-container {
             margin-left: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 50px;
-            width: 50px;
+            height: 50px; /* Reduced from 60px */
+            width: 50px; /* Reduced from 60px */
             overflow: hidden;
             border-radius: 50%;
             background: transparent;
@@ -360,8 +360,10 @@
             margin-bottom: 15px;
             position: relative;
             overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            cursor: crosshair;
         }
 
         .result-image img {
@@ -370,9 +372,7 @@
             aspect-ratio: 3/2;
             object-fit: cover;
             border-radius: 8px;
-            border: 1px solid #ddd;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            will-change: transform;
+            display: block;
         }
 
         .price-box {
@@ -518,147 +518,99 @@
             word-break: break-word; /* Break words if needed */
         }
 
-        /* ===== IMAGE ZOOM FUNCTIONALITY ===== */
-        /* Desktop hover effect */
-        @media (hover: hover) and (pointer: fine) {
-            .result-image:hover img {
-        transform: scale(1.2);
-        opacity: 0.9;
-    }
-    
-    .result-image:hover::after {
-        content: "🖱️ Hover to zoom";
-        position: absolute;
-        bottom: 10px;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 5px;
-        font-size: 12px;
-        text-align: center;
-        border-radius: 0 0 8px 8px;
-        z-index: 1;
-    }
-        }
-
-        /* Mobile tap indicator */
-        @media (max-width: 768px) {
-            .result-image::after {
-        content: "👆 Touch to zoom";
-        position: absolute;
-        bottom: 10px;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 5px;
-        font-size: 12px;
-        text-align: center;
-        border-radius: 0 0 8px 8px;
-        opacity: 0.8;
-        z-index: 1;
-    }
-        }
-
-        /* Image modal overlay */
-        .image-modal {
+        /* ===== AMAZON/FLIPKART STYLE HOVER ZOOM ===== */
+        /* Zoom container */
+        .zoom-container {
+            position: absolute;
+            left: 105%;
+            top: 0;
+            width: 400px;
+            height: 300px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            overflow: hidden;
             display: none;
+            pointer-events: none;
+        }
+        
+        .zoomed-image {
+            position: absolute;
+            max-width: none;
+            transform-origin: 0 0;
+            pointer-events: none;
+        }
+        
+        /* Zoom lens */
+        .zoom-lens {
+            position: absolute;
+            border: 2px solid #d32f2f;
+            background: rgba(211, 47, 47, 0.15);
+            cursor: crosshair;
+            display: none;
+            pointer-events: none;
+            z-index: 999;
+            width: 120px;
+            height: 120px;
+        }
+        
+        /* Show hint text */
+        .result-image::after {
+            content: "🖱️ Hover to zoom";
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            font-size: 12px;
+            text-align: center;
+            border-radius: 0 0 8px 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+        
+        .result-image:hover::after {
+            opacity: 0.8;
+        }
+        
+        /* Mobile zoom overlay */
+        .mobile-zoom-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            z-index: 2000;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1999;
+            display: none;
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
-
-        .image-modal.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .modal-content {
-            position: relative;
+        
+        .mobile-zoom-image {
             max-width: 90%;
-            max-height: 90%;
-            text-align: center;
-        }
-
-        .modal-content img {
-            max-width: 100%;
-            max-height: 85vh;
+            max-height: 80vh;
             object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
         }
-
-        /* Modal close button */
-        .close-modal {
-            position: absolute;
-            top: -40px;
-            right: -10px;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2001;
-        }
-
-        .close-modal:hover {
-            color: #ff5555;
-        }
-
-        /* Mobile back button indicator */
-        .mobile-back-hint {
-            position: absolute;
+        
+        .mobile-zoom-hint {
+            position: fixed;
             bottom: 20px;
             left: 0;
             right: 0;
             text-align: center;
             color: white;
             font-size: 14px;
-            opacity: 0.8;
-            display: none;
+            z-index: 2001;
+            background: rgba(0,0,0,0.7);
             padding: 10px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 5px;
-            margin: 0 20px;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-back-hint {
-                display: block;
-            }
-            
-            .close-modal {
-                top: 20px;
-                right: 20px;
-                background: rgba(0, 0, 0, 0.7);
-                border-radius: 50%;
-                width: 50px;
-                height: 50px;
-                font-size: 35px;
-            }
-            
-            .modal-content {
-                max-width: 95%;
-                max-height: 95%;
-            }
-            
-            .modal-content img {
-                max-height: 75vh;
-            }
+            margin: 20px;
+            border-radius: 10px;
         }
 
         /* ===== RESPONSIVE DESIGN ===== */
@@ -689,6 +641,12 @@
             .result-right {
                 grid-column: 2;
             }
+            
+            .zoom-container {
+                width: 300px;
+                height: 225px;
+                left: 110%;
+            }
         }
 
         /* MOBILE LAYOUT - FIXED PROPERLY */
@@ -704,23 +662,23 @@
             /* Keep the original structure but adjust sizes */
             .logo-container {
                 margin-right: 15px;
-                height: 40px;
-                width: 40px;
+                height: 45px; /* Adjusted for mobile */
+                width: 45px; /* Adjusted for mobile */
                 order: 1;
                 flex-shrink: 0;
             }
             
             .cart-image-container {
                 margin-left: 15px;
-                height: 40px;
-                width: 40px;
+                height: 45px; /* Adjusted for mobile */
+                width: 45px; /* Adjusted for mobile */
                 order: 3;
                 flex-shrink: 0;
             }
             
             /* Center content takes available space */
             .header-center {
-                width: calc(100% - 120px); /* Account for both logos */
+                width: calc(100% - 110px); /* Account for both logos */
                 order: 2;
                 padding: 0 10px;
                 margin: 0;
@@ -838,6 +796,21 @@
             .main-content {
                 margin-top: 190px;
             }
+            
+            /* Mobile zoom adjustments */
+            .zoom-container {
+                display: none !important;
+            }
+            
+            .zoom-lens {
+                display: none !important;
+            }
+            
+            .result-image::after {
+                content: "👆 Tap to zoom";
+                opacity: 0.8;
+                font-size: 11px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -847,19 +820,19 @@
             }
             
             .logo-container {
-                height: 45px;
-                width: 45px;
+                height: 40px; /* Adjusted for small mobile */
+                width: 40px; /* Adjusted for small mobile */
                 margin-right: 10px;
             }
             
             .cart-image-container {
-                height: 45px;
-                width: 45px;
+                height: 40px; /* Adjusted for small mobile */
+                width: 40px; /* Adjusted for small mobile */
                 margin-left: 10px;
             }
             
             .header-center {
-                width: calc(100% - 100px);
+                width: calc(100% - 100px); /* Adjusted for smaller logos */
                 padding: 0 8px;
             }
             
@@ -911,11 +884,6 @@
             .item-name {
                 font-size: 20px;
             }
-            
-            .mobile-back-hint {
-                font-size: 12px;
-                bottom: 10px;
-            }
         }
 
         /* For very small screens */
@@ -926,8 +894,8 @@
             
             .logo-container,
             .cart-image-container {
-                height: 40px;
-                width: 40px;
+                height: 35px; /* Adjusted for very small screens */
+                width: 35px; /* Adjusted for very small screens */
             }
             
             .header-center {
@@ -1037,13 +1005,10 @@
         </div>
     </footer>
     
-    <!-- Image Zoom Modal -->
-    <div class="image-modal" id="imageModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeModal">&times;</button>
-            <img id="modalImage" src="" alt="Zoomed Image">
-            <div class="mobile-back-hint">Press back button or tap anywhere to close</div>
-        </div>
+    <!-- Mobile Zoom Overlay -->
+    <div class="mobile-zoom-overlay" id="mobileZoomOverlay">
+        <img class="mobile-zoom-image" id="mobileZoomImage" src="" alt="Zoomed Image">
+        <div class="mobile-zoom-hint">Touch and drag to zoom • Tap anywhere to close</div>
     </div>
 
     <script>
@@ -1259,7 +1224,7 @@
                     
                     searchResults.style.display = 'block';
                     // Initialize image zoom for new results
-                    setTimeout(initializeImageZoomForResults, 100);
+                    setTimeout(initializeAmazonStyleZoom, 100);
                 } else {
                     resultsTitle.textContent = `No results found for "${searchTerm}"`;
                     resultsList.innerHTML = '<div class="no-results">Try different keywords or check spelling</div>';
@@ -1276,134 +1241,153 @@
             }, 300);
         }
         
-// Image zoom functionality - MODIFIED VERSION
-function initializeImageZoomForResults() {
-    const imageModal = document.getElementById('imageModal');
-    const modalImage = document.getElementById('modalImage');
-    const closeModal = document.getElementById('closeModal');
-    
-    // Check if device is mobile/tablet
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    // Function to open modal - REMOVED for this requirement
-    function openModal(imgSrc, altText) {
-        modalImage.src = imgSrc;
-        modalImage.alt = altText;
-        imageModal.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevent scrolling
-        
-        // Push state for back button on mobile
-        if (isMobile) {
-            history.pushState({ modalOpen: true }, '');
-        }
-    }
-    
-    // Function to close modal
-    function closeModalFunc() {
-        imageModal.classList.remove('active');
-        document.body.style.overflow = ''; // Restore scrolling
-    }
-    
-    // Close modal when clicking X - KEEP for if modal is accidentally opened
-    closeModal.addEventListener('click', closeModalFunc);
-    
-    // Close modal when clicking outside image
-    imageModal.addEventListener('click', function(e) {
-        if (e.target === imageModal || e.target.classList.contains('mobile-back-hint')) {
-            closeModalFunc();
-            if (isMobile && history.state && history.state.modalOpen) {
-                history.back();
-            }
-        }
-    });
-    
-    // Handle back button on mobile
-    window.addEventListener('popstate', function(e) {
-        if (imageModal.classList.contains('active')) {
-            closeModalFunc();
-        }
-    });
-    
-    // Set up image events - MODIFIED: NO CLICK EVENT
-    const resultImages = document.querySelectorAll('.result-image img');
-    
-    resultImages.forEach(img => {
-        // Remove any existing event listeners by cloning
-        const newImg = img.cloneNode(true);
-        img.parentNode.replaceChild(newImg, img);
-        
-        // REMOVED: Click event that opens modal
-        // newImg.addEventListener('click', function(e) {
-        //     e.stopPropagation();
-        //     openModal(this.src, this.alt);
-        // });
-        
-        // Add hover effect for desktop
-        const resultImageDiv = newImg.closest('.result-image');
-        
-        if (!isMobile) {
-            // Desktop: Hover to zoom
-            resultImageDiv.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.02)';
-                newImg.style.transform = 'scale(1.1)';
-                newImg.style.opacity = '0.9';
-            });
+        // Amazon/Flipkart style hover zoom functionality
+        function initializeAmazonStyleZoom() {
+            const resultImages = document.querySelectorAll('.result-image');
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const mobileZoomOverlay = document.getElementById('mobileZoomOverlay');
+            const mobileZoomImage = document.getElementById('mobileZoomImage');
             
-            resultImageDiv.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
-                newImg.style.transform = 'scale(1)';
-                newImg.style.opacity = '1';
-            });
-        } else {
-            // Mobile: Touch to zoom (temporary while touching)
-            resultImageDiv.addEventListener('touchstart', function() {
-                this.style.transform = 'scale(1.02)';
-                newImg.style.transform = 'scale(1.1)';
-                newImg.style.opacity = '0.9';
-            });
-            
-            resultImageDiv.addEventListener('touchend', function() {
-                this.style.transform = 'scale(1)';
-                newImg.style.transform = 'scale(1)';
-                newImg.style.opacity = '1';
-            });
-        }
-    });
-    
-    // Set up keyboard shortcuts - KEEP for modal
-    document.addEventListener('keydown', function(e) {
-        if (imageModal.classList.contains('active')) {
-            if (e.key === 'Escape' || e.key === 'Backspace') {
-                closeModalFunc();
-                if (isMobile && history.state && history.state.modalOpen) {
-                    history.back();
+            resultImages.forEach((resultImageDiv, index) => {
+                const img = resultImageDiv.querySelector('img');
+                if (!img) return;
+                
+                // Create zoom elements
+                const zoomContainer = document.createElement('div');
+                zoomContainer.className = 'zoom-container';
+                zoomContainer.id = `zoom-container-${index}`;
+                
+                const zoomedImg = document.createElement('img');
+                zoomedImg.className = 'zoomed-image';
+                zoomedImg.src = img.src;
+                zoomedImg.alt = img.alt;
+                
+                const zoomLens = document.createElement('div');
+                zoomLens.className = 'zoom-lens';
+                zoomLens.id = `zoom-lens-${index}`;
+                
+                zoomContainer.appendChild(zoomedImg);
+                resultImageDiv.appendChild(zoomContainer);
+                resultImageDiv.appendChild(zoomLens);
+                
+                // Set zoom level (3x)
+                const zoomLevel = 3;
+                
+                // For desktop hover zoom
+                if (!isMobile) {
+                    resultImageDiv.addEventListener('mouseenter', function() {
+                        const rect = this.getBoundingClientRect();
+                        zoomContainer.style.display = 'block';
+                        zoomLens.style.display = 'block';
+                        
+                        // Position zoom container to the right of the image
+                        zoomContainer.style.left = (rect.width + 10) + 'px';
+                        zoomContainer.style.top = '0';
+                        
+                        // Set zoomed image size
+                        zoomedImg.style.width = (img.naturalWidth * zoomLevel) + 'px';
+                        zoomedImg.style.height = (img.naturalHeight * zoomLevel) + 'px';
+                    });
+                    
+                    resultImageDiv.addEventListener('mouseleave', function() {
+                        zoomContainer.style.display = 'none';
+                        zoomLens.style.display = 'none';
+                    });
+                    
+                    resultImageDiv.addEventListener('mousemove', function(e) {
+                        const rect = this.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        
+                        // Lens size
+                        const lensWidth = 120;
+                        const lensHeight = 120;
+                        
+                        // Calculate lens position (centered on cursor)
+                        let lensX = x - (lensWidth / 2);
+                        let lensY = y - (lensHeight / 2);
+                        
+                        // Keep lens within image bounds
+                        lensX = Math.max(0, Math.min(lensX, rect.width - lensWidth));
+                        lensY = Math.max(0, Math.min(lensY, rect.height - lensHeight));
+                        
+                        // Position the lens
+                        zoomLens.style.left = lensX + 'px';
+                        zoomLens.style.top = lensY + 'px';
+                        
+                        // Calculate zoomed image position (inverse movement)
+                        const zoomX = -(lensX * zoomLevel);
+                        const zoomY = -(lensY * zoomLevel);
+                        
+                        // Position the zoomed image
+                        zoomedImg.style.left = zoomX + 'px';
+                        zoomedImg.style.top = zoomY + 'px';
+                    });
                 }
+                
+                // For mobile touch zoom
+                if (isMobile) {
+                    let isZooming = false;
+                    let lastTouchX = 0;
+                    let lastTouchY = 0;
+                    
+                    resultImageDiv.addEventListener('touchstart', function(e) {
+                        e.preventDefault();
+                        isZooming = true;
+                        
+                        const touch = e.touches[0];
+                        lastTouchX = touch.clientX;
+                        lastTouchY = touch.clientY;
+                        
+                        // Show mobile zoom overlay
+                        mobileZoomImage.src = img.src;
+                        mobileZoomImage.alt = img.alt;
+                        mobileZoomOverlay.style.display = 'flex';
+                        
+                        // Set initial zoom position
+                        updateMobileZoom(touch.clientX, touch.clientY);
+                    });
+                    
+                    resultImageDiv.addEventListener('touchmove', function(e) {
+                        if (!isZooming) return;
+                        e.preventDefault();
+                        
+                        const touch = e.touches[0];
+                        updateMobileZoom(touch.clientX, touch.clientY);
+                        lastTouchX = touch.clientX;
+                        lastTouchY = touch.clientY;
+                    });
+                    
+                    resultImageDiv.addEventListener('touchend', function() {
+                        isZooming = false;
+                        // Don't hide overlay on touchend - let user tap to close
+                    });
+                    
+                    function updateMobileZoom(x, y) {
+                        const rect = img.getBoundingClientRect();
+                        const imgX = x - rect.left;
+                        const imgY = y - rect.top;
+                        
+                        // Calculate zoom position (center on touch)
+                        const zoomX = -(imgX * zoomLevel) + (window.innerWidth / 2);
+                        const zoomY = -(imgY * zoomLevel) + (window.innerHeight / 2);
+                        
+                        // Apply transform to zoomed image
+                        mobileZoomImage.style.transform = `translate(${zoomX}px, ${zoomY}px) scale(${zoomLevel})`;
+                        mobileZoomImage.style.transformOrigin = '0 0';
+                    }
+                }
+            });
+            
+            // Close mobile zoom overlay when tapped
+            if (isMobile) {
+                mobileZoomOverlay.addEventListener('click', function() {
+                    this.style.display = 'none';
+                    // Reset zoom image
+                    mobileZoomImage.style.transform = 'none';
+                });
             }
         }
-    });
-    
-    // Close modal on swipe down (mobile)
-    let startY;
-    imageModal.addEventListener('touchstart', function(e) {
-        startY = e.touches[0].clientY;
-    });
-    
-    imageModal.addEventListener('touchmove', function(e) {
-        if (!startY) return;
-        
-        const currentY = e.touches[0].clientY;
-        const diffY = currentY - startY;
-        
-        // If swiping down more than 50px, close modal
-        if (diffY > 50) {
-            closeModalFunc();
-            if (isMobile && history.state && history.state.modalOpen) {
-                history.back();
-            }
-            startY = null;
-        }
-    });
-}
         
         // Keep the existing event listeners
         document.querySelector('.search-box').addEventListener('input', searchItems);
@@ -1439,14 +1423,8 @@ function initializeImageZoomForResults() {
         window.addEventListener('DOMContentLoaded', function() {
             loadJSONFiles();
             // Initialize image zoom for any existing results
-            setTimeout(initializeImageZoomForResults, 1000);
+            setTimeout(initializeAmazonStyleZoom, 1000);
         });
     </script>
 </body>
 </html>
-
-
-
-
-
-

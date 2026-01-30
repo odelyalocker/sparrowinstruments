@@ -2,7 +2,7 @@
   {
     "name": "Digital Hematology Analyzer",
     "category": "Medical Lab",
-    "image": "/sanjayparas/medimg/med1.jpg",
+    "image": "/sparrowinstruments/medimg/med1.jpg",
     "mrpPrice": "2,85,000",
     "discount": "18%",
     "bestBuyPrice": "2,33,700",
@@ -26,7 +26,7 @@
   {
     "name": "Clinical Centrifuge",
     "category": "Medical Lab",
-    "image": "/sanjayparas/medimg/med2.jpg",
+    "image": "/sparrowinstruments/medimg/med2.jpg",
     "mrpPrice": "32,000",
     "discount": "12%",
     "bestBuyPrice": "28,160",
@@ -50,7 +50,7 @@
   {
     "name": "Digital Colorimeter",
     "category": "Medical Lab",
-    "image": "/sanjayparas/medimg/med3.jpg",
+    "image": "/sparrowinstruments/medimg/med3.jpg",
     "mrpPrice": "18,500",
     "discount": "15%",
     "bestBuyPrice": "15,725",

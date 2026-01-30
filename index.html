@@ -166,6 +166,30 @@
         .home-button a:hover {
             color: #FFFFFF;
         }
+
+        /* Icon styles for Home and Contact */
+.home-button a i,
+.contact-button a i {
+    color: #FFFFFF;
+    font-size: 28px; /* Big size for visibility */
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.home-button a:hover i,
+.contact-button a:hover i {
+    color: #FFFFFF;
+    transform: scale(1.1); /* Slight zoom on hover */
+    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+}
+
+/* Adjust button containers for icons */
+.home-button,
+.contact-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
         
         /* Search box in center - NEW */
         .black-header-search {
@@ -177,7 +201,7 @@
         }
         
         .search-container {
-            width: 70%;
+            width: 50%;
         }
         
         .search-box {
@@ -225,6 +249,8 @@
         .contact-button a:hover {
             color: #FFFFFF;
         }
+
+        
         
         /* Search Results Section - UPDATED FOR DESKTOP FOOTER FIX */
         .search-results {
@@ -617,6 +643,9 @@
 
         /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 1024px) {
+            .search-container {
+                width: 70%; /* Slightly more on tablet */
+            }
             .result-content {
                 grid-template-columns: 1fr 1fr; /* Two columns on tablet */
                 gap: 20px;
@@ -768,7 +797,7 @@
     }
     
     .search-container {
-        width: 100%;
+        width: 60%;
     }
     
     .contact-button {
@@ -783,7 +812,10 @@
         font-size: 16px;
         padding: 8px 0;
     }
-    
+    .home-button a i,
+    .contact-button a i {
+        font-size: 24px; /* Slightly smaller on mobile */
+    }
     .search-box {
         padding: 10px 15px;
         font-size: 16px;
@@ -949,7 +981,13 @@
         white-space: nowrap;
         padding: 6px 0;
     }
-    
+    .home-button a i,
+    .contact-button a i {
+        font-size: 22px;
+    }
+    .search-container {
+        width: 60%; /* Further reduced on small mobile */
+    }
     .search-box {
         padding: 8px 12px;
         font-size: 15px;
@@ -1032,7 +1070,13 @@
         white-space: nowrap;
         padding: 4px 0;
     }
-    
+    .home-button a i,
+    .contact-button a i {
+        font-size: 20px;
+    }
+    .search-container {
+        width: 55%; /* Minimum width */
+    }
     .search-box {
         padding: 6px 10px;
         font-size: 14px;
@@ -1361,4 +1405,5 @@ container.addEventListener('touchcancel', () => {
 </script>
 </body>
 </html>
+
 

@@ -1,1 +1,74 @@
-
+[
+  {
+    "name": "Digital Hematology Analyzer",
+    "category": "Medical Lab",
+    "image": "/sanjayparas/medimg/med1.jpg",
+    "mrpPrice": "2,85,000",
+    "discount": "18%",
+    "bestBuyPrice": "2,33,700",
+    "warranty": "2 Years Manufacturer Warranty",
+    "specifications": [
+      "Parameters: 22 parameters + 3 histograms",
+      "Sample type: Whole blood, pre-diluted",
+      "Sample volume: 20μL (open mode), 40μL (closed mode)",
+      "Throughput: Up to 60 samples/hour",
+      "Display: 10.4 inch color touchscreen"
+    ],
+    "description": [
+      "Semi-automatic hematology analyzer for complete blood count",
+      "Measures WBC, RBC, HGB, HCT, PLT and indices",
+      "Built-in thermal printer for results",
+      "Calibration and QC functions included",
+      "Ideal for clinics, hospitals, and diagnostic labs"
+    ],
+    "keywords": ["hematology analyzer", "cbc", "medical", "diagnostic", "blood test", "lab equipment"]
+  },
+  {
+    "name": "Clinical Centrifuge",
+    "category": "Medical Lab",
+    "image": "/sanjayparas/medimg/med2.jpg",
+    "mrpPrice": "32,000",
+    "discount": "12%",
+    "bestBuyPrice": "28,160",
+    "warranty": "1 Year Manufacturer Warranty",
+    "specifications": [
+      "Max speed: 5000 rpm",
+      "Max RCF: 4390×g",
+      "Timer: 0-60 min with continuous",
+      "Capacity: 24×15ml, 12×10ml, 4×100ml",
+      "Motor: Brushless, maintenance-free"
+    ],
+    "description": [
+      "Bench-top clinical centrifuge for laboratory use",
+      "Automatic imbalance detection and lid lock",
+      "Quiet operation with low vibration",
+      "Suitable for serum separation, urine, and other clinical samples",
+      "Includes rotor, buckets, and tube holders"
+    ],
+    "keywords": ["centrifuge", "clinical", "medical", "serum separation", "laboratory", "diagnostic"]
+  },
+  {
+    "name": "Digital Colorimeter",
+    "category": "Medical Lab",
+    "image": "/sanjayparas/medimg/med3.jpg",
+    "mrpPrice": "18,500",
+    "discount": "15%",
+    "bestBuyPrice": "15,725",
+    "warranty": "1 Year Manufacturer Warranty",
+    "specifications": [
+      "Light source: LED with 6 filters",
+      "Filters: 430, 520, 540, 580, 610, 660 nm",
+      "Cuvette: 10mm path length, glass",
+      "Display: 3½ digit LCD",
+      "Measurement modes: Transmittance and Absorbance"
+    ],
+    "description": [
+      "Digital colorimeter for biochemical analysis",
+      "For glucose, cholesterol, urea, bilirubin, and other tests",
+      "Stable readings with low drift",
+      "Includes cuvette set, filters, and operation manual",
+      "Ideal for small labs and nursing homes"
+    ],
+    "keywords": ["colorimeter", "digital", "medical", "biochemistry", "diagnostic", "lab equipment"]
+  }
+]

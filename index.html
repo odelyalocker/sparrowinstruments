@@ -1515,27 +1515,27 @@
             <h4><i class="fas fa-th-list"></i> Sections</h4>
             <div class="checkbox-group">
                 <label class="checkbox-item">
-                    <input type="checkbox" value="physics" class="section-checkbox">
+                    <input type="checkbox" value="Physics Lab" class="section-checkbox">
                     <span class="checkmark"></span>
                     Physics
                 </label>
                 <label class="checkbox-item">
-                    <input type="checkbox" value="chemistry" class="section-checkbox">
+                    <input type="checkbox" value="Chemistry Lab" class="section-checkbox">
                     <span class="checkmark"></span>
                     Chemistry
                 </label>
                 <label class="checkbox-item">
-                    <input type="checkbox" value="biology" class="section-checkbox">
+                    <input type="checkbox" value="Biology Lab" class="section-checkbox">
                     <span class="checkmark"></span>
                     Biology
                 </label>
                 <label class="checkbox-item">
-                    <input type="checkbox" value="scientific" class="section-checkbox">
+                    <input type="checkbox" value="Scientific Lab" class="section-checkbox">
                     <span class="checkmark"></span>
                     Scientific
                 </label>
                 <label class="checkbox-item">
-                    <input type="checkbox" value="medical" class="section-checkbox">
+                    <input type="checkbox" value="Medical Lab" class="section-checkbox">
                     <span class="checkmark"></span>
                     Medical
                 </label>
@@ -1612,10 +1612,18 @@
     </div>
 
 <script>
+    
     // 1. GLOBAL VARIABLES & LOADING
     let allItems = [];
     let searchTimeout;
 
+// PRICE PARSING HELPER FUNCTION - ADD THIS
+function parsePrice(priceStr) {
+    if (!priceStr) return 0;
+    // Remove commas and convert to number
+    return parseInt(priceStr.toString().replace(/,/g, ''));
+}
+    
     async function loadJSONFiles() {
         console.log('🚀 Loading Lab Data...');
         try {
@@ -1719,6 +1727,9 @@
                     
                     // ATTACH ZOOM TO EACH ITEM
                     setupZoom(resultItem); 
+                    // Set data attributes for filtering
+                    resultItem.dataset.price = parsePrice(item.bestBuyPrice || item.mrpPrice);
+                    resultItem.dataset.section = determineSection(item);
                 });
                 searchResults.style.display = 'block';
                 mainContent.classList.add('hide-main');
@@ -1730,6 +1741,15 @@
         }, 300);
     }
 
+// SECTION DETERMINATION HELPER FUNCTION - ADD THIS
+function determineSection(item) {
+    if (item.category) {
+        // Extract first word from category (e.g., "Biology Lab" → "biology")
+        return item.category.toLowerCase().split(' ')[0];
+    }
+    return 'general';
+}    
+    
 function setupZoom(resultItem) {
     const container = resultItem.querySelector('.result-image');
     const img = container.querySelector('img');
@@ -2052,10 +2072,10 @@ resultItem.dataset.section = determineSection(item); // You need to implement th
 
 // Then add this helper function to determine section:
 function determineSection(item) {
-    // This is a placeholder - you need to implement based on your data structure
-    // Check which JSON file the item came from or add a "section" field to your JSON
+    // Extract section from category (e.g., "Biology Lab" → "biology")
     if (item.category) {
-        return item.category.toLowerCase();
+        // Convert to lowercase and extract first word
+        return item.category.toLowerCase().split(' ')[0];
     }
     return 'general';
 }
@@ -2063,3 +2083,4 @@ function determineSection(item) {
 </script>
 </body>
 </html>
+

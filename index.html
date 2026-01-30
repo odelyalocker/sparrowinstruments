@@ -1829,12 +1829,237 @@ container.addEventListener('touchcancel', () => {
     window.scrollTo(0, 0);
 });
 
+// ===== FILTER SIDEBAR FUNCTIONALITY =====
+
+// DOM Elements
+const hamburgerMenu = document.querySelector('.hamburger-menu');
+const filterSidebar = document.getElementById('filterSidebar');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+const closeFilter = document.getElementById('closeFilter');
+const clearFilterBtn = document.getElementById('clearFilter');
+const applyFilterBtn = document.getElementById('applyFilter');
+const sectionCheckboxes = document.querySelectorAll('.section-checkbox');
+const minPriceInput = document.getElementById('minPrice');
+const maxPriceInput = document.getElementById('maxPrice');
+const priceMinSlider = document.getElementById('priceMin');
+const priceMaxSlider = document.getElementById('priceMax');
+const minDisplay = document.getElementById('minDisplay');
+const maxDisplay = document.getElementById('maxDisplay');
+
+// Price range variables
+let minPrice = 10;
+let maxPrice = 100000;
+
+// Current filters state
+let currentFilters = {
+    sections: [],
+    minPrice: 10,
+    maxPrice: 100000
+};
+
+// Initialize price slider
+function initializePriceSlider() {
+    // Set initial display values
+    minDisplay.textContent = minPrice;
+    maxDisplay.textContent = maxPrice;
+    
+    // Update slider when input changes
+    minPriceInput.addEventListener('input', function() {
+        let value = parseInt(this.value);
+        if (value < 10) value = 10;
+        if (value > maxPrice) value = maxPrice;
+        priceMinSlider.value = value;
+        minDisplay.textContent = value;
+        currentFilters.minPrice = value;
+    });
+    
+    maxPriceInput.addEventListener('input', function() {
+        let value = parseInt(this.value);
+        if (value > 100000) value = 100000;
+        if (value < minPrice) value = minPrice;
+        priceMaxSlider.value = value;
+        maxDisplay.textContent = value;
+        currentFilters.maxPrice = value;
+    });
+    
+    // Update input when slider changes
+    priceMinSlider.addEventListener('input', function() {
+        let value = parseInt(this.value);
+        if (value > parseInt(priceMaxSlider.value) - 1000) {
+            value = parseInt(priceMaxSlider.value) - 1000;
+        }
+        minPriceInput.value = value;
+        minDisplay.textContent = value;
+        currentFilters.minPrice = value;
+    });
+    
+    priceMaxSlider.addEventListener('input', function() {
+        let value = parseInt(this.value);
+        if (value < parseInt(priceMinSlider.value) + 1000) {
+            value = parseInt(priceMinSlider.value) + 1000;
+        }
+        maxPriceInput.value = value;
+        maxDisplay.textContent = value;
+        currentFilters.maxPrice = value;
+    });
+}
+
+// Toggle filter sidebar
+hamburgerMenu.addEventListener('click', function() {
+    filterSidebar.classList.add('show');
+    sidebarOverlay.classList.add('show');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+});
+
+// Close filter sidebar
+closeFilter.addEventListener('click', closeFilterSidebar);
+sidebarOverlay.addEventListener('click', closeFilterSidebar);
+
+function closeFilterSidebar() {
+    filterSidebar.classList.remove('show');
+    sidebarOverlay.classList.remove('show');
+    document.body.style.overflow = ''; // Restore scrolling
+}
+
+// Clear all filters
+clearFilterBtn.addEventListener('click', function() {
+    // Uncheck all checkboxes
+    sectionCheckboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    
+    // Reset price range
+    minPriceInput.value = 10;
+    maxPriceInput.value = 100000;
+    priceMinSlider.value = 10;
+    priceMaxSlider.value = 100000;
+    minDisplay.textContent = 10;
+    maxDisplay.textContent = 100000;
+    
+    // Clear current filters
+    currentFilters.sections = [];
+    currentFilters.minPrice = 10;
+    currentFilters.maxPrice = 100000;
+    
+    // Apply cleared filters
+    applyFilters();
+});
+
+// Update sections filter
+sectionCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            if (!currentFilters.sections.includes(this.value)) {
+                currentFilters.sections.push(this.value);
+            }
+        } else {
+            currentFilters.sections = currentFilters.sections.filter(
+                section => section !== this.value
+            );
+        }
+    });
+});
+
+// Apply filters
+applyFilterBtn.addEventListener('click', function() {
+    applyFilters();
+    closeFilterSidebar();
+});
+
+// Filter function
+function applyFilters() {
+    const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
+    const resultsList = document.getElementById('resultsList');
+    const resultItems = document.querySelectorAll('.result-item');
+    
+    // If no search results, don't filter
+    if (resultItems.length === 0) return;
+    
+    resultItems.forEach(item => {
+        let showItem = true;
+        
+        // Get item data (you'll need to add data attributes to your result items)
+        const itemPrice = parseInt(item.dataset.price) || 0;
+        const itemSection = item.dataset.section || '';
+        
+        // Check price filter
+        if (itemPrice < currentFilters.minPrice || itemPrice > currentFilters.maxPrice) {
+            showItem = false;
+        }
+        
+        // Check section filter (if any sections selected)
+        if (currentFilters.sections.length > 0 && !currentFilters.sections.includes(itemSection)) {
+            showItem = false;
+        }
+        
+        // Show/hide item
+        item.style.display = showItem ? 'block' : 'none';
+    });
+    
+    // Update results count
+    const visibleItems = document.querySelectorAll('.result-item[style="display: block"]');
+    const resultsTitle = document.getElementById('resultsTitle');
+    if (visibleItems.length > 0) {
+        resultsTitle.textContent = `Showing ${visibleItems.length} filtered items`;
+    } else {
+        resultsTitle.textContent = 'No items match your filters';
+    }
+}
+
+// Initialize filter functionality
+initializePriceSlider();
+
+// Update your searchItems function to add data attributes to result items
+// Add this inside your searchItems function, after creating each resultItem:
+// Replace the resultItem.innerHTML section with this updated version:
+
+// In your searchItems function, find where you create resultItem.innerHTML
+// and add data-price and data-section attributes:
+
+// Inside the matchedItems.forEach loop in searchItems function:
+resultItem.innerHTML = `
+    <div class="result-content">
+        <div class="result-left">
+            <div class="result-image">
+                <img src="${item.image || 'placeholder.jpg'}" alt="${item.name}">
+            </div>
+            <div class="price-box">
+                <div class="mrp-line"><span class="mrp-label">M.R.P.</span> <span class="mrp-price">INR ${item.mrpPrice || '0'}/-</span></div>
+                <div class="bestbuy-line"><span class="bestbuy-label">Buy</span> <span class="bestbuy-price">INR ${item.bestBuyPrice || '0'}/-</span></div>
+            </div>
+        </div>
+        <div class="result-center">
+            <h4 class="item-name">${item.name}</h4>
+            <div class="specs-section">
+                ${specsHTML ? `<strong>Specifications:</strong><ul>${specsHTML}</ul>` : ''}
+                <strong>Warranty:</strong> ${item.warranty || 'Not specified'}
+            </div>
+        </div>
+        <div class="result-right">
+            <div class="description-section">
+                <strong>Descriptions:</strong>
+                <ul>${descHTML}</ul>
+            </div>
+        </div>
+    </div>
+`;
+
+// ADD THESE LINES RIGHT AFTER resultItem.innerHTML:
+resultItem.dataset.price = item.bestBuyPrice || item.mrpPrice || '0';
+// You'll need to determine the section based on your data
+// For now, I'll add a placeholder - you'll need to update this based on your JSON structure
+resultItem.dataset.section = determineSection(item); // You need to implement this function
+
+// Then add this helper function to determine section:
+function determineSection(item) {
+    // This is a placeholder - you need to implement based on your data structure
+    // Check which JSON file the item came from or add a "section" field to your JSON
+    if (item.category) {
+        return item.category.toLowerCase();
+    }
+    return 'general';
+}
+    
 </script>
 </body>
 </html>
-
-
-
-
-
-

@@ -172,6 +172,7 @@
         /* Icon styles for Home and Contact */
 .home-button a i,
 .contact-button a i,
+.about-button a i,
 .hamburger-menu i {
     color: #FFFFFF;
     font-size: 26px;
@@ -268,7 +269,21 @@
         .contact-button a:hover {
             color: #FFFFFF;
         }
+/* About button */
+.about-button {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+/* About icon styling */
+
+.about-button a:hover i {
+    color: #FFFFFF;
+    transform: scale(1.1);
+    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+}
         /* Search Results Section - UPDATED FOR DESKTOP FOOTER FIX */
         .search-results {
             position: relative; /* CHANGED: from absolute to relative */
@@ -1140,6 +1155,7 @@
     }
     .home-button a i,
     .contact-button a i,
+    .about-button a i,
     .hamburger-menu i {
     font-size: 22px; /* All icons now 22px on mobile */
     }
@@ -1152,7 +1168,9 @@
         min-width: 50px;
         height: 45px;
     }
-    
+    .about-button {
+        margin-left: 5px;
+    }
     /* Search Results Section - FIXED SCROLLING */
     .search-results {
         position: relative !important;
@@ -1313,6 +1331,7 @@
     }
     .home-button a i,
     .contact-button a i,
+    .about-button a i,
     .hamburger-menu i {
     font-size: 20px;
     }
@@ -1406,6 +1425,7 @@
     }
     .home-button a i,
     .contact-button a i,
+    .about-button a i,
     .hamburger-menu i {
     font-size: 18px; /* All icons now 18px */
 }    
@@ -2090,5 +2110,6 @@ function determineSection(item) {
 </script>
 </body>
 </html>
+
 
 

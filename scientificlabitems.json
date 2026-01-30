@@ -2,7 +2,7 @@
   {
     "name": "Digital Centrifuge Machine",
     "category": "Scientific Lab",
-    "image": "/sanjayparas/sciimg/sci1.jpg",
+    "image": "/sparrowinstruments/sciimg/sci1.jpg",
     "mrpPrice": "85,000",
     "discount": "15%",
     "bestBuyPrice": "72,250",
@@ -26,7 +26,7 @@
   {
     "name": "UV-Vis Spectrophotometer",
     "category": "Scientific Lab",
-    "image": "/sanjayparas/sciimg/sci2.jpg",
+    "image": "/sparrowinstruments/sciimg/sci2.jpg",
     "mrpPrice": "1,25,000",
     "discount": "12%",
     "bestBuyPrice": "1,10,000",
@@ -49,7 +49,7 @@
   {
     "name": "Vortex Mixer",
     "category": "Scientific Lab",
-    "image": "/sanjayparas/sciimg/sci3.jpg",
+    "image": "/sparrowinstruments/sciimg/sci3.jpg",
     "mrpPrice": "8,500",
     "discount": "10%",
     "bestBuyPrice": "7,650",

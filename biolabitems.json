@@ -28,7 +28,7 @@
   {
     "name": "Digital Microscope Camera",
     "category": "Biology Lab",
-    "image": "/sanjayparas/bioimg/bio4.jpg",
+    "image": "/sanjayparas/bioimg/bio1.jpg",
     "mrpPrice": "15,000",
     "discount": "10%",
     "bestBuyPrice": "13,500",
@@ -54,7 +54,7 @@
   {
     "name": "Isoprofile",
     "category": "Biology Lab",
-    "image": "/sanjayparas/bioimg/bio5.jpg",
+    "image": "/sanjayparas/bioimg/bio2.jpg",
     "mrpPrice": "65,000",
     "discount": "12%",
     "bestBuyPrice": "57,200",

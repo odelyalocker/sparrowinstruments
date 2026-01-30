@@ -226,19 +226,18 @@
             color: #FFFFFF;
         }
         
-        /* Search Results Section - FIXED */
-    .search-results {
-    position: absolute;
-    top: 140px; 
-    left: 0;
-    width: 100%;
-    background: white;
-    z-index: 998;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: none;
-    border-top: 2px solid #d32f2f;
-    
-    overflow-y: auto;
+        /* Search Results Section - UPDATED FOR DESKTOP FOOTER FIX */
+        .search-results {
+            position: relative; /* CHANGED: from absolute to relative */
+            width: 100%;
+            background: white;
+            z-index: 998;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: none;
+            border-top: 2px solid #d32f2f;
+            overflow-y: auto;
+            margin-top: 140px; /* ADDED: Push below both headers */
+            min-height: 200px; /* ADDED: Minimum height for single item */
         }
 
         .results-container {
@@ -299,6 +298,7 @@
             padding: 30px 20px;
             text-align: center;
             color: #555;
+            margin-top: 140px; /* Keep this for when no search results */
         }
         
 
@@ -657,7 +657,7 @@
             }
         }
 
-/* MOBILE LAYOUT - FIXED & REDUCED HEIGHT */
+        /* MOBILE LAYOUT - FIXED & REDUCED HEIGHT */
 @media (max-width: 768px) {
     /* FIXED HEADER - Now stays fixed at top */
     header {
@@ -823,7 +823,7 @@
     }
     
     .result-content {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Single column on mobile */
         gap: 20px;
     }
     
@@ -897,10 +897,9 @@
         -webkit-user-select: none;
         user-select: none;
     }
-}
-        
+}        
  
-@media (max-width: 480px) {
+        @media (max-width: 480px) {
     header {
         position: fixed; /* ADDED */
         padding: 5px 12px;
@@ -981,7 +980,8 @@
     }
 }
 
-@media (max-width: 360px) {
+        /* For very small screens */
+        @media (max-width: 360px) {
     header {
         position: fixed; /* ADDED */
         min-height: 55px;

@@ -1844,7 +1844,7 @@ function showAllItems() {
             // Render Results
             if (matchedItems.length > 0) {
                 resultsTitle.textContent = `Found ${matchedItems.length} items for "${searchTerm}"`;
-                
+                resultsList.innerHTML = '';
                 matchedItems.forEach(item => {
     const resultItem = document.createElement('div');
     resultItem.className = 'result-item';
@@ -2192,4 +2192,5 @@ initializePriceSlider();
 </script>
 </body>
 </html>
+
 

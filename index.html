@@ -1846,21 +1846,49 @@ function showAllItems() {
                 resultsTitle.textContent = `Found ${matchedItems.length} items for "${searchTerm}"`;
                 
                 matchedItems.forEach(item => {
-                    const resultItem = document.createElement('div');
-                    resultItem.className = 'result-item';
-                    
-                    const specsHTML = Array.isArray(item.specifications) ? item.specifications.map(s => `<li>${s}</li>`).join('') : '';
-                    const descHTML = Array.isArray(item.description) ? item.description.map(d => `<li>${d}</li>`).join('') : `<li>${item.description || ''}</li>`;
+    const resultItem = document.createElement('div');
+    resultItem.className = 'result-item';
+    
+    const specsHTML = Array.isArray(item.specifications) ? item.specifications.map(s => `<li>${s}</li>`).join('') : '';
+    const descHTML = Array.isArray(item.description) ? item.description.map(d => `<li>${d}</li>`).join('') : `<li>${item.description || ''}</li>`;
 
-                    
-                    resultsList.appendChild(resultItem);
-                    
-                    // ATTACH ZOOM TO EACH ITEM
-                    setupZoom(resultItem); 
-                    // Set data attributes for filtering
-                    resultItem.dataset.price = parsePrice(item.bestBuyPrice || item.mrpPrice);
-                    resultItem.dataset.section = determineSection(item);
-                });
+    // ADD THIS MISSING HTML:
+    resultItem.innerHTML = `
+        <div class="result-content">
+            <div class="result-left">
+                <div class="result-image">
+                    <img src="${item.image || 'placeholder.jpg'}" alt="${item.name}">
+                </div>
+                <div class="price-box">
+                    <div class="mrp-line"><span class="mrp-label">M.R.P.</span> <span class="mrp-price">INR ${item.mrpPrice || '0'}/-</span></div>
+                    <div class="bestbuy-line"><span class="bestbuy-label">Buy</span> <span class="bestbuy-price">INR ${item.bestBuyPrice || '0'}/-</span></div>
+                </div>
+            </div>
+            <div class="result-center">
+                <h4 class="item-name">${item.name}</h4>
+                <div class="specs-section">
+                    ${specsHTML ? `<strong>Specifications:</strong><ul>${specsHTML}</ul>` : ''}
+                    <strong>Warranty:</strong> ${item.warranty || 'Not specified'}
+                </div>
+            </div>
+            <div class="result-right">
+                <div class="description-section">
+                    <strong>Descriptions:</strong>
+                    <ul>${descHTML}</ul>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    resultsList.appendChild(resultItem);
+    
+    // ATTACH ZOOM TO EACH ITEM
+    setupZoom(resultItem); 
+    // Set data attributes for filtering
+    resultItem.dataset.price = parsePrice(item.bestBuyPrice || item.mrpPrice);
+    resultItem.dataset.section = determineSection(item);
+});
+                
                 searchResults.style.display = 'block';
                 mainContent.classList.add('hide-main');
             } else {
@@ -2159,57 +2187,9 @@ function applyFilters() {
 // Initialize filter functionality
 initializePriceSlider();
 
-// Update your searchItems function to add data attributes to result items
-// Add this inside your searchItems function, after creating each resultItem:
-// Replace the resultItem.innerHTML section with this updated version:
 
-// In your searchItems function, find where you create resultItem.innerHTML
-// and add data-price and data-section attributes:
-
-// Inside the matchedItems.forEach loop in searchItems function:
-resultItem.innerHTML = `
-    <div class="result-content">
-        <div class="result-left">
-            <div class="result-image">
-                <img src="${item.image || 'placeholder.jpg'}" alt="${item.name}">
-            </div>
-            <div class="price-box">
-                <div class="mrp-line"><span class="mrp-label">M.R.P.</span> <span class="mrp-price">INR ${item.mrpPrice || '0'}/-</span></div>
-                <div class="bestbuy-line"><span class="bestbuy-label">Buy</span> <span class="bestbuy-price">INR ${item.bestBuyPrice || '0'}/-</span></div>
-            </div>
-        </div>
-        <div class="result-center">
-            <h4 class="item-name">${item.name}</h4>
-            <div class="specs-section">
-                ${specsHTML ? `<strong>Specifications:</strong><ul>${specsHTML}</ul>` : ''}
-                <strong>Warranty:</strong> ${item.warranty || 'Not specified'}
-            </div>
-        </div>
-        <div class="result-right">
-            <div class="description-section">
-                <strong>Descriptions:</strong>
-                <ul>${descHTML}</ul>
-            </div>
-        </div>
-    </div>
-`;
-
-// ADD THESE LINES RIGHT AFTER resultItem.innerHTML:
-resultItem.dataset.price = item.bestBuyPrice || item.mrpPrice || '0';
-// You'll need to determine the section based on your data
-// For now, I'll add a placeholder - you'll need to update this based on your JSON structure
-resultItem.dataset.section = determineSection(item); // You need to implement this function
-
-// Then add this helper function to determine section:
-function determineSection(item) {
-    // Extract section from category (e.g., "Biology Lab" → "biology")
-    if (item.category) {
-        // Convert to lowercase and extract first word
-        return item.category.toLowerCase().split(' ')[0];
-    }
-    return 'general';
-}
     
 </script>
 </body>
 </html>
+

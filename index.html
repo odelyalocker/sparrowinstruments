@@ -390,7 +390,19 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             font-size: 14px;
             color: #FFFFFF;
         }
+/* Footer text responsiveness */
+.mobile-text {
+    display: none;
+}
 
+@media (max-width: 768px) {
+    .desktop-text {
+        display: none;
+    }
+    .mobile-text {
+        display: block;
+    }
+}
         /* ===== SEARCH RESULTS LAYOUT ===== */
         .result-item {
             background: white;
@@ -1503,6 +1515,7 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
     .hide-main {
         display: none !important;
     }
+    
 }
         
     </style>
@@ -1675,10 +1688,12 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
     
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-title">A product of Sparrow Instruments</div>
-            <div class="copyright">© 2023 All rights reserved.</div>
+    <div class="footer-content">
+        <div class="copyright">
+            <span class="desktop-text">Sparrow Instruments is in service for the last 50 years • © 2023 All rights reserved.</span>
+            <span class="mobile-text">Sparrow Instruments: 50 years of service<br>© 2023 All rights reserved.</span>
         </div>
+    </div>
     </footer>
     
     <!-- Mobile Zoom Overlay -->
@@ -2159,6 +2174,7 @@ function determineSection(item) {
 </script>
 </body>
 </html>
+
 
 
 

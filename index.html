@@ -171,9 +171,10 @@
 
         /* Icon styles for Home and Contact */
 .home-button a i,
-.contact-button a i {
+.contact-button a i,
+.hamburger-menu i {
     color: #FFFFFF;
-    font-size: 26px; /* Big size for visibility */
+    font-size: 26px;
     transition: all 0.3s ease;
     display: block;
 }
@@ -187,7 +188,6 @@
 /* Hamburger menu styling - ADD THIS */
 .hamburger-menu i {
     color: #FFFFFF;
-    font-size: 24px; /* Same size as home icon */
     transition: all 0.3s ease;
     margin-left: 15px; /* Space between home and hamburger */
 }
@@ -830,12 +830,12 @@
         padding: 8px 0;
     }
     .home-button a i,
-    .contact-button a i {
-        font-size: 22px; /* Slightly smaller on mobile */
+    .contact-button a i,
+    .hamburger-menu i {
+    font-size: 22px; /* All icons now 22px on mobile */
     }
     .hamburger-menu i {
-        font-size: 22px; /* Slightly smaller on mobile */
-        margin-left: 12px;
+     margin-left: 12px;
     }
     .search-box {
         padding: 10px 15px;
@@ -1003,12 +1003,12 @@
         padding: 6px 0;
     }
     .home-button a i,
-    .contact-button a i {
-        font-size: 20px;
+    .contact-button a i,
+    .hamburger-menu i {
+    font-size: 20px;
     }
     .hamburger-menu i {
-        font-size: 20px;
-        margin-left: 10px;
+     margin-left: 10px;
     } 
     .search-container {
         width: 60%; /* Further reduced on small mobile */
@@ -1096,12 +1096,12 @@
         padding: 4px 0;
     }
     .home-button a i,
-    .contact-button a i {
-        font-size: 18px;
-    }
+    .contact-button a i,
     .hamburger-menu i {
-        font-size: 18px;
-        margin-left: 8px;
+    font-size: 18px; /* All icons now 18px */
+}    
+    .hamburger-menu i {
+     margin-left: 8px;
     }
     .search-container {
         width: 55%; /* Minimum width */
@@ -1437,4 +1437,5 @@ container.addEventListener('touchcancel', () => {
 </script>
 </body>
 </html>
+
 

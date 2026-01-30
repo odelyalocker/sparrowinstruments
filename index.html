@@ -657,49 +657,54 @@
             }
         }
 
-        /* MOBILE LAYOUT - FIXED & REDUCED HEIGHT */
+/* MOBILE LAYOUT - FIXED & REDUCED HEIGHT */
 @media (max-width: 768px) {
-    /* REDUCED HEADER HEIGHT ON MOBILE */
+    /* FIXED HEADER - Now stays fixed at top */
     header {
-        padding: 6px 15px; 
-        min-height: 65px; 
-        flex-wrap: nowrap; 
+        position: fixed; /* ADDED: Make header fixed */
+        top: 0; /* ADDED */
+        left: 0; /* ADDED */
+        width: 100%; /* ADDED */
+        padding: 6px 15px;
+        min-height: 65px;
+        flex-wrap: nowrap;
         align-items: center;
         justify-content: space-between;
-        position: relative;
+        z-index: 1000; /* Ensure it's above other elements */
+        background: linear-gradient(135deg, #d32f2f, #b71c1c); /* Ensure background is set */
     }
     
     /* Keep the original structure but adjust sizes */
     .logo-container {
         margin-right: 15px;
-        height: 40px; 
-        width: 40px; 
+        height: 40px;
+        width: 40px;
         order: 1;
         flex-shrink: 0;
-        position: static; /* CHANGED: absolute → static */
-        left: auto; /* ADDED */
-        top: auto; /* ADDED */
-        transform: none; /* ADDED */
+        position: static;
+        left: auto;
+        top: auto;
+        transform: none;
     }
     
     /* Cart container */
     .cart-image-container {
-        margin-left: 15px; /* CHANGED: 0 → 15px */
-        height: 40px; /* Adjusted for mobile */
-        width: 40px; /* Adjusted for mobile */
+        margin-left: 15px;
+        height: 40px;
+        width: 40px;
         order: 3;
         flex-shrink: 0;
-        position: static; /* CHANGED: absolute → static */
-        right: auto; /* ADDED */
-        top: auto; /* ADDED */
-        transform: none; /* ADDED */
+        position: static;
+        right: auto;
+        top: auto;
+        transform: none;
     }
     
     /* Center content takes available space */
     .header-center {
-        width: calc(100% - 110px); /* ADDED: 40px + 40px + 15px + 15px */
+        width: calc(100% - 110px);
         order: 2;
-        padding: 0 10px; /* CHANGED: 60px → 10px */
+        padding: 0 10px;
         margin: 0;
         min-height: auto;
         flex-grow: 1;
@@ -707,7 +712,7 @@
     }
     
     .center-tagline {
-        font-size: 13px; 
+        font-size: 13px;
         color: #FFFFFF;
         line-height: 1.2;
         margin-bottom: 2px;
@@ -720,7 +725,7 @@
     }
     
     .trusted-tagline {
-        font-size: 12px; 
+        font-size: 12px;
         margin-top: 2px;
         white-space: normal;
         overflow: hidden;
@@ -730,16 +735,20 @@
         -webkit-box-orient: vertical;
     }
     
-    /* Adjust black header position */
+    /* Black Header Section - FIXED POSITIONING */
     .black-header {
-        top: 65px; 
-        padding: 10px 15px; 
-        min-height: 65px; 
-        flex-wrap: nowrap;
-        justify-content: space-between;
+        position: fixed; /* CHANGED: Already fixed, but ensuring */
+        left: 0;
+        top: 65px; /* Position below red header */
+        width: 100%;
+        background-color: #000000;
+        color: white;
+        padding: 10px 15px;
+        display: flex;
         align-items: center;
-        position: fixed;
-        z-index: 999; 
+        z-index: 999;
+        min-height: 65px;
+        box-sizing: border-box; /* Ensure padding included in height */
     }
     
     /* Home and Contact buttons - FIXED */
@@ -782,17 +791,18 @@
         height: 45px;
     }
     
-    /* Adjust search results position */
+    /* Search Results Section - FIXED SCROLLING */
     .search-results {
-        position: relative !important; /* Forces it to push the footer down */
-        top: 0 !important;            /* Removes the 140px desktop gap */
-        max-height: none !important;   /* Let it grow as long as the list is */
-        overflow-y: visible !important;/* Let the whole page scroll */
-        margin-top: 0 !important;
+        position: relative !important;
+        top: 0 !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+        margin-top: 130px !important; /* CHANGED: Combined height of both headers (65px + 65px) */
+        z-index: 1; /* Place below headers */
     }
 
     .main-content.hide-main {
-        display: none !important;      /* Hides the "Welcome" text while searching */
+        display: none !important;
     }
     
     .results-container {
@@ -800,8 +810,20 @@
         padding: 15px;
     }
     
+    /* Adjust main content to start below both headers */
+    .main-content {
+        margin-top: 130px !important; /* CHANGED: Combined height of both headers */
+        margin-bottom: 10px;
+        background-color: white;
+        padding: 30px 20px;
+        text-align: center;
+        color: #555;
+        position: relative;
+        z-index: 1;
+    }
+    
     .result-content {
-        grid-template-columns: 1fr; /* Single column on mobile */
+        grid-template-columns: 1fr;
         gap: 20px;
     }
     
@@ -826,11 +848,6 @@
     .result-center,
     .result-right {
         grid-column: 1;
-    }
-    
-    /* Adjust main content margin */
-    .main-content {
-        margin-top: 130px;
     }
     
     /* Mobile zoom adjustments */
@@ -880,12 +897,17 @@
         -webkit-user-select: none;
         user-select: none;
     }
-}        
+}
+        
  
-        @media (max-width: 480px) {
+@media (max-width: 480px) {
     header {
+        position: fixed; /* ADDED */
         padding: 5px 12px;
-        min-height: 60px; /* Further reduced */
+        min-height: 60px;
+        top: 0; /* ADDED */
+        left: 0; /* ADDED */
+        width: 100%; /* ADDED */
     }
     
     .logo-container {
@@ -901,7 +923,7 @@
     }
     
     .header-center {
-        width: calc(100% - 90px); /* 35px + 35px + 10px + 10px */
+        width: calc(100% - 90px);
         padding: 0 8px;
     }
     
@@ -916,7 +938,7 @@
     }
     
     .black-header {
-        top: 60px;
+        top: 60px; /* Position below 60px header */
         padding: 8px 12px;
         min-height: 60px;
         flex-wrap: nowrap;
@@ -936,13 +958,13 @@
         height: 40px;
     }
     
+    /* Update search results and main content margin */
     .search-results {
-        top: 120px;
-        max-height: calc(100vh - 120px);
+        margin-top: 120px !important; /* Combined: 60px + 60px */
     }
     
     .main-content {
-        margin-top: 120px;
+        margin-top: 120px !important; /* Combined: 60px + 60px */
     }
     
     .results-container {
@@ -959,10 +981,13 @@
     }
 }
 
-        /* For very small screens */
-        @media (max-width: 360px) {
+@media (max-width: 360px) {
     header {
+        position: fixed; /* ADDED */
         min-height: 55px;
+        top: 0; /* ADDED */
+        left: 0; /* ADDED */
+        width: 100%; /* ADDED */
     }
     
     .logo-container,
@@ -972,30 +997,30 @@
     }
     
     .logo-container {
-        margin-right: 8px; /* ADDED: Specific margin for logo */
+        margin-right: 8px;
     }
     
     .cart-image-container {
-        margin-left: 8px; /* ADDED: Specific margin for cart */
+        margin-left: 8px;
     }
     
     .header-center {
-        width: calc(100% - 76px); /* CHANGED: 80px → 76px (30px + 30px + 8px + 8px) */
-        padding: 0 6px; /* ADDED: Small padding for text */
+        width: calc(100% - 76px);
+        padding: 0 6px;
     }
     
     .center-tagline {
         font-size: 10px;
-        -webkit-line-clamp: 1; /* ADDED: Show only 1 line on very small screens */
+        -webkit-line-clamp: 1;
     }
     
     .trusted-tagline {
         font-size: 9px;
-        -webkit-line-clamp: 1; /* ADDED: Show only 1 line on very small screens */
+        -webkit-line-clamp: 1;
     }
     
     .black-header {
-        top: 55px;
+        top: 55px; /* Position below 55px header */
         min-height: 55px;
         padding: 6px 8px;
         flex-wrap: nowrap;
@@ -1012,19 +1037,21 @@
         padding: 6px 10px;
         font-size: 14px;
         min-width: 30px;
-        height: 35px; 
+        height: 35px;
     }
     
+    /* Update search results and main content margin */
     .search-results {
-        top: 110px;
-        max-height: calc(100vh - 110px);
+        margin-top: 110px !important; /* Combined: 55px + 55px */
     }
+    
     .main-content {
-        margin-top: 110px;
+        margin-top: 110px !important; /* Combined: 55px + 55px */
     }
+    
     .hide-main {
-    display: none !important;
-}
+        display: none !important;
+    }
 }
         
     </style>
@@ -1330,7 +1357,3 @@ container.addEventListener('touchcancel', () => {
 </script>
 </body>
 </html>
-
-
-
-

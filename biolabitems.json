@@ -4,7 +4,7 @@
     "category": "Biology Lab",
     "image": "/sanjayparas/bioimg/bio1.jpg",
     "mrpPrice": "20,000",
-    "discount": "-5%",
+    "discount": "5%",
     "bestBuyPrice": "19,000",
     "warranty": "2 Years Manufacturer Warranty",
     "specifications": [
@@ -27,7 +27,7 @@
     "category": "Biology Lab",
     "image": "/sanjayparas/bioimg/bio2.jpg",
     "mrpPrice": "2,000",
-    "discount": "-5%",
+    "discount": "5%",
     "bestBuyPrice": "1,800",
     "warranty": "None",
     "specifications": [
@@ -45,5 +45,4 @@
     "keywords": ["microscope", "biology", "compound", "magnification", "lab equipment"]
   }
 
-  
 ]

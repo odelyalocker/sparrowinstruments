@@ -2,7 +2,7 @@
   {
     "name": "Optical Spectrometer",
     "category": "Physics Lab",
-    "image": "/sanjayparas/physimg/phys1.jpg",
+    "image": "/sparrowinstruments/physimg/phys1.jpg",
     "mrpPrice": "42,500",
     "discount": "8%",
     "bestBuyPrice": "39,100",
@@ -25,7 +25,7 @@
   {
     "name": "Digital Multimeter",
     "category": "Physics Lab",
-    "image": "/sanjayparas/physimg/phys2.jpg",
+    "image": "/sparrowinstruments/physimg/phys2.jpg",
     "mrpPrice": "3,200",
     "discount": "15%",
     "bestBuyPrice": "2,720",
@@ -48,7 +48,7 @@
   {
     "name": "Laser Light Kit",
     "category": "Physics Lab",
-    "image": "/sanjayparas/physimg/phys3.jpg",
+    "image": "/sparrowinstruments/physimg/phys3.jpg",
     "mrpPrice": "18,000",
     "discount": "10%",
     "bestBuyPrice": "16,200",

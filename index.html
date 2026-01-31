@@ -131,25 +131,6 @@
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) brightness(1.05);
         }
         
-        /* ===== NEW: QUOTE COUNTER BADGE ===== */
-        .quote-counter {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #d32f2f;
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
         /* Adjust main content position */
         .main-content {
             margin-top: 140px;
@@ -824,12 +805,6 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             to { transform: translateX(0); opacity: 1; }
         }
         
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        
 /* ===== FILTER SIDEBAR ===== */
 .filter-sidebar {
     position: fixed;
@@ -1228,15 +1203,6 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         transform: none;
     }
     
-    /* Quote counter mobile adjustments */
-    .quote-counter {
-        font-size: 10px;
-        width: 18px;
-        height: 18px;
-        top: -4px;
-        right: -4px;
-    }
-    
     /* Center content takes available space */
     .header-center {
         width: calc(100% - 110px);
@@ -1480,12 +1446,6 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         margin-left: 10px;
     }
     
-    .quote-counter {
-        font-size: 9px;
-        width: 16px;
-        height: 16px;
-    }
-    
     .header-center {
         width: calc(100% - 90px);
         padding: 0 8px;
@@ -1601,12 +1561,6 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
     
     .quote-image-container {
         margin-left: 8px;
-    }
-    
-    .quote-counter {
-        font-size: 8px;
-        width: 15px;
-        height: 15px;
     }
     
     .header-center {
@@ -1742,9 +1696,7 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         <div class="quote-image-container">
             <a href="/sparrowinstruments/quote.html">
                 <img src="/sparrowinstruments/images/quote.jpg" alt="Request Quote" style="background: transparent;">
-                <!-- NEW: Quote counter badge -->
-                <div class="quote-counter" id="quoteCounter">0</div>
-            </a>
+                </a>
         </div>
     </header>
     
@@ -1907,10 +1859,6 @@ function fixCorruptedQuoteData() {
     }
 }
     
-    // NEW: Quote management variables
-    let quoteItems = new Set();
-    let quoteCount = 0;
-    const quoteCounter = document.getElementById('quoteCounter');
     
 // PRICE PARSING HELPER FUNCTION
 function parsePrice(priceStr) {
@@ -1940,7 +1888,6 @@ function parsePrice(priceStr) {
         console.log(`✅ Loaded ${allItems.length} items.`);
         
         // NEW: Load saved quote items
-        loadSavedQuotes();
         
         // Show all items on page load
         showAllItems();
@@ -1963,24 +1910,6 @@ function loadSavedQuotes() {
             console.error('Error loading saved quotes:', e);
         }
     }
-}
-
-// NEW: UPDATE QUOTE COUNTER DISPLAY
-function updateQuoteCounter() {
-    if (quoteCount > 0) {
-        quoteCounter.textContent = quoteCount;
-        quoteCounter.style.display = 'flex';
-        
-        // Add animation for new items
-        if (quoteCount === 1) {
-            quoteCounter.style.animation = 'pulse 0.5s ease-in-out 2';
-        }
-    } else {
-        quoteCounter.style.display = 'none';
-    }
-    
-    // Save to localStorage
-    saveQuotesToStorage();
 }
 
 // NEW: SAVE QUOTES TO LOCALSTORAGE - FIXED
@@ -2153,7 +2082,7 @@ function handleQuoteClick(itemId, button) {
         // Remove from quote
         quoteItemsArray.splice(existingIndex, 1);
         quoteItems.delete(itemId);
-        quoteCount = quoteItemsArray.length;
+        
         
         // Update button
         button.innerHTML = '<i class="fas fa-file-alt"></i> Get Quote';
@@ -2179,7 +2108,7 @@ function handleQuoteClick(itemId, button) {
         
         quoteItemsArray.push(itemToSave);
         quoteItems.add(itemId);
-        quoteCount = quoteItemsArray.length;
+        
         
         // Update button
         button.innerHTML = '<i class="fas fa-check"></i> Added to Quote';
@@ -2195,7 +2124,7 @@ function handleQuoteClick(itemId, button) {
     localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
     
     // Update counter display
-    updateQuoteCounter();
+
 }
 
 // NEW: HANDLE CART BUTTON CLICK
@@ -2525,4 +2454,5 @@ function applyFilters() {
 </script>
 </body>
 </html>
+
 

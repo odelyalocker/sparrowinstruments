@@ -216,7 +216,7 @@
             color: #FFFFFF;
         }
 
-        /* Items Display Section - UPDATED */
+        /* Items Display Section */
         .items-section {
             position: relative;
             width: 100%;
@@ -226,8 +226,8 @@
             border-top: 2px solid #d32f2f;
             overflow-y: auto;
             margin-top: 140px;
-            min-height: calc(100vh - 190px); /* Adjusted to fill remaining space */
-            display: block; /* Always show, but content changes */
+            min-height: calc(100vh - 190px);
+            display: block;
         }
 
         .items-container {
@@ -235,77 +235,27 @@
             width: 95%;
             margin: 0 auto;
             max-width: 1400px;
-            min-height: 100%; /* Ensure it fills the section */
+            min-height: 100%;
         }
         
-        .empty-state {
+        .empty-message {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            height: calc(100vh - 300px); /* Adjusted height */
+            height: calc(100vh - 300px);
             padding: 40px 20px;
         }
         
-        .empty-icon {
-            font-size: 80px;
-            color: #d32f2f;
-            margin-bottom: 25px;
-            opacity: 0.7;
-        }
-        
-        .empty-title {
-            color: #333;
-            font-size: 32px;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        
-        .empty-subtitle {
-            color: #666;
-            font-size: 18px;
-            max-width: 600px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-        
-        .empty-actions {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .action-btn {
-            padding: 12px 25px;
-            background: #d32f2f;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
+        .empty-text {
+            color: #1565c0; /* Deep blue font */
+            font-size: 22px;
             font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            line-height: 1.5;
+            max-width: 600px;
+            margin: 0 auto;
         }
-        
-        .action-btn:hover {
-            background: #b71c1c;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
-        }
-        
-        .action-btn.secondary {
-            background: #0056b3;
-        }
-        
-        .action-btn.secondary:hover {
-            background: #004494;
-        }
-        
-        /* REMOVED: items-header class completely */
         
         .items-list {
             display: block;
@@ -655,32 +605,13 @@
                 font-size: 14px;
             }
             
-            .empty-state {
+            .empty-message {
                 height: calc(100vh - 280px);
                 padding: 30px 15px;
             }
             
-            .empty-icon {
-                font-size: 60px;
-            }
-            
-            .empty-title {
-                font-size: 26px;
-            }
-            
-            .empty-subtitle {
-                font-size: 16px;
-            }
-            
-            .empty-actions {
-                flex-direction: column;
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .action-btn {
-                width: 100%;
-                justify-content: center;
+            .empty-text {
+                font-size: 18px;
             }
         }
         
@@ -733,8 +664,12 @@
                 min-height: calc(100vh - 170px);
             }
             
-            .empty-state {
+            .empty-message {
                 height: calc(100vh - 260px);
+            }
+            
+            .empty-text {
+                font-size: 16px;
             }
         }
         
@@ -781,8 +716,12 @@
                 min-height: calc(100vh - 160px);
             }
             
-            .empty-state {
+            .empty-message {
                 height: calc(100vh - 240px);
+            }
+            
+            .empty-text {
+                font-size: 15px;
             }
         }
     </style>
@@ -833,31 +772,17 @@
         </div>
     </div>
     
-    <!-- Items Display Section - Now always visible -->
+    <!-- Items Display Section -->
     <div class="items-section" id="itemsSection">
         <div class="items-container">
             <!-- Items will appear here when available -->
             <div class="items-list" id="itemsList">
                 <!-- Items will be dynamically inserted here -->
             </div>
-            <!-- Empty state - shown when no items -->
-            <div class="empty-state" id="emptyState">
-                <div class="empty-icon">
-                    <i class="fas fa-clipboard-list"></i>
-                </div>
-                <h1 class="empty-title">Your Quotation Items</h1>
-                <p class="empty-subtitle">
-                    Items you've added for quotation will appear here. Start by adding products to your quote list from the main catalog.
-                </p>
-                <div class="empty-actions">
-                    <button class="action-btn" onclick="window.location.href='index.html'">
-                        <i class="fas fa-arrow-left"></i>
-                        Back to Catalog
-                    </button>
-                    <button class="action-btn secondary" onclick="window.location.href='contact.html'">
-                        <i class="fas fa-phone"></i>
-                        Request Quote
-                    </button>
+            <!-- Empty message - shown when no items -->
+            <div class="empty-message" id="emptyMessage">
+                <div class="empty-text">
+                    You have no items to Quote. Please search and add items for your quotation. Thanks.
                 </div>
             </div>
         </div>
@@ -878,8 +803,7 @@
     function loadAddedItems() {
         const savedItems = localStorage.getItem('sparrowQuoteItems');
         const itemsList = document.getElementById('itemsList');
-        const itemsSection = document.getElementById('itemsSection');
-        const emptyState = document.getElementById('emptyState');
+        const emptyMessage = document.getElementById('emptyMessage');
         
         if (savedItems) {
             try {
@@ -887,9 +811,9 @@
                 const items = quoteData.items || [];
                 
                 if (items.length > 0) {
-                    // Show items, hide empty state
+                    // Show items, hide empty message
                     itemsList.style.display = 'block';
-                    emptyState.style.display = 'none';
+                    emptyMessage.style.display = 'none';
                     
                     // Clear existing items
                     itemsList.innerHTML = '';
@@ -906,19 +830,19 @@
                         });
                     });
                 } else {
-                    // No items, show empty state
+                    // No items, show empty message
                     itemsList.style.display = 'none';
-                    emptyState.style.display = 'flex';
+                    emptyMessage.style.display = 'flex';
                 }
             } catch (e) {
                 console.error('Error loading saved items:', e);
                 itemsList.style.display = 'none';
-                emptyState.style.display = 'flex';
+                emptyMessage.style.display = 'flex';
             }
         } else {
-            // No saved items, show empty state
+            // No saved items, show empty message
             itemsList.style.display = 'none';
-            emptyState.style.display = 'flex';
+            emptyMessage.style.display = 'flex';
         }
     }
     

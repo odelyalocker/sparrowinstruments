@@ -1835,30 +1835,6 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             </div>
         </div>
         
-        <!-- Price Range Filter -->
-        <div class="filter-section">
-            <h4><i class="fas fa-tag"></i> Price Range</h4>
-            <div class="price-inputs">
-                <div class="price-input">
-                    <label>Min (₹)</label>
-                    <input type="number" id="minPrice" min="10" max="100000" placeholder="10" value="10">
-                </div>
-                <div class="price-input">
-                    <label>Max (₹)</label>
-                    <input type="number" id="maxPrice" min="10" max="100000" placeholder="100000" value="100000">
-                </div>
-            </div>
-            
-            <div class="price-slider">
-                <div class="slider-track"></div>
-                <input type="range" min="10" max="100000" value="10" class="range-min" id="priceMin">
-                <input type="range" min="10" max="100000" value="100000" class="range-max" id="priceMax">
-            </div>
-            
-            <div class="price-display">
-                <span>Price: ₹<span id="minDisplay">10</span> - ₹<span id="maxDisplay">100000</span></span>
-            </div>
-        </div>
         
         <!-- Apply Filter Button -->
         <div class="filter-section">
@@ -2379,12 +2355,6 @@ const closeFilter = document.getElementById('closeFilter');
 const clearFilterBtn = document.getElementById('clearFilter');
 const applyFilterBtn = document.getElementById('applyFilter');
 const sectionCheckboxes = document.querySelectorAll('.section-checkbox');
-const minPriceInput = document.getElementById('minPrice');
-const maxPriceInput = document.getElementById('maxPrice');
-const priceMinSlider = document.getElementById('priceMin');
-const priceMaxSlider = document.getElementById('priceMax');
-const minDisplay = document.getElementById('minDisplay');
-const maxDisplay = document.getElementById('maxDisplay');
 
 // Price range variables
 let minPrice = 10;
@@ -2392,57 +2362,8 @@ let maxPrice = 100000;
 
 // Current filters state
 let currentFilters = {
-    sections: [],
-    minPrice: 10,
-    maxPrice: 100000
+    sections: []
 };
-
-// Initialize price slider
-function initializePriceSlider() {
-    // Set initial display values
-    minDisplay.textContent = minPrice;
-    maxDisplay.textContent = maxPrice;
-    
-    // Update slider when input changes
-    minPriceInput.addEventListener('input', function() {
-        let value = parseInt(this.value);
-        if (value < 10) value = 10;
-        if (value > maxPrice) value = maxPrice;
-        priceMinSlider.value = value;
-        minDisplay.textContent = value;
-        currentFilters.minPrice = value;
-    });
-    
-    maxPriceInput.addEventListener('input', function() {
-        let value = parseInt(this.value);
-        if (value > 100000) value = 100000;
-        if (value < minPrice) value = minPrice;
-        priceMaxSlider.value = value;
-        maxDisplay.textContent = value;
-        currentFilters.maxPrice = value;
-    });
-    
-    // Update input when slider changes
-    priceMinSlider.addEventListener('input', function() {
-        let value = parseInt(this.value);
-        if (value > parseInt(priceMaxSlider.value) - 1000) {
-            value = parseInt(priceMaxSlider.value) - 1000;
-        }
-        minPriceInput.value = value;
-        minDisplay.textContent = value;
-        currentFilters.minPrice = value;
-    });
-    
-    priceMaxSlider.addEventListener('input', function() {
-        let value = parseInt(this.value);
-        if (value < parseInt(priceMinSlider.value) + 1000) {
-            value = parseInt(priceMinSlider.value) + 1000;
-        }
-        maxPriceInput.value = value;
-        maxDisplay.textContent = value;
-        currentFilters.maxPrice = value;
-    });
-}
 
 // Toggle filter sidebar
 hamburgerMenu.addEventListener('click', function() {
@@ -2461,13 +2382,14 @@ function closeFilterSidebar() {
     document.body.style.overflow = ''; // Restore scrolling
 }
 
-// Clear all filters
 clearFilterBtn.addEventListener('click', function() {
     // Uncheck all checkboxes
     sectionCheckboxes.forEach(checkbox => {
         checkbox.checked = false;
     });
     
+    // REMOVE OR COMMENT OUT the price reset lines:
+    /*
     // Reset price range
     minPriceInput.value = 10;
     maxPriceInput.value = 100000;
@@ -2475,11 +2397,12 @@ clearFilterBtn.addEventListener('click', function() {
     priceMaxSlider.value = 100000;
     minDisplay.textContent = 10;
     maxDisplay.textContent = 100000;
+    */
     
     // Clear current filters
     currentFilters.sections = [];
-    currentFilters.minPrice = 10;
-    currentFilters.maxPrice = 100000;
+    // REMOVE: currentFilters.minPrice = 10;
+    // REMOVE: currentFilters.maxPrice = 100000;
     
     // Apply cleared filters
     applyFilters();
@@ -2522,10 +2445,6 @@ function applyFilters() {
         const itemPrice = parseInt(item.dataset.price) || 0;
         const itemSection = item.dataset.section || '';
         
-        // Check price filter
-        if (itemPrice < currentFilters.minPrice || itemPrice > currentFilters.maxPrice) {
-            showItem = false;
-        }
         
         // Check section filter (if any sections selected)
         if (currentFilters.sections.length > 0 && !currentFilters.sections.includes(itemSection)) {
@@ -2546,12 +2465,10 @@ function applyFilters() {
     }
 }
 
-// Initialize filter functionality
-initializePriceSlider();
-
 </script>
 </body>
 </html>
+
 
 
 

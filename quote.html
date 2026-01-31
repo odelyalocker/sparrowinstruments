@@ -882,6 +882,9 @@
         const itemsList = document.getElementById('itemsList');
         const emptyMessage = document.getElementById('emptyMessage');
         
+        console.log('🔍 Checking localStorage for quote items...');
+        console.log('Saved items:', savedItems);
+        
         // DEFAULT: Show empty message, hide items list
         emptyMessage.style.display = 'flex';
         itemsList.style.display = 'none';
@@ -892,6 +895,9 @@
                 const quoteData = JSON.parse(savedItems);
                 const items = quoteData.items || [];
                 
+                console.log(`📦 Found ${items.length} items in quote`);
+                console.log('Items data:', items);
+                
                 if (items.length > 0) {
                     // Show items, hide empty message
                     itemsList.style.display = 'block';
@@ -899,15 +905,19 @@
                     
                     // Display items with full product data
                     items.forEach((itemData, index) => {
-                        // itemData should be the full product object from index.html
-                        if (typeof itemData === 'object') {
+                        console.log(`🔄 Processing item ${index + 1}:`, itemData);
+                        
+                        // Check if itemData is an object with full product data
+                        if (typeof itemData === 'object' && itemData !== null) {
+                            console.log('✅ Item is an object, creating element...');
                             const itemElement = createItemElement(itemData, index);
                             itemsList.appendChild(itemElement);
                         } 
-                        // Fallback for old format (just IDs)
+                        // Fallback for old format (just IDs) - but shouldn't happen now
                         else {
+                            console.log('⚠️ Item is not an object, using fallback:', itemData);
                             const basicItem = {
-                                id: itemData,
+                                id: itemData || `item_${index}`,
                                 name: `Item ${index + 1}`,
                                 image: 'placeholder.jpg',
                                 mrpPrice: 'Price on request',
@@ -921,19 +931,25 @@
                             itemsList.appendChild(itemElement);
                         }
                     });
+                    
+                    console.log('✅ All items displayed');
+                } else {
+                    console.log('📭 No items in quote array');
                 }
-                // If items.length === 0, default state (empty message) remains
                 
             } catch (e) {
-                console.error('Error loading saved items:', e);
+                console.error('❌ Error loading saved items:', e);
                 // Keep default state (empty message) if there's an error
             }
+        } else {
+            console.log('📭 No saved items found in localStorage');
         }
-        // If no savedItems, default state (empty message) remains
     }
     
     // Create item element for display
     function createItemElement(product, index) {
+        console.log(`🎨 Creating element for item ${index}:`, product.name || product.id);
+        
         const itemElement = document.createElement('div');
         itemElement.className = 'result-item';
         itemElement.dataset.itemId = product.id || `item_${index}`;
@@ -966,8 +982,8 @@
         
         // Check for guaranteed competitive pricing
         const isGuaranteedCompetitive = 
-            bestBuyPrice.toString().toLowerCase().includes('guaranteed competitive') ||
-            bestBuyLabel.toString().toLowerCase().includes('guaranteed competitive');
+            (bestBuyPrice && bestBuyPrice.toString().toLowerCase().includes('guaranteed competitive')) ||
+            (bestBuyLabel && bestBuyLabel.toString().toLowerCase().includes('guaranteed competitive'));
         
         const priceDisplay = isGuaranteedCompetitive ? 
             'Guaranteed Competitive' : 
@@ -979,7 +995,7 @@
             <div class="result-content">
                 <div class="result-left">
                     <div class="result-image">
-                        <img src="${product.image || product.img || 'placeholder.jpg'}" alt="${product.name}" onerror="this.src='placeholder.jpg'">
+                        <img src="${product.image || product.img || 'placeholder.jpg'}" alt="${product.name || 'Product'}" onerror="this.src='placeholder.jpg'">
                     </div>
                     <div class="price-box">
                         <div class="mrp-line">
@@ -1026,6 +1042,7 @@
         // Add event listeners
         const removeBtn = itemElement.querySelector('.remove-btn');
         removeBtn.addEventListener('click', function() {
+            console.log('🗑️ Removing item:', product.id || index);
             removeItem(product.id || index);
         });
         
@@ -1034,51 +1051,49 @@
         const quantityValue = itemElement.querySelector('.quantity-value');
         
         minusBtn.addEventListener('click', function() {
+            console.log('➖ Decreasing quantity for item:', product.id || index);
             updateQuantity(product.id || index, -1, quantityValue);
         });
         
         plusBtn.addEventListener('click', function() {
+            console.log('➕ Increasing quantity for item:', product.id || index);
             updateQuantity(product.id || index, 1, quantityValue);
         });
         
+        console.log('✅ Item element created successfully');
         return itemElement;
     }
     
     // Update quantity function
     function updateQuantity(itemId, change, quantityElement) {
+        console.log(`🔄 Updating quantity for item ${itemId}, change: ${change}`);
+        
         const savedItems = localStorage.getItem('sparrowQuoteItems');
         if (savedItems) {
             try {
                 const quoteData = JSON.parse(savedItems);
                 const items = quoteData.items || [];
                 
+                console.log('📋 Current items in quote:', items);
+                
                 // Find the item index
-                const itemIndex = items.findIndex(item => 
-                    (typeof item === 'object' ? item.id : item) === itemId
-                );
+                const itemIndex = items.findIndex(item => item.id === itemId);
+                console.log('🔍 Item index found:', itemIndex);
                 
                 if (itemIndex !== -1) {
                     // Get current quantity
                     let currentItem = items[itemIndex];
-                    let currentQuantity = 1;
+                    let currentQuantity = currentItem.quantity || 1;
                     
-                    if (typeof currentItem === 'object') {
-                        currentQuantity = currentItem.quantity || 1;
-                    }
+                    console.log('📊 Current quantity:', currentQuantity);
                     
                     // Calculate new quantity (minimum 1)
                     let newQuantity = Math.max(1, currentQuantity + change);
                     
-                    // Update the item
-                    if (typeof currentItem === 'object') {
-                        items[itemIndex].quantity = newQuantity;
-                    } else {
-                        // Convert to object if it's just an ID
-                        items[itemIndex] = {
-                            id: currentItem,
-                            quantity: newQuantity
-                        };
-                    }
+                    console.log('🎯 New quantity:', newQuantity);
+                    
+                    // Update the item quantity
+                    items[itemIndex].quantity = newQuantity;
                     
                     // Update localStorage
                     quoteData.items = items;
@@ -1089,29 +1104,31 @@
                     
                     // Show toast
                     showToast(`Quantity updated to ${newQuantity}`, 'success');
+                } else {
+                    console.error('❌ Item not found in quote:', itemId);
                 }
             } catch (e) {
-                console.error('Error updating quantity:', e);
+                console.error('❌ Error updating quantity:', e);
             }
         }
     }
     
     // Remove item from list
     function removeItem(itemId) {
+        console.log(`🗑️ Attempting to remove item: ${itemId}`);
+        
         const savedItems = localStorage.getItem('sparrowQuoteItems');
         if (savedItems) {
             try {
                 const quoteData = JSON.parse(savedItems);
                 const items = quoteData.items || [];
                 
+                console.log('📋 Items before removal:', items.length);
+                
                 // Filter out the item to remove
-                const updatedItems = items.filter(item => {
-                    if (typeof item === 'object') {
-                        return item.id !== itemId;
-                    } else {
-                        return item !== itemId;
-                    }
-                });
+                const updatedItems = items.filter(item => item.id !== itemId);
+                
+                console.log('📋 Items after removal:', updatedItems.length);
                 
                 quoteData.items = updatedItems;
                 quoteData.count = updatedItems.length;
@@ -1124,7 +1141,7 @@
                 // Show confirmation
                 showToast('Item removed from your list', 'info');
             } catch (e) {
-                console.error('Error removing item:', e);
+                console.error('❌ Error removing item:', e);
             }
         }
     }
@@ -1177,8 +1194,19 @@
     
     // Initialize when page loads
     document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 Page loaded, starting quote item loading...');
         loadAddedItems();
     });
+    
+    // Add debug helper
+    window.debugQuote = function() {
+        const saved = localStorage.getItem('sparrowQuoteItems');
+        console.log('🔍 Debug - localStorage sparrowQuoteItems:', saved);
+        if (saved) {
+            console.log('🔍 Parsed data:', JSON.parse(saved));
+        }
+        loadAddedItems();
+    }
 </script>
 </body>
 </html>

@@ -150,7 +150,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
-        /* Black Header Section - UPDATED */
+        /* Black Header Section */
         .black-header {
             position: fixed;
             left: 0;
@@ -160,7 +160,7 @@
             padding: 10px 20px;
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Changed to space-between */
+            justify-content: space-between;
             z-index: 999;
             min-height: 70px;
             top: 70px;
@@ -235,7 +235,7 @@
             color: #FFFFFF;
         }
 
-        /* Items Display Section */
+        /* Items Display Section - UPDATED */
         .items-section {
             position: relative;
             width: 100%;
@@ -256,26 +256,203 @@
             max-width: 1400px;
         }
         
-        .items-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #eee;
-        }
-        
-        .items-header h2 {
-            color: #333;
-            font-size: 24px;
-            font-weight: 700;
-        }
-        
-        /* REMOVED: .items-count class */
+        /* REMOVED: .items-header class completely */
         
         .items-list {
             display: block;
             gap: 20px;
+        }
+        
+        /* Result item styling */
+        .result-item {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 2px solid #000000;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .result-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            align-items: end;
+        }
+
+        /* Left Column: Image + Price */
+        .result-left {
+            grid-column: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .result-image {
+            margin-bottom: 15px;
+            position: relative;
+            overflow: visible;
+            cursor: crosshair;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            cursor: crosshair;
+            height: 250px;
+        }
+
+        .result-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .price-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .mrp-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .mrp-label {
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .mrp-price {
+            color: #888;
+            text-decoration: line-through;
+            font-size: 16px;
+        }
+
+        .bestbuy-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bestbuy-label {
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .bestbuy-price {
+            color: #d32f2f;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        /* Button container */
+        .button-container {
+            margin-top: 20px;
+        }
+        
+        /* Remove button */
+        .remove-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .remove-btn:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Center Column: Name + Specifications + Warranty */
+        .result-center {
+            grid-column: 2;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-name {
+            color: #1565c0;
+            font-size: 24px;
+            font-weight: 800;
+            margin: 0 0 15px 0;
+            line-height: 1.2;
+        }
+
+        .specs-section {
+            margin-bottom: 0;
+            flex-grow: 1;
+        }
+
+        .specs-section strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .specs-section ul {
+            margin: 5px 0 5px 20px;
+            color: #555;
+        }
+
+        .specs-section li {
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        /* Right Column: Description */
+        .result-right {
+            grid-column: 3;
+            min-width: 0;
+            margin-top: 35px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .description-section {
+            margin-top: 0;
+            flex-grow: 1;
+        }
+
+        .description-section strong {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .description-section ul {
+            margin: 5px 0 5px 20px;
+            color: #555;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .description-section li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            word-break: break-word;
         }
         
         /* Clean Content Area */
@@ -373,6 +550,37 @@
             display: none;
         }
 
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .result-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+            
+            .result-left {
+                grid-column: 1 / span 2;
+                display: flex;
+                gap: 20px;
+            }
+            
+            .result-image {
+                flex: 0 0 200px;
+                height: 200px;
+            }
+            
+            .price-box {
+                flex: 1;
+            }
+            
+            .result-center {
+                grid-column: 1;
+            }
+            
+            .result-right {
+                grid-column: 2;
+            }
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .desktop-text {
@@ -441,6 +649,39 @@
             /* Items Section Mobile */
             .items-section {
                 margin-top: 130px;
+            }
+            
+            .result-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .result-left {
+                grid-column: 1;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .result-image {
+                flex: 0 0 auto;
+                text-align: center;
+                height: 200px;
+            }
+            
+            .result-image img {
+                width: 100%;
+                height: 100%;
+                margin: 0 auto;
+            }
+            
+            .result-center,
+            .result-right {
+                grid-column: 1;
+            }
+            
+            .remove-btn {
+                padding: 10px 15px;
+                font-size: 14px;
             }
             
             .clean-content {
@@ -621,7 +862,7 @@
         </div>
     </header>
     
-    <!-- Black Header Section - UPDATED -->
+    <!-- Black Header Section -->
     <div class="black-header">
         <!-- Home button on left -->
         <div class="home-button">
@@ -646,10 +887,7 @@
     <!-- Items Display Section -->
     <div class="items-section" id="itemsSection">
         <div class="items-container">
-            <div class="items-header">
-                <h2 id="itemsTitle">Your Added Items (<span id="itemsCount">0</span>)</h2>
-                <!-- REMOVED: Total price display -->
-            </div>
+            <!-- REMOVED: items-header section completely -->
             <div class="items-list" id="itemsList">
                 <!-- Items will appear here -->
             </div>
@@ -692,10 +930,8 @@
     function loadAddedItems() {
         const savedItems = localStorage.getItem('sparrowQuoteItems');
         const itemsList = document.getElementById('itemsList');
-        const itemsCount = document.getElementById('itemsCount');
         const itemsSection = document.getElementById('itemsSection');
         const cleanContent = document.getElementById('cleanContent');
-        const itemsTitle = document.getElementById('itemsTitle');
         const quoteCounter = document.getElementById('quoteCounter');
         
         if (savedItems) {
@@ -716,10 +952,6 @@
                     // Show items section, hide clean content
                     itemsSection.style.display = 'block';
                     cleanContent.style.display = 'none';
-                    
-                    // Update counts
-                    itemsCount.textContent = items.length;
-                    itemsTitle.textContent = `Your Added Items (${items.length})`;
                     
                     // Clear existing items
                     itemsList.innerHTML = '';

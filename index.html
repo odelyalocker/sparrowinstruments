@@ -1704,6 +1704,22 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             margin-top: auto; /* This pushes button to bottom */
             padding-top: 15px; /* Add some spacing */
         }        
+   /* ===== NEW: DISABLED BUTTON STYLES ===== */
+.add-to-cart-btn.inactive,
+.add-to-cart-btn[disabled] {
+    background: #6c757d !important;
+    cursor: not-allowed !important;
+    opacity: 0.6 !important;
+    pointer-events: none !important;
+}
+
+.add-to-cart-btn.inactive:hover,
+.add-to-cart-btn[disabled]:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    background: #6c757d !important;
+}
+    
     </style>
 </head>
 <body>
@@ -2096,12 +2112,17 @@ const cartButtonDisabled = isGuaranteedCompetitive ? 'disabled' : '';
     });
     
     // Cart button click handler (only if active)
-    if (!cartButtonDisabled) {
-        cartBtn.addEventListener('click', function() {
-            const itemId = this.dataset.itemId;
-            handleCartClick(itemId);
-        });
-    }
+if (!isGuaranteedCompetitive) { // CHANGED: Check the actual condition, not just the disabled attribute
+    cartBtn.addEventListener('click', function() {
+        const itemId = this.dataset.itemId;
+        handleCartClick(itemId);
+    });
+} else {
+    // Make sure the button is truly disabled
+    cartBtn.setAttribute('disabled', 'disabled');
+    cartBtn.style.cursor = 'not-allowed';
+    cartBtn.style.opacity = '0.6';
+}
     
     // Set data attributes for filtering
     resultItem.dataset.price = parsePrice(item.bestBuyPrice || item.mrpPrice);
@@ -2522,5 +2543,6 @@ initializePriceSlider();
 </script>
 </body>
 </html>
+
 
 

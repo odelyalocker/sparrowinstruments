@@ -106,52 +106,49 @@
             position: relative; /* Added for quote counter */
         }
 
-.quote-image-container a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    position: relative; /* Added for quote counter */
-    z-index: 1; /* ADD THIS LINE */
-}
+        .quote-image-container a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            position: relative; /* Added for quote counter */
+        }
 
- .quote-image-container img {
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.3s ease, filter 0.3s ease;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-    position: relative; /* ADD THIS LINE */
-    z-index: 1; /* ADD THIS LINE */
-}
+        .quote-image-container img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
 
         .quote-image-container img:hover {
             transform: scale(1.08);
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) brightness(1.05);
         }
         
-/* ===== NEW: QUOTE COUNTER BADGE ===== */
-.quote-counter {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: #d32f2f;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1002; /* CHANGED: Increased from 1001 to 1002 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
+        /* ===== NEW: QUOTE COUNTER BADGE ===== */
+        .quote-counter {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #d32f2f;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
         
         /* Adjust main content position */
         .main-content {
@@ -1238,7 +1235,6 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         height: 18px;
         top: -4px;
         right: -4px;
-        z-index: 1002; /* ADD THIS LINE */
     }
     
     /* Center content takes available space */
@@ -1484,11 +1480,10 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         margin-left: 10px;
     }
     
-.quote-counter {
+    .quote-counter {
         font-size: 9px;
         width: 16px;
         height: 16px;
-        z-index: 1002; /* ADD THIS LINE */
     }
     
     .header-center {
@@ -1608,11 +1603,10 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         margin-left: 8px;
     }
     
-.quote-counter {
+    .quote-counter {
         font-size: 8px;
         width: 15px;
         height: 15px;
-        z-index: 1002; /* ADD THIS LINE */
     }
     
     .header-center {
@@ -2531,5 +2525,4 @@ function applyFilters() {
 </script>
 </body>
 </html>
-
 

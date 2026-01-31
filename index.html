@@ -2042,12 +2042,23 @@ const quoteButtonClass = isQuoted ? 'get-quote-btn added' : 'get-quote-btn';
 
 // Check if "Add to Cart" should be active
 // If the PRICE field contains "Guaranteed Competitive", make cart button inactive
-// Check both bestBuyPrice and bestBuyLabel fields
 const buyPriceText = item.bestBuyPrice || '';
 const buyLabelText = item.bestBuyLabel || 'Buy';
 const isGuaranteedCompetitive = 
     buyPriceText.toString().toLowerCase().includes('guaranteed competitive') ||
     buyLabelText.toString().toLowerCase().includes('guaranteed competitive');
+    
+const cartButtonClass = isGuaranteedCompetitive ? 'add-to-cart-btn inactive' : 'add-to-cart-btn';
+const cartButtonDisabled = isGuaranteedCompetitive ? 'disabled' : '';
+
+// DEBUG: Check what's in the fields
+console.log('🔍 Debug: Item:', item.name, 
+    '| Price:', item.bestBuyPrice, 
+    '| Label:', item.bestBuyLabel,
+    '| Guaranteed Competitive?', isGuaranteedCompetitive);
+    
+const cartButtonClass = isGuaranteedCompetitive ? 'add-to-cart-btn inactive' : 'add-to-cart-btn';
+const cartButtonDisabled = isGuaranteedCompetitive ? 'disabled' : '';    
     
     // Create the HTML with buttons
     resultItem.innerHTML = `
@@ -2544,6 +2555,7 @@ initializePriceSlider();
 </script>
 </body>
 </html>
+
 
 
 

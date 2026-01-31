@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanjay Paras - Added Items</title>
+    <title>Sparrow Instruments - Added Items</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -26,7 +26,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            background: #FFFFFF;
             color: white;
             padding: 8px 20px;
             display: flex;
@@ -72,9 +72,9 @@
         
         /* Center tagline */
         .center-tagline {
-            font-size: 18px;
-            color: #FFFFFF;
-            font-weight: 500;
+            font-size: 24px;
+            color: #FF0000;
+            font-weight: 700;
             letter-spacing: 0.5px;
             text-align: center;
             line-height: 1.3;
@@ -82,8 +82,8 @@
         
         /* Second tagline */
         .trusted-tagline {
-            font-size: 18px;
-            color: #FFFFFF;
+            font-size: 14px;
+            color: #000000;
             font-weight: 500;
             letter-spacing: 0.5px;
             text-align: center;
@@ -91,29 +91,31 @@
             margin-top: 5px;
         }
         
-        /* Cart Image Container */
-        .cart-image-container {
+        /* Quote Image Container */
+        .quote-image-container {
             margin-left: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 50px;
-            width: 50px;
+            height: 55px;
+            width: 55px;
             overflow: hidden;
             border-radius: 50%;
             background: transparent;
             flex-shrink: 0;
+            position: relative;
         }
 
-        .cart-image-container a {
+        .quote-image-container a {
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100%;
             width: 100%;
+            position: relative;
         }
 
-        .cart-image-container img {
+        .quote-image-container img {
             height: 100%;
             width: 100%;
             object-fit: contain;
@@ -124,9 +126,28 @@
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
 
-        .cart-image-container img:hover {
+        .quote-image-container img:hover {
             transform: scale(1.08);
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) brightness(1.05);
+        }
+        
+        /* Quote counter badge */
+        .quote-counter {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #d32f2f;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         /* Black Header Section */
@@ -192,7 +213,7 @@
             margin-left: 15px;
         }
 
-        /* Adjust button containers for icons */
+        /* Adjust button containers */
         .home-button,
         .contact-button {
             display: flex;
@@ -241,7 +262,7 @@
             background-color: #fff;
         }
         
-        /* Contact button on right */
+        /* Contact button */
         .contact-button {
             margin-left: 10px;
             display: flex;
@@ -282,6 +303,7 @@
             overflow-y: auto;
             margin-top: 140px;
             min-height: 200px;
+            display: none;
         }
 
         .items-container {
@@ -321,7 +343,7 @@
         .clean-content {
             flex: 1;
             margin-top: 140px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: white;
             padding: 60px 20px;
             text-align: center;
             display: flex;
@@ -381,11 +403,11 @@
         }
         
         .action-btn.secondary {
-            background: #6c757d;
+            background: #0056b3;
         }
         
         .action-btn.secondary:hover {
-            background: #545b62;
+            background: #004494;
         }
 
         /* Footer Styles */
@@ -412,6 +434,7 @@
             display: none;
         }
 
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             .desktop-text {
                 display: none;
@@ -420,7 +443,6 @@
                 display: block;
             }
             
-            /* Mobile Header Adjustments */
             header {
                 padding: 6px 15px;
                 min-height: 65px;
@@ -432,10 +454,18 @@
                 width: 40px;
             }
             
-            .cart-image-container {
+            .quote-image-container {
                 margin-left: 15px;
                 height: 40px;
                 width: 40px;
+            }
+            
+            .quote-counter {
+                font-size: 10px;
+                width: 18px;
+                height: 18px;
+                top: -4px;
+                right: -4px;
             }
             
             .header-center {
@@ -444,7 +474,7 @@
             }
             
             .center-tagline {
-                font-size: 13px;
+                font-size: 20px;
                 line-height: 1.2;
                 margin-bottom: 2px;
             }
@@ -458,10 +488,6 @@
                 top: 65px;
                 padding: 10px 15px;
                 min-height: 65px;
-            }
-            
-            .home-button {
-                margin-right: 10px;
             }
             
             .search-container {
@@ -501,18 +527,6 @@
             
             .clean-content-subtitle {
                 font-size: 16px;
-                padding: 0 15px;
-            }
-            
-            .clean-content-actions {
-                flex-direction: column;
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .action-btn {
-                width: 100%;
-                justify-content: center;
             }
         }
         
@@ -528,10 +542,16 @@
                 margin-right: 10px;
             }
             
-            .cart-image-container {
+            .quote-image-container {
                 height: 35px;
                 width: 35px;
                 margin-left: 10px;
+            }
+            
+            .quote-counter {
+                font-size: 9px;
+                width: 16px;
+                height: 16px;
             }
             
             .header-center {
@@ -540,7 +560,7 @@
             }
             
             .center-tagline {
-                font-size: 12px;
+                font-size: 18px;
             }
             
             .trusted-tagline {
@@ -570,19 +590,6 @@
             .clean-content {
                 margin-top: 120px;
                 min-height: calc(100vh - 120px - 50px);
-                padding: 40px 15px;
-            }
-            
-            .clean-content-icon {
-                font-size: 50px;
-            }
-            
-            .clean-content-title {
-                font-size: 22px;
-            }
-            
-            .clean-content-subtitle {
-                font-size: 15px;
             }
         }
         
@@ -592,7 +599,7 @@
             }
             
             .logo-container,
-            .cart-image-container {
+            .quote-image-container {
                 height: 30px;
                 width: 30px;
             }
@@ -601,8 +608,14 @@
                 margin-right: 8px;
             }
             
-            .cart-image-container {
+            .quote-image-container {
                 margin-left: 8px;
+            }
+            
+            .quote-counter {
+                font-size: 8px;
+                width: 15px;
+                height: 15px;
             }
             
             .header-center {
@@ -611,7 +624,7 @@
             }
             
             .center-tagline {
-                font-size: 10px;
+                font-size: 16px;
             }
             
             .trusted-tagline {
@@ -641,7 +654,6 @@
             .clean-content {
                 margin-top: 110px;
                 min-height: calc(100vh - 110px - 50px);
-                padding: 30px 10px;
             }
         }
     </style>
@@ -651,21 +663,23 @@
     <header>
         <!-- Logo in top-left corner -->
         <div class="logo-container">
-            <img src="/sparrowinstruments/images/silogo.png" alt="Paras International Logo" style="background: transparent;">
+            <img src="/sparrowinstruments/images/silogo.jpg" alt="Sparrow Instruments Logo" style="background: transparent;">
         </div>
         
         <!-- Center content with centered tagline -->
         <div class="header-center">
             <!-- First Tagline -->
-            <div class="center-tagline">Request for Quotation</div>
+            <div class="center-tagline">Sparrow Instruments Pvt. Ltd.</div>
             <!-- Second Tagline -->
-            <div class="trusted-tagline">Genuine Trusted Medical and Scientific Equipments at Retail Price</div>
+            <div class="trusted-tagline">Wholesaler of all Laboratory Equipment and Instruments</div>
         </div>
         
-        <!-- Cart Image in top-right corner -->
-        <div class="cart-image-container">
-            <a href="cart.html">
-                <img src="/sparrowinstruments/images/cart.jpg" alt="Shopping Cart" style="background: transparent;">
+        <!-- Quote Image in top-right corner -->
+        <div class="quote-image-container">
+            <a href="/sparrowinstruments/quote.html">
+                <img src="/sparrowinstruments/images/quote.jpg" alt="Request Quote" style="background: transparent;">
+                <!-- Quote counter badge -->
+                <div class="quote-counter" id="quoteCounter">0</div>
             </a>
         </div>
     </header>
@@ -689,7 +703,8 @@
                        class="search-box" 
                        placeholder="Search your added items ..."
                        aria-label="Search items"
-                       maxlength="30">
+                       maxlength="30"
+                       id="searchBox">
             </div>
         </div>
         
@@ -708,8 +723,8 @@
         </div>
     </div>
     
-    <!-- Items Display Section (Initially hidden) -->
-    <div class="items-section" id="itemsSection" style="display: none;">
+    <!-- Items Display Section -->
+    <div class="items-section" id="itemsSection">
         <div class="items-container">
             <div class="items-header">
                 <h2 id="itemsTitle">Your Added Items (<span id="itemsCount">0</span>)</h2>
@@ -721,14 +736,14 @@
         </div>
     </div>
     
-    <!-- Clean Content Area (Shown by default) -->
+    <!-- Clean Content Area -->
     <main class="clean-content" id="cleanContent">
         <div class="clean-content-icon">
-            <i class="fas fa-shopping-basket"></i>
+            <i class="fas fa-clipboard-list"></i>
         </div>
         <h1 class="clean-content-title">Your Quotation Items</h1>
         <p class="clean-content-subtitle">
-            Items you've selected for quotation will appear here. Start by adding products to your quotation list from the main catalog.
+            Items you've added for quotation will appear here. Start by adding products to your quote list from the main catalog.
         </p>
         <div class="clean-content-actions">
             <button class="action-btn" onclick="window.location.href='index.html'">
@@ -737,7 +752,7 @@
             </button>
             <button class="action-btn secondary" onclick="window.location.href='contact.html'">
                 <i class="fas fa-phone"></i>
-                Contact for Quote
+                Request Quote
             </button>
         </div>
     </main>
@@ -746,8 +761,8 @@
     <footer>
         <div class="footer-content">
             <div class="copyright">
-                <span class="desktop-text">Paras International • © 2023 All rights reserved.</span>
-                <span class="mobile-text">Paras International<br>© 2023 All rights reserved.</span>
+                <span class="desktop-text">Sparrow Instruments is in service for the last 50 years • © 2023 All rights reserved.</span>
+                <span class="mobile-text">Sparrow Instruments: 50 years of service<br>© 2023 All rights reserved.</span>
             </div>
         </div>
     </footer>
@@ -762,11 +777,21 @@
         const itemsSection = document.getElementById('itemsSection');
         const cleanContent = document.getElementById('cleanContent');
         const itemsTitle = document.getElementById('itemsTitle');
+        const quoteCounter = document.getElementById('quoteCounter');
         
         if (savedItems) {
             try {
                 const quoteData = JSON.parse(savedItems);
                 const items = quoteData.items || [];
+                const count = quoteData.count || 0;
+                
+                // Update quote counter
+                if (count > 0) {
+                    quoteCounter.textContent = count;
+                    quoteCounter.style.display = 'flex';
+                } else {
+                    quoteCounter.style.display = 'none';
+                }
                 
                 if (items.length > 0) {
                     // Show items section, hide clean content
@@ -820,7 +845,7 @@
     // Load product data from JSON files
     async function loadProductData() {
         try {
-            const files = ['biolabitems.json', 'physlabitems.json', 'chemlabitems.json', 'scientificlabitems.json'];
+            const files = ['biolabitems.json', 'physlabitems.json', 'chemlabitems.json', 'scientificlabitems.json', 'medilabitems.json'];
             const responses = await Promise.all(files.map(file => 
                 fetch(file).then(res => res.ok ? res.json() : []).catch(() => [])
             ));
@@ -852,6 +877,17 @@
         const descHTML = Array.isArray(product.description) ? 
             product.description.map(d => `<li>${d}</li>`).join('') : `<li>${product.description || ''}</li>`;
         
+        // Check price display
+        const buyPriceText = product.bestBuyPrice || '';
+        const buyLabelText = product.bestBuyLabel || 'Buy';
+        const isGuaranteedCompetitive = 
+            buyPriceText.toString().toLowerCase().includes('guaranteed competitive') ||
+            buyLabelText.toString().toLowerCase().includes('guaranteed competitive');
+        
+        const priceDisplay = isGuaranteedCompetitive ? 
+            'Guaranteed Competitive' : 
+            (product.bestBuyPrice ? `INR ${product.bestBuyPrice}/-` : 'Price on request');
+        
         itemElement.innerHTML = `
             <div class="result-content">
                 <div class="result-left">
@@ -864,8 +900,8 @@
                             <span class="mrp-price">${product.mrpPrice ? 'INR ' + product.mrpPrice + '/-' : 'Price on request'}</span>
                         </div>
                         <div class="bestbuy-line">
-                            <span class="bestbuy-label">${product.bestBuyLabel || 'Our Price'}</span> 
-                            <span class="bestbuy-price">${product.bestBuyPrice ? 'INR ' + product.bestBuyPrice + '/-' : 'Price on request'}</span>
+                            <span class="bestbuy-label">${buyLabelText}</span> 
+                            <span class="bestbuy-price">${priceDisplay}</span>
                         </div>
                     </div>
                 </div>
@@ -981,7 +1017,7 @@
     
     // Search functionality for added items
     function setupSearch() {
-        const searchBox = document.querySelector('.search-box');
+        const searchBox = document.getElementById('searchBox');
         searchBox.addEventListener('input', function() {
             const searchTerm = this.value.toLowerCase().trim();
             const items = document.querySelectorAll('.result-item');
@@ -1023,7 +1059,7 @@
         setupSearch();
         
         // Update search placeholder based on screen size
-        const searchBox = document.querySelector('.search-box');
+        const searchBox = document.getElementById('searchBox');
         if (window.innerWidth <= 768) {
             searchBox.placeholder = 'Search items ...';
         }

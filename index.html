@@ -430,7 +430,7 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 30px;
-            align-items: start;
+            align-items: end;
         }
 
         /* Left Column: Image + Price */
@@ -1690,9 +1690,20 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
     .hide-main {
         display: none !important;
     }
-    
 }
+/* ===== NEW: BUTTON ALIGNMENT FIX ===== */
+        .result-center,
+        .result-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
         
+        .button-container {
+            margin-top: auto; /* This pushes button to bottom */
+            padding-top: 15px; /* Add some spacing */
+        }        
     </style>
 </head>
 <body>
@@ -2008,17 +2019,17 @@ function createResultItem(item, resultsList) {
     const specsHTML = Array.isArray(item.specifications) ? item.specifications.map(s => `<li>${s}</li>`).join('') : '';
     const descHTML = Array.isArray(item.description) ? item.description.map(d => `<li>${d}</li>`).join('') : `<li>${item.description || ''}</li>`;
     
-    // Check if item is already quoted
-    const isQuoted = quoteItems.has(item.id);
-    const quoteButtonText = isQuoted ? 'Added to Quote' : 'Get Quote';
-    const quoteButtonClass = isQuoted ? 'get-quote-btn added' : 'get-quote-btn';
-    
-    // Check if "Add to Cart" should be active
-    // If bestBuyLabel contains "Guaranteed Competitive", make cart button inactive
-    const bestBuyLabel = item.bestBuyLabel || 'Buy';
-    const isGuaranteedCompetitive = bestBuyLabel.toLowerCase().includes('guaranteed competitive');
-    const cartButtonClass = isGuaranteedCompetitive ? 'add-to-cart-btn inactive' : 'add-to-cart-btn';
-    const cartButtonDisabled = isGuaranteedCompetitive ? 'disabled' : '';
+// Check if item is already quoted
+const isQuoted = quoteItems.has(item.id);
+const quoteButtonText = isQuoted ? 'Added to Quote' : 'Get Quote';
+const quoteButtonClass = isQuoted ? 'get-quote-btn added' : 'get-quote-btn';
+
+// NEW: Get the actual BUY OPTION TEXT from the price box
+// We'll check if the "Buy" label contains "Guaranteed Competitive"
+const bestBuyLabelText = item.bestBuyLabel || 'Buy'; // This should be the text from your JSON
+const isGuaranteedCompetitive = bestBuyLabelText.toLowerCase().includes('guaranteed competitive');
+const cartButtonClass = isGuaranteedCompetitive ? 'add-to-cart-btn inactive' : 'add-to-cart-btn';
+const cartButtonDisabled = isGuaranteedCompetitive ? 'disabled' : '';
     
     // Create the HTML with buttons
     resultItem.innerHTML = `
@@ -2054,17 +2065,17 @@ function createResultItem(item, resultsList) {
             </div>
             
             <div class="result-right">
-                <div class="description-section">
-                    <strong>Descriptions:</strong>
-                    <ul>${descHTML}</ul>
-                </div>
-                <div class="button-container">
-                    <button class="${cartButtonClass}" ${cartButtonDisabled} data-item-id="${item.id}">
-                        <i class="fas fa-shopping-cart"></i>
-                        Add to Cart
-                    </button>
-                </div>
-            </div>
+    <div class="description-section">
+        <strong>Descriptions:</strong>
+        <ul>${descHTML}</ul>
+    </div>
+    <div class="button-container">
+        <button class="${cartButtonClass}" ${cartButtonDisabled} data-item-id="${item.id}">
+            <i class="fas fa-shopping-cart"></i>
+            Add to Cart
+        </button>
+    </div>
+</div>
         </div>
     `;
     
@@ -2510,3 +2521,4 @@ initializePriceSlider();
 </script>
 </body>
 </html>
+

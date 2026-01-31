@@ -227,7 +227,6 @@
             overflow-y: auto;
             margin-top: 140px;
             min-height: calc(100vh - 190px);
-            display: block;
         }
 
         .items-container {
@@ -239,7 +238,7 @@
         }
         
         .empty-message {
-            display: flex;
+            display: none; /* Start hidden */
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -258,7 +257,7 @@
         }
         
         .items-list {
-            display: block;
+            display: none; /* Start hidden */
             gap: 20px;
         }
         
@@ -1011,10 +1010,14 @@
         document.body.appendChild(toast);
     }
     
-    // Initialize when page loads
-    window.addEventListener('DOMContentLoaded', function() {
+    // Initialize when page loads - IMMEDIATELY to prevent blinking
+    document.addEventListener('DOMContentLoaded', function() {
+        // Run immediately to prevent flashing
         loadAddedItems();
     });
+    
+    // Also run on page load to catch any edge cases
+    window.onload = loadAddedItems;
 </script>
 </body>
 </html>

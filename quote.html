@@ -505,6 +505,166 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
+        /* NEW: Confirm Quote Section */
+        .confirm-quote-section {
+            display: none;
+            margin-top: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px solid #28a745;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .confirm-quote-section.visible {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .confirm-button-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .confirm-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 8px;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .confirm-btn:hover {
+            background: #218838;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(40, 167, 69, 0.4);
+        }
+        
+        .confirm-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .contact-form-section {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        .contact-form-section.visible {
+            display: block;
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        .contact-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            align-items: end;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .form-group input {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #28a745;
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+        }
+        
+        .submit-btn-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .submit-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .submit-btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+        }
+        
+        .submit-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .success-message {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .success-message.visible {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .success-message p {
+            color: #000;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .success-message .contact-info {
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #28a745;
+        }
+        
         /* Footer Styles */
         footer {
             background: linear-gradient(135deg, #d32f2f, #b71c1c);
@@ -527,6 +687,23 @@
         /* Footer text responsiveness */
         .mobile-text {
             display: none;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Responsive Design */
@@ -562,6 +739,10 @@
             
             .quantity-section {
                 margin-top: 20px;
+            }
+            
+            .contact-form {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -674,6 +855,24 @@
             .quantity-section {
                 margin-top: 20px;
             }
+            
+            .confirm-quote-section {
+                padding: 20px;
+                margin-top: 30px;
+            }
+            
+            .confirm-btn {
+                padding: 15px 30px;
+                font-size: 20px;
+            }
+            
+            .contact-form-section {
+                padding: 20px;
+            }
+            
+            .success-message {
+                padding: 20px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -741,6 +940,18 @@
                 width: 28px;
                 height: 28px;
                 font-size: 16px;
+            }
+            
+            .confirm-btn {
+                padding: 12px 25px;
+                font-size: 18px;
+                width: 100%;
+            }
+            
+            .submit-btn {
+                padding: 12px 25px;
+                font-size: 16px;
+                width: 100%;
             }
         }
         
@@ -862,6 +1073,51 @@
                     You have no items to Quote. Please search and add items for your quotation. Thanks.
                 </div>
             </div>
+            
+            <!-- NEW: Confirm Quote Section -->
+            <div class="confirm-quote-section" id="confirmQuoteSection">
+                <div class="confirm-button-container">
+                    <button class="confirm-btn" id="confirmQuoteBtn">
+                        <i class="fas fa-check-circle"></i>
+                        Confirm Quote
+                    </button>
+                </div>
+                
+                <!-- Contact Form Section -->
+                <div class="contact-form-section" id="contactFormSection">
+                    <form class="contact-form" id="quoteForm">
+                        <div class="form-group">
+                            <label for="name">Name (Company/Person) :</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your name or company">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone :</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email ID :</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                        </div>
+                        <div class="form-group submit-btn-container">
+                            <button type="submit" class="submit-btn" id="submitQuoteBtn">
+                                <i class="fas fa-paper-plane"></i>
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Success Message -->
+                <div class="success-message" id="successMessage">
+                    <p>Your Requested Quotation has been submitted successfully. We will notify you within 24 business hours.</p>
+                    <p>Or, you can directly contact us through:</p>
+                    <div class="contact-info">
+                        Email: sales@sparrowinstruments.com<br>
+                        WhatsApp: +91-9876543210<br>
+                        Phone: +91-1234567890
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -881,14 +1137,21 @@
         const savedItems = localStorage.getItem('sparrowQuoteItems');
         const itemsList = document.getElementById('itemsList');
         const emptyMessage = document.getElementById('emptyMessage');
+        const confirmQuoteSection = document.getElementById('confirmQuoteSection');
         
         console.log('🔍 Checking localStorage for quote items...');
         console.log('Saved items:', savedItems);
         
-        // DEFAULT: Show empty message, hide items list
+        // DEFAULT: Show empty message, hide items list and confirm section
         emptyMessage.style.display = 'flex';
         itemsList.style.display = 'none';
+        confirmQuoteSection.classList.remove('visible');
         itemsList.innerHTML = ''; // Clear any existing items
+        
+        // Reset form and success message
+        document.getElementById('contactFormSection').classList.remove('visible');
+        document.getElementById('successMessage').classList.remove('visible');
+        document.getElementById('quoteForm').reset();
         
         if (savedItems) {
             try {
@@ -899,9 +1162,10 @@
                 console.log('Items data:', items);
                 
                 if (items.length > 0) {
-                    // Show items, hide empty message
+                    // Show items and confirm section, hide empty message
                     itemsList.style.display = 'block';
                     emptyMessage.style.display = 'none';
+                    confirmQuoteSection.classList.add('visible');
                     
                     // Display items with full product data
                     items.forEach((itemData, index) => {
@@ -1146,6 +1410,104 @@
         }
     }
     
+    // NEW: Confirm Quote functionality
+    function setupConfirmQuote() {
+        const confirmBtn = document.getElementById('confirmQuoteBtn');
+        const contactFormSection = document.getElementById('contactFormSection');
+        const quoteForm = document.getElementById('quoteForm');
+        const successMessage = document.getElementById('successMessage');
+        const submitBtn = document.getElementById('submitQuoteBtn');
+        
+        confirmBtn.addEventListener('click', function() {
+            console.log('✅ Confirm Quote button clicked');
+            
+            // Hide confirm button, show contact form
+            confirmBtn.style.display = 'none';
+            contactFormSection.classList.add('visible');
+            
+            // Scroll to form
+            contactFormSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            showToast('Please fill in your contact details', 'info');
+        });
+        
+        quoteForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('📝 Form submitted');
+            
+            // Disable submit button to prevent double submission
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                items: getQuoteItems(),
+                timestamp: new Date().toISOString()
+            };
+            
+            console.log('📊 Form data:', formData);
+            
+            // Simulate form submission with delay
+            setTimeout(() => {
+                // Hide form, show success message
+                contactFormSection.classList.remove('visible');
+                successMessage.classList.add('visible');
+                
+                // Save submission to localStorage (for demo purposes)
+                saveQuoteSubmission(formData);
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                showToast('Quote submitted successfully!', 'success');
+                
+                // Reset form and button
+                quoteForm.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit';
+                
+            }, 1500); // 1.5 second delay to simulate processing
+        });
+    }
+    
+    // NEW: Get quote items from localStorage
+    function getQuoteItems() {
+        const savedItems = localStorage.getItem('sparrowQuoteItems');
+        if (savedItems) {
+            try {
+                const quoteData = JSON.parse(savedItems);
+                return quoteData.items || [];
+            } catch (e) {
+                console.error('❌ Error getting quote items:', e);
+                return [];
+            }
+        }
+        return [];
+    }
+    
+    // NEW: Save quote submission (for demo purposes)
+    function saveQuoteSubmission(formData) {
+        try {
+            // Get existing submissions or create new array
+            const existingSubmissions = JSON.parse(localStorage.getItem('sparrowQuoteSubmissions') || '[]');
+            
+            // Add new submission
+            existingSubmissions.push(formData);
+            
+            // Save back to localStorage
+            localStorage.setItem('sparrowQuoteSubmissions', JSON.stringify(existingSubmissions));
+            
+            console.log('💾 Quote submission saved:', formData);
+            console.log('📋 Total submissions:', existingSubmissions.length);
+            
+        } catch (e) {
+            console.error('❌ Error saving quote submission:', e);
+        }
+    }
+    
     // Show toast notification
     function showToast(message, type = 'info') {
         // Remove existing toast
@@ -1196,6 +1558,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         console.log('🚀 Page loaded, starting quote item loading...');
         loadAddedItems();
+        setupConfirmQuote();
     });
     
     // Add debug helper

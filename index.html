@@ -103,6 +103,7 @@
             border-radius: 50%;
             background: transparent;
             flex-shrink: 0;
+            position: relative; /* Added for quote counter */
         }
 
         .quote-image-container a {
@@ -111,6 +112,7 @@
             justify-content: center;
             height: 100%;
             width: 100%;
+            position: relative; /* Added for quote counter */
         }
 
         .quote-image-container img {
@@ -127,6 +129,25 @@
         .quote-image-container img:hover {
             transform: scale(1.08);
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) brightness(1.05);
+        }
+        
+        /* ===== NEW: QUOTE COUNTER BADGE ===== */
+        .quote-counter {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #d32f2f;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         /* Adjust main content position */
@@ -486,6 +507,82 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             font-weight: bold;
         }
 
+        /* ===== NEW: BUTTON CONTAINER FOR SECOND COLUMN ===== */
+        .button-container {
+            margin-top: 20px;
+        }
+        
+        /* ===== NEW: GET QUOTE BUTTON ===== */
+        .get-quote-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .get-quote-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .get-quote-btn.added {
+            background: #6c757d;
+            cursor: default;
+        }
+        
+        .get-quote-btn.added:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* ===== NEW: ADD TO CART BUTTON ===== */
+        .add-to-cart-btn {
+            background: #0056b3;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .add-to-cart-btn:hover {
+            background: #004494;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .add-to-cart-btn.inactive {
+            background: #6c757d;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .add-to-cart-btn.inactive:hover {
+            transform: none;
+            box-shadow: none;
+            background: #6c757d;
+        }
+
         /* Search Suggestions */
         .search-suggestions {
             max-height: 200px;
@@ -504,6 +601,8 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         .result-center {
             grid-column: 2;
             min-width: 0;
+            display: flex;
+            flex-direction: column;
         }
 
         .item-name {
@@ -516,6 +615,7 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
 
         .specs-section {
             margin-bottom: 0; /* Changed from 20px to 0 */
+            flex-grow: 1;
         }
 
         .specs-section strong {
@@ -540,10 +640,13 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             grid-column: 3;
             min-width: 0;
             margin-top: 35px; /* Added to align with specifications */
+            display: flex;
+            flex-direction: column;
         }
 
         .description-section {
             margin-top: 0;
+            flex-grow: 1;
         }
 
         .description-section strong {
@@ -682,6 +785,51 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             margin: 20px;
             border-radius: 10px;
         }
+        
+        /* ===== NEW: TOAST NOTIFICATION ===== */
+        .toast-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .toast-notification.error {
+            background: #dc3545;
+        }
+        
+        .toast-notification.info {
+            background: #17a2b8;
+        }
+        
+        .toast-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
 /* ===== FILTER SIDEBAR ===== */
 .filter-sidebar {
     position: fixed;
@@ -1080,6 +1228,15 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         transform: none;
     }
     
+    /* Quote counter mobile adjustments */
+    .quote-counter {
+        font-size: 10px;
+        width: 18px;
+        height: 18px;
+        top: -4px;
+        right: -4px;
+    }
+    
     /* Center content takes available space */
     .header-center {
         width: calc(100% - 110px);
@@ -1244,6 +1401,13 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         grid-column: 1;
     }
     
+    /* Button adjustments for mobile */
+    .get-quote-btn,
+    .add-to-cart-btn {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
     /* Mobile zoom adjustments */
     .zoom-container {
         position: fixed !important;
@@ -1314,6 +1478,12 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         height: 35px; /* CHANGED: Matched with logo-container (35px) */
         width: 35px; /* CHANGED: Matched with logo-container (35px) */
         margin-left: 10px;
+    }
+    
+    .quote-counter {
+        font-size: 9px;
+        width: 16px;
+        height: 16px;
     }
     
     .header-center {
@@ -1433,6 +1603,12 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         margin-left: 8px;
     }
     
+    .quote-counter {
+        font-size: 8px;
+        width: 15px;
+        height: 15px;
+    }
+    
     .header-center {
         width: calc(100% - 76px);
         padding: 0 6px;
@@ -1539,6 +1715,8 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         <div class="quote-image-container">
             <a href="/sparrowinstruments/quote.html">
                 <img src="/sparrowinstruments/images/quote.jpg" alt="Request Quote" style="background: transparent;">
+                <!-- NEW: Quote counter badge -->
+                <div class="quote-counter" id="quoteCounter">0</div>
             </a>
         </div>
     </header>
@@ -1706,8 +1884,12 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
     // 1. GLOBAL VARIABLES & LOADING
     let allItems = [];
     let searchTimeout;
-
-// PRICE PARSING HELPER FUNCTION - ADD THIS
+    // NEW: Quote management variables
+    let quoteItems = new Set();
+    let quoteCount = 0;
+    const quoteCounter = document.getElementById('quoteCounter');
+    
+// PRICE PARSING HELPER FUNCTION
 function parsePrice(priceStr) {
     if (!priceStr) return 0;
     // Remove commas and convert to number
@@ -1717,7 +1899,7 @@ function parsePrice(priceStr) {
     async function loadJSONFiles() {
     console.log('🚀 Loading Lab Data...');
     try {
-        const files = ['biolabitems.json', 'physlabitems.json', 'chemlabitems.json', 'scientificlabitems.json', 'medilabitems.json']; // Added medilabitems.json
+        const files = ['biolabitems.json', 'physlabitems.json', 'chemlabitems.json', 'scientificlabitems.json', 'medilabitems.json'];
         const responses = await Promise.all(files.map(file => 
             fetch(file).then(res => res.ok ? res.json() : [])
         ));
@@ -1725,17 +1907,248 @@ function parsePrice(priceStr) {
         // Combine and clean discount data
         allItems = [].concat(...responses).map(item => {
             if (item.discount) item.discount = item.discount.toString().replace('%', '');
+            // Add unique ID if not present
+            if (!item.id) {
+                item.id = 'item_' + Math.random().toString(36).substr(2, 9);
+            }
             return item;
         });
 
         console.log(`✅ Loaded ${allItems.length} items.`);
         
-        // NEW: Show all items on page load
+        // NEW: Load saved quote items
+        loadSavedQuotes();
+        
+        // Show all items on page load
         showAllItems();
         
     } catch (error) {
         console.error('❌ Load Error:', error);
     }
+}
+
+// NEW: LOAD SAVED QUOTES FROM LOCALSTORAGE
+function loadSavedQuotes() {
+    const savedQuotes = localStorage.getItem('sparrowQuoteItems');
+    if (savedQuotes) {
+        try {
+            const quoteData = JSON.parse(savedQuotes);
+            quoteItems = new Set(quoteData.items || []);
+            quoteCount = quoteData.count || 0;
+            updateQuoteCounter();
+        } catch (e) {
+            console.error('Error loading saved quotes:', e);
+        }
+    }
+}
+
+// NEW: UPDATE QUOTE COUNTER DISPLAY
+function updateQuoteCounter() {
+    if (quoteCount > 0) {
+        quoteCounter.textContent = quoteCount;
+        quoteCounter.style.display = 'flex';
+        
+        // Add animation for new items
+        if (quoteCount === 1) {
+            quoteCounter.style.animation = 'pulse 0.5s ease-in-out 2';
+        }
+    } else {
+        quoteCounter.style.display = 'none';
+    }
+    
+    // Save to localStorage
+    saveQuotesToStorage();
+}
+
+// NEW: SAVE QUOTES TO LOCALSTORAGE
+function saveQuotesToStorage() {
+    const quoteData = {
+        items: Array.from(quoteItems),
+        count: quoteCount,
+        timestamp: new Date().toISOString()
+    };
+    localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
+}
+
+// NEW: SHOW TOAST NOTIFICATION
+function showToast(message, type = 'success') {
+    // Remove existing toast
+    const existingToast = document.querySelector('.toast-notification');
+    if (existingToast) existingToast.remove();
+    
+    // Create toast
+    const toast = document.createElement('div');
+    toast.className = `toast-notification ${type}`;
+    toast.innerHTML = `
+        <span>${message}</span>
+        <button class="toast-close"><i class="fas fa-times"></i></button>
+    `;
+    
+    // Add event listener to close button
+    const closeBtn = toast.querySelector('.toast-close');
+    closeBtn.addEventListener('click', () => toast.remove());
+    
+    // Auto-remove after 3 seconds
+    setTimeout(() => {
+        if (toast.parentNode) {
+            toast.style.animation = 'slideIn 0.3s ease-out reverse';
+            setTimeout(() => toast.remove(), 300);
+        }
+    }, 3000);
+    
+    document.body.appendChild(toast);
+}
+
+// NEW: CREATE RESULT ITEM WITH BUTTONS
+function createResultItem(item, resultsList) {
+    const resultItem = document.createElement('div');
+    resultItem.className = 'result-item';
+    resultItem.dataset.itemId = item.id;
+    
+    const specsHTML = Array.isArray(item.specifications) ? item.specifications.map(s => `<li>${s}</li>`).join('') : '';
+    const descHTML = Array.isArray(item.description) ? item.description.map(d => `<li>${d}</li>`).join('') : `<li>${item.description || ''}</li>`;
+    
+    // Check if item is already quoted
+    const isQuoted = quoteItems.has(item.id);
+    const quoteButtonText = isQuoted ? 'Added to Quote' : 'Get Quote';
+    const quoteButtonClass = isQuoted ? 'get-quote-btn added' : 'get-quote-btn';
+    
+    // Check if "Add to Cart" should be active
+    // If bestBuyLabel contains "Guaranteed Competitive", make cart button inactive
+    const bestBuyLabel = item.bestBuyLabel || 'Buy';
+    const isGuaranteedCompetitive = bestBuyLabel.toLowerCase().includes('guaranteed competitive');
+    const cartButtonClass = isGuaranteedCompetitive ? 'add-to-cart-btn inactive' : 'add-to-cart-btn';
+    const cartButtonDisabled = isGuaranteedCompetitive ? 'disabled' : '';
+    
+    // Create the HTML with buttons
+    resultItem.innerHTML = `
+        <div class="result-content">
+            <div class="result-left">
+                <div class="result-image">
+                    <img src="${item.image || 'placeholder.jpg'}" alt="${item.name}">
+                </div>
+                <div class="price-box">
+                    <div class="mrp-line">
+                        <span class="mrp-label">M.R.P.</span> 
+                        <span class="mrp-price">INR ${item.mrpPrice || '0'}/-</span>
+                    </div>
+                    <div class="bestbuy-line">
+                        <span class="bestbuy-label">${bestBuyLabel}</span> 
+                        <span class="bestbuy-price">INR ${item.bestBuyPrice || '0'}/-</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-center">
+                <h4 class="item-name">${item.name}</h4>
+                <div class="specs-section">
+                    ${specsHTML ? `<strong>Specifications:</strong><ul>${specsHTML}</ul>` : ''}
+                    <strong>Warranty:</strong> ${item.warranty || 'Not specified'}
+                </div>
+                <div class="button-container">
+                    <button class="${quoteButtonClass}" data-item-id="${item.id}">
+                        <i class="fas ${isQuoted ? 'fa-check' : 'fa-file-alt'}"></i>
+                        ${quoteButtonText}
+                    </button>
+                </div>
+            </div>
+            
+            <div class="result-right">
+                <div class="description-section">
+                    <strong>Descriptions:</strong>
+                    <ul>${descHTML}</ul>
+                </div>
+                <div class="button-container">
+                    <button class="${cartButtonClass}" ${cartButtonDisabled} data-item-id="${item.id}">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    resultsList.appendChild(resultItem);
+    
+    // Setup zoom functionality
+    setupZoom(resultItem);
+    
+    // Add event listeners to buttons
+    const quoteBtn = resultItem.querySelector('.get-quote-btn');
+    const cartBtn = resultItem.querySelector('.add-to-cart-btn');
+    
+    // Quote button click handler
+    quoteBtn.addEventListener('click', function() {
+        const itemId = this.dataset.itemId;
+        handleQuoteClick(itemId, this);
+    });
+    
+    // Cart button click handler (only if active)
+    if (!cartButtonDisabled) {
+        cartBtn.addEventListener('click', function() {
+            const itemId = this.dataset.itemId;
+            handleCartClick(itemId);
+        });
+    }
+    
+    // Set data attributes for filtering
+    resultItem.dataset.price = parsePrice(item.bestBuyPrice || item.mrpPrice);
+    resultItem.dataset.section = determineSection(item);
+}
+
+// NEW: HANDLE QUOTE BUTTON CLICK
+function handleQuoteClick(itemId, button) {
+    if (quoteItems.has(itemId)) {
+        // Remove from quote
+        quoteItems.delete(itemId);
+        quoteCount--;
+        
+        // Update button
+        button.innerHTML = '<i class="fas fa-file-alt"></i> Get Quote';
+        button.classList.remove('added');
+        
+        // Show confirmation
+        showToast('Item removed from quote', 'info');
+    } else {
+        // Add to quote
+        quoteItems.add(itemId);
+        quoteCount++;
+        
+        // Update button
+        button.innerHTML = '<i class="fas fa-check"></i> Added to Quote';
+        button.classList.add('added');
+        
+        // Show confirmation
+        showToast('Item added to quote!', 'success');
+    }
+    
+    // Update counter
+    updateQuoteCounter();
+}
+
+// NEW: HANDLE CART BUTTON CLICK
+function handleCartClick(itemId) {
+    // Find the item
+    const item = allItems.find(i => i.id === itemId);
+    if (!item) return;
+    
+    // Save to localStorage for cart page
+    const cartItems = JSON.parse(localStorage.getItem('sparrowCartItems') || '[]');
+    cartItems.push({
+        id: item.id,
+        name: item.name,
+        price: item.bestBuyPrice || item.mrpPrice,
+        image: item.image,
+        addedAt: new Date().toISOString()
+    });
+    localStorage.setItem('sparrowCartItems', JSON.stringify(cartItems));
+    
+    // Show confirmation and redirect
+    showToast('Item added to cart! Redirecting...', 'success');
+    
+    setTimeout(() => {
+        window.location.href = '/sparrowinstruments/cart.html';
+    }, 1000);
 }
 
 // Function to display all items on page load
@@ -1751,49 +2164,8 @@ function showAllItems() {
     // Shuffle/mix the items (optional - for random order)
     const shuffledItems = [...allItems].sort(() => Math.random() - 0.5);
     
-    // Or for sequential mixing: You can implement a round-robin mixing
-    // For simple sequential: just use allItems as is
-    
     shuffledItems.forEach(item => {
-        const resultItem = document.createElement('div');
-        resultItem.className = 'result-item';
-        
-        const specsHTML = Array.isArray(item.specifications) ? item.specifications.map(s => `<li>${s}</li>`).join('') : '';
-        const descHTML = Array.isArray(item.description) ? item.description.map(d => `<li>${d}</li>`).join('') : `<li>${item.description || ''}</li>`;
-
-        resultItem.innerHTML = `
-            <div class="result-content">
-                <div class="result-left">
-                    <div class="result-image">
-                        <img src="${item.image || 'placeholder.jpg'}" alt="${item.name}">
-                    </div>
-                    <div class="price-box">
-                        <div class="mrp-line"><span class="mrp-label">M.R.P.</span> <span class="mrp-price">INR ${item.mrpPrice || '0'}/-</span></div>
-                        <div class="bestbuy-line"><span class="bestbuy-label">Buy</span> <span class="bestbuy-price">INR ${item.bestBuyPrice || '0'}/-</span></div>
-                    </div>
-                </div>
-                <div class="result-center">
-                    <h4 class="item-name">${item.name}</h4>
-                    <div class="specs-section">
-                        ${specsHTML ? `<strong>Specifications:</strong><ul>${specsHTML}</ul>` : ''}
-                        <strong>Warranty:</strong> ${item.warranty || 'Not specified'}
-                    </div>
-                </div>
-                <div class="result-right">
-                    <div class="description-section">
-                        <strong>Descriptions:</strong>
-                        <ul>${descHTML}</ul>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        // Add data attributes for filtering
-        resultItem.dataset.price = parsePrice(item.bestBuyPrice || item.mrpPrice);
-        resultItem.dataset.section = determineSection(item);
-        
-        resultsList.appendChild(resultItem);
-        setupZoom(resultItem);
+        createResultItem(item, resultsList);
     });
     
     searchResults.style.display = 'block';
@@ -1845,48 +2217,8 @@ function showAllItems() {
                 resultsTitle.textContent = `Your Searched Products (${matchedItems.length} items)`;
                 resultsList.innerHTML = '';
                 matchedItems.forEach(item => {
-    const resultItem = document.createElement('div');
-    resultItem.className = 'result-item';
-    
-    const specsHTML = Array.isArray(item.specifications) ? item.specifications.map(s => `<li>${s}</li>`).join('') : '';
-    const descHTML = Array.isArray(item.description) ? item.description.map(d => `<li>${d}</li>`).join('') : `<li>${item.description || ''}</li>`;
-
-    // ADD THIS MISSING HTML:
-    resultItem.innerHTML = `
-        <div class="result-content">
-            <div class="result-left">
-                <div class="result-image">
-                    <img src="${item.image || 'placeholder.jpg'}" alt="${item.name}">
-                </div>
-                <div class="price-box">
-                    <div class="mrp-line"><span class="mrp-label">M.R.P.</span> <span class="mrp-price">INR ${item.mrpPrice || '0'}/–</span></div>
-                    <div class="bestbuy-line"><span class="bestbuy-label">Buy</span> <span class="bestbuy-price">INR ${item.bestBuyPrice || '0'}/–</span></div>
-                </div>
-            </div>
-            <div class="result-center">
-                <h4 class="item-name">${item.name}</h4>
-                <div class="specs-section">
-                    ${specsHTML ? `<strong>Specifications:</strong><ul>${specsHTML}</ul>` : ''}
-                    <strong>Warranty:</strong> ${item.warranty || 'Not specified'}
-                </div>
-            </div>
-            <div class="result-right">
-                <div class="description-section">
-                    <strong>Descriptions:</strong>
-                    <ul>${descHTML}</ul>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    resultsList.appendChild(resultItem);
-    
-    // ATTACH ZOOM TO EACH ITEM
-    setupZoom(resultItem); 
-    // Set data attributes for filtering
-    resultItem.dataset.price = parsePrice(item.bestBuyPrice || item.mrpPrice);
-    resultItem.dataset.section = determineSection(item);
-});
+                    createResultItem(item, resultsList);
+                });
                 
                 searchResults.style.display = 'block';
                 mainContent.classList.add('hide-main');
@@ -1898,7 +2230,7 @@ function showAllItems() {
         }, 300);
     }
 
-// SECTION DETERMINATION HELPER FUNCTION - ADD THIS
+// SECTION DETERMINATION HELPER FUNCTION
 function determineSection(item) {
     if (item.category) {
         // Extract first word from category (e.g., "Biology Lab" → "biology")
@@ -2178,4 +2510,3 @@ initializePriceSlider();
 </script>
 </body>
 </html>
-

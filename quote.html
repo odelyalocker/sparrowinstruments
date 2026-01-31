@@ -238,7 +238,7 @@
         }
         
         .empty-message {
-            display: none; /* Start hidden */
+            display: flex; /* Changed to flex - will show when there are no items */
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -257,7 +257,7 @@
         }
         
         .items-list {
-            display: none; /* Start hidden */
+            display: none; /* Start hidden, will show when there are items */
             gap: 20px;
         }
         
@@ -778,7 +778,7 @@
             <div class="items-list" id="itemsList">
                 <!-- Items will be dynamically inserted here -->
             </div>
-            <!-- Empty message - shown when no items -->
+            <!-- Empty message - shown when no items (DEFAULT STATE) -->
             <div class="empty-message" id="emptyMessage">
                 <div class="empty-text">
                     You have no items to Quote. Please search and add items for your quotation. Thanks.
@@ -804,9 +804,10 @@
         const itemsList = document.getElementById('itemsList');
         const emptyMessage = document.getElementById('emptyMessage');
         
-        // Start with both hidden
+        // DEFAULT: Show empty message, hide items list
+        emptyMessage.style.display = 'flex';
         itemsList.style.display = 'none';
-        emptyMessage.style.display = 'none';
+        itemsList.innerHTML = ''; // Clear any existing items
         
         if (savedItems) {
             try {
@@ -817,9 +818,6 @@
                     // Show items, hide empty message
                     itemsList.style.display = 'block';
                     emptyMessage.style.display = 'none';
-                    
-                    // Clear existing items
-                    itemsList.innerHTML = '';
                     
                     // Display items directly from localStorage
                     items.forEach((itemData, index) => {
@@ -845,22 +843,15 @@
                             itemsList.appendChild(itemElement);
                         }
                     });
-                } else {
-                    // No items, show empty message
-                    itemsList.style.display = 'none';
-                    emptyMessage.style.display = 'flex';
                 }
+                // If items.length === 0, default state (empty message) remains
+                
             } catch (e) {
                 console.error('Error loading saved items:', e);
-                // If there's an error, show empty message
-                itemsList.style.display = 'none';
-                emptyMessage.style.display = 'flex';
+                // Keep default state (empty message) if there's an error
             }
-        } else {
-            // No saved items, show empty message
-            itemsList.style.display = 'none';
-            emptyMessage.style.display = 'flex';
         }
+        // If no savedItems, default state (empty message) remains
     }
     
     // Create item element for display
@@ -1007,9 +998,8 @@
         document.body.appendChild(toast);
     }
     
-    // Initialize when page loads - IMMEDIATELY to prevent blinking
+    // Initialize when page loads
     document.addEventListener('DOMContentLoaded', function() {
-        // Run immediately to prevent flashing
         loadAddedItems();
     });
 </script>

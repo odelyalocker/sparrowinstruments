@@ -2041,12 +2041,13 @@ const quoteButtonText = isQuoted ? 'Added to Quote' : 'Get Quote';
 const quoteButtonClass = isQuoted ? 'get-quote-btn added' : 'get-quote-btn';
 
 // Check if "Add to Cart" should be active
-// If the buy option contains "Guaranteed Competitive", make cart button inactive
-// Use item.bestBuyLabel from the JSON data
-const buyLabel = item.bestBuyLabel || 'Buy'; // This should be 'Buy' or 'Guaranteed Competitive'
-const isGuaranteedCompetitive = buyLabel.toLowerCase().includes('guaranteed competitive');
-const cartButtonClass = isGuaranteedCompetitive ? 'add-to-cart-btn inactive' : 'add-to-cart-btn';
-const cartButtonDisabled = isGuaranteedCompetitive ? 'disabled' : '';
+// If the PRICE field contains "Guaranteed Competitive", make cart button inactive
+// Check both bestBuyPrice and bestBuyLabel fields
+const buyPriceText = item.bestBuyPrice || '';
+const buyLabelText = item.bestBuyLabel || 'Buy';
+const isGuaranteedCompetitive = 
+    buyPriceText.toString().toLowerCase().includes('guaranteed competitive') ||
+    buyLabelText.toString().toLowerCase().includes('guaranteed competitive');
     
     // Create the HTML with buttons
     resultItem.innerHTML = `
@@ -2062,7 +2063,7 @@ const cartButtonDisabled = isGuaranteedCompetitive ? 'disabled' : '';
                     </div>
                     <div class="bestbuy-line">
                         <span class="bestbuy-label">${item.bestBuyLabel || 'Buy'}</span> 
-                        <span class="bestbuy-price">INR ${item.bestBuyPrice || '0'}/-</span>
+                        <span class="bestbuy-price">${item.bestBuyPrice || 'INR 0/-'}</span>
                     </div>
                 </div>
             </div>
@@ -2543,6 +2544,7 @@ initializePriceSlider();
 </script>
 </body>
 </html>
+
 
 
 

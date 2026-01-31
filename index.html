@@ -1887,6 +1887,26 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
     // 1. GLOBAL VARIABLES & LOADING
     let allItems = [];
     let searchTimeout;
+    
+    // ===== CLEANUP FUNCTION FOR CORRUPTED DATA =====
+function fixCorruptedQuoteData() {
+    const savedQuotes = localStorage.getItem('sparrowQuoteItems');
+    if (savedQuotes) {
+        try {
+            const quoteData = JSON.parse(savedQuotes);
+            
+            // If items array is empty but count > 0, reset count to 0
+            if ((!quoteData.items || quoteData.items.length === 0) && quoteData.count > 0) {
+                console.log('🛠️ Fixing corrupted quote data');
+                quoteData.count = 0;
+                localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
+            }
+        } catch (e) {
+            console.error('Error fixing quote data:', e);
+        }
+    }
+}
+    
     // NEW: Quote management variables
     let quoteItems = new Set();
     let quoteCount = 0;
@@ -1963,13 +1983,14 @@ function updateQuoteCounter() {
     saveQuotesToStorage();
 }
 
-// NEW: SAVE QUOTES TO LOCALSTORAGE
+// NEW: SAVE QUOTES TO LOCALSTORAGE - FIXED
 function saveQuotesToStorage() {
-    const quoteData = {
-        items: Array.from(quoteItems),
-        count: quoteCount,
-        timestamp: new Date().toISOString()
-    };
+    const savedQuotes = localStorage.getItem('sparrowQuoteItems');
+    let quoteData = savedQuotes ? JSON.parse(savedQuotes) : { items: [], count: 0 };
+    
+    // Update the count to match actual items
+    quoteData.count = quoteData.items ? quoteData.items.length : 0;
+    
     localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
 }
 
@@ -2114,12 +2135,25 @@ if (!isGuaranteedCompetitive) { // CHANGED: Check the actual condition, not just
     resultItem.dataset.section = determineSection(item);
 }
 
-// NEW: HANDLE QUOTE BUTTON CLICK
+// NEW: HANDLE QUOTE BUTTON CLICK - FIXED VERSION
 function handleQuoteClick(itemId, button) {
-    if (quoteItems.has(itemId)) {
+    // Find the full item object
+    const item = allItems.find(i => i.id === itemId);
+    if (!item) return;
+    
+    // Load existing quotes
+    const savedQuotes = localStorage.getItem('sparrowQuoteItems');
+    let quoteData = savedQuotes ? JSON.parse(savedQuotes) : { items: [], count: 0 };
+    let quoteItemsArray = quoteData.items || [];
+    
+    // Check if item already exists in quote
+    const existingIndex = quoteItemsArray.findIndex(i => i.id === itemId);
+    
+    if (existingIndex !== -1) {
         // Remove from quote
+        quoteItemsArray.splice(existingIndex, 1);
         quoteItems.delete(itemId);
-        quoteCount--;
+        quoteCount = quoteItemsArray.length;
         
         // Update button
         button.innerHTML = '<i class="fas fa-file-alt"></i> Get Quote';
@@ -2128,9 +2162,24 @@ function handleQuoteClick(itemId, button) {
         // Show confirmation
         showToast('Item removed from quote', 'info');
     } else {
-        // Add to quote
+        // Add full item to quote
+        const itemToSave = {
+            id: item.id,
+            name: item.name,
+            image: item.image || item.img || 'placeholder.jpg',
+            mrpPrice: item.mrpPrice || item.mrp || 'Price on request',
+            bestBuyPrice: item.bestBuyPrice || item.price || 'Price on request',
+            bestBuyLabel: item.bestBuyLabel || 'Buy',
+            warranty: item.warranty || 'Not specified',
+            specifications: item.specifications || [],
+            description: item.description || [],
+            category: item.category || '',
+            quantity: 1
+        };
+        
+        quoteItemsArray.push(itemToSave);
         quoteItems.add(itemId);
-        quoteCount++;
+        quoteCount = quoteItemsArray.length;
         
         // Update button
         button.innerHTML = '<i class="fas fa-check"></i> Added to Quote';
@@ -2140,7 +2189,12 @@ function handleQuoteClick(itemId, button) {
         showToast('Item added to quote!', 'success');
     }
     
-    // Update counter
+    // Save to localStorage
+    quoteData.items = quoteItemsArray;
+    quoteData.count = quoteCount;
+    localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
+    
+    // Update counter display
     updateQuoteCounter();
 }
 
@@ -2342,7 +2396,10 @@ container.addEventListener('touchcancel', () => {
 
     // 4. EVENT LISTENERS
     document.querySelector('.search-box').addEventListener('input', searchItems);
-    window.addEventListener('DOMContentLoaded', loadJSONFiles);
+    window.addEventListener('DOMContentLoaded', function() {
+    fixCorruptedQuoteData(); // Add this line
+    loadJSONFiles();
+});
 
     
 // ===== FILTER SIDEBAR FUNCTIONALITY =====
@@ -2468,3 +2525,4 @@ function applyFilters() {
 </script>
 </body>
 </html>
+

@@ -131,6 +131,25 @@
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) brightness(1.05);
         }
         
+        /* ===== NEW: QUOTE COUNTER BADGE ===== */
+        .quote-counter {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #d32f2f;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
         /* Adjust main content position */
         .main-content {
             margin-top: 140px;
@@ -805,6 +824,12 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             to { transform: translateX(0); opacity: 1; }
         }
         
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
 /* ===== FILTER SIDEBAR ===== */
 .filter-sidebar {
     position: fixed;
@@ -1203,6 +1228,15 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         transform: none;
     }
     
+    /* Quote counter mobile adjustments */
+    .quote-counter {
+        font-size: 10px;
+        width: 18px;
+        height: 18px;
+        top: -4px;
+        right: -4px;
+    }
+    
     /* Center content takes available space */
     .header-center {
         width: calc(100% - 110px);
@@ -1446,6 +1480,12 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         margin-left: 10px;
     }
     
+    .quote-counter {
+        font-size: 9px;
+        width: 16px;
+        height: 16px;
+    }
+    
     .header-center {
         width: calc(100% - 90px);
         padding: 0 8px;
@@ -1561,6 +1601,12 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
     
     .quote-image-container {
         margin-left: 8px;
+    }
+    
+    .quote-counter {
+        font-size: 8px;
+        width: 15px;
+        height: 15px;
     }
     
     .header-center {
@@ -1696,7 +1742,9 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         <div class="quote-image-container">
             <a href="/sparrowinstruments/quote.html">
                 <img src="/sparrowinstruments/images/quote.jpg" alt="Request Quote" style="background: transparent;">
-                </a>
+                <!-- NEW: Quote counter badge -->
+                <div class="quote-counter" id="quoteCounter">0</div>
+            </a>
         </div>
     </header>
     
@@ -1839,30 +1887,10 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
     // 1. GLOBAL VARIABLES & LOADING
     let allItems = [];
     let searchTimeout;
-
-    // ADD THESE LINES BACK:
+    // NEW: Quote management variables
     let quoteItems = new Set();
     let quoteCount = 0;
-    
-    // ===== CLEANUP FUNCTION FOR CORRUPTED DATA =====
-function fixCorruptedQuoteData() {
-    const savedQuotes = localStorage.getItem('sparrowQuoteItems');
-    if (savedQuotes) {
-        try {
-            const quoteData = JSON.parse(savedQuotes);
-            
-            // If items array is empty but count > 0, reset count to 0
-            if ((!quoteData.items || quoteData.items.length === 0) && quoteData.count > 0) {
-                console.log('🛠️ Fixing corrupted quote data');
-                quoteData.count = 0;
-                localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
-            }
-        } catch (e) {
-            console.error('Error fixing quote data:', e);
-        }
-    }
-}
-    
+    const quoteCounter = document.getElementById('quoteCounter');
     
 // PRICE PARSING HELPER FUNCTION
 function parsePrice(priceStr) {
@@ -1890,12 +1918,12 @@ function parsePrice(priceStr) {
         });
 
         console.log(`✅ Loaded ${allItems.length} items.`);
-
-// NEW: Load saved quote items
-loadSavedQuotes(); // ADD THIS LINE BACK
-
-// Show all items on page load
-showAllItems();
+        
+        // NEW: Load saved quote items
+        loadSavedQuotes();
+        
+        // Show all items on page load
+        showAllItems();
         
     } catch (error) {
         console.error('❌ Load Error:', error);
@@ -1917,14 +1945,31 @@ function loadSavedQuotes() {
     }
 }
 
-// NEW: SAVE QUOTES TO LOCALSTORAGE - FIXED
+// NEW: UPDATE QUOTE COUNTER DISPLAY
+function updateQuoteCounter() {
+    if (quoteCount > 0) {
+        quoteCounter.textContent = quoteCount;
+        quoteCounter.style.display = 'flex';
+        
+        // Add animation for new items
+        if (quoteCount === 1) {
+            quoteCounter.style.animation = 'pulse 0.5s ease-in-out 2';
+        }
+    } else {
+        quoteCounter.style.display = 'none';
+    }
+    
+    // Save to localStorage
+    saveQuotesToStorage();
+}
+
+// NEW: SAVE QUOTES TO LOCALSTORAGE
 function saveQuotesToStorage() {
-    const savedQuotes = localStorage.getItem('sparrowQuoteItems');
-    let quoteData = savedQuotes ? JSON.parse(savedQuotes) : { items: [], count: 0 };
-    
-    // Update the count to match actual items
-    quoteData.count = quoteData.items ? quoteData.items.length : 0;
-    
+    const quoteData = {
+        items: Array.from(quoteItems),
+        count: quoteCount,
+        timestamp: new Date().toISOString()
+    };
     localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
 }
 
@@ -2069,25 +2114,12 @@ if (!isGuaranteedCompetitive) { // CHANGED: Check the actual condition, not just
     resultItem.dataset.section = determineSection(item);
 }
 
-// NEW: HANDLE QUOTE BUTTON CLICK - FIXED VERSION
+// NEW: HANDLE QUOTE BUTTON CLICK
 function handleQuoteClick(itemId, button) {
-    // Find the full item object
-    const item = allItems.find(i => i.id === itemId);
-    if (!item) return;
-    
-    // Load existing quotes
-    const savedQuotes = localStorage.getItem('sparrowQuoteItems');
-    let quoteData = savedQuotes ? JSON.parse(savedQuotes) : { items: [], count: 0 };
-    let quoteItemsArray = quoteData.items || [];
-    
-    // Check if item already exists in quote
-    const existingIndex = quoteItemsArray.findIndex(i => i.id === itemId);
-    
-    if (existingIndex !== -1) {
+    if (quoteItems.has(itemId)) {
         // Remove from quote
-        quoteItemsArray.splice(existingIndex, 1);
         quoteItems.delete(itemId);
-        quoteCount = quoteItemsArray.length; // ADD THIS LINE BACK
+        quoteCount--;
         
         // Update button
         button.innerHTML = '<i class="fas fa-file-alt"></i> Get Quote';
@@ -2096,24 +2128,9 @@ function handleQuoteClick(itemId, button) {
         // Show confirmation
         showToast('Item removed from quote', 'info');
     } else {
-        // Add full item to quote
-        const itemToSave = {
-            id: item.id,
-            name: item.name,
-            image: item.image || item.img || 'placeholder.jpg',
-            mrpPrice: item.mrpPrice || item.mrp || 'Price on request',
-            bestBuyPrice: item.bestBuyPrice || item.price || 'Price on request',
-            bestBuyLabel: item.bestBuyLabel || 'Buy',
-            warranty: item.warranty || 'Not specified',
-            specifications: item.specifications || [],
-            description: item.description || [],
-            category: item.category || '',
-            quantity: 1
-        };
-        
-        quoteItemsArray.push(itemToSave);
+        // Add to quote
         quoteItems.add(itemId);
-        quoteCount = quoteItemsArray.length; // ADD THIS LINE BACK
+        quoteCount++;
         
         // Update button
         button.innerHTML = '<i class="fas fa-check"></i> Added to Quote';
@@ -2123,10 +2140,8 @@ function handleQuoteClick(itemId, button) {
         showToast('Item added to quote!', 'success');
     }
     
-    // Save to localStorage
-    quoteData.items = quoteItemsArray;
-    quoteData.count = quoteCount; // This should now work
-    localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
+    // Update counter
+    updateQuoteCounter();
 }
 
 // NEW: HANDLE CART BUTTON CLICK
@@ -2327,10 +2342,7 @@ container.addEventListener('touchcancel', () => {
 
     // 4. EVENT LISTENERS
     document.querySelector('.search-box').addEventListener('input', searchItems);
-    window.addEventListener('DOMContentLoaded', function() {
-    fixCorruptedQuoteData(); // Add this line
-    loadJSONFiles();
-});
+    window.addEventListener('DOMContentLoaded', loadJSONFiles);
 
     
 // ===== FILTER SIDEBAR FUNCTIONALITY =====

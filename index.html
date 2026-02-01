@@ -1407,6 +1407,42 @@
             box-shadow: none !important;
             background: #6c757d !important;
         }
+/* Add to your CSS file */
+.main-section-checkbox {
+    font-weight: 600 !important;
+    color: #333 !important;
+}
+
+.main-section-checkbox .checkmark {
+    border-width: 2px !important;
+}
+
+.subcategories-container {
+    margin-top: 8px;
+    margin-bottom: 15px;
+}
+
+.sub-checkbox {
+    margin-bottom: 8px !important;
+}
+
+/* Indentation for subcategories */
+.sub-checkbox .checkmark {
+    left: 10px !important;
+}
+
+.sub-checkbox {
+    padding-left: 35px !important;
+}
+
+/* Hover effect for main sections */
+.main-section-checkbox:hover {
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: -5px -10px;
+}		
+		
     </style>
 </head>
 <body>
@@ -1679,94 +1715,151 @@
             }
         }
         
-        // ===== GENERATE FILTER SIDEBAR =====
-        function generateFilterSidebar() {
-            const sectionsFilter = document.getElementById('sectionsFilter');
-            sectionsFilter.innerHTML = '';
+// ===== GENERATE FILTER SIDEBAR =====
+function generateFilterSidebar() {
+    const sectionsFilter = document.getElementById('sectionsFilter');
+    sectionsFilter.innerHTML = '';
+    
+    // Generate checkboxes for each section
+    Object.entries(sectionsConfig).forEach(([sectionKey, sectionData]) => {
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'section-group';
+        
+        // Create MAIN SECTION CHECKBOX (Education, Scientific, etc.)
+        const mainCheckboxItem = document.createElement('label');
+        mainCheckboxItem.className = 'checkbox-item main-section-checkbox';
+        mainCheckboxItem.innerHTML = `
+            <input type="checkbox" value="${sectionKey}" class="section-checkbox main-section" data-section="${sectionKey}">
+            <span class="checkmark"></span>
+            <strong>${sectionData.label}</strong>
+        `;
+        sectionDiv.appendChild(mainCheckboxItem);
+        
+        // Create checkboxes for subcategories if they exist
+        if (sectionData.subcategories && sectionData.subcategories.length > 0) {
+            const subcategoriesDiv = document.createElement('div');
+            subcategoriesDiv.className = 'subcategories-container';
+            subcategoriesDiv.style.marginLeft = '25px'; // Indent subcategories
             
-            // Generate checkboxes for each section
-            Object.entries(sectionsConfig).forEach(([sectionKey, sectionData]) => {
-                const sectionDiv = document.createElement('div');
-                sectionDiv.className = 'section-group';
-                
-                // Create section header
-                const sectionHeader = document.createElement('div');
-                sectionHeader.className = 'section-label';
-                sectionHeader.innerHTML = `
-                    <i class="fas fa-folder"></i>
-                    ${sectionData.label}
+            sectionData.subcategories.forEach(subcategory => {
+                const checkboxItem = document.createElement('label');
+                checkboxItem.className = 'checkbox-item sub-checkbox';
+                checkboxItem.innerHTML = `
+                    <input type="checkbox" value="${subcategory}" class="section-checkbox subcategory" data-parent="${sectionKey}">
+                    <span class="checkmark"></span>
+                    ${subcategory}
                 `;
-                sectionDiv.appendChild(sectionHeader);
-                
-                // Create checkboxes for subcategories if they exist
-                if (sectionData.subcategories && sectionData.subcategories.length > 0) {
-                    sectionData.subcategories.forEach(subcategory => {
-                        const checkboxItem = document.createElement('label');
-                        checkboxItem.className = 'checkbox-item sub-checkbox';
-                        checkboxItem.innerHTML = `
-                            <input type="checkbox" value="${subcategory}" class="section-checkbox" data-section="${sectionKey}">
-                            <span class="checkmark"></span>
-                            ${subcategory}
-                        `;
-                        sectionDiv.appendChild(checkboxItem);
-                    });
-                } else {
-                    // If no subcategories, create a single checkbox for the section
-                    const checkboxItem = document.createElement('label');
-                    checkboxItem.className = 'checkbox-item';
-                    checkboxItem.innerHTML = `
-                        <input type="checkbox" value="${sectionKey}" class="section-checkbox">
-                        <span class="checkmark"></span>
-                        ${sectionData.label} <span class="to-be-added">(to be added later)</span>
-                    `;
-                    sectionDiv.appendChild(checkboxItem);
-                }
-                
-                sectionsFilter.appendChild(sectionDiv);
+                subcategoriesDiv.appendChild(checkboxItem);
             });
             
-            // Add event listeners to checkboxes
-            setupFilterEventListeners();
+            sectionDiv.appendChild(subcategoriesDiv);
+        } else {
+            // If no subcategories, show message
+            const noSubcategories = document.createElement('div');
+            noSubcategories.className = 'no-subcategories';
+            noSubcategories.style.marginLeft = '25px';
+            noSubcategories.style.fontSize = '12px';
+            noSubcategories.style.color = '#888';
+            noSubcategories.style.fontStyle = 'italic';
+            noSubcategories.innerHTML = 'To be added later';
+            sectionDiv.appendChild(noSubcategories);
         }
         
-        // ===== SETUP FILTER EVENT LISTENERS =====
-        function setupFilterEventListeners() {
-            const sectionCheckboxes = document.querySelectorAll('.section-checkbox');
+        sectionsFilter.appendChild(sectionDiv);
+    });
+    
+    // Add event listeners to checkboxes
+    setupFilterEventListeners();
+}
+        
+// ===== SETUP FILTER EVENT LISTENERS =====
+function setupFilterEventListeners() {
+    const sectionCheckboxes = document.querySelectorAll('.section-checkbox');
+    
+    sectionCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const isMainSection = this.classList.contains('main-section');
+            const value = this.value;
             
-            sectionCheckboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        const section = this.dataset.section || this.value;
-                        const value = this.value;
-                        
-                        // If it's a subcategory checkbox
-                        if (this.dataset.section) {
-                            if (!currentFilters.subcategories.includes(value)) {
-                                currentFilters.subcategories.push(value);
-                            }
-                        } else {
-                            // If it's a main section checkbox
-                            if (!currentFilters.sections.includes(value)) {
-                                currentFilters.sections.push(value);
+            if (this.checked) {
+                if (isMainSection) {
+                    // Main section checkbox checked
+                    if (!currentFilters.sections.includes(value)) {
+                        currentFilters.sections.push(value);
+                    }
+                    
+                    // Automatically check all subcategories when main section is checked
+                    const subCheckboxes = document.querySelectorAll(`.subcategory[data-parent="${value}"]`);
+                    subCheckboxes.forEach(subCheckbox => {
+                        if (!subCheckbox.checked) {
+                            subCheckbox.checked = true;
+                            const subValue = subCheckbox.value;
+                            if (!currentFilters.subcategories.includes(subValue)) {
+                                currentFilters.subcategories.push(subValue);
                             }
                         }
-                    } else {
-                        const value = this.value;
-                        
-                        // Remove from appropriate filter array
-                        if (this.dataset.section) {
-                            currentFilters.subcategories = currentFilters.subcategories.filter(
-                                item => item !== value
-                            );
-                        } else {
-                            currentFilters.sections = currentFilters.sections.filter(
-                                item => item !== value
-                            );
+                    });
+                } else {
+                    // Subcategory checkbox checked
+                    const parentSection = this.dataset.parent;
+                    const subValue = this.value;
+                    
+                    if (!currentFilters.subcategories.includes(subValue)) {
+                        currentFilters.subcategories.push(subValue);
+                    }
+                    
+                    // Check if all subcategories are checked, then check main section
+                    const allSubCheckboxes = document.querySelectorAll(`.subcategory[data-parent="${parentSection}"]`);
+                    const allChecked = Array.from(allSubCheckboxes).every(cb => cb.checked);
+                    const mainCheckbox = document.querySelector(`.main-section[value="${parentSection}"]`);
+                    
+                    if (allChecked && mainCheckbox && !mainCheckbox.checked) {
+                        mainCheckbox.checked = true;
+                        if (!currentFilters.sections.includes(parentSection)) {
+                            currentFilters.sections.push(parentSection);
                         }
                     }
-                });
-            });
-        }
+                }
+            } else {
+                if (isMainSection) {
+                    // Main section checkbox unchecked
+                    currentFilters.sections = currentFilters.sections.filter(
+                        item => item !== value
+                    );
+                    
+                    // Automatically uncheck all subcategories when main section is unchecked
+                    const subCheckboxes = document.querySelectorAll(`.subcategory[data-parent="${value}"]`);
+                    subCheckboxes.forEach(subCheckbox => {
+                        if (subCheckbox.checked) {
+                            subCheckbox.checked = false;
+                            const subValue = subCheckbox.value;
+                            currentFilters.subcategories = currentFilters.subcategories.filter(
+                                item => item !== subValue
+                            );
+                        }
+                    });
+                } else {
+                    // Subcategory checkbox unchecked
+                    const parentSection = this.dataset.parent;
+                    const subValue = this.value;
+                    
+                    currentFilters.subcategories = currentFilters.subcategories.filter(
+                        item => item !== subValue
+                    );
+                    
+                    // Uncheck main section if any subcategory is unchecked
+                    const mainCheckbox = document.querySelector(`.main-section[value="${parentSection}"]`);
+                    if (mainCheckbox && mainCheckbox.checked) {
+                        mainCheckbox.checked = false;
+                        currentFilters.sections = currentFilters.sections.filter(
+                            item => item !== parentSection
+                        );
+                    }
+                }
+            }
+        });
+    });
+}
         
         // ===== LOAD SAVED QUOTES =====
         function loadSavedQuotes() {
@@ -2195,21 +2288,21 @@ function searchItems() {
             document.body.style.overflow = '';
         }
         
-        // Clear filter button
-        clearFilterBtn.addEventListener('click', function() {
-            // Uncheck all checkboxes
-            const sectionCheckboxes = document.querySelectorAll('.section-checkbox');
-            sectionCheckboxes.forEach(checkbox => {
-                checkbox.checked = false;
-            });
-            
-            // Clear current filters
-            currentFilters.sections = [];
-            currentFilters.subcategories = [];
-            
-            // Apply cleared filters
-            applyFilters();
-        });
+// Clear filter button
+clearFilterBtn.addEventListener('click', function() {
+    // Uncheck all checkboxes
+    const sectionCheckboxes = document.querySelectorAll('.section-checkbox');
+    sectionCheckboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    
+    // Clear current filters
+    currentFilters.sections = [];
+    currentFilters.subcategories = [];
+    
+    // Apply cleared filters
+    applyFilters();
+});
         
         // Apply filter button
         applyFilterBtn.addEventListener('click', function() {
@@ -2217,45 +2310,49 @@ function searchItems() {
             closeFilterSidebar();
         });
         
-        // Apply filters function
-        function applyFilters() {
-            const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
-            const resultItems = document.querySelectorAll('.result-item');
-            
-            // If no search results, don't filter
-            if (resultItems.length === 0) return;
-            
-            let visibleCount = 0;
-            
-            resultItems.forEach(item => {
-                let showItem = true;
-                
-                // Get item data
-                const itemSection = item.dataset.section || 'General';
-                const itemCategory = item.dataset.category || 'General';
-                
-                // Check if we have any filters active
-                const hasSectionFilters = currentFilters.sections.length > 0;
-                const hasSubcategoryFilters = currentFilters.subcategories.length > 0;
-                
-                // Apply section filters
-                if (hasSectionFilters) {
-                    if (!currentFilters.sections.includes(itemSection)) {
-                        showItem = false;
-                    }
-                }
-                
-                // Apply subcategory filters
-                if (hasSubcategoryFilters) {
-                    if (!currentFilters.subcategories.includes(itemCategory)) {
-                        showItem = false;
-                    }
-                }
-                
-                // Show/hide item
-                item.style.display = showItem ? 'block' : 'none';
-                if (showItem) visibleCount++;
-            });
+// Apply filters function
+function applyFilters() {
+    const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
+    const resultItems = document.querySelectorAll('.result-item');
+    
+    // If no search results, don't filter
+    if (resultItems.length === 0) return;
+    
+    resultItems.forEach(item => {
+        let showItem = true;
+        
+        // Get item data
+        const itemSection = item.dataset.section || 'General';
+        const itemCategory = item.dataset.category || 'General';
+        
+        // Check if we have any filters active
+        const hasSectionFilters = currentFilters.sections.length > 0;
+        const hasSubcategoryFilters = currentFilters.subcategories.length > 0;
+        
+        // If no filters are selected, show all items
+        if (!hasSectionFilters && !hasSubcategoryFilters) {
+            item.style.display = 'block';
+            return;
+        }
+        
+        // Apply section filters (main sections)
+        if (hasSectionFilters) {
+            if (!currentFilters.sections.includes(itemSection)) {
+                showItem = false;
+            }
+        }
+        
+        // Apply subcategory filters
+        if (hasSubcategoryFilters && showItem) {
+            if (!currentFilters.subcategories.includes(itemCategory)) {
+                showItem = false;
+            }
+        }
+        
+        // Show/hide item
+        item.style.display = showItem ? 'block' : 'none';
+    });
+}
             
             // Update results count
             const resultsTitle = document.getElementById('resultsTitle');
@@ -2281,5 +2378,3 @@ function searchItems() {
     </script>
 </body>
 </html>
-
-

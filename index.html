@@ -1913,30 +1913,39 @@
             showToast('Added to cart (' + cartItems.length + ' item' + (cartItems.length > 1 ? 's' : '') + ')', 'success');
         }
 
-        // ===== SHOW ALL ITEMS =====
-        function showAllItems() {
-            const resultsList = document.getElementById('resultsList');
-            const searchResults = document.getElementById('searchResults');
-            const mainContent = document.querySelector('.main-content');
-            
-            resultsList.innerHTML = '';
+// ===== SHOW ALL ITEMS =====
+function showAllItems() {
+    const resultsList = document.getElementById('resultsList');
+    const searchResults = document.getElementById('searchResults');
+    const mainContent = document.querySelector('.main-content');
+    
+    resultsList.innerHTML = '';
 
-            const hasSectionFilters = currentFilters.sections.length > 0;
-            const hasSubcategoryFilters = currentFilters.subcategories.length > 0;
-            
-            allItems.forEach(item => {
-                const itemSection = item.section || 'General';
-                const itemCategory = item.category || 'General';
+    const hasSectionFilters = currentFilters.sections.length > 0;
+    const hasSubcategoryFilters = currentFilters.subcategories.length > 0;
+    
+    // Create a shuffled copy of allItems
+    let displayItems = [...allItems]; // Create a copy
+    
+    // Shuffle the array using Fisher-Yates algorithm
+    for (let i = displayItems.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [displayItems[i], displayItems[j]] = [displayItems[j], displayItems[i]];
+    }
+    
+    displayItems.forEach(item => {
+        const itemSection = item.section || 'General';
+        const itemCategory = item.category || 'General';
 
-                if (hasSectionFilters && !currentFilters.sections.includes(itemSection)) return;
-                if (hasSubcategoryFilters && !currentFilters.subcategories.includes(itemCategory)) return;
+        if (hasSectionFilters && !currentFilters.sections.includes(itemSection)) return;
+        if (hasSubcategoryFilters && !currentFilters.subcategories.includes(itemCategory)) return;
 
-                createResultItem(item, resultsList);
-            });
-            
-            searchResults.style.display = 'block';
-            mainContent.classList.add('hide-main');
-        }
+        createResultItem(item, resultsList);
+    });
+    
+    searchResults.style.display = 'block';
+    mainContent.classList.add('hide-main');
+}
         
         // ===== SEARCH FUNCTION =====
         function searchItems() {
@@ -2241,6 +2250,7 @@ document.addEventListener('keydown', (e) => {
     </script>
 </body>
 </html>
+
 
 
 

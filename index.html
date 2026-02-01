@@ -1269,16 +1269,19 @@
         order: 1;
         flex-shrink: 0;
     }
-    
-    .black-header-search {
+    .hamburger-menu {
         order: 2;
+        margin-right: 10px;
+    }
+    .black-header-search {
+        order: 3;
         flex-grow: 1;
         padding: 0 10px;
         margin-top: 0;
         min-width: 0;
     }
     .about-button {
-    order: 3;
+    order: 4;
     margin-left: 5px;
     margin-right: 5px; /* ADD for mobile */
     flex-shrink: 0;
@@ -1286,7 +1289,7 @@
     
     .contact-button {
         margin-left: 5px;
-        order: 4;
+        order: 5;
         flex-shrink: 0;
     }
     
@@ -1481,20 +1484,23 @@
     order: 1;
     margin-right: 5px; /* Reduced for mobile */
 }
-
+.hamburger-menu {
+        order: 2;
+        margin-right: 5px;
+    }
 .black-header-search {
-    order: 2;
+    order: 3;
     flex-grow: 1;
 }
 
 .about-button {
-    order: 3;
+    order: 4;
     margin-left: 5px;
     margin-right: 5px; /* Consistent spacing */
 }
 
 .contact-button {
-    order: 4;
+    order: 5;
     margin-left: 0; /* No left margin since About has right margin */
 }
     .home-button a,
@@ -2465,4 +2471,5 @@ function applyFilters() {
 </script>
 </body>
 </html>
+
 

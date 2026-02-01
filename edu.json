@@ -2,7 +2,7 @@
   {
     "name": "Digital pH Meter",
     "category": "Chemistry Lab",
-    "image": "/sparrowinstruments/eduimg/edu1.jpg",
+    "image": "/sparrowinstruments/imgedu/edu1.jpg",
     "mrpPrice": "9,800",
     "discount": "12%",
     "bestBuyPrice": "8,624",
@@ -25,7 +25,7 @@
   {
     "name": "Magnetic Stirrer with Hot Plate",
     "category": "Chemistry Lab",
-    "image": "/sparrowinstruments/eduimg/edu2.jpg",
+    "image": "/sparrowinstruments/imgedu/edu2.jpg",
     "mrpPrice": "12,500",
     "discount": "10%",
     "bestBuyPrice": "11,250",

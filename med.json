@@ -2,7 +2,7 @@
   {
     "name": "Binocular Microscope",
     "category": "Biology Lab",
-    "image": "/sparrowinstruments/medimg/med1.jpg",
+    "image": "/sparrowinstruments/imgmed/med1.jpg",
     "mrpPrice": "N.A.",
     "discount": "0",
     "bestBuyPrice": "Guaranteed Competitive",
@@ -28,7 +28,7 @@
   {
     "name": "Digital Microscope Camera",
     "category": "Biology Lab",
-    "image": "/sparrowinstruments/medimg/med2.jpg",
+    "image": "/sparrowinstruments/imgmed/med2.jpg",
     "mrpPrice": "15,000",
     "discount": "10%",
     "bestBuyPrice": "13,500",

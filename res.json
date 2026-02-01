@@ -45,28 +45,8 @@
       "Includes quartz and glass cuvettes, software CD"
     ],
     "keywords": ["spectrophotometer", "uv-vis", "analysis", "scientific", "laboratory", "instrument"]
-  },
-  {
-    "name": "Vortex Mixer",
-    "category": "Scientific Lab",
-    "image": "/sparrowinstruments/sciimg/sci3.jpg",
-    "mrpPrice": "8,500",
-    "discount": "10%",
-    "bestBuyPrice": "7,650",
-    "warranty": "1 Year Manufacturer Warranty",
-    "specifications": [
-      "Speed range: 0-3000 rpm",
-      "Platform: Rubber mat 85mm diameter",
-      "Operation: Continuous or touch mode",
-      "Power: 230V, 50Hz, 25W",
-      "Construction: Metal base, rubber feet"
-    ],
-    "description": [
-      "Laboratory vortex mixer for thorough mixing of liquids",
-      "Touch mode for quick mixing, continuous for longer periods",
-      "Suitable for test tubes, microcentrifuge tubes, and vials",
-      "Compact design with stable operation"
-    ],
-    "keywords": ["vortex mixer", "mixing", "laboratory", "scientific", "shaker", "lab equipment"]
   }
+
+
+  
 ]

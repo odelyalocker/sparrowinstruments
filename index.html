@@ -1014,8 +1014,16 @@
             }
             
             .filter-sidebar {
-                width: 180px;
-                left: -180px;
+            position: fixed;
+            top: 140px;
+            left: -180px;
+            width: 180px;
+            height: calc(82vh - 120px);
+            background: white;
+            z-index: 1001;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+            padding-bottom: 0;
             }
         }
 
@@ -2233,6 +2241,7 @@
     </script>
 </body>
 </html>
+
 
 
 

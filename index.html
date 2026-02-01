@@ -295,35 +295,25 @@
         }
         
         /* Search Results Section */
-        .search-results {
-            position: relative;
-            width: 100%;
-            background: white;
-            z-index: 998;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            display: block !important;
-            border-top: 2px solid #d32f2f;
-            overflow-y: auto;
-            margin-top: 140px;
-            min-height: 200px;
-            opacity: 1; /* Always visible */
-            transition: opacity 0.3s ease; /* Smooth transition */
-        }
-.search-results:empty {
-    opacity: 0; /* Fade out when empty */
-    min-height: 0;
-    border: none;
-    box-shadow: none;
-}
 
+.search-results {
+    position: relative;
+    width: 100%;
+    background: white;
+    z-index: 998;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: block !important;
+    border-top: 2px solid #d32f2f;
+    overflow-y: auto;
+    margin-top: 140px;
+    min-height: 50px; /* Smaller minimum height */
+}
+        
     .results-container {
     padding: 10px 20px 20px 20px;
     width: 95%;
     margin: 0 auto;
     transition: all 0.3s ease;
-}
-.search-results:empty .results-container {
-    padding: 0;
 }
  .no-results {
     text-align: center;
@@ -1526,14 +1516,21 @@
     <!-- Overlay for closing sidebar -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
     
-    <!-- Search Results Section -->
-    <div class="search-results" id="searchResults">
+<!-- Search Results Section - CHANGED: Always visible from start -->
+<div class="search-results" id="searchResults" style="display: block;">
     <div class="results-container">
         <div class="results-list" id="resultsList">
-            <!-- Results will appear here -->
+            <div style="text-align:center; padding:20px; color:#666;">
+                Loading items...
+            </div>
         </div>
     </div>
 </div>
+    
+<!-- Main Content Area - CHANGED: Hidden by default -->
+<main class="main-content" style="display: none;">
+    <!-- Ready for your content -->
+</main>
     
     <!-- Main Content Area -->
     <main class="main-content">
@@ -2019,104 +2016,108 @@
             }, 1000);
         }
         
-        // ===== SHOW ALL ITEMS =====
-        function showAllItems() {
-            const resultsList = document.getElementById('resultsList');
-            
-            // Clear results
-            resultsList.innerHTML = '';
-            
-            // If we have items, show them
-            if (allItems.length > 0) {
-                allItems.forEach(item => {
-                    createResultItem(item, resultsList);
-                });
-            }
-            
-            // Always hide main content when showing results
-            document.querySelector('.main-content').style.display = 'none';
+// ===== SHOW ALL ITEMS =====
+function showAllItems() {
+    const resultsList = document.getElementById('resultsList');
+    
+    // Clear results
+    resultsList.innerHTML = '';
+    
+    // If we have items, show them
+    if (allItems.length > 0) {
+        allItems.forEach(item => {
+            createResultItem(item, resultsList);
+        });
+    } else {
+        // Show loading/placeholder while items load
+        resultsList.innerHTML = '<div style="text-align:center; padding:20px; color:#666;">Loading items...</div>';
+    }
+    
+    // Always hide main content when showing results
+    document.querySelector('.main-content').style.display = 'none';
+}
+        
+// ===== SEARCH FUNCTION =====
+function searchItems() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+        const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
+        const resultsList = document.getElementById('resultsList');
+        const mainContent = document.querySelector('.main-content');
+        
+        // Hide main content immediately
+        mainContent.style.display = 'none';
+        
+        // If search box is empty, show all items
+        if (searchTerm === '') {
+            showAllItems();
+            return;
         }
         
-        // ===== SEARCH FUNCTION =====
-        function searchItems() {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
-                const resultsList = document.getElementById('resultsList');
-                const mainContent = document.querySelector('.main-content');
+        // Get active filters
+        const hasActiveFilters = currentFilters.sections.length > 0 || currentFilters.subcategories.length > 0;
+        
+        // Filter items based on search term AND active filters
+        const matchedItems = allItems
+            .map(item => {
+                // Calculate relevance score
+                let score = 0;
+                const name = item.name.toLowerCase();
                 
-                // If search box is empty, show all items
-                if (searchTerm === '') {
-                    showAllItems();
-                    return;
-                }
+                if (name === searchTerm) score += 100;
+                if (name.startsWith(searchTerm)) score += 50;
+                if (name.includes(searchTerm)) score += 30;
                 
-                // Get active filters
-                const hasActiveFilters = currentFilters.sections.length > 0 || currentFilters.subcategories.length > 0;
+                const searchWords = searchTerm.split(/[\s\-_.,;]+/).filter(w => w.length > 0);
+                const nameWords = name.split(/[\s\-_.,;]+/).filter(w => w.length > 0);
                 
-                // Filter items based on search term AND active filters
-                const matchedItems = allItems
-                    .map(item => {
-                        // Calculate relevance score
-                        let score = 0;
-                        const name = item.name.toLowerCase();
-                        
-                        if (name === searchTerm) score += 100;
-                        if (name.startsWith(searchTerm)) score += 50;
-                        if (name.includes(searchTerm)) score += 30;
-                        
-                        const searchWords = searchTerm.split(/[\s\-_.,;]+/).filter(w => w.length > 0);
-                        const nameWords = name.split(/[\s\-_.,;]+/).filter(w => w.length > 0);
-                        
-                        searchWords.forEach(sw => {
-                            nameWords.forEach(nw => {
-                                if (nw === sw) score += 40;
-                                else if (nw.includes(sw) && sw.length >= 3) score += 20;
-                            });
-                        });
-                        
-                        return { ...item, relevanceScore: score };
-                    })
-                    .filter(item => {
-                        // Apply section/subcategory filters if any are active
-                        if (hasActiveFilters) {
-                            const itemSection = item.section || 'General';
-                            const itemCategory = item.category || 'General';
-                            
-                            // Check section filters
-                            if (currentFilters.sections.length > 0) {
-                                if (!currentFilters.sections.includes(itemSection)) {
-                                    return false;
-                                }
-                            }
-                            
-                            // Check subcategory filters
-                            if (currentFilters.subcategories.length > 0) {
-                                if (!currentFilters.subcategories.includes(itemCategory)) {
-                                    return false;
-                                }
-                            }
-                        }
-                        
-                        // Only show items with positive relevance score
-                        return item.relevanceScore > 0;
-                    })
-                    .sort((a, b) => b.relevanceScore - a.relevanceScore);
-                
-                // Render Results
-                resultsList.innerHTML = ''; // Clear first
-                
-                if (matchedItems.length > 0) {
-                    matchedItems.forEach(item => {
-                        createResultItem(item, resultsList);
+                searchWords.forEach(sw => {
+                    nameWords.forEach(nw => {
+                        if (nw === sw) score += 40;
+                        else if (nw.includes(sw) && sw.length >= 3) score += 20;
                     });
-                    mainContent.style.display = 'none';
-                } else {
-                    resultsList.innerHTML = '<div class="no-results">Try different keywords</div>';
-                    mainContent.style.display = 'none';
+                });
+                
+                return { ...item, relevanceScore: score };
+            })
+            .filter(item => {
+                // Apply section/subcategory filters if any are active
+                if (hasActiveFilters) {
+                    const itemSection = item.section || 'General';
+                    const itemCategory = item.category || 'General';
+                    
+                    // Check section filters
+                    if (currentFilters.sections.length > 0) {
+                        if (!currentFilters.sections.includes(itemSection)) {
+                            return false;
+                        }
+                    }
+                    
+                    // Check subcategory filters
+                    if (currentFilters.subcategories.length > 0) {
+                        if (!currentFilters.subcategories.includes(itemCategory)) {
+                            return false;
+                        }
+                    }
                 }
-            }, 300);
+                
+                // Only show items with positive relevance score
+                return item.relevanceScore > 0;
+            })
+            .sort((a, b) => b.relevanceScore - a.relevanceScore);
+        
+        // Render Results
+        resultsList.innerHTML = ''; // Clear first
+        
+        if (matchedItems.length > 0) {
+            matchedItems.forEach(item => {
+                createResultItem(item, resultsList);
+            });
+        } else {
+            resultsList.innerHTML = '<div class="no-results" style="padding: 30px; text-align: center; color: #666;">No items found. Try different keywords.</div>';
         }
+    }, 300);
+}
         
         // ===== SETUP ZOOM FUNCTIONALITY =====
         function setupZoom(resultItem) {
@@ -2288,4 +2289,5 @@
     
 </body>
 </html>
+
 

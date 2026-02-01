@@ -49,31 +49,7 @@
       "Easy to install and use"
     ],
     "keywords": ["camera", "digital", "microscope", "imaging", "5MP", "biology lab"]
-  },
-
-  {
-    "name": "Isoprofile",
-    "category": "Biology Lab",
-    "image": "/sparrowinstruments/bioimg/bio2.jpg",
-    "mrpPrice": "65,000",
-    "discount": "12%",
-    "bestBuyPrice": "57,200",
-    "warranty": "2 Years Manufacturer Warranty",
-    "specifications": [
-      "Capacity: 50 Liters",
-      "Temperature Range: 105°C to 135°C",
-      "Pressure: 0.22 MPa",
-      "Timer: 1-120 minutes digital",
-      "Chamber: Stainless Steel 304",
-      "Power: 220V, 50Hz, 3000W"
-    ],
-    "description": [
-      "Vertical autoclave for laboratory sterilization",
-      "Digital microprocessor control with memory",
-      "Automatic drying cycle after sterilization",
-      "Safety features: pressure lock, over-temperature protection",
-      "Ideal for glassware, media, instruments sterilization"
-    ],
-    "keywords": ["autoclave", "sterilizer", "sterilization", "lab equipment", "biology", "microbiology"]
   }
+
+  
 ]

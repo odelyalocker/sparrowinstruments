@@ -2,7 +2,7 @@
   {
     "name": "Digital Hematology Analyzer",
     "category": "Medical Lab",
-    "image": "/sparrowinstruments/medimg/med1.jpg",
+    "image": "/sparrowinstruments/indimg/ind1.jpg",
     "mrpPrice": "2,85,000",
     "discount": "18%",
     "bestBuyPrice": "2,33,700",
@@ -26,7 +26,7 @@
   {
     "name": "Clinical Centrifuge",
     "category": "Medical Lab",
-    "image": "/sparrowinstruments/medimg/med2.jpg",
+    "image": "/sparrowinstruments/indimg/ind2.jpg",
     "mrpPrice": "32,000",
     "discount": "12%",
     "bestBuyPrice": "28,160",

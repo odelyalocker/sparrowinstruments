@@ -46,29 +46,7 @@
       "Includes rotor, buckets, and tube holders"
     ],
     "keywords": ["centrifuge", "clinical", "medical", "serum separation", "laboratory", "diagnostic"]
-  },
-  {
-    "name": "Digital Colorimeter",
-    "category": "Medical Lab",
-    "image": "/sparrowinstruments/medimg/med3.jpg",
-    "mrpPrice": "18,500",
-    "discount": "15%",
-    "bestBuyPrice": "15,725",
-    "warranty": "1 Year Manufacturer Warranty",
-    "specifications": [
-      "Light source: LED with 6 filters",
-      "Filters: 430, 520, 540, 580, 610, 660 nm",
-      "Cuvette: 10mm path length, glass",
-      "Display: 3½ digit LCD",
-      "Measurement modes: Transmittance and Absorbance"
-    ],
-    "description": [
-      "Digital colorimeter for biochemical analysis",
-      "For glucose, cholesterol, urea, bilirubin, and other tests",
-      "Stable readings with low drift",
-      "Includes cuvette set, filters, and operation manual",
-      "Ideal for small labs and nursing homes"
-    ],
-    "keywords": ["colorimeter", "digital", "medical", "biochemistry", "diagnostic", "lab equipment"]
   }
+
+  
 ]

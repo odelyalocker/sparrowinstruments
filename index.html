@@ -285,7 +285,7 @@
             z-index: 998;
             display: none;
             border-top: 2px solid #d32f2f;
-            overflow-y: auto;
+            overflow: visible;
             margin-top: 140px;
             min-height: 200px;
         }
@@ -330,7 +330,7 @@
             background: linear-gradient(135deg, #d32f2f, #b71c1c);
             color: white;
             text-align: center;
-            padding: 7px;
+            padding: 10px 15px 7px 15px;
             margin-top: auto;
         }
         
@@ -338,11 +338,33 @@
             max-width: 800px;
             margin: 0 auto;
         }
-        
-        .footer-title {
-            font-weight: bold;
-            font-size: 15px;
-            margin-bottom: 4px;
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 6px 10px;
+            margin-bottom: 6px;
+        }
+
+        .footer-links a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: opacity 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.75;
+            text-decoration: underline;
+        }
+
+        .footer-sep {
+            color: rgba(255,255,255,0.55);
+            font-size: 13px;
+            user-select: none;
         }
         
         .copyright {
@@ -360,6 +382,21 @@
             }
             .mobile-text {
                 display: block;
+            }
+            .footer-links {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 4px 0;
+                max-width: 200px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 6px;
+            }
+            .footer-links a {
+                font-size: 13px;
+            }
+            .footer-sep {
+                display: none;
             }
         }
         
@@ -1173,15 +1210,14 @@
             }
             
             .filter-sidebar {
-                height: calc(50vh - 120px);
+                top: 130px;
+                height: calc(100vh - 130px);
                 width: 180px;
             }
-            
+
             .checkbox-item {
                 font-size: 17px;
             }
-
-            /* On mobile, button row can wrap if needed */
             .button-container {
                 flex-wrap: wrap;
             }
@@ -1256,7 +1292,8 @@
             }
             
             .filter-sidebar {
-                height: calc(50vh - 120px);
+                top: 120px;
+                height: calc(100vh - 120px);
                 width: 180px;
             }
             
@@ -1331,7 +1368,8 @@
             }
             
             .filter-sidebar {
-                height: calc(60vh - 120px);
+                top: 110px;
+                height: calc(100vh - 110px);
                 width: 180px;
             }
             
@@ -1502,6 +1540,15 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
+            <div class="footer-links">
+                <a href="/sparrowinstruments/project.html">Project</a>
+                <span class="footer-sep">•</span>
+                <a href="/sparrowinstruments/policy.html">Policy</a>
+                <span class="footer-sep">•</span>
+                <a href="/sparrowinstruments/about.html">About</a>
+                <span class="footer-sep">•</span>
+                <a href="/sparrowinstruments/sparrowqa.html">FAQs</a>
+            </div>
             <div class="copyright">
                 <span class="desktop-text">Sparrow Instruments is in service for the last 50 years • © 2023 All rights reserved.</span>
                 <span class="mobile-text">Sparrow Instruments: 50 years of service<br>© 2023 All rights reserved.</span>

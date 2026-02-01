@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanjay Paras Website</title>
+    <title>Cart Sparrow Instruments</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -26,7 +26,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            background: #FFFFFF;
             color: white;
             padding: 8px 20px;
             display: flex;
@@ -36,14 +36,14 @@
             min-height: 70px;
         }
         
-        /* Logo container in top-left corner - REDUCED SIZE BY 10px */
+        /* Logo container in top-left corner */
         .logo-container {
             margin-right: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 55px; /* Reduced from 65px */
-            width: 55px; /* Reduced from 65px */
+            height: 55px;
+            width: 55px;
             overflow: hidden;
             border-radius: 50%;
             background: transparent;
@@ -67,14 +67,14 @@
             justify-content: center;
             align-items: center;
             padding: 0 20px;
-            min-width: 0; /* Allows text to shrink properly */
+            min-width: 0;
         }
         
         /* Center tagline */
         .center-tagline {
-            font-size: 18px;
-            color: #FFFFFF;
-            font-weight: 500;
+            font-size: 24px;
+            color: #FF0000;
+            font-weight: 700;
             letter-spacing: 0.5px;
             text-align: center;
             line-height: 1.3;
@@ -82,8 +82,8 @@
         
         /* Second tagline */
         .trusted-tagline {
-            font-size: 18px;
-            color: #FFFFFF;
+            font-size: 14px;
+            color: #000000;
             font-weight: 500;
             letter-spacing: 0.5px;
             text-align: center;
@@ -91,29 +91,31 @@
             margin-top: 5px;
         }
         
-        /* Cart Image Container - REDUCED SIZE BY 10px */
-        .cart-image-container {
+        /* Quote Image Container */
+        .quote-image-container {
             margin-left: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 50px; /* Reduced from 60px */
-            width: 50px; /* Reduced from 60px */
+            height: 55px;
+            width: 55px;
             overflow: hidden;
             border-radius: 50%;
             background: transparent;
             flex-shrink: 0;
+            position: relative;
         }
 
-        .cart-image-container a {
+        .quote-image-container a {
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100%;
             width: 100%;
+            position: relative;
         }
 
-        .cart-image-container img {
+        .quote-image-container img {
             height: 100%;
             width: 100%;
             object-fit: contain;
@@ -124,17 +126,12 @@
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
 
-        .cart-image-container img:hover {
+        .quote-image-container img:hover {
             transform: scale(1.08);
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) brightness(1.05);
         }
         
-        /* Adjust main content position */
-        .main-content {
-            margin-top: 140px;
-        }
-        
-        /* Black Header Section - MODIFIED */
+        /* Black Header Section */
         .black-header {
             position: fixed;
             left: 0;
@@ -144,18 +141,17 @@
             padding: 10px 20px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             z-index: 999;
             min-height: 70px;
             top: 70px;
         }
         
- /* Home button on left */
-.home-button {
-    margin-right: 10px; /* Reduced from 20px */
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    }
+        /* Home button on left */
+        .home-button {
+            display: flex;
+            align-items: center;
+        }
         
         .home-button a {
             color: #FFFFFF;
@@ -170,98 +166,44 @@
             color: #FFFFFF;
         }
 
-        /* Icon styles for Home and Contact */
-.home-button a i,
-.contact-button a i,
-.about-button a i,
-.hamburger-menu i {
-    color: #FFFFFF;
-    font-size: 26px;
-    transition: all 0.3s ease;
-    display: block;
-}
-
-.home-button a:hover i,
-.hamburger-menu:hover i,
-.about-button a:hover i,
-.contact-button a:hover i {
-color: #FFFFFF;
-transform: scale(1.1); /* Slight zoom on hover */
-filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
-}
-        
-/* Hamburger menu styling - ADD THIS */
-.hamburger-menu i {
-    color: #FFFFFF;
-    transition: all 0.3s ease;
-    margin-left: 15px; /* Space between home and hamburger */
-}
-
-/* Hover effect for hamburger menu - ADD THIS */
-.hamburger-menu:hover i {
-    color: #FFFFFF;
-    transform: scale(1.1);
-    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
-}
-
-/* Adjust button containers for icons */
-.home-button,
-.contact-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-        
-        /* Search box in center - NEW */
-        .black-header-search {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0 20px;
-        }
-        
-        .search-container {
-            width: 50%;
-        }
-        
-        .search-box {
-            width: 100%;
-            padding: 10px 20px;
-            font-size: 18px;
-            border: 2px solid #444;
-            border-radius: 25px;
-            outline: none;
+        /* Icon styles */
+        .home-button a i,
+        .cart.html a i {
+            color: #FFFFFF;
+            font-size: 26px;
             transition: all 0.3s ease;
-            background-color: #fff;
-            color: #333;
+            display: block;
+        }
+
+        .home-button a:hover i,
+        .cart.html a:hover i {
+            color: #FFFFFF;
+            transform: scale(1.1);
+            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+        }
+
+        /* Center title in black header */
+        .black-header-center {
+            flex-grow: 1;
+            text-align: center;
         }
         
-        .search-box::placeholder {
-            color: #888;
-            font-style: italic;
+        .center-title {
+            font-size: 22px;
+            color: #FFFFFF;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
         }
         
-        .search-box:focus {
-            border-color: #d32f2f;
-            background-color: #fff;
-            box-shadow: 0 0 8px rgba(211, 47, 47, 0.5);
+        /* Cart button on right */
+        .cart.html {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        .search-box:hover {
-            border-color: #999;
-            background-color: #fff;
-        }
-        
-        /* Contact button on right */
-        .contact-button {
-    margin-left: 10px; /* Reduced from 20px to 10px */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-        }
-        
-        .contact-button a {
+        .cart.html a {
             color: #FFFFFF;
             text-decoration: none;
             font-size: 18px;
@@ -270,140 +212,56 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             white-space: nowrap;
         }
         
-        .contact-button a:hover {
+        .cart.html a:hover {
             color: #FFFFFF;
         }
-/* About button */
-.about-button {
-    margin-left: 10px;
-    margin-right: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-/* About icon styling */
-
-.about-button a:hover i {
-    color: #FFFFFF;
-    font-size: 26px; 
-    transform: scale(1.1);
-    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
-}
-        /* Search Results Section - UPDATED FOR DESKTOP FOOTER FIX */
-        .search-results {
-            position: relative; /* CHANGED: from absolute to relative */
+        /* Items Display Section */
+        .items-section {
+            position: relative;
             width: 100%;
             background: white;
             z-index: 998;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            display: none;
             border-top: 2px solid #d32f2f;
             overflow-y: auto;
-            margin-top: 140px; /* ADDED: Push below both headers */
-            min-height: 200px; /* ADDED: Minimum height for single item */
+            margin-top: 140px;
+            min-height: calc(100vh - 190px);
         }
 
-        .results-container {
-            padding: 20px;
+        .items-container {
+            padding: 30px;
             width: 95%;
             margin: 0 auto;
-        }
-
-        /* Ensure results container doesn't add extra padding */
-        .search-results > .results-container {
-            width: 100%;
             max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px 30px;
+            min-height: 100%;
         }
         
-        .results-header {
+        .empty-message {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .results-header h3 {
-            color: #333;
-            font-size: 18px;
-        }
-        
-        .close-results {
-            background: #d32f2f;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        
-        .results-list {
-            display: block;
-            gap: 15px;
-        }
-        
-        .no-results {
+            justify-content: center;
             text-align: center;
-            padding: 30px;
-            color: #666;
-            font-style: italic;
+            height: calc(100vh - 300px);
+            padding: 40px 20px;
         }
         
-        /* Main Content Area */
-        .main-content {
-            flex: 1;
-            margin-bottom: 10px;
-            background-color: white;
-            padding: 30px 20px;
-            text-align: center;
-            color: #555;
-            margin-top: 140px; /* Keep this for when no search results */
-        }
-        
-
-        /* Footer Styles */
-        footer {
-            background: linear-gradient(135deg, #d32f2f, #b71c1c);
-            color: white;
-            text-align: center;
-            padding: 7px;
-            margin-top: auto;
-        }
-        
-        .footer-content {
-            max-width: 800px;
+        .empty-text {
+            color: #1565c0;
+            font-size: 22px;
+            font-weight: 500;
+            line-height: 1.5;
+            max-width: 600px;
             margin: 0 auto;
         }
         
-        .footer-title {
-            font-weight: bold;
-            font-size: 15px;
-            margin-bottom: 4px;
+        .items-list {
+            display: none;
+            gap: 20px;
         }
         
-        .copyright {
-            font-size: 14px;
-            color: #FFFFFF;
-        }
-/* Footer text responsiveness */
-.mobile-text {
-    display: none;
-}
-
-@media (max-width: 768px) {
-    .desktop-text {
-        display: none;
-    }
-    .mobile-text {
-        display: block;
-    }
-}
-        /* ===== SEARCH RESULTS LAYOUT ===== */
+        /* Result item styling - MATCHING index.html STYLE */
         .result-item {
             background: white;
             padding: 25px;
@@ -420,7 +278,7 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             align-items: start;
         }
 
-        /* Left Column: Image + Price */
+        /* Left Column: Image + Price - MATCHING index.html */
         .result-left {
             grid-column: 1;
             display: flex;
@@ -432,12 +290,13 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             margin-bottom: 15px;
             position: relative;
             overflow: visible;
-            cursor: crosshair;
             border: 1px solid #ddd;
             border-radius: 8px;
             background: #fff;
-            cursor: crosshair;
             height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .result-image img {
@@ -493,25 +352,13 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             font-size: 17px;
             font-weight: bold;
         }
-
-        /* Search Suggestions */
-        .search-suggestions {
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .search-suggestions div:last-child {
-            border-bottom: none;
-        }
-
-        .search-suggestions div:hover {
-            background-color: #f0f0f0;
-        }
         
         /* Center Column: Name + Specifications + Warranty */
         .result-center {
             grid-column: 2;
             min-width: 0;
+            display: flex;
+            flex-direction: column;
         }
 
         .item-name {
@@ -523,7 +370,8 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         }
 
         .specs-section {
-            margin-bottom: 0; /* Changed from 20px to 0 */
+            margin-bottom: 20px;
+            flex-grow: 1;
         }
 
         .specs-section strong {
@@ -542,16 +390,71 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             margin-bottom: 6px;
             line-height: 1.4;
         }
-
-        /* Right Column: Description */
+        
+        /* Quantity Selector - Green Section */
+        .quantity-section {
+            margin-top: auto;
+            padding: 15px;
+            background: #28a745; /* Green background */
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .quantity-label {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-btn {
+            background: white;
+            color: #28a745;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .quantity-btn:hover {
+            background: #f8f9fa;
+            transform: scale(1.1);
+        }
+        
+        .quantity-value {
+            font-size: 18px;
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        /* Right Column: Description + Remove Button */
         .result-right {
             grid-column: 3;
             min-width: 0;
-            margin-top: 35px; /* Added to align with specifications */
+            margin-top: 35px;
+            display: flex;
+            flex-direction: column;
         }
 
         .description-section {
             margin-top: 0;
+            flex-grow: 1;
+            margin-bottom: 20px;
         }
 
         .description-section strong {
@@ -573,445 +476,245 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             line-height: 1.5;
             word-break: break-word;
         }
-
-        /* Hide category */
-        .category {
-            display: none !important;
+        
+        /* Remove button - moved to third column */
+        .remove-btn-container {
+            margin-top: auto;
         }
         
-        .description-section ul {
-            margin: 5px 0 5px 20px;
-            color: #555;
-            word-wrap: break-word; /* Break long words */
-            overflow-wrap: break-word; /* Modern property */
-        }
-
-        .description-section li {
-            margin-bottom: 8px;
-            line-height: 1.5;
-            word-break: break-word; /* Break words if needed */
-        }
-
-        /* ===== WORKING HOVER ZOOM ===== */
-        /* Zoom container */
-        .zoom-container {
-            position: absolute;
-            left: 102%;
-            top: 0;
-            width: 450px;
-            height: 350px;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            overflow: hidden;
-            display: none;
-            pointer-events: none;
-        }
-        
-        .zoomed-image {
-            position: absolute;
-            max-width: none;
-            transform-origin: 0 0;
-            pointer-events: none;
-            border-radius: 4px;
-        }
-        
-        /* Zoom lens */
-        .zoom-lens {
-            position: absolute;
-            border: 2px solid #d32f2f;
-            background: rgba(211, 47, 47, 0.15);
-            cursor: none;
-            display: none;
-            pointer-events: none;
-            z-index: 999;
-            width: 150px;
-            height: 150px;
-            border-radius: 4px;
-        }
-        
-        /* Show hint text */
-        .result-image::after {
-            content: "🖱️ Hover to zoom";
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
+        .remove-btn {
+            background: #dc3545;
             color: white;
-            padding: 5px;
-            font-size: 12px;
-            text-align: center;
-            border-radius: 0 0 8px 8px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 1;
-        }
-        
-        .result-image:hover::after {
-            opacity: 0.8;
-        }
-        
-        /* Mobile zoom overlay */
-        .mobile-zoom-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1999;
-            display: none;
-            justify-content: center;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .remove-btn:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* NEW: Confirm Quote Section */
+        .confirm-quote-section {
+            display: none;
+            margin-top: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px solid #000000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .confirm-quote-section.visible {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .confirm-button-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .confirm-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 8px;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .confirm-btn:hover {
+            background: #218838;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(40, 167, 69, 0.4);
+        }
+        
+        .confirm-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .contact-form-section {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #000000;
+        }
+        
+        .contact-form-section.visible {
+            display: block;
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        .contact-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            align-items: end;
+        }
+        
+        .form-group {
+            display: flex;
             flex-direction: column;
         }
         
-        .mobile-zoom-image {
-            max-width: 95%;
-            max-height: 70vh;
-            object-fit: contain;
-            border-radius: 8px;
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
         }
         
-        .mobile-zoom-hint {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            color: white;
-            font-size: 14px;
-            z-index: 2001;
-            background: rgba(0,0,0,0.7);
-            padding: 10px;
-            margin: 20px;
-            border-radius: 10px;
+        .form-group input {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
         }
-/* ===== FILTER SIDEBAR ===== */
-.filter-sidebar {
-    position: fixed;
-    top: 140px; /* Below both headers */
-    left: -350px; /* Hidden off-screen */
-    width: 320px;
-    height: calc(100vh - 140px);
-    background: white;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1001;
-    transition: left 0.3s ease;
-    overflow-y: auto;
-}
-
-.filter-sidebar.show {
-    left: 0; /* Slide in */
-}
-
-.filter-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background: #f8f9fa;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.filter-header h3 {
-    color: #333;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.filter-header h3 i {
-    color: #d32f2f;
-}
-
-.close-filter {
-    background: none;
-    border: none;
-    font-size: 20px;
-    color: #666;
-    cursor: pointer;
-    padding: 5px;
-    transition: color 0.3s;
-}
-
-.close-filter:hover {
-    color: #d32f2f;
-}
-
-.filter-content {
-    padding: 20px;
-}
-
-.filter-section {
-    margin-bottom: 25px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
-}
-
-.filter-section:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-}
-
-.filter-section h4 {
-    color: #333;
-    font-size: 16px;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.filter-section h4 i {
-    color: #d32f2f;
-}
-
-/* Clear Filter Button */
-.clear-filter-btn {
-    width: 100%;
-    padding: 12px;
-    background: #f8f9fa;
-    border: 2px solid #ddd;
-    border-radius: 6px;
-    color: #666;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.clear-filter-btn:hover {
-    background: #e9ecef;
-    border-color: #ccc;
-    color: #333;
-}
-
-/* Checkbox Styles */
-.checkbox-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.checkbox-item {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    color: #555;
-    font-size: 15px;
-    position: relative;
-    padding-left: 30px;
-}
-
-.checkbox-item input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-}
-
-.checkmark {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 20px;
-    width: 20px;
-    background-color: #fff;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    transition: all 0.3s;
-}
-
-.checkbox-item:hover .checkmark {
-    border-color: #999;
-}
-
-.checkbox-item input:checked ~ .checkmark {
-    background-color: #d32f2f;
-    border-color: #d32f2f;
-}
-
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-.checkbox-item input:checked ~ .checkmark:after {
-    display: block;
-}
-
-.checkbox-item .checkmark:after {
-    left: 6px;
-    top: 2px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-}
-
-/* Price Inputs */
-.price-inputs {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.price-input {
-    flex: 1;
-}
-
-.price-input label {
-    display: block;
-    margin-bottom: 5px;
-    color: #666;
-    font-size: 14px;
-}
-
-.price-input input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.price-input input:focus {
-    outline: none;
-    border-color: #d32f2f;
-}
-
-/* Price Slider */
-.price-slider {
-    position: relative;
-    height: 40px;
-    margin: 30px 0;
-}
-
-.slider-track {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: #ddd;
-    border-radius: 5px;
-    transform: translateY(-50%);
-}
-
-.range-min,
-.range-max {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    height: 0;
-    -webkit-appearance: none;
-    background: none;
-    pointer-events: none;
-    transform: translateY(-50%);
-}
-
-.range-min::-webkit-slider-thumb,
-.range-max::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background: #d32f2f;
-    cursor: pointer;
-    pointer-events: all;
-    border: 2px solid white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.range-min::-moz-range-thumb,
-.range-max::-moz-range-thumb {
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background: #d32f2f;
-    cursor: pointer;
-    pointer-events: all;
-    border: 2px solid white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.price-display {
-    text-align: center;
-    padding: 10px;
-    background: #f8f9fa;
-    border-radius: 6px;
-    color: #333;
-    font-weight: 500;
-}
-
-/* Apply Filter Button */
-.apply-filter-btn {
-    width: 100%;
-    padding: 14px;
-    background: #d32f2f;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    font-weight: 500;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.apply-filter-btn:hover {
-    background: #b71c1c;
-}
-
-/* Sidebar Overlay */
-.sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    display: none;
-}
-
-.sidebar-overlay.show {
-    display: block;
-}
-
-/* Mobile adjustments for filter sidebar */
-@media (max-width: 768px) {
-    .filter-sidebar {
-        top: 130px; /* Adjusted for mobile header height */
-        height: calc(100vh - 130px);
-        width: 280px;
-        left: -280px;
-    }
-}
-        /* ===== RESPONSIVE DESIGN ===== */
-        @media (max-width: 1024px) {
-            .search-container {
-                width: 70%; /* Slightly more on tablet */
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #28a745;
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+        }
+        
+        .submit-btn-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .submit-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .submit-btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+        }
+        
+        .submit-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .success-message {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: #d4edda;
+            border: 2px solid #000000;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .success-message.visible {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .success-message p {
+            color: #000;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .success-message .contact-info {
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1.2px solid #28a745;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            color: white;
+            text-align: center;
+            padding: 7px;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .copyright {
+            font-size: 14px;
+            color: #FFFFFF;
+        }
+        
+        /* Footer text responsiveness */
+        .mobile-text {
+            display: none;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-20px);
             }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
             .result-content {
-                grid-template-columns: 1fr 1fr; /* Two columns on tablet */
+                grid-template-columns: 1fr 1fr;
                 gap: 20px;
             }
             
             .result-left {
-                grid-column: 1 / span 2; /* Span full width */
+                grid-column: 1 / span 2;
                 display: flex;
                 gap: 20px;
             }
@@ -1031,493 +734,292 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             
             .result-right {
                 grid-column: 2;
+                margin-top: 0;
             }
             
-            .zoom-container {
-                width: 300px;
-                height: 250px;
-                left: 105%;
+            .quantity-section {
+                margin-top: 20px;
             }
             
-            .zoom-lens {
-                width: 100px;
-                height: 100px;
+            .contact-form {
+                grid-template-columns: 1fr;
             }
         }
 
-        /* MOBILE LAYOUT - FIXED & REDUCED HEIGHT */
-@media (max-width: 768px) {
-    /* FIXED HEADER - Now stays fixed at top */
-    header {
-        position: fixed; /* ADDED: Make header fixed */
-        top: 0; /* ADDED */
-        left: 0; /* ADDED */
-        width: 100%; /* ADDED */
-        padding: 6px 15px;
-        min-height: 65px;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: space-between;
-        z-index: 1000; /* Ensure it's above other elements */
-        background: linear-gradient(135deg, #d32f2f, #b71c1c); /* Ensure background is set */
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .desktop-text {
+                display: none;
+            }
+            .mobile-text {
+                display: block;
+            }
+            
+            header {
+                padding: 6px 15px;
+                min-height: 65px;
+            }
+            
+            .logo-container {
+                margin-right: 15px;
+                height: 40px;
+                width: 40px;
+            }
+            
+            .quote-image-container {
+                margin-left: 15px;
+                height: 40px;
+                width: 40px;
+            }
+            
+            .header-center {
+                width: calc(100% - 110px);
+                padding: 0 10px;
+            }
+            
+            .center-tagline {
+                font-size: 20px;
+                line-height: 1.2;
+                margin-bottom: 2px;
+            }
+            
+            .trusted-tagline {
+                font-size: 12px;
+                margin-top: 2px;
+            }
+            
+            .black-header {
+                top: 65px;
+                padding: 10px 15px;
+                min-height: 65px;
+            }
+            
+            .center-title {
+                font-size: 18px;
+            }
+            
+            .home-button a i,
+            .cart.html a i {
+                font-size: 22px;
+            }
+            
+            /* Items Section Mobile */
+            .items-section {
+                margin-top: 130px;
+                min-height: calc(100vh - 180px);
+            }
+            
+            .result-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .result-left {
+                grid-column: 1;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .result-image {
+                flex: 0 0 auto;
+                text-align: center;
+                height: 200px;
+            }
+            
+            .result-image img {
+                width: 100%;
+                height: 100%;
+                margin: 0 auto;
+            }
+            
+            .result-center,
+            .result-right {
+                grid-column: 1;
+                margin-top: 0;
+            }
+            
+            .remove-btn {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+            
+            .empty-message {
+                height: calc(100vh - 280px);
+                padding: 30px 15px;
+            }
+            
+            .empty-text {
+                font-size: 18px;
+            }
+            
+            .quantity-section {
+                margin-top: 20px;
+            }
+            
+            .confirm-quote-section {
+                padding: 20px;
+                margin-top: 30px;
+            }
+            
+            .confirm-btn {
+                padding: 15px 30px;
+                font-size: 20px;
+            }
+            
+            .contact-form-section {
+                padding: 20px;
+            }
+            
+            .success-message {
+                padding: 20px;
+            }
+            .success-message .contact-info {
+                font-size: 20px;
     }
-    
-    /* Keep the original structure but adjust sizes */
-    .logo-container {
-        margin-right: 15px;
-        height: 40px;
-        width: 40px;
-        order: 1;
-        flex-shrink: 0;
-        position: static;
-        left: auto;
-        top: auto;
-        transform: none;
-    }
-    
-    /* Cart container */
-    .cart-image-container {
-        margin-left: 15px;
-        height: 40px;
-        width: 40px;
-        order: 3;
-        flex-shrink: 0;
-        position: static;
-        right: auto;
-        top: auto;
-        transform: none;
-    }
-    
-    /* Center content takes available space */
-    .header-center {
-        width: calc(100% - 110px);
-        order: 2;
-        padding: 0 10px;
-        margin: 0;
-        min-height: auto;
-        flex-grow: 1;
-        text-align: center;
-    }
-    
-    .center-tagline {
-        font-size: 13px;
-        color: #FFFFFF;
-        line-height: 1.2;
-        margin-bottom: 2px;
-        white-space: normal;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-    }
-    
-    .trusted-tagline {
-        font-size: 12px;
-        margin-top: 2px;
-        white-space: normal;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-    }
-    
-    /* Black Header Section - FIXED POSITIONING */
-    .black-header {
-        position: fixed; /* CHANGED: Already fixed, but ensuring */
-        left: 0;
-        top: 65px; /* Position below red header */
-        width: 100%;
-        background-color: #000000;
-        color: white;
-        padding: 10px 15px;
-        display: flex;
-        align-items: center;
-        z-index: 999;
-        min-height: 65px;
-        box-sizing: border-box; /* Ensure padding included in height */
-        justify-content: space-between;
-    }
-    
-    /* Home and Contact buttons - FIXED */
-    .home-button {
-        margin-right: 10px;
-        order: 1;
-        flex-shrink: 0;
-    }
-    
-    .black-header-search {
-        order: 2;
-        flex-grow: 1;
-        padding: 0 10px;
-        margin-top: 0;
-        min-width: 0;
-    }
-    .about-button {
-    order: 3;
-    margin-left: 5px;
-    margin-right: 5px; /* ADD for mobile */
-    flex-shrink: 0;
-    }
-    
-    .contact-button {
-        margin-left: 5px;
-        order: 4;
-        flex-shrink: 0;
-    }
-    
-    .search-container {
-        width: 60%;
-    }
-    
-    .home-button a,
-    .contact-button a {
-        font-size: 16px;
-        padding: 8px 0;
-    }
-    .home-button a i,
-    .contact-button a i,
-    .about-button a i,
-    .hamburger-menu i {
-    font-size: 22px; /* All icons now 22px on mobile */
-    }
-    .hamburger-menu i {
-     margin-left: 12px;
-    }
-    .search-box {
-        padding: 10px 15px;
-        font-size: 16px;
-        min-width: 50px;
-        height: 45px;
-    }
-    
-    /* Search Results Section - FIXED SCROLLING */
-    .search-results {
-        position: relative !important;
-        top: 0 !important;
-        max-height: none !important;
-        overflow-y: visible !important;
-        margin-top: 130px !important; /* CHANGED: Combined height of both headers (65px + 65px) */
-        z-index: 1; /* Place below headers */
-    }
-
-    .main-content.hide-main {
-        display: none !important;
-    }
-    
-    .results-container {
-        width: 95%;
-        padding: 15px;
-    }
-    
-    /* Adjust main content to start below both headers */
-    .main-content {
-        margin-top: 130px !important; /* CHANGED: Combined height of both headers */
-        margin-bottom: 10px;
-        background-color: white;
-        padding: 30px 20px;
-        text-align: center;
-        color: #555;
-        position: relative;
-        z-index: 1;
-    }
-    
-    .result-content {
-        grid-template-columns: 1fr; /* Single column on mobile */
-        gap: 20px;
-    }
-    
-    .result-left {
-        grid-column: 1;
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .result-image {
-        flex: 0 0 auto;
-        text-align: center;
-        height: 200px;
-    }
-    
-    .result-image img {
-        width: 100%;
-        height: 100%;
-        margin: 0 auto;
-    }
-    
-    .result-center,
-    .result-right {
-        grid-column: 1;
-    }
-    
-    /* Mobile zoom adjustments */
-    .zoom-container {
-        position: fixed !important;
-        left: 50% !important;
-        top: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        width: 90vw !important;
-        height: 60vh !important;
-        max-width: 400px !important;
-        max-height: 300px !important;
-        background: white;
-        border: 3px solid #d32f2f;
-        border-radius: 12px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-        z-index: 2000 !important;
-        pointer-events: none;
-        display: none;
-    }
-    
-    .zoomed-image {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: contain;
-        border-radius: 8px;
-    }
-    
-    .zoom-lens {
-        display: none !important;
-    }
-    
-    .result-image {
-        cursor: pointer;
-    }
-    
-    .result-image::after {
-        content: "👆 Tap to zoom";
-        opacity: 0.8;
-        font-size: 11px;
-    }
-    
-    /* Improve touch experience */
-    .result-image img {
-        -webkit-tap-highlight-color: transparent;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        user-select: none;
-    }
-}        
- 
-        @media (max-width: 480px) {
-    header {
-        position: fixed; /* ADDED */
-        padding: 5px 12px;
-        min-height: 60px;
-        top: 0; /* ADDED */
-        left: 0; /* ADDED */
-        width: 100%; /* ADDED */
-    }
-    
-    .logo-container {
-        height: 35px;
-        width: 35px;
-        margin-right: 10px;
-    }
-    
-    .cart-image-container {
-        height: 35px;
-        width: 35px;
-        margin-left: 10px;
-    }
-    
-    .header-center {
-        width: calc(100% - 90px);
-        padding: 0 8px;
-    }
-    
-    .center-tagline {
-        font-size: 12px;
-        line-height: 1.1;
-    }
-    
-    .trusted-tagline {
-        font-size: 11px;
-        line-height: 1.1;
-    }
-    
-    .black-header {
-        top: 60px; /* Position below 60px header */
-        padding: 8px 12px;
-        min-height: 60px;
-        flex-wrap: nowrap;
-    }
-    /* Mobile layout order */
-.home-button {
-    order: 1;
-    margin-right: 5px; /* Reduced for mobile */
-}
-
-.black-header-search {
-    order: 2;
-    flex-grow: 1;
-}
-
-.about-button {
-    order: 3;
-    margin-left: 5px;
-    margin-right: 5px; /* Consistent spacing */
-}
-
-.contact-button {
-    order: 4;
-    margin-left: 0; /* No left margin since About has right margin */
-}
-    .home-button a,
-    .contact-button a {
-        font-size: 15px;
-        white-space: nowrap;
-        padding: 6px 0;
-    }
-    .home-button a i,
-    .contact-button a i,
-    .about-button a i,
-    .hamburger-menu i {
-    font-size: 20px;
-    }
-    .hamburger-menu i {
-     margin-left: 10px;
-    } 
-    .search-container {
-        width: 60%; /* Further reduced on small mobile */
-    }
-    .search-box {
-        padding: 8px 12px;
-        font-size: 15px;
-        min-width: 40px;
-        height: 40px;
-    }
-    
-    /* Update search results and main content margin */
-    .search-results {
-        margin-top: 120px !important; /* Combined: 60px + 60px */
-    }
-    
-    .main-content {
-        margin-top: 120px !important; /* Combined: 60px + 60px */
-    }
-    
-    .results-container {
-        width: 95%;
-        padding: 10px;
-    }
-    
-    .result-image {
-        height: 180px;
-    }
-    
-    .item-name {
-        font-size: 20px;
-    }
-}
-
-        /* For very small screens */
-        @media (max-width: 360px) {
-    header {
-        position: fixed; /* ADDED */
-        min-height: 55px;
-        top: 0; /* ADDED */
-        left: 0; /* ADDED */
-        width: 100%; /* ADDED */
-    }
-    
-    .logo-container,
-    .cart-image-container {
-        height: 30px;
-        width: 30px;
-    }
-    
-    .logo-container {
-        margin-right: 8px;
-    }
-    
-    .cart-image-container {
-        margin-left: 8px;
-    }
-    
-    .header-center {
-        width: calc(100% - 76px);
-        padding: 0 6px;
-    }
-    
-    .center-tagline {
-        font-size: 10px;
-        -webkit-line-clamp: 1;
-    }
-    
-    .trusted-tagline {
-        font-size: 9px;
-        -webkit-line-clamp: 1;
-    }
-    
-    .black-header {
-        top: 55px; /* Position below 55px header */
-        min-height: 55px;
-        padding: 6px 8px;
-        flex-wrap: nowrap;
-    }
-    /* Mobile layout order */
-.home-button {
-    order: 1;
-    margin-right: 5px; /* Reduced for mobile */
-}
-
-.black-header-search {
-    order: 2;
-    flex-grow: 1;
-}
-
-.about-button {
-    order: 3;
-    margin-left: 5px;
-    margin-right: 5px; /* Consistent spacing */
-}
-
-.contact-button {
-    order: 4;
-    margin-left: 0; /* No left margin since About has right margin */
-}
-    .home-button a,
-    .contact-button a {
-        font-size: 14px;
-        white-space: nowrap;
-        padding: 4px 0;
-    }
-    .home-button a i,
-    .contact-button a i,
-    .about-button a i,
-    .hamburger-menu i {
-    font-size: 18px; /* All icons now 18px */
-}    
-    .hamburger-menu i {
-     margin-left: 8px;
-    }
-    .search-container {
-        width: 55%; /* Minimum width */
-    }
-    .search-box {
-        padding: 6px 10px;
-        font-size: 14px;
-        min-width: 30px;
-        height: 35px;
-    }
-    
-    /* Update search results and main content margin */
-    .search-results {
-        margin-top: 110px !important; /* Combined: 55px + 55px */
-    }
-    
-    .main-content {
-        margin-top: 110px !important; /* Combined: 55px + 55px */
-    }
-    
-    .hide-main {
-        display: none !important;
-    }
-    
-}
+        }
         
+        @media (max-width: 480px) {
+            header {
+                padding: 5px 12px;
+                min-height: 60px;
+            }
+            
+            .logo-container {
+                height: 35px;
+                width: 35px;
+                margin-right: 10px;
+            }
+            
+            .quote-image-container {
+                height: 35px;
+                width: 35px;
+                margin-left: 10px;
+            }
+            
+            .header-center {
+                width: calc(100% - 90px);
+                padding: 0 8px;
+            }
+            
+            .center-tagline {
+                font-size: 18px;
+            }
+            
+            .trusted-tagline {
+                font-size: 11px;
+            }
+            
+            .black-header {
+                top: 60px;
+                padding: 8px 12px;
+                min-height: 60px;
+            }
+            
+            .center-title {
+                font-size: 16px;
+                white-space: normal;
+                line-height: 1.2;
+                padding: 0 10px;
+            }
+            
+            .items-section {
+                margin-top: 120px;
+                min-height: calc(100vh - 170px);
+            }
+            
+            .empty-message {
+                height: calc(100vh - 260px);
+            }
+            
+            .empty-text {
+                font-size: 16px;
+            }
+            
+            .quantity-section {
+                padding: 12px;
+            }
+            
+            .quantity-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 16px;
+            }
+            
+            .confirm-btn {
+                padding: 12px 25px;
+                font-size: 18px;
+                width: 100%;
+            }
+            
+            .submit-btn {
+                padding: 12px 25px;
+                font-size: 16px;
+                width: 100%;
+            }
+            .success-message .contact-info {
+                font-size: 16px;
+        }
+        
+        @media (max-width: 360px) {
+            header {
+                min-height: 55px;
+            }
+            
+            .logo-container,
+            .quote-image-container {
+                height: 30px;
+                width: 30px;
+            }
+            
+            .logo-container {
+                margin-right: 8px;
+            }
+            
+            .quote-image-container {
+                margin-left: 8px;
+            }
+            
+            .header-center {
+                width: calc(100% - 76px);
+                padding: 0 6px;
+            }
+            
+            .center-tagline {
+                font-size: 16px;
+            }
+            
+            .trusted-tagline {
+                font-size: 9px;
+            }
+            
+            .black-header {
+                top: 55px;
+                min-height: 55px;
+                padding: 6px 8px;
+            }
+            
+            .items-section {
+                margin-top: 110px;
+                min-height: calc(100vh - 160px);
+            }
+            
+            .empty-message {
+                height: calc(100vh - 240px);
+            }
+            
+            .empty-text {
+                font-size: 15px;
+            }
+            
+            .quantity-btn {
+                width: 26px;
+                height: 26px;
+                font-size: 14px;
+            }
+            .success-message .contact-info {
+                font-size: 18px; /* Adjust for very small screens */
+    }
+        }
     </style>
 </head>
 <body>
@@ -1525,652 +1027,557 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
     <header>
         <!-- Logo in top-left corner -->
         <div class="logo-container">
-            <img src="/sparrowinstruments/images/silogo.png" alt="Paras International Logo" style="background: transparent;">
+            <img src="/sparrowinstruments/images/silogo.jpg" alt="Sparrow Instruments Logo" style="background: transparent;">
         </div>
         
         <!-- Center content with centered tagline -->
         <div class="header-center">
             <!-- First Tagline -->
-            <div class="center-tagline">Your Orders & Cart in Sparrow Instruments</div>
+            <div class="center-tagline">Sparrow Instruments Pvt. Ltd.</div>
             <!-- Second Tagline -->
-            <div class="trusted-tagline">Genuine Trusted Medical and Scientific Equipments at Retail Price</div>
+            <div class="trusted-tagline">Wholesaler of all Laboratory Equipment and Instruments</div>
         </div>
         
-        <!-- Cart Image in top-right corner -->
-        <div class="cart-image-container">
-            <a href="cart.html">
-                <img src="/sparrowinstruments/images/cart.jpg" alt="Shopping Cart" style="background: transparent;">
+        <!-- Quote Image in top-right corner -->
+        <div class="quote-image-container">
+            <a href="/sparrowinstruments/quote.html">
+                <img src="/sparrowinstruments/images/quote.jpg" alt="Request Quote" style="background: transparent;">
             </a>
         </div>
     </header>
     
-<!-- Black Header Section - MODIFIED -->
-<div class="black-header">
-    <!-- Home button with hamburger menu on left -->
-    <div class="home-button">
-        <a href="index.html">
-            <i class="fas fa-home"></i>
-        </a>
-        <div class="hamburger-menu">
-            <i class="fas fa-bars"></i>
-        </div>
-    </div>
-    
-    <!-- Search box in center -->
-    <div class="black-header-search">
-        <div class="search-container">
-            <input type="text" 
-                   class="search-box" 
-                   placeholder="Type your items here ..."
-                   aria-label="Search products"
-                   maxlength="30">
-        </div>
-    </div>
-    
-    <!-- About button -->
-    <div class="about-button">
-        <a href="/sparrowinstruments/about.html">
-            <i class="fas fa-info-circle"></i>
-        </a>
-    </div>
-    
-    <!-- Contact button on right -->
-    <div class="contact-button">
-        <a href="contact.html">
-            <i class="fas fa-phone"></i>
-        </a>
-    </div>
-</div>
-
-<!-- Filter Sidebar (Hamburger Menu) -->
-<div class="filter-sidebar" id="filterSidebar">
-    <div class="filter-header">
-        <h3><i class="fas fa-filter"></i> Filters</h3>
-        <button class="close-filter" id="closeFilter">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    
-    <div class="filter-content">
-        <!-- Clear Filter Button -->
-        <div class="filter-section">
-            <button class="clear-filter-btn" id="clearFilter">
-                <i class="fas fa-times-circle"></i> X Clear Filter
-            </button>
+    <!-- Black Header Section -->
+    <div class="black-header">
+        <!-- Home button on left -->
+        <div class="home-button">
+            <a href="index.html">
+                <i class="fas fa-home"></i>
+            </a>
         </div>
         
-        <!-- Sections Filter -->
-        <div class="filter-section">
-            <h4><i class="fas fa-th-list"></i> Sections</h4>
-            <div class="checkbox-group">
-                <label class="checkbox-item">
-                    <input type="checkbox" value="Physics Lab" class="section-checkbox">
-                    <span class="checkmark"></span>
-                    Physics
-                </label>
-                <label class="checkbox-item">
-                    <input type="checkbox" value="Chemistry Lab" class="section-checkbox">
-                    <span class="checkmark"></span>
-                    Chemistry
-                </label>
-                <label class="checkbox-item">
-                    <input type="checkbox" value="Biology Lab" class="section-checkbox">
-                    <span class="checkmark"></span>
-                    Biology
-                </label>
-                <label class="checkbox-item">
-                    <input type="checkbox" value="Scientific Lab" class="section-checkbox">
-                    <span class="checkmark"></span>
-                    Scientific
-                </label>
-                <label class="checkbox-item">
-                    <input type="checkbox" value="Medical Lab" class="section-checkbox">
-                    <span class="checkmark"></span>
-                    Medical
-                </label>
+        <!-- Center title -->
+        <div class="black-header-center">
+            <div class="center-title">Cart Sparrow Instruments</div>
+        </div>
+        
+        <!-- Cart button on right -->
+        <div class="cart.html">
+            <a href="contact.html">
+                <i class="fas fa-phone"></i>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Items Display Section -->
+    <div class="items-section" id="itemsSection">
+        <div class="items-container">
+            <!-- Items will appear here when available -->
+            <div class="items-list" id="itemsList">
+                <!-- Items will be dynamically inserted here -->
             </div>
-        </div>
-        
-        <!-- Price Range Filter -->
-        <div class="filter-section">
-            <h4><i class="fas fa-tag"></i> Price Range</h4>
-            <div class="price-inputs">
-                <div class="price-input">
-                    <label>Min (₹)</label>
-                    <input type="number" id="minPrice" min="10" max="100000" placeholder="10" value="10">
-                </div>
-                <div class="price-input">
-                    <label>Max (₹)</label>
-                    <input type="number" id="maxPrice" min="10" max="100000" placeholder="100000" value="100000">
+            <!-- Empty message - shown when no items (DEFAULT STATE) -->
+            <div class="empty-message" id="emptyMessage">
+                <div class="empty-text">
+                    You have no items to Quote. Please search and add items for your quotation. Thanks.
                 </div>
             </div>
             
-            <div class="price-slider">
-                <div class="slider-track"></div>
-                <input type="range" min="10" max="100000" value="10" class="range-min" id="priceMin">
-                <input type="range" min="10" max="100000" value="100000" class="range-max" id="priceMax">
+            <!-- NEW: Confirm Quote Section -->
+            <div class="confirm-quote-section" id="confirmQuoteSection">
+                <div class="confirm-button-container">
+                    <button class="confirm-btn" id="confirmQuoteBtn">
+                        <i class="fas fa-check-circle"></i>
+                        Confirm Quote
+                    </button>
+                </div>
+                
+                <!-- Cart Form Section -->
+                <div class="contact-form-section" id="contactFormSection">
+                    <form class="contact-form" id="quoteForm">
+                        <div class="form-group">
+                            <label for="name">Name (Company/Person) :</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your name or company">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone :</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email ID :</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                        </div>
+                        <div class="form-group submit-btn-container">
+                            <button type="submit" class="submit-btn" id="submitQuoteBtn">
+                                <i class="fas fa-paper-plane"></i>
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Success Message -->
+                <div class="success-message" id="successMessage">
+                    <p>Your Requested Quotation has been submitted successfully. We will notify you within 24 business hours.</p>
+                    <p>Or, you can directly Cart us through:</p>
+                    <div class="contact-info">
+                        Email: sales@sparrowinstruments.com<br>
+                        WhatsApp: +91-9876543210<br>
+                        Phone: +91-1234567890
+                    </div>
+                </div>
             </div>
-            
-            <div class="price-display">
-                <span>Price: ₹<span id="minDisplay">10</span> - ₹<span id="maxDisplay">100000</span></span>
-            </div>
-        </div>
-        
-        <!-- Apply Filter Button -->
-        <div class="filter-section">
-            <button class="apply-filter-btn" id="applyFilter">
-                <i class="fas fa-check"></i> Apply Filters
-            </button>
         </div>
     </div>
-</div>
-
-<!-- Overlay for closing sidebar -->
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
-    
-    <!-- Search Results Section -->
-    <div class="search-results" id="searchResults">
-        <div class="results-container">
-            <div class="results-header">
-                <h3 id="resultsTitle">Search Results</h3>
-                <button class="close-results" id="closeResults">Close</button>
-            </div>
-            <div class="results-list" id="resultsList">
-                <!-- Results will appear here -->
-            </div>
-        </div>
-    </div>
-    
-        <!-- Main Content Area -->
-    <main class="main-content">
-        <!-- Ready for your content -->
-    </main>
     
     <!-- Footer -->
     <footer>
-    <div class="footer-content">
-        <div class="copyright">
-            <span class="desktop-text">Sparrow Instruments is in service for the last 50 years • © 2023 All rights reserved.</span>
-            <span class="mobile-text">Sparrow Instruments: 50 years of service<br>© 2023 All rights reserved.</span>
+        <div class="footer-content">
+            <div class="copyright">
+                <span class="desktop-text">Sparrow Instruments is in service for the last 50 years • © 2023 All rights reserved.</span>
+                <span class="mobile-text">Sparrow Instruments: 50 years of service<br>© 2023 All rights reserved.</span>
+            </div>
         </div>
-    </div>
     </footer>
-    
-    <!-- Mobile Zoom Overlay -->
-    <div class="mobile-zoom-overlay" id="mobileZoomOverlay">
-        <img class="mobile-zoom-image" id="mobileZoomImage" src="" alt="Zoomed Image">
-        <div class="mobile-zoom-hint">Touch and drag to zoom • Tap anywhere to close</div>
-    </div>
 
 <script>
-    
-    // 1. GLOBAL VARIABLES & LOADING
-    let allItems = [];
-    let searchTimeout;
-
-// PRICE PARSING HELPER FUNCTION - ADD THIS
-function parsePrice(priceStr) {
-    if (!priceStr) return 0;
-    // Remove commas and convert to number
-    return parseInt(priceStr.toString().replace(/,/g, ''));
-}
-    
-    async function loadJSONFiles() {
-        console.log('🚀 Loading Lab Data...');
-        try {
-            const files = ['biolabitems.json', 'physlabitems.json', 'chemlabitems.json', 'scientificlabitems.json'];
-            const responses = await Promise.all(files.map(file => 
-                fetch(file).then(res => res.ok ? res.json() : [])
-            ));
-            
-            // Combine and clean discount data
-            allItems = [].concat(...responses).map(item => {
-                if (item.discount) item.discount = item.discount.toString().replace('%', '');
-                return item;
-            });
-
-            console.log(`✅ Loaded ${allItems.length} items.`);
-        } catch (error) {
-            console.error('❌ Load Error:', error);
-        }
-    }
-
-    // 2. SEARCH & RENDER
-    function searchItems() {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-            const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
-            const resultsList = document.getElementById('resultsList');
-            const mainContent = document.querySelector('.main-content');
-            const searchResults = document.getElementById('searchResults');
-            const resultsTitle = document.getElementById('resultsTitle');
-
-            resultsList.innerHTML = '';
-
-            if (searchTerm.length < 2) {
-                searchResults.style.display = 'none';
-                mainContent.classList.remove('hide-main');
-                return;
-            }
-
-            // Calculate Scoring
-            const matchedItems = allItems.map(item => {
-                let score = 0;
-                const name = item.name.toLowerCase();
+    // Load saved items from localStorage
+    function loadAddedItems() {
+        const savedItems = localStorage.getItem('sparrowQuoteItems');
+        const itemsList = document.getElementById('itemsList');
+        const emptyMessage = document.getElementById('emptyMessage');
+        const confirmQuoteSection = document.getElementById('confirmQuoteSection');
+        
+        console.log('🔍 Checking localStorage for quote items...');
+        console.log('Saved items:', savedItems);
+        
+        // DEFAULT: Show empty message, hide items list and confirm section
+        emptyMessage.style.display = 'flex';
+        itemsList.style.display = 'none';
+        confirmQuoteSection.classList.remove('visible');
+        itemsList.innerHTML = ''; // Clear any existing items
+        
+        // Reset form and success message
+        document.getElementById('contactFormSection').classList.remove('visible');
+        document.getElementById('successMessage').classList.remove('visible');
+        document.getElementById('quoteForm').reset();
+        
+        if (savedItems) {
+            try {
+                const quoteData = JSON.parse(savedItems);
+                const items = quoteData.items || [];
                 
-                if (name === searchTerm) score += 100;
-                if (name.startsWith(searchTerm)) score += 50;
-                if (name.includes(searchTerm)) score += 30;
-
-                const searchWords = searchTerm.split(/[\s\-_.,;]+/).filter(w => w.length > 0);
-                const nameWords = name.split(/[\s\-_.,;]+/).filter(w => w.length > 0);
-
-                searchWords.forEach(sw => {
-                    nameWords.forEach(nw => {
-                        if (nw === sw) score += 40;
-                        else if (nw.includes(sw) && sw.length >= 3) score += 20;
+                console.log(`📦 Found ${items.length} items in quote`);
+                console.log('Items data:', items);
+                
+                if (items.length > 0) {
+                    // Show items and confirm section, hide empty message
+                    itemsList.style.display = 'block';
+                    emptyMessage.style.display = 'none';
+                    confirmQuoteSection.classList.add('visible');
+                    
+                    // Display items with full product data
+                    items.forEach((itemData, index) => {
+                        console.log(`🔄 Processing item ${index + 1}:`, itemData);
+                        
+                        // Check if itemData is an object with full product data
+                        if (typeof itemData === 'object' && itemData !== null) {
+                            console.log('✅ Item is an object, creating element...');
+                            const itemElement = createItemElement(itemData, index);
+                            itemsList.appendChild(itemElement);
+                        } 
+                        // Fallback for old format (just IDs) - but shouldn't happen now
+                        else {
+                            console.log('⚠️ Item is not an object, using fallback:', itemData);
+                            const basicItem = {
+                                id: itemData || `item_${index}`,
+                                name: `Item ${index + 1}`,
+                                image: 'placeholder.jpg',
+                                mrpPrice: 'Price on request',
+                                bestBuyPrice: 'Price on request',
+                                bestBuyLabel: 'Buy',
+                                warranty: 'Not specified',
+                                specifications: ['Specifications not available'],
+                                description: ['Please go back to the main catalog to see full details.']
+                            };
+                            const itemElement = createItemElement(basicItem, index);
+                            itemsList.appendChild(itemElement);
+                        }
                     });
-                });
-
-                return { ...item, relevanceScore: score };
-            })
-            .filter(item => item.relevanceScore > 0)
-            .sort((a, b) => b.relevanceScore - a.relevanceScore);
-
-            // Render Results
-            if (matchedItems.length > 0) {
-                resultsTitle.textContent = `Found ${matchedItems.length} items for "${searchTerm}"`;
+                    
+                    console.log('✅ All items displayed');
+                } else {
+                    console.log('📭 No items in quote array');
+                }
                 
-                matchedItems.forEach(item => {
-                    const resultItem = document.createElement('div');
-                    resultItem.className = 'result-item';
-                    
-                    const specsHTML = Array.isArray(item.specifications) ? item.specifications.map(s => `<li>${s}</li>`).join('') : '';
-                    const descHTML = Array.isArray(item.description) ? item.description.map(d => `<li>${d}</li>`).join('') : `<li>${item.description || ''}</li>`;
-
-                    resultItem.innerHTML = `
-                        <div class="result-content">
-                            <div class="result-left">
-                                <div class="result-image">
-                                    <img src="${item.image || 'placeholder.jpg'}" alt="${item.name}">
-                                </div>
-                                <div class="price-box">
-                                    <div class="mrp-line"><span class="mrp-label">M.R.P.</span> <span class="mrp-price">INR ${item.mrpPrice || '0'}/-</span></div>
-                                    <div class="bestbuy-line"><span class="bestbuy-label">Buy</span> <span class="bestbuy-price">INR ${item.bestBuyPrice || '0'}/-</span></div>
-                                </div>
-                            </div>
-                            <div class="result-center">
-                                <h4 class="item-name">${item.name}</h4>
-                                <div class="specs-section">
-                                    ${specsHTML ? `<strong>Specifications:</strong><ul>${specsHTML}</ul>` : ''}
-                                    <strong>Warranty:</strong> ${item.warranty || 'Not specified'}
-                                </div>
-                            </div>
-                            <div class="result-right">
-                                <div class="description-section">
-                                    <strong>Descriptions:</strong>
-                                    <ul>${descHTML}</ul>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    resultsList.appendChild(resultItem);
-                    
-                    // ATTACH ZOOM TO EACH ITEM
-                    setupZoom(resultItem); 
-                    // Set data attributes for filtering
-                    resultItem.dataset.price = parsePrice(item.bestBuyPrice || item.mrpPrice);
-                    resultItem.dataset.section = determineSection(item);
-                });
-                searchResults.style.display = 'block';
-                mainContent.classList.add('hide-main');
-            } else {
-                resultsTitle.textContent = `No results found for "${searchTerm}"`;
-                resultsList.innerHTML = '<div class="no-results">Try different keywords</div>';
-                searchResults.style.display = 'block';
-            }
-        }, 300);
-    }
-
-// SECTION DETERMINATION HELPER FUNCTION - ADD THIS
-function determineSection(item) {
-    if (item.category) {
-        // Extract first word from category (e.g., "Biology Lab" → "biology")
-        return item.category.toLowerCase().split(' ')[0];
-    }
-    return 'general';
-}    
-    
-function setupZoom(resultItem) {
-    const container = resultItem.querySelector('.result-image');
-    const img = container.querySelector('img');
-    if (!container || !img) return;
-
-    const lens = document.createElement('div');
-    lens.className = 'zoom-lens';
-    const zoomWin = document.createElement('div');
-    zoomWin.className = 'zoom-container';
-    const zImg = document.createElement('img');
-    zImg.className = 'zoomed-image';
-    zImg.src = img.src;
-    
-    zoomWin.appendChild(zImg);
-    container.appendChild(lens);
-    container.appendChild(zoomWin);
-
-    function moveZoom(clientX, clientY) {
-        lens.style.display = 'block';
-        zoomWin.style.display = 'block';
-
-        const rect = container.getBoundingClientRect();
-        let x = clientX - rect.left - (lens.offsetWidth / 2);
-        let y = clientY - rect.top - (lens.offsetHeight / 2);
-
-        x = Math.max(0, Math.min(x, rect.width - lens.offsetWidth));
-        y = Math.max(0, Math.min(y, rect.height - lens.offsetHeight));
-
-        lens.style.left = x + 'px';
-        lens.style.top = y + 'px';
-
-        const cx = zoomWin.offsetWidth / lens.offsetWidth;
-        const cy = zoomWin.offsetHeight / lens.offsetHeight;
-
-        zImg.style.width = (rect.width * cx) + 'px';
-        zImg.style.height = (rect.height * cy) + 'px';
-        zImg.style.left = `-${x * cx}px`;
-        zImg.style.top = `-${y * cy}px`;
-    }
-
-    function hideZoom() {
-        lens.style.display = 'none';
-        zoomWin.style.display = 'none';
-    }
-
-    // --- DESKTOP EVENTS ---
-    container.addEventListener('mousemove', (e) => moveZoom(e.clientX, e.clientY));
-    container.addEventListener('mouseleave', hideZoom);
-
-    // --- MOBILE EVENTS (TOUCH) ---
-let isTouchZooming = false;
-
-container.addEventListener('touchstart', (e) => {
-    if (e.cancelable) e.preventDefault();
-    isTouchZooming = true;
-    moveZoom(e.touches[0].clientX, e.touches[0].clientY);
-}, { passive: false });
-
-container.addEventListener('touchmove', (e) => {
-    if (!isTouchZooming) return;
-    if (e.cancelable) e.preventDefault();
-    moveZoom(e.touches[0].clientX, e.touches[0].clientY);
-}, { passive: false });
-
-container.addEventListener('touchend', (e) => {
-    isTouchZooming = false;
-    hideZoom();
-});
-
-// Close zoom when tapping outside
-container.addEventListener('touchcancel', () => {
-    isTouchZooming = false;
-    hideZoom();
-});
-
-    container.addEventListener('touchmove', (e) => {
-        if (e.cancelable) e.preventDefault();
-        moveZoom(e.touches[0].clientX, e.touches[0].clientY);
-    }, { passive: false });
-
-    container.addEventListener('touchend', hideZoom);
-}
-
-    // 4. EVENT LISTENERS
-    document.querySelector('.search-box').addEventListener('input', searchItems);
-    document.getElementById('closeResults').onclick = () => {
-        document.getElementById('searchResults').style.display = 'none';
-    };
-
-    window.addEventListener('DOMContentLoaded', loadJSONFiles);
-
-    // Add this inside your <script> to handle the close button
-    document.getElementById('closeResults').addEventListener('click', function() {
-    document.getElementById('searchResults').style.display = 'none';
-    document.querySelector('.search-box').value = '';
-    // Ensure scroll returns to top
-    window.scrollTo(0, 0);
-});
-
-// ===== FILTER SIDEBAR FUNCTIONALITY =====
-
-// DOM Elements
-const hamburgerMenu = document.querySelector('.hamburger-menu');
-const filterSidebar = document.getElementById('filterSidebar');
-const sidebarOverlay = document.getElementById('sidebarOverlay');
-const closeFilter = document.getElementById('closeFilter');
-const clearFilterBtn = document.getElementById('clearFilter');
-const applyFilterBtn = document.getElementById('applyFilter');
-const sectionCheckboxes = document.querySelectorAll('.section-checkbox');
-const minPriceInput = document.getElementById('minPrice');
-const maxPriceInput = document.getElementById('maxPrice');
-const priceMinSlider = document.getElementById('priceMin');
-const priceMaxSlider = document.getElementById('priceMax');
-const minDisplay = document.getElementById('minDisplay');
-const maxDisplay = document.getElementById('maxDisplay');
-
-// Price range variables
-let minPrice = 10;
-let maxPrice = 100000;
-
-// Current filters state
-let currentFilters = {
-    sections: [],
-    minPrice: 10,
-    maxPrice: 100000
-};
-
-// Initialize price slider
-function initializePriceSlider() {
-    // Set initial display values
-    minDisplay.textContent = minPrice;
-    maxDisplay.textContent = maxPrice;
-    
-    // Update slider when input changes
-    minPriceInput.addEventListener('input', function() {
-        let value = parseInt(this.value);
-        if (value < 10) value = 10;
-        if (value > maxPrice) value = maxPrice;
-        priceMinSlider.value = value;
-        minDisplay.textContent = value;
-        currentFilters.minPrice = value;
-    });
-    
-    maxPriceInput.addEventListener('input', function() {
-        let value = parseInt(this.value);
-        if (value > 100000) value = 100000;
-        if (value < minPrice) value = minPrice;
-        priceMaxSlider.value = value;
-        maxDisplay.textContent = value;
-        currentFilters.maxPrice = value;
-    });
-    
-    // Update input when slider changes
-    priceMinSlider.addEventListener('input', function() {
-        let value = parseInt(this.value);
-        if (value > parseInt(priceMaxSlider.value) - 1000) {
-            value = parseInt(priceMaxSlider.value) - 1000;
-        }
-        minPriceInput.value = value;
-        minDisplay.textContent = value;
-        currentFilters.minPrice = value;
-    });
-    
-    priceMaxSlider.addEventListener('input', function() {
-        let value = parseInt(this.value);
-        if (value < parseInt(priceMinSlider.value) + 1000) {
-            value = parseInt(priceMinSlider.value) + 1000;
-        }
-        maxPriceInput.value = value;
-        maxDisplay.textContent = value;
-        currentFilters.maxPrice = value;
-    });
-}
-
-// Toggle filter sidebar
-hamburgerMenu.addEventListener('click', function() {
-    filterSidebar.classList.add('show');
-    sidebarOverlay.classList.add('show');
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
-});
-
-// Close filter sidebar
-closeFilter.addEventListener('click', closeFilterSidebar);
-sidebarOverlay.addEventListener('click', closeFilterSidebar);
-
-function closeFilterSidebar() {
-    filterSidebar.classList.remove('show');
-    sidebarOverlay.classList.remove('show');
-    document.body.style.overflow = ''; // Restore scrolling
-}
-
-// Clear all filters
-clearFilterBtn.addEventListener('click', function() {
-    // Uncheck all checkboxes
-    sectionCheckboxes.forEach(checkbox => {
-        checkbox.checked = false;
-    });
-    
-    // Reset price range
-    minPriceInput.value = 10;
-    maxPriceInput.value = 100000;
-    priceMinSlider.value = 10;
-    priceMaxSlider.value = 100000;
-    minDisplay.textContent = 10;
-    maxDisplay.textContent = 100000;
-    
-    // Clear current filters
-    currentFilters.sections = [];
-    currentFilters.minPrice = 10;
-    currentFilters.maxPrice = 100000;
-    
-    // Apply cleared filters
-    applyFilters();
-});
-
-// Update sections filter
-sectionCheckboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', function() {
-        if (this.checked) {
-            if (!currentFilters.sections.includes(this.value)) {
-                currentFilters.sections.push(this.value);
+            } catch (e) {
+                console.error('❌ Error loading saved items:', e);
+                // Keep default state (empty message) if there's an error
             }
         } else {
-            currentFilters.sections = currentFilters.sections.filter(
-                section => section !== this.value
-            );
+            console.log('📭 No saved items found in localStorage');
         }
-    });
-});
-
-// Apply filters
-applyFilterBtn.addEventListener('click', function() {
-    applyFilters();
-    closeFilterSidebar();
-});
-
-// Filter function
-function applyFilters() {
-    const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
-    const resultsList = document.getElementById('resultsList');
-    const resultItems = document.querySelectorAll('.result-item');
-    
-    // If no search results, don't filter
-    if (resultItems.length === 0) return;
-    
-    resultItems.forEach(item => {
-        let showItem = true;
-        
-        // Get item data (you'll need to add data attributes to your result items)
-        const itemPrice = parseInt(item.dataset.price) || 0;
-        const itemSection = item.dataset.section || '';
-        
-        // Check price filter
-        if (itemPrice < currentFilters.minPrice || itemPrice > currentFilters.maxPrice) {
-            showItem = false;
-        }
-        
-        // Check section filter (if any sections selected)
-        if (currentFilters.sections.length > 0 && !currentFilters.sections.includes(itemSection)) {
-            showItem = false;
-        }
-        
-        // Show/hide item
-        item.style.display = showItem ? 'block' : 'none';
-    });
-    
-    // Update results count
-    const visibleItems = document.querySelectorAll('.result-item[style="display: block"]');
-    const resultsTitle = document.getElementById('resultsTitle');
-    if (visibleItems.length > 0) {
-        resultsTitle.textContent = `Showing ${visibleItems.length} filtered items`;
-    } else {
-        resultsTitle.textContent = 'No items match your filters';
     }
-}
-
-// Initialize filter functionality
-initializePriceSlider();
-
-// Update your searchItems function to add data attributes to result items
-// Add this inside your searchItems function, after creating each resultItem:
-// Replace the resultItem.innerHTML section with this updated version:
-
-// In your searchItems function, find where you create resultItem.innerHTML
-// and add data-price and data-section attributes:
-
-// Inside the matchedItems.forEach loop in searchItems function:
-resultItem.innerHTML = `
-    <div class="result-content">
-        <div class="result-left">
-            <div class="result-image">
-                <img src="${item.image || 'placeholder.jpg'}" alt="${item.name}">
-            </div>
-            <div class="price-box">
-                <div class="mrp-line"><span class="mrp-label">M.R.P.</span> <span class="mrp-price">INR ${item.mrpPrice || '0'}/-</span></div>
-                <div class="bestbuy-line"><span class="bestbuy-label">Buy</span> <span class="bestbuy-price">INR ${item.bestBuyPrice || '0'}/-</span></div>
-            </div>
-        </div>
-        <div class="result-center">
-            <h4 class="item-name">${item.name}</h4>
-            <div class="specs-section">
-                ${specsHTML ? `<strong>Specifications:</strong><ul>${specsHTML}</ul>` : ''}
-                <strong>Warranty:</strong> ${item.warranty || 'Not specified'}
-            </div>
-        </div>
-        <div class="result-right">
-            <div class="description-section">
-                <strong>Descriptions:</strong>
-                <ul>${descHTML}</ul>
-            </div>
-        </div>
-    </div>
-`;
-
-// ADD THESE LINES RIGHT AFTER resultItem.innerHTML:
-resultItem.dataset.price = item.bestBuyPrice || item.mrpPrice || '0';
-// You'll need to determine the section based on your data
-// For now, I'll add a placeholder - you'll need to update this based on your JSON structure
-resultItem.dataset.section = determineSection(item); // You need to implement this function
-
-// Then add this helper function to determine section:
-function determineSection(item) {
-    // Extract section from category (e.g., "Biology Lab" → "biology")
-    if (item.category) {
-        // Convert to lowercase and extract first word
-        return item.category.toLowerCase().split(' ')[0];
-    }
-    return 'general';
-}
     
+    // Create item element for display
+    function createItemElement(product, index) {
+        console.log(`🎨 Creating element for item ${index}:`, product.name || product.id);
+        
+        const itemElement = document.createElement('div');
+        itemElement.className = 'result-item';
+        itemElement.dataset.itemId = product.id || `item_${index}`;
+        itemElement.dataset.quantity = product.quantity || 1;
+        
+        // Format specifications
+        let specsHTML = '';
+        if (Array.isArray(product.specifications)) {
+            specsHTML = product.specifications.map(s => `<li>${s}</li>`).join('');
+        } else if (product.specifications) {
+            specsHTML = `<li>${product.specifications}</li>`;
+        } else {
+            specsHTML = '<li>Specifications not specified</li>';
+        }
+        
+        // Format description
+        let descHTML = '';
+        if (Array.isArray(product.description)) {
+            descHTML = product.description.map(d => `<li>${d}</li>`).join('');
+        } else if (product.description) {
+            descHTML = `<li>${product.description}</li>`;
+        } else {
+            descHTML = '<li>Description not available</li>';
+        }
+        
+        // Format prices
+        const mrpPrice = product.mrpPrice || product.mrp || 'Price on request';
+        const bestBuyPrice = product.bestBuyPrice || product.price || 'Price on request';
+        const bestBuyLabel = product.bestBuyLabel || 'Buy';
+        
+        // Check for guaranteed competitive pricing
+        const isGuaranteedCompetitive = 
+            (bestBuyPrice && bestBuyPrice.toString().toLowerCase().includes('guaranteed competitive')) ||
+            (bestBuyLabel && bestBuyLabel.toString().toLowerCase().includes('guaranteed competitive'));
+        
+        const priceDisplay = isGuaranteedCompetitive ? 
+            'Guaranteed Competitive' : 
+            (bestBuyPrice ? `INR ${bestBuyPrice}/-` : 'Price on request');
+        
+        const mrpDisplay = mrpPrice ? `INR ${mrpPrice}/-` : 'Price on request';
+        
+        itemElement.innerHTML = `
+            <div class="result-content">
+                <div class="result-left">
+                    <div class="result-image">
+                        <img src="${product.image || product.img || 'placeholder.jpg'}" alt="${product.name || 'Product'}" onerror="this.src='placeholder.jpg'">
+                    </div>
+                    <div class="price-box">
+                        <div class="mrp-line">
+                            <span class="mrp-label">M.R.P.</span> 
+                            <span class="mrp-price">${mrpDisplay}</span>
+                        </div>
+                        <div class="bestbuy-line">
+                            <span class="bestbuy-label">${bestBuyLabel}</span> 
+                            <span class="bestbuy-price">${priceDisplay}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-center">
+                    <h4 class="item-name">${product.name || 'Product Name'}</h4>
+                    <div class="specs-section">
+                        <strong>Specifications:</strong>
+                        <ul>${specsHTML}</ul>
+                        <strong>Warranty:</strong> ${product.warranty || 'Not specified'}
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">No. of Items</span>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus-btn" data-item-id="${product.id || index}">-</button>
+                            <span class="quantity-value">${product.quantity || 1}</span>
+                            <button class="quantity-btn plus-btn" data-item-id="${product.id || index}">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-right">
+                    <div class="description-section">
+                        <strong>Descriptions:</strong>
+                        <ul>${descHTML}</ul>
+                    </div>
+                    <div class="remove-btn-container">
+                        <button class="remove-btn" data-item-id="${product.id || index}">
+                            <i class="fas fa-trash"></i>
+                            Remove Item
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Add event listeners
+        const removeBtn = itemElement.querySelector('.remove-btn');
+        removeBtn.addEventListener('click', function() {
+            console.log('🗑️ Removing item:', product.id || index);
+            removeItem(product.id || index);
+        });
+        
+        const minusBtn = itemElement.querySelector('.minus-btn');
+        const plusBtn = itemElement.querySelector('.plus-btn');
+        const quantityValue = itemElement.querySelector('.quantity-value');
+        
+        minusBtn.addEventListener('click', function() {
+            console.log('➖ Decreasing quantity for item:', product.id || index);
+            updateQuantity(product.id || index, -1, quantityValue);
+        });
+        
+        plusBtn.addEventListener('click', function() {
+            console.log('➕ Increasing quantity for item:', product.id || index);
+            updateQuantity(product.id || index, 1, quantityValue);
+        });
+        
+        console.log('✅ Item element created successfully');
+        return itemElement;
+    }
+    
+    // Update quantity function
+    function updateQuantity(itemId, change, quantityElement) {
+        console.log(`🔄 Updating quantity for item ${itemId}, change: ${change}`);
+        
+        const savedItems = localStorage.getItem('sparrowQuoteItems');
+        if (savedItems) {
+            try {
+                const quoteData = JSON.parse(savedItems);
+                const items = quoteData.items || [];
+                
+                console.log('📋 Current items in quote:', items);
+                
+                // Find the item index
+                const itemIndex = items.findIndex(item => item.id === itemId);
+                console.log('🔍 Item index found:', itemIndex);
+                
+                if (itemIndex !== -1) {
+                    // Get current quantity
+                    let currentItem = items[itemIndex];
+                    let currentQuantity = currentItem.quantity || 1;
+                    
+                    console.log('📊 Current quantity:', currentQuantity);
+                    
+                    // Calculate new quantity (minimum 1)
+                    let newQuantity = Math.max(1, currentQuantity + change);
+                    
+                    console.log('🎯 New quantity:', newQuantity);
+                    
+                    // Update the item quantity
+                    items[itemIndex].quantity = newQuantity;
+                    
+                    // Update localStorage
+                    quoteData.items = items;
+                    localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
+                    
+                    // Update display
+                    quantityElement.textContent = newQuantity;
+                    
+                    // Show toast
+                    showToast(`Quantity updated to ${newQuantity}`, 'success');
+                } else {
+                    console.error('❌ Item not found in quote:', itemId);
+                }
+            } catch (e) {
+                console.error('❌ Error updating quantity:', e);
+            }
+        }
+    }
+    
+    // Remove item from list
+    function removeItem(itemId) {
+        console.log(`🗑️ Attempting to remove item: ${itemId}`);
+        
+        const savedItems = localStorage.getItem('sparrowQuoteItems');
+        if (savedItems) {
+            try {
+                const quoteData = JSON.parse(savedItems);
+                const items = quoteData.items || [];
+                
+                console.log('📋 Items before removal:', items.length);
+                
+                // Filter out the item to remove
+                const updatedItems = items.filter(item => item.id !== itemId);
+                
+                console.log('📋 Items after removal:', updatedItems.length);
+                
+                quoteData.items = updatedItems;
+                quoteData.count = updatedItems.length;
+                
+                localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
+                
+                // Reload the items
+                loadAddedItems();
+                
+                // Show confirmation
+                showToast('Item removed from your list', 'info');
+            } catch (e) {
+                console.error('❌ Error removing item:', e);
+            }
+        }
+    }
+    
+    // NEW: Confirm Quote functionality
+    function setupConfirmQuote() {
+        const confirmBtn = document.getElementById('confirmQuoteBtn');
+        const contactFormSection = document.getElementById('contactFormSection');
+        const quoteForm = document.getElementById('quoteForm');
+        const successMessage = document.getElementById('successMessage');
+        const submitBtn = document.getElementById('submitQuoteBtn');
+        
+        confirmBtn.addEventListener('click', function() {
+            console.log('✅ Confirm Quote button clicked');
+            
+            // Hide confirm button, show Cart form
+            confirmBtn.style.display = 'none';
+            contactFormSection.classList.add('visible');
+            
+            // Scroll to form
+            contactFormSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            showToast('Please fill in your Cart details', 'info');
+        });
+        
+        quoteForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('📝 Form submitted');
+            
+            // Disable submit button to prevent double submission
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                items: getQuoteItems(),
+                timestamp: new Date().toISOString()
+            };
+            
+            console.log('📊 Form data:', formData);
+            
+            // Simulate form submission with delay
+            setTimeout(() => {
+                // Hide form, show success message
+                contactFormSection.classList.remove('visible');
+                successMessage.classList.add('visible');
+                
+                // Save submission to localStorage (for demo purposes)
+                saveQuoteSubmission(formData);
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                showToast('Quote submitted successfully!', 'success');
+                
+                // Reset form and button
+                quoteForm.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit';
+                
+            }, 1500); // 1.5 second delay to simulate processing
+        });
+    }
+    
+    // NEW: Get quote items from localStorage
+    function getQuoteItems() {
+        const savedItems = localStorage.getItem('sparrowQuoteItems');
+        if (savedItems) {
+            try {
+                const quoteData = JSON.parse(savedItems);
+                return quoteData.items || [];
+            } catch (e) {
+                console.error('❌ Error getting quote items:', e);
+                return [];
+            }
+        }
+        return [];
+    }
+    
+    // NEW: Save quote submission (for demo purposes)
+    function saveQuoteSubmission(formData) {
+        try {
+            // Get existing submissions or create new array
+            const existingSubmissions = JSON.parse(localStorage.getItem('sparrowQuoteSubmissions') || '[]');
+            
+            // Add new submission
+            existingSubmissions.push(formData);
+            
+            // Save back to localStorage
+            localStorage.setItem('sparrowQuoteSubmissions', JSON.stringify(existingSubmissions));
+            
+            console.log('💾 Quote submission saved:', formData);
+            console.log('📋 Total submissions:', existingSubmissions.length);
+            
+        } catch (e) {
+            console.error('❌ Error saving quote submission:', e);
+        }
+    }
+    
+    // Show toast notification
+    function showToast(message, type = 'info') {
+        // Remove existing toast
+        const existingToast = document.querySelector('.toast-notification');
+        if (existingToast) existingToast.remove();
+        
+        // Create toast
+        const toast = document.createElement('div');
+        toast.className = `toast-notification toast-${type}`;
+        toast.textContent = message;
+        
+        // Add styles
+        toast.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: ${type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : '#17a2b8'};
+            color: white;
+            padding: 15px 20px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            animation: slideIn 0.3s ease-out;
+        `;
+        
+        // Add keyframe animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Auto-remove after 3 seconds
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.style.animation = 'slideIn 0.3s ease-out reverse';
+                setTimeout(() => toast.remove(), 300);
+            }
+        }, 3000);
+        
+        document.body.appendChild(toast);
+    }
+    
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 Page loaded, starting quote item loading...');
+        loadAddedItems();
+        setupConfirmQuote();
+    });
+    
+    // Add debug helper
+    window.debugQuote = function() {
+        const saved = localStorage.getItem('sparrowQuoteItems');
+        console.log('🔍 Debug - localStorage sparrowQuoteItems:', saved);
+        if (saved) {
+            console.log('🔍 Parsed data:', JSON.parse(saved));
+        }
+        loadAddedItems();
+    }
 </script>
 </body>
 </html>

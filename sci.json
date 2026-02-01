@@ -2,7 +2,7 @@
   {
     "name": "Optical Spectrometer",
     "category": "Physics Lab",
-    "image": "/sparrowinstruments/physimg/phys1.jpg",
+    "image": "/sparrowinstruments/imgsci/sci1.jpg",
     "mrpPrice": "42,500",
     "discount": "8%",
     "bestBuyPrice": "39,100",
@@ -26,7 +26,7 @@
   {
     "name": "Digital Multimeter",
     "category": "Physics Lab",
-    "image": "/sparrowinstruments/physimg/phys2.jpg",
+    "image": "/sparrowinstruments/imgsci/sci2.jpg",
     "mrpPrice": "3,200",
     "discount": "15%",
     "bestBuyPrice": "2,720",

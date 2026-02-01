@@ -1121,7 +1121,7 @@
                     <p>Your Requested Quotation has been submitted successfully. We will notify you within 24 business hours.</p>
                     <p>Or, you can directly Contact us through:</p>
                     <div class="contact-info">
-                        Email: sales@sparrowinstruments.com<br>
+                        Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f083919c9583b083809182829f87999e838482859d959e8483de939f9d">[email&#160;protected]</a><br>
                         WhatsApp: +91-9876543210<br>
                         Phone: +91-1234567890
                     </div>
@@ -1140,22 +1140,25 @@
         </div>
     </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Load saved items from localStorage
+    // index.html saves cart as a PLAIN ARRAY under key "sparrowCartItems":
+    //   localStorage.setItem('sparrowCartItems', JSON.stringify([item1, item2, ...]))
+    // So we read that key and treat the parsed value as the array directly.
     function loadAddedItems() {
-        const savedItems = localStorage.getItem('sparrowQuoteItems');
+        const savedItems = localStorage.getItem('sparrowCartItems');   // ✅ CORRECT KEY
         const itemsList = document.getElementById('itemsList');
         const emptyMessage = document.getElementById('emptyMessage');
         const confirmQuoteSection = document.getElementById('confirmQuoteSection');
         
-        console.log('🔍 Checking localStorage for quote items...');
+        console.log('🔍 Checking localStorage for cart items...');
         console.log('Saved items:', savedItems);
         
         // DEFAULT: Show empty message, hide items list and confirm section
         emptyMessage.style.display = 'flex';
         itemsList.style.display = 'none';
         confirmQuoteSection.classList.remove('visible');
-        itemsList.innerHTML = ''; // Clear any existing items
+        itemsList.innerHTML = '';
         
         // Reset form and success message
         document.getElementById('contactFormSection').classList.remove('visible');
@@ -1164,29 +1167,25 @@
         
         if (savedItems) {
             try {
-                const quoteData = JSON.parse(savedItems);
-                const items = quoteData.items || [];
+                const items = JSON.parse(savedItems);   // ✅ plain array, no .items wrapper
                 
-                console.log(`📦 Found ${items.length} items in quote`);
+                console.log(`📦 Found ${items.length} items in cart`);
                 console.log('Items data:', items);
                 
-                if (items.length > 0) {
+                if (Array.isArray(items) && items.length > 0) {
                     // Show items and confirm section, hide empty message
                     itemsList.style.display = 'block';
                     emptyMessage.style.display = 'none';
                     confirmQuoteSection.classList.add('visible');
                     
-                    // Display items with full product data
                     items.forEach((itemData, index) => {
                         console.log(`🔄 Processing item ${index + 1}:`, itemData);
                         
-                        // Check if itemData is an object with full product data
                         if (typeof itemData === 'object' && itemData !== null) {
                             console.log('✅ Item is an object, creating element...');
                             const itemElement = createItemElement(itemData, index);
                             itemsList.appendChild(itemElement);
                         } 
-                        // Fallback for old format (just IDs)
                         else {
                             console.log('⚠️ Item is not an object, using fallback:', itemData);
                             const basicItem = {
@@ -1207,7 +1206,7 @@
                     
                     console.log('✅ All items displayed');
                 } else {
-                    console.log('📭 No items in quote array');
+                    console.log('📭 No items in cart array');
                 }
                 
             } catch (e) {
@@ -1362,42 +1361,35 @@
     function updateQuantity(itemId, change, quantityElement) {
         console.log(`🔄 Updating quantity for item ${itemId}, change: ${change}`);
         
-        const savedItems = localStorage.getItem('sparrowQuoteItems');
+        const savedItems = localStorage.getItem('sparrowCartItems');   // ✅ CORRECT KEY
         if (savedItems) {
             try {
-                const quoteData = JSON.parse(savedItems);
-                const items = quoteData.items || [];
+                const items = JSON.parse(savedItems);   // ✅ plain array, no .items wrapper
                 
-                console.log('📋 Current items in quote:', items);
+                console.log('📋 Current items in cart:', items);
                 
-                // Find the item index
                 const itemIndex = items.findIndex(item => item.id === itemId);
                 console.log('🔍 Item index found:', itemIndex);
                 
                 if (itemIndex !== -1) {
-                    let currentItem = items[itemIndex];
-                    let currentQuantity = currentItem.quantity || 1;
+                    let currentQuantity = items[itemIndex].quantity || 1;
                     
                     console.log('📊 Current quantity:', currentQuantity);
                     
-                    // Calculate new quantity (minimum 1)
                     let newQuantity = Math.max(1, currentQuantity + change);
                     
                     console.log('🎯 New quantity:', newQuantity);
                     
-                    // Update the item quantity
                     items[itemIndex].quantity = newQuantity;
                     
-                    // Update localStorage
-                    quoteData.items = items;
-                    localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
+                    // Write back the plain array directly
+                    localStorage.setItem('sparrowCartItems', JSON.stringify(items));   // ✅
                     
-                    // Update display
                     quantityElement.textContent = newQuantity;
                     
                     showToast(`Quantity updated to ${newQuantity}`, 'success');
                 } else {
-                    console.error('❌ Item not found in quote:', itemId);
+                    console.error('❌ Item not found in cart:', itemId);
                 }
             } catch (e) {
                 console.error('❌ Error updating quantity:', e);
@@ -1409,11 +1401,10 @@
     function removeItem(itemId) {
         console.log(`🗑️ Attempting to remove item: ${itemId}`);
         
-        const savedItems = localStorage.getItem('sparrowQuoteItems');
+        const savedItems = localStorage.getItem('sparrowCartItems');   // ✅ CORRECT KEY
         if (savedItems) {
             try {
-                const quoteData = JSON.parse(savedItems);
-                const items = quoteData.items || [];
+                const items = JSON.parse(savedItems);   // ✅ plain array
                 
                 console.log('📋 Items before removal:', items.length);
                 
@@ -1422,10 +1413,8 @@
                 
                 console.log('📋 Items after removal:', updatedItems.length);
                 
-                quoteData.items = updatedItems;
-                quoteData.count = updatedItems.length;
-                
-                localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
+                // Write back the plain array directly
+                localStorage.setItem('sparrowCartItems', JSON.stringify(updatedItems));   // ✅
                 
                 // Reload the items
                 loadAddedItems();
@@ -1500,15 +1489,14 @@
         });
     }
     
-    // Get quote items from localStorage
+    // Get cart items from localStorage (used when submitting the quote form)
     function getQuoteItems() {
-        const savedItems = localStorage.getItem('sparrowQuoteItems');
+        const savedItems = localStorage.getItem('sparrowCartItems');   // ✅ CORRECT KEY
         if (savedItems) {
             try {
-                const quoteData = JSON.parse(savedItems);
-                return quoteData.items || [];
+                return JSON.parse(savedItems) || [];   // ✅ plain array directly
             } catch (e) {
-                console.error('❌ Error getting quote items:', e);
+                console.error('❌ Error getting cart items:', e);
                 return [];
             }
         }
@@ -1585,13 +1573,4 @@
     
     // Debug helper
     window.debugQuote = function() {
-        const saved = localStorage.getItem('sparrowQuoteItems');
-        console.log('🔍 Debug - localStorage sparrowQuoteItems:', saved);
-        if (saved) {
-            console.log('🔍 Parsed data:', JSON.parse(saved));
-        }
-        loadAddedItems();
-    }
-</script>
-</body>
-</html>
+        const saved = localStorage.getItem('sparrowQuote

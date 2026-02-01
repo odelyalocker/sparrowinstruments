@@ -175,7 +175,7 @@
         /* Icon styles for Home and Contact */
 .home-button a i,
 .contact-button a i,
-.about-button a i,
+.cart-button a i,
 .hamburger-menu i {
     color: #FFFFFF;
     font-size: 26px;
@@ -185,7 +185,7 @@
 
 .home-button a:hover i,
 .hamburger-menu:hover i,
-.about-button a:hover i,
+.cart-button a:hover i,
 .contact-button a:hover i {
 color: #FFFFFF;
 transform: scale(1.1); /* Slight zoom on hover */
@@ -255,14 +255,47 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
             background-color: #fff;
         }
         
-        /* Contact button on right */
-        .contact-button {
-    margin-left: 10px; /* Reduced from 20px to 10px */
+    /* Contact button*/
+    .contact-button {
+    margin-left: 10px; 
     display: flex;
     align-items: center;
     justify-content: center;
-        }
-        
+    }
+    /* Cart button - ADD THIS NEW STYLE */
+.cart-button {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-button a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s;
+    white-space: nowrap;
+}
+
+.cart-button a:hover {
+    color: #FFFFFF;
+}
+
+/* Cart icon styling - ADD THIS */
+.cart-button a i {
+    color: #FFFFFF;
+    font-size: 26px;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.cart-button a:hover i {
+    color: #FFFFFF;
+    transform: scale(1.1);
+    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+}    
         .contact-button a {
             color: #FFFFFF;
             text-decoration: none;
@@ -275,23 +308,7 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         .contact-button a:hover {
             color: #FFFFFF;
         }
-/* About button */
-.about-button {
-    margin-left: 10px;
-    margin-right: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-/* About icon styling */
-
-.about-button a:hover i {
-    color: #FFFFFF;
-    font-size: 26px; 
-    transform: scale(1.1);
-    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
-}
         /* Search Results Section - UPDATED FOR DESKTOP FOOTER FIX */
         .search-results {
             position: relative; /* CHANGED: from absolute to relative */
@@ -1270,17 +1287,17 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         margin-top: 0;
         min-width: 0;
     }
-    .about-button {
-    order: 3;
-    margin-left: 5px;
-    margin-right: 5px; /* ADD for mobile */
-    flex-shrink: 0;
-    }
-    
     .contact-button {
         margin-left: 5px;
-        order: 4;
+        order: 3;
         flex-shrink: 0;
+    }
+    
+    .cart-button {
+    order: 4;
+    margin-left: 5px;
+    margin-right: 5px; 
+    flex-shrink: 0;
     }
     
     .search-container {
@@ -1294,7 +1311,7 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
     }
     .home-button a i,
     .contact-button a i,
-    .about-button a i,
+    .cart-button a i,
     .hamburger-menu i {
     font-size: 22px; /* All icons now 22px on mobile */
     }
@@ -1469,7 +1486,8 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         min-height: 60px;
         flex-wrap: nowrap;
     }
-    /* Mobile layout order */
+
+/* Mobile layout order */
 .home-button {
     order: 1;
     margin-right: 5px; /* Reduced for mobile */
@@ -1480,16 +1498,17 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
     flex-grow: 1;
 }
 
-.about-button {
+.contact-button {
     order: 3;
     margin-left: 5px;
     margin-right: 5px; /* Consistent spacing */
 }
 
-.contact-button {
+.cart-button {
     order: 4;
-    margin-left: 0; /* No left margin since About has right margin */
+    margin-left: 0;
 }
+            
     .home-button a,
     .contact-button a {
         font-size: 15px;
@@ -1498,7 +1517,7 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
     }
     .home-button a i,
     .contact-button a i,
-    .about-button a i,
+    .czrt-button a i,
     .hamburger-menu i {
     font-size: 20px;
     }
@@ -1596,17 +1615,17 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
     order: 2;
     flex-grow: 1;
 }
-
-.about-button {
-    order: 3;
-    margin-left: 5px;
-    margin-right: 5px; /* Consistent spacing */
-}
-
 .contact-button {
-    order: 4;
-    margin-left: 0; /* No left margin since About has right margin */
+    order: 3;
+    margin-left: 0;
 }
+
+.cart-button {
+    order: 4;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
     .home-button a,
     .contact-button a {
         font-size: 14px;
@@ -1615,7 +1634,7 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
     }
     .home-button a i,
     .contact-button a i,
-    .about-button a i,
+    .cart-button a i,
     .hamburger-menu i {
     font-size: 18px; /* All icons now 18px */
 }    
@@ -2455,3 +2474,4 @@ function applyFilters() {
 </script>
 </body>
 </html>
+

@@ -151,39 +151,13 @@
             top: 70px;
         }
         
-        /* Home button on left */
-        .home-button {
-            margin-right: 10px; /* Reduced from 20px */
-            display: flex;
-            align-items: center;
-        }
-
-        /* Hamburger menu as separate entity */
-        .hamburger-menu {
-            margin-right: 15px; /* Space between hamburger and search */
-            display: flex;
-            align-items: center;
-        }
-
-        /* Icon styles for Home and Contact */
-        .home-button a i,
-        .cart-button a i,
-        .about-button a i,
-        .hamburger-menu i {
-            color: #FFFFFF;
-            font-size: 26px;
-            transition: all 0.3s ease;
-            display: block;
-        }
-
-        .home-button a:hover i,
-        .hamburger-menu:hover i,
-        .about-button a:hover i,
-        .cart-button a:hover i {
-            color: #FFFFFF;
-            transform: scale(1.1); /* Slight zoom on hover */
-            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
-        }
+ /* Home button on left */
+.home-button {
+    margin-right: 10px; /* Reduced from 20px */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    }
         
         .home-button a {
             color: #FFFFFF;
@@ -198,29 +172,49 @@
             color: #FFFFFF;
         }
 
-        /* Hamburger menu styling */
-        .hamburger-menu i {
-            color: #FFFFFF;
-            transition: all 0.3s ease;
-            margin-left: 15px; /* Space between home and hamburger */
-        }
+        /* Icon styles for Home and Contact */
+.home-button a i,
+.contact-button a i,
+.about-button a i,
+.hamburger-menu i {
+    color: #FFFFFF;
+    font-size: 26px;
+    transition: all 0.3s ease;
+    display: block;
+}
 
-        /* Hover effect for hamburger menu */
-        .hamburger-menu:hover i {
-            color: #FFFFFF;
-            transform: scale(1.1);
-            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
-        }
-
-        /* Adjust button containers for icons */
-        .home-button,
-        .cart-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.home-button a:hover i,
+.hamburger-menu:hover i,
+.about-button a:hover i,
+.contact-button a:hover i {
+color: #FFFFFF;
+transform: scale(1.1); /* Slight zoom on hover */
+filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+}
         
-        /* Search box in center */
+/* Hamburger menu styling - ADD THIS */
+.hamburger-menu i {
+    color: #FFFFFF;
+    transition: all 0.3s ease;
+    margin-left: 15px; /* Space between home and hamburger */
+}
+
+/* Hover effect for hamburger menu - ADD THIS */
+.hamburger-menu:hover i {
+    color: #FFFFFF;
+    transform: scale(1.1);
+    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+}
+
+/* Adjust button containers for icons */
+.home-button,
+.contact-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+        
+        /* Search box in center - NEW */
         .black-header-search {
             flex-grow: 1;
             display: flex;
@@ -261,15 +255,15 @@
             background-color: #fff;
         }
         
-        /* Cart button on right */
-        .cart-button {
-            margin-left: 10px; /* Reduced from 20px to 10px */
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Contact button on right */
+        .contact-button {
+    margin-left: 10px; /* Reduced from 20px to 10px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
         }
         
-        .cart-button a {
+        .contact-button a {
             color: #FFFFFF;
             text-decoration: none;
             font-size: 18px;
@@ -278,30 +272,29 @@
             white-space: nowrap;
         }
         
-        .cart-button a:hover {
+        .contact-button a:hover {
             color: #FFFFFF;
         }
+/* About button */
+.about-button {
+    margin-left: 10px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        /* About button */
-        .about-button {
-            margin-left: 10px;
-            margin-right: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+/* About icon styling */
 
-        /* About icon styling */
-        .about-button a:hover i {
-            color: #FFFFFF;
-            font-size: 26px; 
-            transform: scale(1.1);
-            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
-        }
-        
-        /* Search Results Section */
+.about-button a:hover i {
+    color: #FFFFFF;
+    font-size: 26px; 
+    transform: scale(1.1);
+    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+}
+        /* Search Results Section - UPDATED FOR DESKTOP FOOTER FIX */
         .search-results {
-            position: relative;
+            position: relative; /* CHANGED: from absolute to relative */
             width: 100%;
             background: white;
             z-index: 998;
@@ -309,15 +302,15 @@
             display: none;
             border-top: 2px solid #d32f2f;
             overflow-y: auto;
-            margin-top: 140px;
-            min-height: 200px;
+            margin-top: 140px; /* ADDED: Push below both headers */
+            min-height: 200px; /* ADDED: Minimum height for single item */
         }
 
-.results-container {
-    padding: 10px 20px 20px 20px;
-    width: 95%;
-    margin: 0 auto;
-}
+        .results-container {
+            padding: 20px;
+            width: 95%;
+            margin: 0 auto;
+        }
 
         /* Ensure results container doesn't add extra padding */
         .search-results > .results-container {
@@ -326,6 +319,22 @@
             margin: 0 auto;
             padding: 20px 30px;
         }
+        
+        .results-header {
+            display: block;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .results-header h3 {
+            color: #333;
+            font-size: 18px;
+            margin: 0;
+        }
+        
         
         .results-list {
             display: block;
@@ -347,9 +356,10 @@
             padding: 30px 20px;
             text-align: center;
             color: #555;
-            margin-top: 140px;
+            margin-top: 140px; /* Keep this for when no search results */
         }
         
+
         /* Footer Styles */
         footer {
             background: linear-gradient(135deg, #d32f2f, #b71c1c);
@@ -374,21 +384,19 @@
             font-size: 14px;
             color: #FFFFFF;
         }
-        
-        /* Footer text responsiveness */
-        .mobile-text {
-            display: none;
-        }
+/* Footer text responsiveness */
+.mobile-text {
+    display: none;
+}
 
-        @media (max-width: 768px) {
-            .desktop-text {
-                display: none;
-            }
-            .mobile-text {
-                display: block;
-            }
-        }
-        
+@media (max-width: 768px) {
+    .desktop-text {
+        display: none;
+    }
+    .mobile-text {
+        display: block;
+    }
+}
         /* ===== SEARCH RESULTS LAYOUT ===== */
         .result-item {
             background: white;
@@ -480,12 +488,12 @@
             font-weight: bold;
         }
 
-        /* Button Container */
+        /* ===== NEW: BUTTON CONTAINER FOR SECOND COLUMN ===== */
         .button-container {
             margin-top: 20px;
         }
         
-        /* GET QUOTE BUTTON */
+        /* ===== NEW: GET QUOTE BUTTON ===== */
         .get-quote-btn {
             background: #28a745;
             color: white;
@@ -519,7 +527,7 @@
             box-shadow: none;
         }
         
-        /* ADD TO CART BUTTON */
+        /* ===== NEW: ADD TO CART BUTTON ===== */
         .add-to-cart-btn {
             background: #0056b3;
             color: white;
@@ -587,7 +595,7 @@
         }
 
         .specs-section {
-            margin-bottom: 0;
+            margin-bottom: 0; /* Changed from 20px to 0 */
             flex-grow: 1;
         }
 
@@ -612,7 +620,7 @@
         .result-right {
             grid-column: 3;
             min-width: 0;
-            margin-top: 35px;
+            margin-top: 35px; /* Added to align with specifications */
             display: flex;
             flex-direction: column;
         }
@@ -647,7 +655,21 @@
             display: none !important;
         }
         
+        .description-section ul {
+            margin: 5px 0 5px 20px;
+            color: #555;
+            word-wrap: break-word; /* Break long words */
+            overflow-wrap: break-word; /* Modern property */
+        }
+
+        .description-section li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            word-break: break-word; /* Break words if needed */
+        }
+
         /* ===== WORKING HOVER ZOOM ===== */
+        /* Zoom container */
         .zoom-container {
             position: absolute;
             left: 102%;
@@ -745,7 +767,7 @@
             border-radius: 10px;
         }
         
-        /* ===== TOAST NOTIFICATION ===== */
+        /* ===== NEW: TOAST NOTIFICATION ===== */
         .toast-notification {
             position: fixed;
             top: 20px;
@@ -783,262 +805,328 @@
             to { transform: translateX(0); opacity: 1; }
         }
         
-        /* ===== UPDATED FILTER SIDEBAR ===== */
-        .filter-sidebar {
-            position: fixed;
-            top: 140px;
-            left: -350px;
-            width: 320px;
-            height: calc(100vh - 140px);
-            background: white;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 1001;
-            transition: left 0.3s ease;
-            overflow-y: auto;
-            padding-bottom: 20px;
-        }
+/* ===== FILTER SIDEBAR ===== */
+.filter-sidebar {
+    position: fixed;
+    top: 140px; /* Below both headers */
+    left: -350px; /* Hidden off-screen */
+    width: 320px;
+    height: calc(100vh - 140px);
+    background: white;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+}
 
-        .filter-sidebar.show {
-            left: 0;
-        }
+.filter-sidebar.show {
+    left: 0; /* Slide in */
+}
 
-        .filter-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background: #f8f9fa;
-            border-bottom: 1px solid #e0e0e0;
-            position: sticky;
-            top: 0;
-            z-index: 1;
-        }
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+}
 
-        .filter-header h3 {
-            color: #333;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.filter-header h3 {
+    color: #333;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-        .filter-header h3 i {
-            color: #d32f2f;
-        }
+.filter-header h3 i {
+    color: #d32f2f;
+}
 
-        .close-filter {
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: #666;
-            cursor: pointer;
-            padding: 5px;
-            transition: color 0.3s;
-        }
+.close-filter {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s;
+}
 
-        .close-filter:hover {
-            color: #d32f2f;
-        }
+.close-filter:hover {
+    color: #d32f2f;
+}
 
-        .filter-content {
-            padding: 20px;
-        }
+.filter-content {
+    padding: 20px;
+}
 
-        .filter-section {
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
+.filter-section {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
 
-        .filter-section:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
+.filter-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
 
-        .filter-section h4 {
-            color: #333;
-            font-size: 16px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+.filter-section h4 {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
-        .filter-section h4 i {
-            color: #d32f2f;
-        }
+.filter-section h4 i {
+    color: #d32f2f;
+}
 
-        /* Clear Filter Button */
-        .clear-filter-btn {
-            width: 100%;
-            padding: 12px;
-            background: #f8f9fa;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            color: #666;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
+/* Clear Filter Button */
+.clear-filter-btn {
+    width: 100%;
+    padding: 12px;
+    background: #f8f9fa;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    color: #666;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
 
-        .clear-filter-btn:hover {
-            background: #e9ecef;
-            border-color: #ccc;
-            color: #333;
-        }
+.clear-filter-btn:hover {
+    background: #e9ecef;
+    border-color: #ccc;
+    color: #333;
+}
 
-        /* Checkbox Styles */
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+/* Checkbox Styles */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
 
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            color: #555;
-            font-size: 15px;
-            position: relative;
-            padding-left: 30px;
-            min-height: 24px;
-        }
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #555;
+    font-size: 15px;
+    position: relative;
+    padding-left: 30px;
+}
 
-        .checkbox-item input {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-        }
+.checkbox-item input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
 
-        .checkmark {
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 20px;
-            width: 20px;
-            background-color: #fff;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            transition: all 0.3s;
-        }
+.checkmark {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
 
-        .checkbox-item:hover .checkmark {
-            border-color: #999;
-        }
+.checkbox-item:hover .checkmark {
+    border-color: #999;
+}
 
-        .checkbox-item input:checked ~ .checkmark {
-            background-color: #d32f2f;
-            border-color: #d32f2f;
-        }
+.checkbox-item input:checked ~ .checkmark {
+    background-color: #d32f2f;
+    border-color: #d32f2f;
+}
 
-        .checkmark:after {
-            content: "";
-            position: absolute;
-            display: none;
-        }
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
 
-        .checkbox-item input:checked ~ .checkmark:after {
-            display: block;
-        }
+.checkbox-item input:checked ~ .checkmark:after {
+    display: block;
+}
 
-        .checkbox-item .checkmark:after {
-            left: 6px;
-            top: 2px;
-            width: 5px;
-            height: 10px;
-            border: solid white;
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
-        }
+.checkbox-item .checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
 
-        /* Sub-checkbox indentation */
-        .sub-checkbox {
-            margin-left: 25px !important;
-            padding-left: 35px !important;
-        }
+/* Price Inputs */
+.price-inputs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
 
-        .sub-checkbox .checkmark {
-            left: 10px;
-        }
+.price-input {
+    flex: 1;
+}
 
-        /* Section label styling */
-        .section-label {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+.price-input label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-size: 14px;
+}
 
-        .section-label i {
-            color: #d32f2f;
-            font-size: 14px;
-        }
+.price-input input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
 
-        /* To be added later note */
-        .to-be-added {
-            color: #888;
-            font-size: 12px;
-            font-style: italic;
-            margin-left: 8px;
-        }
+.price-input input:focus {
+    outline: none;
+    border-color: #d32f2f;
+}
 
-        /* Apply Filter Button */
-        .apply-filter-btn {
-            width: 100%;
-            padding: 14px;
-            background: #d32f2f;
-            border: none;
-            border-radius: 6px;
-            color: white;
-            font-weight: 500;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
+/* Price Slider */
+.price-slider {
+    position: relative;
+    height: 40px;
+    margin: 30px 0;
+}
 
-        .apply-filter-btn:hover {
-            background: #b71c1c;
-        }
+.slider-track {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: #ddd;
+    border-radius: 5px;
+    transform: translateY(-50%);
+}
 
-        /* Sidebar Overlay */
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            display: none;
-        }
+.range-min,
+.range-max {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 0;
+    -webkit-appearance: none;
+    background: none;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
 
-        .sidebar-overlay.show {
-            display: block;
-        }
+.range-min::-webkit-slider-thumb,
+.range-max::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #d32f2f;
+    cursor: pointer;
+    pointer-events: all;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
 
+.range-min::-moz-range-thumb,
+.range-max::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #d32f2f;
+    cursor: pointer;
+    pointer-events: all;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.price-display {
+    text-align: center;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Apply Filter Button */
+.apply-filter-btn {
+    width: 100%;
+    padding: 14px;
+    background: #d32f2f;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.apply-filter-btn:hover {
+    background: #b71c1c;
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+}
+
+.sidebar-overlay.show {
+    display: block;
+}
+
+/* Mobile adjustments for filter sidebar */
+@media (max-width: 768px) {
+    .filter-sidebar {
+        top: 130px; /* Adjusted for mobile header height */
+        height: calc(100vh - 130px);
+        width: 280px;
+        left: -280px;
+    }
+}
         /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 1024px) {
             .search-container {
-                width: 70%;
+                width: 70%; /* Slightly more on tablet */
             }
             .result-content {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr 1fr; /* Two columns on tablet */
                 gap: 20px;
             }
             
             .result-left {
-                grid-column: 1 / span 2;
+                grid-column: 1 / span 2; /* Span full width */
                 display: flex;
                 gap: 20px;
             }
@@ -1070,315 +1158,494 @@
                 width: 100px;
                 height: 100px;
             }
-            
-            .filter-sidebar {
-                width: 300px;
-            }
         }
 
-        /* MOBILE LAYOUT */
-        @media (max-width: 768px) {
-            header {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                padding: 6px 15px;
-                min-height: 65px;
-                flex-wrap: nowrap;
-                align-items: center;
-                justify-content: space-between;
-                z-index: 1000;
-                background: #FFFFFF;
-            }
-            
-            .logo-container {
-                margin-right: 15px;
-                height: 40px;
-                width: 40px;
-                order: 1;
-                flex-shrink: 0;
-            }
-            
-            .quote-image-container {
-                margin-left: 15px;
-                height: 40px;
-                width: 40px;
-                order: 3;
-                flex-shrink: 0;
-            }
-            
-            .header-center {
-                width: calc(100% - 110px);
-                order: 2;
-                padding: 0 10px;
-                margin: 0;
-                min-height: auto;
-                flex-grow: 1;
-                text-align: center;
-            }
-            
-            .center-tagline {
-                font-size: 20px;
-                color: #FF0000;
-                line-height: 1.2;
-                margin-bottom: 2px;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-            }
-            
-            .trusted-tagline {
-                font-size: 12px;
-                margin-top: 2px;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                color: #000000;
-            }
-            
-            .black-header {
-                position: fixed;
-                left: 0;
-                top: 65px;
-                width: 100%;
-                padding: 10px 15px;
-                min-height: 65px;
-                box-sizing: border-box;
-                justify-content: space-between;
-            }
-            
-            /* Mobile layout order */
-            .home-button {
-                order: 1;
-                margin-right: 5px;
-            }
-            .hamburger-menu {
-                order: 2;
-                margin-right: 5px;
-            }
-            .black-header-search {
-                order: 3;
-                flex-grow: 1;
-                padding: 0 10px;
-            }
-            .about-button {
-                order: 4;
-                margin-left: 5px;
-                margin-right: 5px;
-            }
-            .cart-button {
-                order: 5;
-                margin-left: 5px;
-            }
-            
-            .search-container {
-                width: 60%;
-            }
-            
-            .home-button a i,
-            .cart-button a i,
-            .about-button a i,
-            .hamburger-menu i {
-                font-size: 22px;
-            }
-            
-            .search-box {
-                padding: 10px 15px;
-                font-size: 16px;
-                height: 45px;
-            }
-            
-            .search-results {
-                position: relative !important;
-                margin-top: 130px !important;
-            }
+        /* MOBILE LAYOUT - FIXED & REDUCED HEIGHT */
+@media (max-width: 768px) {
+    /* FIXED HEADER - Now stays fixed at top */
+    header {
+        position: fixed; /* ADDED: Make header fixed */
+        top: 0; /* ADDED */
+        left: 0; /* ADDED */
+        width: 100%; /* ADDED */
+        padding: 6px 15px;
+        min-height: 65px;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1000; /* Ensure it's above other elements */
+        background: #FFFFFF
+    }
+    
+    /* Keep the original structure but adjust sizes */
+    .logo-container {
+        margin-right: 15px;
+        height: 40px;
+        width: 40px;
+        order: 1;
+        flex-shrink: 0;
+        position: static;
+        left: auto;
+        top: auto;
+        transform: none;
+    }
+    
+    /* Quote container - CHANGED from cart to quote */
+    .quote-image-container {
+        margin-left: 15px;
+        height: 40px; /* CHANGED: Matched with logo-container (40px) */
+        width: 40px; /* CHANGED: Matched with logo-container (40px) */
+        order: 3;
+        flex-shrink: 0;
+        position: static;
+        right: auto;
+        top: auto;
+        transform: none;
+    }
+    
+    /* Center content takes available space */
+    .header-center {
+        width: calc(100% - 110px);
+        order: 2;
+        padding: 0 10px;
+        margin: 0;
+        min-height: auto;
+        flex-grow: 1;
+        text-align: center;
+    }
+    
+    .center-tagline {
+        font-size: 20px;
+        color: #FF0000;
+        line-height: 1.2;
+        margin-bottom: 2px;
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+    
+    .trusted-tagline {
+        font-size: 12px;
+        margin-top: 2px;
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        color: #000000;
+    }
+    
+    /* Black Header Section - FIXED POSITIONING */
+    .black-header {
+        position: fixed; /* CHANGED: Already fixed, but ensuring */
+        left: 0;
+        top: 65px; /* Position below red header */
+        width: 100%;
+        background-color: #000000;
+        color: white;
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        z-index: 999;
+        min-height: 65px;
+        box-sizing: border-box; /* Ensure padding included in height */
+        justify-content: space-between;
+    }
+    
+    /* Home and Contact buttons - FIXED */
+    .home-button {
+        margin-right: 10px;
+        order: 1;
+        flex-shrink: 0;
+    }
+    
+    .black-header-search {
+        order: 2;
+        flex-grow: 1;
+        padding: 0 10px;
+        margin-top: 0;
+        min-width: 0;
+    }
+    .about-button {
+    order: 3;
+    margin-left: 5px;
+    margin-right: 5px; /* ADD for mobile */
+    flex-shrink: 0;
+    }
+    
+    .contact-button {
+        margin-left: 5px;
+        order: 4;
+        flex-shrink: 0;
+    }
+    
+    .search-container {
+        width: 60%;
+    }
+    
+    .home-button a,
+    .contact-button a {
+        font-size: 16px;
+        padding: 8px 0;
+    }
+    .home-button a i,
+    .contact-button a i,
+    .about-button a i,
+    .hamburger-menu i {
+    font-size: 22px; /* All icons now 22px on mobile */
+    }
+    .hamburger-menu i {
+     margin-left: 12px;
+    }
+    .search-box {
+        padding: 10px 15px;
+        font-size: 16px;
+        min-width: 50px;
+        height: 45px;
+    }
+    
+    /* Search Results Section - FIXED SCROLLING */
+    .search-results {
+        position: relative !important;
+        top: 0 !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+        margin-top: 130px !important; /* CHANGED: Combined height of both headers (65px + 65px) */
+        z-index: 1; /* Place below headers */
+    }
 
-            .main-content {
-                margin-top: 130px !important;
-            }
-            
-            .results-container {
-                width: 95%;
-                padding: 15px;
-            }
-            
-            .result-content {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .result-left {
-                grid-column: 1;
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .result-image {
-                flex: 0 0 auto;
-                height: 200px;
-            }
-            
-            .result-center,
-            .result-right {
-                grid-column: 1;
-            }
-            
-            .filter-sidebar {
-                top: 130px;
-                height: calc(100vh - 130px);
-                width: 280px;
-                left: -280px;
-            }
-        }
-
+    .main-content.hide-main {
+        display: none !important;
+    }
+    
+    .results-container {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    /* Adjust main content to start below both headers */
+    .main-content {
+        margin-top: 130px !important; /* CHANGED: Combined height of both headers */
+        margin-bottom: 10px;
+        background-color: white;
+        padding: 30px 20px;
+        text-align: center;
+        color: #555;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .result-content {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 20px;
+    }
+    
+    .result-left {
+        grid-column: 1;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .result-image {
+        flex: 0 0 auto;
+        text-align: center;
+        height: 200px;
+    }
+    
+    .result-image img {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+    }
+    
+    .result-center,
+    .result-right {
+        grid-column: 1;
+    }
+    
+    /* Button adjustments for mobile */
+    .get-quote-btn,
+    .add-to-cart-btn {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
+    /* Mobile zoom adjustments */
+    .zoom-container {
+        position: fixed !important;
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 90vw !important;
+        height: 60vh !important;
+        max-width: 400px !important;
+        max-height: 300px !important;
+        background: white;
+        border: 3px solid #d32f2f;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        z-index: 2000 !important;
+        pointer-events: none;
+        display: none;
+    }
+    
+    .zoomed-image {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain;
+        border-radius: 8px;
+    }
+    
+    .zoom-lens {
+        display: none !important;
+    }
+    
+    .result-image {
+        cursor: pointer;
+    }
+    
+    .result-image::after {
+        content: "👆 Tap to zoom";
+        opacity: 0.8;
+        font-size: 11px;
+    }
+    
+    /* Improve touch experience */
+    .result-image img {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+}        
+ 
         @media (max-width: 480px) {
-            header {
-                padding: 5px 12px;
-                min-height: 60px;
-            }
-            
-            .logo-container {
-                height: 35px;
-                width: 35px;
-                margin-right: 10px;
-            }
-            
-            .quote-image-container {
-                height: 35px;
-                width: 35px;
-                margin-left: 10px;
-            }
-            
-            .header-center {
-                width: calc(100% - 90px);
-                padding: 0 8px;
-            }
-            
-            .center-tagline {
-                font-size: 18px;
-                line-height: 1.1;
-            }
-            
-            .trusted-tagline {
-                font-size: 11px;
-                line-height: 1.1;
-            }
-            
-            .black-header {
-                top: 60px;
-                padding: 8px 12px;
-                min-height: 60px;
-            }
-            
-            .home-button a i,
-            .cart-button a i,
-            .about-button a i,
-            .hamburger-menu i {
-                font-size: 20px;
-            }
-            
-            .search-container {
-                width: 60%;
-            }
-            
-            .search-box {
-                padding: 8px 12px;
-                font-size: 15px;
-                height: 40px;
-            }
-            
-            .search-results {
-                margin-top: 120px !important;
-            }
-            
-            .main-content {
-                margin-top: 120px !important;
-            }
-            
-            .filter-sidebar {
-                top: 120px;
-                height: calc(100vh - 120px);
-                width: 260px;
-                left: -260px;
-            }
-        }
+    header {
+        position: fixed; /* ADDED */
+        padding: 5px 12px;
+        min-height: 60px;
+        top: 0; /* ADDED */
+        left: 0; /* ADDED */
+        width: 100%; /* ADDED */
+        background: #FFFFFF;
+    }
+    
+    .logo-container {
+        height: 35px;
+        width: 35px;
+        margin-right: 10px;
+    }
+    
+    .quote-image-container {
+        height: 35px; /* CHANGED: Matched with logo-container (35px) */
+        width: 35px; /* CHANGED: Matched with logo-container (35px) */
+        margin-left: 10px;
+    }
+    
+    .header-center {
+        width: calc(100% - 90px);
+        padding: 0 8px;
+    }
+    
+    .center-tagline {
+        font-size: 18px;
+        line-height: 1.1;
+        color: #FF0000;
+    }
+    
+    .trusted-tagline {
+        font-size: 11px;
+        line-height: 1.1;
+        color: #000000;
+    }
+    
+    .black-header {
+        top: 60px; /* Position below 60px header */
+        padding: 8px 12px;
+        min-height: 60px;
+        flex-wrap: nowrap;
+    }
+    /* Mobile layout order */
+.home-button {
+    order: 1;
+    margin-right: 5px; /* Reduced for mobile */
+}
+
+.black-header-search {
+    order: 2;
+    flex-grow: 1;
+}
+
+.about-button {
+    order: 3;
+    margin-left: 5px;
+    margin-right: 5px; /* Consistent spacing */
+}
+
+.contact-button {
+    order: 4;
+    margin-left: 0; /* No left margin since About has right margin */
+}
+    .home-button a,
+    .contact-button a {
+        font-size: 15px;
+        white-space: nowrap;
+        padding: 6px 0;
+    }
+    .home-button a i,
+    .contact-button a i,
+    .about-button a i,
+    .hamburger-menu i {
+    font-size: 20px;
+    }
+    .hamburger-menu i {
+     margin-left: 10px;
+    } 
+    .search-container {
+        width: 60%; /* Further reduced on small mobile */
+    }
+    .search-box {
+        padding: 8px 12px;
+        font-size: 15px;
+        min-width: 40px;
+        height: 40px;
+    }
+    
+    /* Update search results and main content margin */
+    .search-results {
+        margin-top: 120px !important; /* Combined: 60px + 60px */
+    }
+    
+    .main-content {
+        margin-top: 120px !important; /* Combined: 60px + 60px */
+    }
+    
+    .results-container {
+        width: 95%;
+        padding: 10px;
+    }
+    
+    .result-image {
+        height: 180px;
+    }
+    
+    .item-name {
+        font-size: 20px;
+    }
+}
 
         /* For very small screens */
         @media (max-width: 360px) {
-            header {
-                min-height: 55px;
-            }
-            
-            .logo-container,
-            .quote-image-container {
-                height: 30px;
-                width: 30px;
-            }
-            
-            .logo-container {
-                margin-right: 8px;
-            }
-            
-            .quote-image-container {
-                margin-left: 8px;
-            }
-            
-            .header-center {
-                width: calc(100% - 76px);
-                padding: 0 6px;
-            }
-            
-            .center-tagline {
-                font-size: 16px;
-                -webkit-line-clamp: 1;
-            }
-            
-            .trusted-tagline {
-                font-size: 9px;
-                -webkit-line-clamp: 1;
-            }
-            
-            .black-header {
-                top: 55px;
-                min-height: 55px;
-                padding: 6px 8px;
-            }
-            
-            .home-button a i,
-            .cart-button a i,
-            .about-button a i,
-            .hamburger-menu i {
-                font-size: 18px;
-            }
-            
-            .search-container {
-                width: 55%;
-            }
-            
-            .search-box {
-                padding: 6px 10px;
-                font-size: 14px;
-                height: 35px;
-            }
-            
-            .search-results {
-                margin-top: 110px !important;
-            }
-            
-            .main-content {
-                margin-top: 110px !important;
-            }
-            
-            .filter-sidebar {
-                top: 110px;
-                height: calc(100vh - 110px);
-                width: 240px;
-                left: -240px;
-            }
-        }
-        
-        /* Button Alignment Fix */
+    header {
+        position: fixed; /* ADDED */
+        min-height: 55px;
+        top: 0; /* ADDED */
+        left: 0; /* ADDED */
+        width: 100%; /* ADDED */
+        background: #FFFFFF;
+    }
+    
+    .logo-container,
+    .quote-image-container {
+        height: 30px;
+        width: 30px;
+    }
+    
+    .logo-container {
+        margin-right: 8px;
+    }
+    
+    .quote-image-container {
+        margin-left: 8px;
+    }
+    
+    .header-center {
+        width: calc(100% - 76px);
+        padding: 0 6px;
+    }
+    
+    .center-tagline {
+        font-size: 16px;
+        -webkit-line-clamp: 1;
+        color: #FF0000;
+    }
+    
+    .trusted-tagline {
+        font-size: 9px;
+        -webkit-line-clamp: 1;
+        color: #000000;
+    }
+    
+    .black-header {
+        top: 55px; /* Position below 55px header */
+        min-height: 55px;
+        padding: 6px 8px;
+        flex-wrap: nowrap;
+    }
+    /* Mobile layout order */
+.home-button {
+    order: 1;
+    margin-right: 5px; /* Reduced for mobile */
+}
+
+.black-header-search {
+    order: 2;
+    flex-grow: 1;
+}
+
+.about-button {
+    order: 3;
+    margin-left: 5px;
+    margin-right: 5px; /* Consistent spacing */
+}
+
+.contact-button {
+    order: 4;
+    margin-left: 0; /* No left margin since About has right margin */
+}
+    .home-button a,
+    .contact-button a {
+        font-size: 14px;
+        white-space: nowrap;
+        padding: 4px 0;
+    }
+    .home-button a i,
+    .contact-button a i,
+    .about-button a i,
+    .hamburger-menu i {
+    font-size: 18px; /* All icons now 18px */
+}    
+    .hamburger-menu i {
+     margin-left: 8px;
+    }
+    .search-container {
+        width: 55%; /* Minimum width */
+    }
+    .search-box {
+        padding: 6px 10px;
+        font-size: 14px;
+        min-width: 30px;
+        height: 35px;
+    }
+    
+    /* Update search results and main content margin */
+    .search-results {
+        margin-top: 110px !important; /* Combined: 55px + 55px */
+    }
+    
+    .main-content {
+        margin-top: 110px !important; /* Combined: 55px + 55px */
+    }
+    
+    .hide-main {
+        display: none !important;
+    }
+}
+/* ===== NEW: BUTTON ALIGNMENT FIX ===== */
         .result-center,
         .result-right {
             display: flex;
@@ -1388,25 +1655,25 @@
         }
         
         .button-container {
-            margin-top: auto;
-            padding-top: 15px;
-        }
-        
-        /* Disabled Button Styles */
-        .add-to-cart-btn.inactive,
-        .add-to-cart-btn[disabled] {
-            background: #6c757d !important;
-            cursor: not-allowed !important;
-            opacity: 0.6 !important;
-            pointer-events: none !important;
-        }
+            margin-top: auto; /* This pushes button to bottom */
+            padding-top: 15px; /* Add some spacing */
+        }        
+   /* ===== NEW: DISABLED BUTTON STYLES ===== */
+.add-to-cart-btn.inactive,
+.add-to-cart-btn[disabled] {
+    background: #6c757d !important;
+    cursor: not-allowed !important;
+    opacity: 0.6 !important;
+    pointer-events: none !important;
+}
 
-        .add-to-cart-btn.inactive:hover,
-        .add-to-cart-btn[disabled]:hover {
-            transform: none !important;
-            box-shadow: none !important;
-            background: #6c757d !important;
-        }
+.add-to-cart-btn.inactive:hover,
+.add-to-cart-btn[disabled]:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    background: #6c757d !important;
+}
+    
     </style>
 </head>
 <body>
@@ -1425,113 +1692,140 @@
             <div class="trusted-tagline">Wholesaler of all Laboratory Equipment and Instruments</div>
         </div>
         
-        <!-- Quote Image in top-right corner -->
+        <!-- Quote Image in top-right corner - CHANGED from cart to quote -->
         <div class="quote-image-container">
             <a href="/sparrowinstruments/quote.html">
                 <img src="/sparrowinstruments/images/quote.jpg" alt="Request Quote" style="background: transparent;">
-            </a>
+                </a>
         </div>
     </header>
     
-    <!-- Black Header Section -->
-    <div class="black-header">
-        <!-- Home button (1) -->
-        <div class="home-button">
-            <a href="index.html">
-                <i class="fas fa-home"></i>
-            </a>
-        </div>
-        
-        <!-- Hamburger menu (2) -->
+<!-- Black Header Section - MODIFIED -->
+<div class="black-header">
+    <!-- Home button with hamburger menu on left -->
+    <div class="home-button">
+        <a href="index.html">
+            <i class="fas fa-home"></i>
+        </a>
         <div class="hamburger-menu">
             <i class="fas fa-bars"></i>
         </div>
-        
-        <!-- Search box in center (3) -->
-        <div class="black-header-search">
-            <div class="search-container">
-                <input type="text" 
-                       class="search-box" 
-                       placeholder="Type your items here ..."
-                       aria-label="Search products"
-                       maxlength="30">
-            </div>
-        </div>
-        
-        <!-- About button (4) -->
-        <div class="about-button">
-            <a href="/sparrowinstruments/about.html">
-                <i class="fas fa-info-circle"></i>
-            </a>
-        </div>
-        
-        <!-- Cart button on right (5) -->
-        <div class="cart-button">
-            <a href="cart.html">
-                <i class="fas fa-shopping-cart"></i>
-            </a>
+    </div>
+    
+    <!-- Search box in center -->
+    <div class="black-header-search">
+        <div class="search-container">
+            <input type="text" 
+                   class="search-box" 
+                   placeholder="Type your items here ..."
+                   aria-label="Search products"
+                   maxlength="30">
         </div>
     </div>
     
-    <!-- Filter Sidebar (Hamburger Menu) -->
-    <div class="filter-sidebar" id="filterSidebar">
-        <div class="filter-header">
-            <h3><i class="fas fa-filter"></i> Filters</h3>
-            <button class="close-filter" id="closeFilter">
-                <i class="fas fa-times"></i>
+    <!-- About button -->
+    <div class="about-button">
+        <a href="/sparrowinstruments/about.html">
+            <i class="fas fa-info-circle"></i>
+        </a>
+    </div>
+    
+    <!-- Contact button on right -->
+    <div class="contact-button">
+        <a href="contact.html">
+            <i class="fas fa-phone"></i>
+        </a>
+    </div>
+</div>
+
+<!-- Filter Sidebar (Hamburger Menu) -->
+<div class="filter-sidebar" id="filterSidebar">
+    <div class="filter-header">
+        <h3><i class="fas fa-filter"></i> Filters</h3>
+        <button class="close-filter" id="closeFilter">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <div class="filter-content">
+        <!-- Clear Filter Button -->
+        <div class="filter-section">
+            <button class="clear-filter-btn" id="clearFilter">
+                <i class="fas fa-times-circle"></i> X Clear Filter
             </button>
         </div>
         
-        <div class="filter-content" id="filterContent">
-            <!-- Clear Filter Button -->
-            <div class="filter-section">
-                <button class="clear-filter-btn" id="clearFilter">
-                    <i class="fas fa-times-circle"></i> X Clear Filter
-                </button>
-            </div>
-            
-            <!-- Sections Filter -->
-            <div class="filter-section">
-                <h4><i class="fas fa-th-list"></i> Sections</h4>
-                <div class="checkbox-group" id="sectionsFilter">
-                    <!-- Checkboxes will be generated by JavaScript -->
-                </div>
-            </div>
-            
-            <!-- Apply Filter Button -->
-            <div class="filter-section">
-                <button class="apply-filter-btn" id="applyFilter">
-                    <i class="fas fa-check"></i> Apply Filters
-                </button>
+        <!-- Sections Filter -->
+        <div class="filter-section">
+            <h4><i class="fas fa-th-list"></i> Sections</h4>
+            <div class="checkbox-group">
+                <label class="checkbox-item">
+                    <input type="checkbox" value="Physics Lab" class="section-checkbox">
+                    <span class="checkmark"></span>
+                    Physics
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" value="Chemistry Lab" class="section-checkbox">
+                    <span class="checkmark"></span>
+                    Chemistry
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" value="Biology Lab" class="section-checkbox">
+                    <span class="checkmark"></span>
+                    Biology
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" value="Scientific Lab" class="section-checkbox">
+                    <span class="checkmark"></span>
+                    Scientific
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" value="Medical Lab" class="section-checkbox">
+                    <span class="checkmark"></span>
+                    Medical
+                </label>
             </div>
         </div>
+        
+        
+        <!-- Apply Filter Button -->
+        <div class="filter-section">
+            <button class="apply-filter-btn" id="applyFilter">
+                <i class="fas fa-check"></i> Apply Filters
+            </button>
+        </div>
     </div>
+</div>
 
-    <!-- Overlay for closing sidebar -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+<!-- Overlay for closing sidebar -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
     
     <!-- Search Results Section -->
     <div class="search-results" id="searchResults">
         <div class="results-container">
+            <div class="results-header">
+                <h3 id="resultsTitle">Search Results</h3>
+                
+            </div>
             <div class="results-list" id="resultsList">
                 <!-- Results will appear here -->
             </div>
         </div>
     </div>
     
-    <!-- Main Content Area -->
+        <!-- Main Content Area -->
     <main class="main-content">
         <!-- Ready for your content -->
     </main>
     
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="copyright">
-                <span class="desktop-text">Sparrow Instruments is in service for the last 50 years • © 2023 All rights reserved.</span>
-                <span class="mobile-text">Sparrow Instruments: 50 years of service<br>© 2023 All rights reserved.</span>
-            </div>
+    <div class="footer-content">
+        <div class="copyright">
+            <span class="desktop-text">Sparrow Instruments is in service for the last 50 years • © 2023 All rights reserved.</span>
+            <span class="mobile-text">Sparrow Instruments: 50 years of service<br>© 2023 All rights reserved.</span>
         </div>
+    </div>
     </footer>
     
     <!-- Mobile Zoom Overlay -->
@@ -1540,744 +1834,625 @@
         <div class="mobile-zoom-hint">Touch and drag to zoom • Tap anywhere to close</div>
     </div>
 
-    <script>
-        // ===== GLOBAL VARIABLES =====
-        let allItems = [];
-        let searchTimeout;
-        let quoteItems = new Set();
-        let quoteCount = 0;
-        
-        // ===== JSON FILE CONFIGURATION =====
-        // Array of JSON files - ADD NEW FILES HERE IN THE FUTURE
-        const jsonFiles = [
-            'edu.json',  // Education
-            'sci.json',  // Scientific
-            'med.json',  // Medical
-            'ind.json',  // Industry
-            'res.json',  // Research
-            'pro.json'   // Project
-        ];
-        
-        // Section configuration
-        const sectionsConfig = {
-            'Education': {
-                label: 'Education',
-                subcategories: ['Physics', 'Chemistry', 'Biology']
-            },
-            'Scientific': {
-                label: 'Scientific',
-                subcategories: []  // To be added later
-            },
-            'Medical': {
-                label: 'Medical',
-                subcategories: []  // To be added later
-            },
-            'Industry': {
-                label: 'Industry',
-                subcategories: []  // To be added later
-            },
-            'Research': {
-                label: 'Research',
-                subcategories: []  // To be added later
-            },
-            'Project': {
-                label: 'Project',
-                subcategories: []  // To be added later
+<script>
+    
+    // 1. GLOBAL VARIABLES & LOADING
+    let allItems = [];
+    let searchTimeout;
+
+    // ADD THESE LINES BACK:
+    let quoteItems = new Set();
+    let quoteCount = 0;
+    
+    // ===== CLEANUP FUNCTION FOR CORRUPTED DATA =====
+function fixCorruptedQuoteData() {
+    const savedQuotes = localStorage.getItem('sparrowQuoteItems');
+    if (savedQuotes) {
+        try {
+            const quoteData = JSON.parse(savedQuotes);
+            
+            // If items array is empty but count > 0, reset count to 0
+            if ((!quoteData.items || quoteData.items.length === 0) && quoteData.count > 0) {
+                console.log('🛠️ Fixing corrupted quote data');
+                quoteData.count = 0;
+                localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
             }
-        };
+        } catch (e) {
+            console.error('Error fixing quote data:', e);
+        }
+    }
+}
+    
+    
+// PRICE PARSING HELPER FUNCTION
+function parsePrice(priceStr) {
+    if (!priceStr) return 0;
+    // Remove commas and convert to number
+    return parseInt(priceStr.toString().replace(/,/g, ''));
+}
+    
+    async function loadJSONFiles() {
+    console.log('🚀 Loading Lab Data...');
+    try {
+        const files = ['biolabitems.json', 'physlabitems.json', 'chemlabitems.json', 'scientificlabitems.json', 'medilabitems.json'];
+        const responses = await Promise.all(files.map(file => 
+            fetch(file).then(res => res.ok ? res.json() : [])
+        ));
         
-        // Map JSON files to sections
-        const fileToSectionMap = {
-            'edu.json': 'Education',
-            'sci.json': 'Scientific',
-            'med.json': 'Medical',
-            'ind.json': 'Industry',
-            'res.json': 'Research',
-            'pro.json': 'Project'
-        };
-        
-        // ===== FILTER STATE =====
-        let currentFilters = {
-            sections: [],
-            subcategories: []
-        };
-        
-        // ===== HELPER FUNCTIONS =====
-        function fixCorruptedQuoteData() {
-            const savedQuotes = localStorage.getItem('sparrowQuoteItems');
-            if (savedQuotes) {
-                try {
-                    const quoteData = JSON.parse(savedQuotes);
-                    if ((!quoteData.items || quoteData.items.length === 0) && quoteData.count > 0) {
-                        console.log('🛠️ Fixing corrupted quote data');
-                        quoteData.count = 0;
-                        localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
-                    }
-                } catch (e) {
-                    console.error('Error fixing quote data:', e);
-                }
+        // Combine and clean discount data
+        allItems = [].concat(...responses).map(item => {
+            if (item.discount) item.discount = item.discount.toString().replace('%', '');
+            // Add unique ID if not present
+            if (!item.id) {
+                item.id = 'item_' + Math.random().toString(36).substr(2, 9);
             }
-        }
+            return item;
+        });
+
+        console.log(`✅ Loaded ${allItems.length} items.`);
+
+// NEW: Load saved quote items
+loadSavedQuotes(); // ADD THIS LINE BACK
+
+// Show all items on page load
+showAllItems();
         
-        function parsePrice(priceStr) {
-            if (!priceStr) return 0;
-            return parseInt(priceStr.toString().replace(/,/g, ''));
+    } catch (error) {
+        console.error('❌ Load Error:', error);
+    }
+}
+
+// NEW: LOAD SAVED QUOTES FROM LOCALSTORAGE
+function loadSavedQuotes() {
+    const savedQuotes = localStorage.getItem('sparrowQuoteItems');
+    if (savedQuotes) {
+        try {
+            const quoteData = JSON.parse(savedQuotes);
+            quoteItems = new Set(quoteData.items || []);
+            quoteCount = quoteData.count || 0;
+            updateQuoteCounter();
+        } catch (e) {
+            console.error('Error loading saved quotes:', e);
         }
-        
-        // ===== LOAD JSON FILES =====
-        async function loadJSONFiles() {
-            console.log('🚀 Loading Lab Data from JSON array...');
-            allItems = []; // Clear all items
-            
-            try {
-                // Load each JSON file in the array
-                for (const file of jsonFiles) {
-                    try {
-                        const response = await fetch(file);
-                        if (response.ok) {
-                            const data = await response.json();
-                            const sectionName = fileToSectionMap[file] || 'General';
-                            
-                            // Add section information to each item
-                            const itemsWithSection = data.map(item => {
-                                if (item.discount) {
-                                    item.discount = item.discount.toString().replace('%', '');
-                                }
-                                // Add unique ID if not present
-                                if (!item.id) {
-                                    item.id = 'item_' + Math.random().toString(36).substr(2, 9);
-                                }
-                                // Add section and category properties
-                                item.section = sectionName;
-                                item.category = item.category || 'General';
-                                return item;
-                            });
-                            
-                            allItems = allItems.concat(itemsWithSection);
-                            console.log(`✅ Loaded ${itemsWithSection.length} items from ${file} (${sectionName})`);
-                        } else {
-                            console.warn(`⚠️ File ${file} not found or empty`);
-                        }
-                    } catch (fileError) {
-                        console.error(`❌ Error loading ${file}:`, fileError);
-                    }
-                }
-                
-                console.log(`✅ Total loaded ${allItems.length} items.`);
-                
-                // Generate filter sidebar
-                generateFilterSidebar();
-                
-                // Load saved quote items
-                loadSavedQuotes();
-                
-                // Show all items on page load
-                showAllItems();
-                
-            } catch (error) {
-                console.error('❌ Load Error:', error);
-            }
+    }
+}
+
+// NEW: SAVE QUOTES TO LOCALSTORAGE - FIXED
+function saveQuotesToStorage() {
+    const savedQuotes = localStorage.getItem('sparrowQuoteItems');
+    let quoteData = savedQuotes ? JSON.parse(savedQuotes) : { items: [], count: 0 };
+    
+    // Update the count to match actual items
+    quoteData.count = quoteData.items ? quoteData.items.length : 0;
+    
+    localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
+}
+
+// NEW: SHOW TOAST NOTIFICATION
+function showToast(message, type = 'success') {
+    // Remove existing toast
+    const existingToast = document.querySelector('.toast-notification');
+    if (existingToast) existingToast.remove();
+    
+    // Create toast
+    const toast = document.createElement('div');
+    toast.className = `toast-notification ${type}`;
+    toast.innerHTML = `
+        <span>${message}</span>
+        <button class="toast-close"><i class="fas fa-times"></i></button>
+    `;
+    
+    // Add event listener to close button
+    const closeBtn = toast.querySelector('.toast-close');
+    closeBtn.addEventListener('click', () => toast.remove());
+    
+    // Auto-remove after 3 seconds
+    setTimeout(() => {
+        if (toast.parentNode) {
+            toast.style.animation = 'slideIn 0.3s ease-out reverse';
+            setTimeout(() => toast.remove(), 300);
         }
-        
-        // ===== GENERATE FILTER SIDEBAR =====
-        function generateFilterSidebar() {
-            const sectionsFilter = document.getElementById('sectionsFilter');
-            sectionsFilter.innerHTML = '';
-            
-            // Generate checkboxes for each section
-            Object.entries(sectionsConfig).forEach(([sectionKey, sectionData]) => {
-                const sectionDiv = document.createElement('div');
-                sectionDiv.className = 'section-group';
-                
-                // Create section header
-                const sectionHeader = document.createElement('div');
-                sectionHeader.className = 'section-label';
-                sectionHeader.innerHTML = `
-                    <i class="fas fa-folder"></i>
-                    ${sectionData.label}
-                `;
-                sectionDiv.appendChild(sectionHeader);
-                
-                // Create checkboxes for subcategories if they exist
-                if (sectionData.subcategories && sectionData.subcategories.length > 0) {
-                    sectionData.subcategories.forEach(subcategory => {
-                        const checkboxItem = document.createElement('label');
-                        checkboxItem.className = 'checkbox-item sub-checkbox';
-                        checkboxItem.innerHTML = `
-                            <input type="checkbox" value="${subcategory}" class="section-checkbox" data-section="${sectionKey}">
-                            <span class="checkmark"></span>
-                            ${subcategory}
-                        `;
-                        sectionDiv.appendChild(checkboxItem);
-                    });
-                } else {
-                    // If no subcategories, create a single checkbox for the section
-                    const checkboxItem = document.createElement('label');
-                    checkboxItem.className = 'checkbox-item';
-                    checkboxItem.innerHTML = `
-                        <input type="checkbox" value="${sectionKey}" class="section-checkbox">
-                        <span class="checkmark"></span>
-                        ${sectionData.label} <span class="to-be-added">(to be added later)</span>
-                    `;
-                    sectionDiv.appendChild(checkboxItem);
-                }
-                
-                sectionsFilter.appendChild(sectionDiv);
-            });
-            
-            // Add event listeners to checkboxes
-            setupFilterEventListeners();
-        }
-        
-        // ===== SETUP FILTER EVENT LISTENERS =====
-        function setupFilterEventListeners() {
-            const sectionCheckboxes = document.querySelectorAll('.section-checkbox');
-            
-            sectionCheckboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        const section = this.dataset.section || this.value;
-                        const value = this.value;
-                        
-                        // If it's a subcategory checkbox
-                        if (this.dataset.section) {
-                            if (!currentFilters.subcategories.includes(value)) {
-                                currentFilters.subcategories.push(value);
-                            }
-                        } else {
-                            // If it's a main section checkbox
-                            if (!currentFilters.sections.includes(value)) {
-                                currentFilters.sections.push(value);
-                            }
-                        }
-                    } else {
-                        const value = this.value;
-                        
-                        // Remove from appropriate filter array
-                        if (this.dataset.section) {
-                            currentFilters.subcategories = currentFilters.subcategories.filter(
-                                item => item !== value
-                            );
-                        } else {
-                            currentFilters.sections = currentFilters.sections.filter(
-                                item => item !== value
-                            );
-                        }
-                    }
-                });
-            });
-        }
-        
-        // ===== LOAD SAVED QUOTES =====
-        function loadSavedQuotes() {
-            const savedQuotes = localStorage.getItem('sparrowQuoteItems');
-            if (savedQuotes) {
-                try {
-                    const quoteData = JSON.parse(savedQuotes);
-                    quoteItems = new Set(quoteData.items || []);
-                    quoteCount = quoteData.count || 0;
-                } catch (e) {
-                    console.error('Error loading saved quotes:', e);
-                }
-            }
-        }
-        
-        // ===== SAVE QUOTES TO STORAGE =====
-        function saveQuotesToStorage() {
-            const savedQuotes = localStorage.getItem('sparrowQuoteItems');
-            let quoteData = savedQuotes ? JSON.parse(savedQuotes) : { items: [], count: 0 };
-            quoteData.count = quoteData.items ? quoteData.items.length : 0;
-            localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
-        }
-        
-        // ===== TOAST NOTIFICATION =====
-        function showToast(message, type = 'success') {
-            const existingToast = document.querySelector('.toast-notification');
-            if (existingToast) existingToast.remove();
-            
-            const toast = document.createElement('div');
-            toast.className = `toast-notification ${type}`;
-            toast.innerHTML = `
-                <span>${message}</span>
-                <button class="toast-close"><i class="fas fa-times"></i></button>
-            `;
-            
-            const closeBtn = toast.querySelector('.toast-close');
-            closeBtn.addEventListener('click', () => toast.remove());
-            
-            setTimeout(() => {
-                if (toast.parentNode) {
-                    toast.style.animation = 'slideIn 0.3s ease-out reverse';
-                    setTimeout(() => toast.remove(), 300);
-                }
-            }, 3000);
-            
-            document.body.appendChild(toast);
-        }
-        
-        // ===== CREATE RESULT ITEM =====
-        function createResultItem(item, resultsList) {
-            const resultItem = document.createElement('div');
-            resultItem.className = 'result-item';
-            resultItem.dataset.itemId = item.id;
-            resultItem.dataset.section = item.section || 'General';
-            resultItem.dataset.category = item.category || 'General';
-            resultItem.dataset.price = parsePrice(item.bestBuyPrice || item.mrpPrice);
-            
-            const specsHTML = Array.isArray(item.specifications) ? 
-                item.specifications.map(s => `<li>${s}</li>`).join('') : '';
-            const descHTML = Array.isArray(item.description) ? 
-                item.description.map(d => `<li>${d}</li>`).join('') : 
-                `<li>${item.description || ''}</li>`;
-            
-            // Check if item is already quoted
-            const isQuoted = quoteItems.has(item.id);
-            const quoteButtonText = isQuoted ? 'Added to Quote' : 'Get Quote';
-            const quoteButtonClass = isQuoted ? 'get-quote-btn added' : 'get-quote-btn';
-            
-            // Check if "Add to Cart" should be active
-            const buyPriceText = item.bestBuyPrice || '';
-            const buyLabelText = item.bestBuyLabel || 'Buy';
-            const isGuaranteedCompetitive = 
-                buyPriceText.toString().toLowerCase().includes('guaranteed competitive') ||
-                buyLabelText.toString().toLowerCase().includes('guaranteed competitive');
-            
-            const cartButtonClass = isGuaranteedCompetitive ? 'add-to-cart-btn inactive' : 'add-to-cart-btn';
-            const cartButtonDisabled = isGuaranteedCompetitive ? 'disabled' : '';
-            
-            // Create the HTML with buttons
-            resultItem.innerHTML = `
-                <div class="result-content">
-                    <div class="result-left">
-                        <div class="result-image">
-                            <img src="${item.image || 'placeholder.jpg'}" alt="${item.name}">
-                        </div>
-                        <div class="price-box">
-                            <div class="mrp-line">
-                                <span class="mrp-label">M.R.P.</span> 
-                                <span class="mrp-price">INR ${item.mrpPrice || '0'}/-</span>
-                            </div>
-                            <div class="bestbuy-line">
-                                <span class="bestbuy-label">${buyLabelText}</span> 
-                                <span class="bestbuy-price">${item.bestBuyPrice || 'INR 0/-'}</span>
-                            </div>
-                        </div>
+    }, 3000);
+    
+    document.body.appendChild(toast);
+}
+
+// NEW: CREATE RESULT ITEM WITH BUTTONS
+function createResultItem(item, resultsList) {
+    const resultItem = document.createElement('div');
+    resultItem.className = 'result-item';
+    resultItem.dataset.itemId = item.id;
+    
+    const specsHTML = Array.isArray(item.specifications) ? item.specifications.map(s => `<li>${s}</li>`).join('') : '';
+    const descHTML = Array.isArray(item.description) ? item.description.map(d => `<li>${d}</li>`).join('') : `<li>${item.description || ''}</li>`;
+    
+// Check if item is already quoted
+const isQuoted = quoteItems.has(item.id);
+const quoteButtonText = isQuoted ? 'Added to Quote' : 'Get Quote';
+const quoteButtonClass = isQuoted ? 'get-quote-btn added' : 'get-quote-btn';
+
+// Check if "Add to Cart" should be active
+// If the PRICE field contains "Guaranteed Competitive", make cart button inactive
+const buyPriceText = item.bestBuyPrice || '';
+const buyLabelText = item.bestBuyLabel || 'Buy';
+const isGuaranteedCompetitive = 
+    buyPriceText.toString().toLowerCase().includes('guaranteed competitive') ||
+    buyLabelText.toString().toLowerCase().includes('guaranteed competitive');
+    
+// DEBUG: Check what's in the fields
+console.log('🔍 Debug: Item:', item.name, 
+    '| Price:', item.bestBuyPrice, 
+    '| Label:', item.bestBuyLabel,
+    '| Guaranteed Competitive?', isGuaranteedCompetitive);
+    
+const cartButtonClass = isGuaranteedCompetitive ? 'add-to-cart-btn inactive' : 'add-to-cart-btn';
+const cartButtonDisabled = isGuaranteedCompetitive ? 'disabled' : '';    
+    
+    // Create the HTML with buttons
+    resultItem.innerHTML = `
+        <div class="result-content">
+            <div class="result-left">
+                <div class="result-image">
+                    <img src="${item.image || 'placeholder.jpg'}" alt="${item.name}">
+                </div>
+                <div class="price-box">
+                    <div class="mrp-line">
+                        <span class="mrp-label">M.R.P.</span> 
+                        <span class="mrp-price">INR ${item.mrpPrice || '0'}/-</span>
                     </div>
-                    
-                    <div class="result-center">
-                        <h4 class="item-name">${item.name}</h4>
-                        <div class="specs-section">
-                            ${specsHTML ? `<strong>Specifications:</strong><ul>${specsHTML}</ul>` : ''}
-                            <strong>Warranty:</strong> ${item.warranty || 'Not specified'}
-                        </div>
-                        <div class="button-container">
-                            <button class="${quoteButtonClass}" data-item-id="${item.id}">
-                                <i class="fas ${isQuoted ? 'fa-check' : 'fa-file-alt'}"></i>
-                                ${quoteButtonText}
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="result-right">
-                        <div class="description-section">
-                            <strong>Descriptions:</strong>
-                            <ul>${descHTML}</ul>
-                        </div>
-                        <div class="button-container">
-                            <button class="${cartButtonClass}" ${cartButtonDisabled} data-item-id="${item.id}">
-                                <i class="fas fa-shopping-cart"></i>
-                                Add to Cart
-                            </button>
-                        </div>
+                    <div class="bestbuy-line">
+                        <span class="bestbuy-label">${buyLabelText}</span> 
+                        <span class="bestbuy-price">${item.bestBuyPrice || 'INR 0/-'}</span>
                     </div>
                 </div>
-            `;
+            </div>
             
-            resultsList.appendChild(resultItem);
+            <div class="result-center">
+                <h4 class="item-name">${item.name}</h4>
+                <div class="specs-section">
+                    ${specsHTML ? `<strong>Specifications:</strong><ul>${specsHTML}</ul>` : ''}
+                    <strong>Warranty:</strong> ${item.warranty || 'Not specified'}
+                </div>
+                <div class="button-container">
+                    <button class="${quoteButtonClass}" data-item-id="${item.id}">
+                        <i class="fas ${isQuoted ? 'fa-check' : 'fa-file-alt'}"></i>
+                        ${quoteButtonText}
+                    </button>
+                </div>
+            </div>
             
-            // Setup zoom functionality
-            setupZoom(resultItem);
-            
-            // Add event listeners to buttons
-            const quoteBtn = resultItem.querySelector('.get-quote-btn');
-            const cartBtn = resultItem.querySelector('.add-to-cart-btn');
-            
-            // Quote button click handler
-            quoteBtn.addEventListener('click', function() {
-                const itemId = this.dataset.itemId;
-                handleQuoteClick(itemId, this);
-            });
-            
-            // Cart button click handler (only if active)
-            if (!isGuaranteedCompetitive) {
-                cartBtn.addEventListener('click', function() {
-                    const itemId = this.dataset.itemId;
-                    handleCartClick(itemId);
-                });
-            } else {
-                cartBtn.setAttribute('disabled', 'disabled');
-                cartBtn.style.cursor = 'not-allowed';
-                cartBtn.style.opacity = '0.6';
-            }
-        }
+            <div class="result-right">
+    <div class="description-section">
+        <strong>Descriptions:</strong>
+        <ul>${descHTML}</ul>
+    </div>
+    <div class="button-container">
+        <button class="${cartButtonClass}" ${cartButtonDisabled} data-item-id="${item.id}">
+            <i class="fas fa-shopping-cart"></i>
+            Add to Cart
+        </button>
+    </div>
+</div>
+        </div>
+    `;
+    
+    resultsList.appendChild(resultItem);
+    
+    // Setup zoom functionality
+    setupZoom(resultItem);
+    
+    // Add event listeners to buttons
+    const quoteBtn = resultItem.querySelector('.get-quote-btn');
+    const cartBtn = resultItem.querySelector('.add-to-cart-btn');
+    
+    // Quote button click handler
+    quoteBtn.addEventListener('click', function() {
+        const itemId = this.dataset.itemId;
+        handleQuoteClick(itemId, this);
+    });
+    
+    // Cart button click handler (only if active)
+if (!isGuaranteedCompetitive) { // CHANGED: Check the actual condition, not just the disabled attribute
+    cartBtn.addEventListener('click', function() {
+        const itemId = this.dataset.itemId;
+        handleCartClick(itemId);
+    });
+} else {
+    // Make sure the button is truly disabled
+    cartBtn.setAttribute('disabled', 'disabled');
+    cartBtn.style.cursor = 'not-allowed';
+    cartBtn.style.opacity = '0.6';
+}
+    
+    // Set data attributes for filtering
+    resultItem.dataset.price = parsePrice(item.bestBuyPrice || item.mrpPrice);
+    resultItem.dataset.section = determineSection(item);
+}
+
+// NEW: HANDLE QUOTE BUTTON CLICK - FIXED VERSION
+function handleQuoteClick(itemId, button) {
+    // Find the full item object
+    const item = allItems.find(i => i.id === itemId);
+    if (!item) return;
+    
+    // Load existing quotes
+    const savedQuotes = localStorage.getItem('sparrowQuoteItems');
+    let quoteData = savedQuotes ? JSON.parse(savedQuotes) : { items: [], count: 0 };
+    let quoteItemsArray = quoteData.items || [];
+    
+    // Check if item already exists in quote
+    const existingIndex = quoteItemsArray.findIndex(i => i.id === itemId);
+    
+    if (existingIndex !== -1) {
+        // Remove from quote
+        quoteItemsArray.splice(existingIndex, 1);
+        quoteItems.delete(itemId);
+        quoteCount = quoteItemsArray.length; // ADD THIS LINE BACK
         
-        // ===== HANDLE QUOTE BUTTON CLICK =====
-        function handleQuoteClick(itemId, button) {
-            const item = allItems.find(i => i.id === itemId);
-            if (!item) return;
-            
-            const savedQuotes = localStorage.getItem('sparrowQuoteItems');
-            let quoteData = savedQuotes ? JSON.parse(savedQuotes) : { items: [], count: 0 };
-            let quoteItemsArray = quoteData.items || [];
-            
-            const existingIndex = quoteItemsArray.findIndex(i => i.id === itemId);
-            
-            if (existingIndex !== -1) {
-                // Remove from quote
-                quoteItemsArray.splice(existingIndex, 1);
-                quoteItems.delete(itemId);
-                quoteCount = quoteItemsArray.length;
-                
-                // Update button
-                button.innerHTML = '<i class="fas fa-file-alt"></i> Get Quote';
-                button.classList.remove('added');
-                
-                showToast('Item removed from quote', 'info');
-            } else {
-                // Add to quote
-                const itemToSave = {
-                    id: item.id,
-                    name: item.name,
-                    image: item.image || item.img || 'placeholder.jpg',
-                    mrpPrice: item.mrpPrice || item.mrp || 'Price on request',
-                    bestBuyPrice: item.bestBuyPrice || item.price || 'Price on request',
-                    bestBuyLabel: item.bestBuyLabel || 'Buy',
-                    warranty: item.warranty || 'Not specified',
-                    specifications: item.specifications || [],
-                    description: item.description || [],
-                    category: item.category || '',
-                    quantity: 1
-                };
-                
-                quoteItemsArray.push(itemToSave);
-                quoteItems.add(itemId);
-                quoteCount = quoteItemsArray.length;
-                
-                // Update button
-                button.innerHTML = '<i class="fas fa-check"></i> Added to Quote';
-                button.classList.add('added');
-                
-                showToast('Item added to quote!', 'success');
-            }
-            
-            // Save to localStorage
-            quoteData.items = quoteItemsArray;
-            quoteData.count = quoteCount;
-            localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
-        }
+        // Update button
+        button.innerHTML = '<i class="fas fa-file-alt"></i> Get Quote';
+        button.classList.remove('added');
         
-        // ===== HANDLE CART BUTTON CLICK =====
-        function handleCartClick(itemId) {
-            const item = allItems.find(i => i.id === itemId);
-            if (!item) return;
-            
-            const cartItems = JSON.parse(localStorage.getItem('sparrowCartItems') || '[]');
-            cartItems.push({
-                id: item.id,
-                name: item.name,
-                price: item.bestBuyPrice || item.mrpPrice,
-                image: item.image,
-                addedAt: new Date().toISOString()
-            });
-            localStorage.setItem('sparrowCartItems', JSON.stringify(cartItems));
-            
-            showToast('Item added to cart! Redirecting...', 'success');
-            
-            setTimeout(() => {
-                window.location.href = '/sparrowinstruments/cart.html';
-            }, 1000);
-        }
+        // Show confirmation
+        showToast('Item removed from quote', 'info');
+    } else {
+        // Add full item to quote
+        const itemToSave = {
+            id: item.id,
+            name: item.name,
+            image: item.image || item.img || 'placeholder.jpg',
+            mrpPrice: item.mrpPrice || item.mrp || 'Price on request',
+            bestBuyPrice: item.bestBuyPrice || item.price || 'Price on request',
+            bestBuyLabel: item.bestBuyLabel || 'Buy',
+            warranty: item.warranty || 'Not specified',
+            specifications: item.specifications || [],
+            description: item.description || [],
+            category: item.category || '',
+            quantity: 1
+        };
         
-        // ===== SHOW ALL ITEMS =====
+        quoteItemsArray.push(itemToSave);
+        quoteItems.add(itemId);
+        quoteCount = quoteItemsArray.length; // ADD THIS LINE BACK
+        
+        // Update button
+        button.innerHTML = '<i class="fas fa-check"></i> Added to Quote';
+        button.classList.add('added');
+        
+        // Show confirmation
+        showToast('Item added to quote!', 'success');
+    }
+    
+    // Save to localStorage
+    quoteData.items = quoteItemsArray;
+    quoteData.count = quoteCount; // This should now work
+    localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
+}
+
+// NEW: HANDLE CART BUTTON CLICK
+function handleCartClick(itemId) {
+    // Find the item
+    const item = allItems.find(i => i.id === itemId);
+    if (!item) return;
+    
+    // Save to localStorage for cart page
+    const cartItems = JSON.parse(localStorage.getItem('sparrowCartItems') || '[]');
+    cartItems.push({
+        id: item.id,
+        name: item.name,
+        price: item.bestBuyPrice || item.mrpPrice,
+        image: item.image,
+        addedAt: new Date().toISOString()
+    });
+    localStorage.setItem('sparrowCartItems', JSON.stringify(cartItems));
+    
+    // Show confirmation and redirect
+    showToast('Item added to cart! Redirecting...', 'success');
+    
+    setTimeout(() => {
+        window.location.href = '/sparrowinstruments/cart.html';
+    }, 1000);
+}
+
+// Function to display all items on page load
 function showAllItems() {
     const resultsList = document.getElementById('resultsList');
     const searchResults = document.getElementById('searchResults');
+    const resultsTitle = document.getElementById('resultsTitle');
     const mainContent = document.querySelector('.main-content');
     
     resultsList.innerHTML = '';
+    resultsTitle.textContent = `Our Products`;
     
-    // Display all items
-    allItems.forEach(item => {
+    // Shuffle/mix the items (optional - for random order)
+    const shuffledItems = [...allItems].sort(() => Math.random() - 0.5);
+    
+    shuffledItems.forEach(item => {
         createResultItem(item, resultsList);
     });
     
     searchResults.style.display = 'block';
     mainContent.classList.add('hide-main');
 }
-        
-        // ===== SEARCH FUNCTION =====
-function searchItems() {
+    
+    // 2. SEARCH & RENDER
+    function searchItems() {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
         const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
         const resultsList = document.getElementById('resultsList');
         const mainContent = document.querySelector('.main-content');
         const searchResults = document.getElementById('searchResults');
-        
-        // If search box is empty, show all items
+        const resultsTitle = document.getElementById('resultsTitle');
+
+        // NEW: If search box is empty, show all items
         if (searchTerm === '') {
             showAllItems();
             return;
         }
-        
-        // Get active filters
-        const hasActiveFilters = currentFilters.sections.length > 0 || currentFilters.subcategories.length > 0;
-        
-        // Filter items based on search term AND active filters
-        const matchedItems = allItems
-            .map(item => {
-                // Calculate relevance score
+
+            // Calculate Scoring
+            const matchedItems = allItems.map(item => {
                 let score = 0;
                 const name = item.name.toLowerCase();
                 
                 if (name === searchTerm) score += 100;
                 if (name.startsWith(searchTerm)) score += 50;
                 if (name.includes(searchTerm)) score += 30;
-                
+
                 const searchWords = searchTerm.split(/[\s\-_.,;]+/).filter(w => w.length > 0);
                 const nameWords = name.split(/[\s\-_.,;]+/).filter(w => w.length > 0);
-                
+
                 searchWords.forEach(sw => {
                     nameWords.forEach(nw => {
                         if (nw === sw) score += 40;
                         else if (nw.includes(sw) && sw.length >= 3) score += 20;
                     });
                 });
-                
+
                 return { ...item, relevanceScore: score };
             })
-            .filter(item => {
-                // Apply section/subcategory filters if any are active
-                if (hasActiveFilters) {
-                    const itemSection = item.section || 'General';
-                    const itemCategory = item.category || 'General';
-                    
-                    // Check section filters
-                    if (currentFilters.sections.length > 0) {
-                        if (!currentFilters.sections.includes(itemSection)) {
-                            return false;
-                        }
-                    }
-                    
-                    // Check subcategory filters
-                    if (currentFilters.subcategories.length > 0) {
-                        if (!currentFilters.subcategories.includes(itemCategory)) {
-                            return false;
-                        }
-                    }
-                }
-                
-                // Only show items with positive relevance score
-                return item.relevanceScore > 0;
-            })
+            .filter(item => item.relevanceScore > 0)
             .sort((a, b) => b.relevanceScore - a.relevanceScore);
-        
-        // Render Results
-        if (matchedItems.length > 0) {
-            resultsList.innerHTML = '';
-            matchedItems.forEach(item => {
-                createResultItem(item, resultsList);
-            });
-            
-            searchResults.style.display = 'block';
-            mainContent.classList.add('hide-main');
-        } else {
-            resultsList.innerHTML = '<div class="no-results">Try different keywords</div>';
-            searchResults.style.display = 'block';
-            mainContent.classList.add('hide-main');
-        }
-    }, 300);
-}        
-        // ===== SETUP ZOOM FUNCTIONALITY =====
-        function setupZoom(resultItem) {
-            const container = resultItem.querySelector('.result-image');
-            const img = container.querySelector('img');
-            if (!container || !img) return;
-            
-            const lens = document.createElement('div');
-            lens.className = 'zoom-lens';
-            const zoomWin = document.createElement('div');
-            zoomWin.className = 'zoom-container';
-            const zImg = document.createElement('img');
-            zImg.className = 'zoomed-image';
-            zImg.src = img.src;
-            
-            zoomWin.appendChild(zImg);
-            container.appendChild(lens);
-            container.appendChild(zoomWin);
-            
-            function moveZoom(clientX, clientY) {
-                lens.style.display = 'block';
-                zoomWin.style.display = 'block';
+
+            // Render Results
+            if (matchedItems.length > 0) {
+                resultsTitle.textContent = `Your Searched Products (${matchedItems.length} items)`;
+                resultsList.innerHTML = '';
+                matchedItems.forEach(item => {
+                    createResultItem(item, resultsList);
+                });
                 
-                const rect = container.getBoundingClientRect();
-                let x = clientX - rect.left - (lens.offsetWidth / 2);
-                let y = clientY - rect.top - (lens.offsetHeight / 2);
-                
-                x = Math.max(0, Math.min(x, rect.width - lens.offsetWidth));
-                y = Math.max(0, Math.min(y, rect.height - lens.offsetHeight));
-                
-                lens.style.left = x + 'px';
-                lens.style.top = y + 'px';
-                
-                const cx = zoomWin.offsetWidth / lens.offsetWidth;
-                const cy = zoomWin.offsetHeight / lens.offsetHeight;
-                
-                zImg.style.width = (rect.width * cx) + 'px';
-                zImg.style.height = (rect.height * cy) + 'px';
-                zImg.style.left = `-${x * cx}px`;
-                zImg.style.top = `-${y * cy}px`;
-            }
-            
-            function hideZoom() {
-                lens.style.display = 'none';
-                zoomWin.style.display = 'none';
-            }
-            
-            // Desktop events
-            container.addEventListener('mousemove', (e) => moveZoom(e.clientX, e.clientY));
-            container.addEventListener('mouseleave', hideZoom);
-            
-            // Mobile events
-            let isTouchZooming = false;
-            
-            container.addEventListener('touchstart', (e) => {
-                if (e.cancelable) e.preventDefault();
-                isTouchZooming = true;
-                moveZoom(e.touches[0].clientX, e.touches[0].clientY);
-            }, { passive: false });
-            
-            container.addEventListener('touchmove', (e) => {
-                if (!isTouchZooming) return;
-                if (e.cancelable) e.preventDefault();
-                moveZoom(e.touches[0].clientX, e.touches[0].clientY);
-            }, { passive: false });
-            
-            container.addEventListener('touchend', (e) => {
-                isTouchZooming = false;
-                hideZoom();
-            });
-        }
-        
-        // ===== FILTER SIDEBAR FUNCTIONALITY =====
-        // DOM Elements
-        const hamburgerMenu = document.querySelector('.hamburger-menu');
-        const filterSidebar = document.getElementById('filterSidebar');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        const closeFilter = document.getElementById('closeFilter');
-        const clearFilterBtn = document.getElementById('clearFilter');
-        const applyFilterBtn = document.getElementById('applyFilter');
-        
-        // Toggle filter sidebar
-        hamburgerMenu.addEventListener('click', function() {
-            filterSidebar.classList.add('show');
-            sidebarOverlay.classList.add('show');
-            document.body.style.overflow = 'hidden';
-        });
-        
-        // Close filter sidebar
-        closeFilter.addEventListener('click', closeFilterSidebar);
-        sidebarOverlay.addEventListener('click', closeFilterSidebar);
-        
-        function closeFilterSidebar() {
-            filterSidebar.classList.remove('show');
-            sidebarOverlay.classList.remove('show');
-            document.body.style.overflow = '';
-        }
-        
-        // Clear filter button
-        clearFilterBtn.addEventListener('click', function() {
-            // Uncheck all checkboxes
-            const sectionCheckboxes = document.querySelectorAll('.section-checkbox');
-            sectionCheckboxes.forEach(checkbox => {
-                checkbox.checked = false;
-            });
-            
-            // Clear current filters
-            currentFilters.sections = [];
-            currentFilters.subcategories = [];
-            
-            // Apply cleared filters
-            applyFilters();
-        });
-        
-        // Apply filter button
-        applyFilterBtn.addEventListener('click', function() {
-            applyFilters();
-            closeFilterSidebar();
-        });
-        
-        // Apply filters function
-        function applyFilters() {
-            const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
-            const resultItems = document.querySelectorAll('.result-item');
-            
-            // If no search results, don't filter
-            if (resultItems.length === 0) return;
-            
-            let visibleCount = 0;
-            
-            resultItems.forEach(item => {
-                let showItem = true;
-                
-                // Get item data
-                const itemSection = item.dataset.section || 'General';
-                const itemCategory = item.dataset.category || 'General';
-                
-                // Check if we have any filters active
-                const hasSectionFilters = currentFilters.sections.length > 0;
-                const hasSubcategoryFilters = currentFilters.subcategories.length > 0;
-                
-                // Apply section filters
-                if (hasSectionFilters) {
-                    if (!currentFilters.sections.includes(itemSection)) {
-                        showItem = false;
-                    }
-                }
-                
-                // Apply subcategory filters
-                if (hasSubcategoryFilters) {
-                    if (!currentFilters.subcategories.includes(itemCategory)) {
-                        showItem = false;
-                    }
-                }
-                
-                // Show/hide item
-                item.style.display = showItem ? 'block' : 'none';
-                if (showItem) visibleCount++;
-            });
-            
-            // Update results count
-            const resultsTitle = document.getElementById('resultsTitle');
-            if (visibleCount > 0) {
-                if (searchTerm === '') {
-                    resultsTitle.textContent = `Our Products (${visibleCount} items)`;
-                } else {
-                    resultsTitle.textContent = `Search Results (${visibleCount} items)`;
-                }
+                searchResults.style.display = 'block';
+                mainContent.classList.add('hide-main');
             } else {
-                resultsTitle.textContent = 'No items match your filters';
+                resultsTitle.textContent = `No results found for "${searchTerm}"`;
+                resultsList.innerHTML = '<div class="no-results">Try different keywords</div>';
+                searchResults.style.display = 'block';
             }
+        }, 300);
+    }
+
+// SECTION DETERMINATION HELPER FUNCTION
+function determineSection(item) {
+    if (item.category) {
+        // Extract first word from category (e.g., "Biology Lab" → "biology")
+        return item.category.toLowerCase().split(' ')[0];
+    }
+    return 'general';
+}    
+    
+function setupZoom(resultItem) {
+    const container = resultItem.querySelector('.result-image');
+    const img = container.querySelector('img');
+    if (!container || !img) return;
+
+    const lens = document.createElement('div');
+    lens.className = 'zoom-lens';
+    const zoomWin = document.createElement('div');
+    zoomWin.className = 'zoom-container';
+    const zImg = document.createElement('img');
+    zImg.className = 'zoomed-image';
+    zImg.src = img.src;
+    
+    zoomWin.appendChild(zImg);
+    container.appendChild(lens);
+    container.appendChild(zoomWin);
+
+    function moveZoom(clientX, clientY) {
+        lens.style.display = 'block';
+        zoomWin.style.display = 'block';
+
+        const rect = container.getBoundingClientRect();
+        let x = clientX - rect.left - (lens.offsetWidth / 2);
+        let y = clientY - rect.top - (lens.offsetHeight / 2);
+
+        x = Math.max(0, Math.min(x, rect.width - lens.offsetWidth));
+        y = Math.max(0, Math.min(y, rect.height - lens.offsetHeight));
+
+        lens.style.left = x + 'px';
+        lens.style.top = y + 'px';
+
+        const cx = zoomWin.offsetWidth / lens.offsetWidth;
+        const cy = zoomWin.offsetHeight / lens.offsetHeight;
+
+        zImg.style.width = (rect.width * cx) + 'px';
+        zImg.style.height = (rect.height * cy) + 'px';
+        zImg.style.left = `-${x * cx}px`;
+        zImg.style.top = `-${y * cy}px`;
+    }
+
+    function hideZoom() {
+        lens.style.display = 'none';
+        zoomWin.style.display = 'none';
+    }
+
+    // --- DESKTOP EVENTS ---
+    container.addEventListener('mousemove', (e) => moveZoom(e.clientX, e.clientY));
+    container.addEventListener('mouseleave', hideZoom);
+
+    // --- MOBILE EVENTS (TOUCH) ---
+let isTouchZooming = false;
+
+container.addEventListener('touchstart', (e) => {
+    if (e.cancelable) e.preventDefault();
+    isTouchZooming = true;
+    moveZoom(e.touches[0].clientX, e.touches[0].clientY);
+}, { passive: false });
+
+container.addEventListener('touchmove', (e) => {
+    if (!isTouchZooming) return;
+    if (e.cancelable) e.preventDefault();
+    moveZoom(e.touches[0].clientX, e.touches[0].clientY);
+}, { passive: false });
+
+container.addEventListener('touchend', (e) => {
+    isTouchZooming = false;
+    hideZoom();
+});
+
+// Close zoom when tapping outside
+container.addEventListener('touchcancel', () => {
+    isTouchZooming = false;
+    hideZoom();
+});
+
+    container.addEventListener('touchmove', (e) => {
+        if (e.cancelable) e.preventDefault();
+        moveZoom(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: false });
+
+    container.addEventListener('touchend', hideZoom);
+}
+
+    // 4. EVENT LISTENERS
+    document.querySelector('.search-box').addEventListener('input', searchItems);
+    window.addEventListener('DOMContentLoaded', function() {
+    fixCorruptedQuoteData(); // Add this line
+    loadJSONFiles();
+});
+
+    
+// ===== FILTER SIDEBAR FUNCTIONALITY =====
+
+// DOM Elements
+const hamburgerMenu = document.querySelector('.hamburger-menu');
+const filterSidebar = document.getElementById('filterSidebar');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+const closeFilter = document.getElementById('closeFilter');
+const clearFilterBtn = document.getElementById('clearFilter');
+const applyFilterBtn = document.getElementById('applyFilter');
+const sectionCheckboxes = document.querySelectorAll('.section-checkbox');
+
+// Price range variables
+let minPrice = 10;
+let maxPrice = 100000;
+
+// Current filters state
+let currentFilters = {
+    sections: []
+};
+
+// Toggle filter sidebar
+hamburgerMenu.addEventListener('click', function() {
+    filterSidebar.classList.add('show');
+    sidebarOverlay.classList.add('show');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+});
+
+// Close filter sidebar
+closeFilter.addEventListener('click', closeFilterSidebar);
+sidebarOverlay.addEventListener('click', closeFilterSidebar);
+
+function closeFilterSidebar() {
+    filterSidebar.classList.remove('show');
+    sidebarOverlay.classList.remove('show');
+    document.body.style.overflow = ''; // Restore scrolling
+}
+
+clearFilterBtn.addEventListener('click', function() {
+    // Uncheck all checkboxes
+    sectionCheckboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    
+    // REMOVE OR COMMENT OUT the price reset lines:
+    /*
+    // Reset price range
+    minPriceInput.value = 10;
+    maxPriceInput.value = 100000;
+    priceMinSlider.value = 10;
+    priceMaxSlider.value = 100000;
+    minDisplay.textContent = 10;
+    maxDisplay.textContent = 100000;
+    */
+    
+    // Clear current filters
+    currentFilters.sections = [];
+    // REMOVE: currentFilters.minPrice = 10;
+    // REMOVE: currentFilters.maxPrice = 100000;
+    
+    // Apply cleared filters
+    applyFilters();
+});
+
+// Update sections filter
+sectionCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            if (!currentFilters.sections.includes(this.value)) {
+                currentFilters.sections.push(this.value);
+            }
+        } else {
+            currentFilters.sections = currentFilters.sections.filter(
+                section => section !== this.value
+            );
+        }
+    });
+});
+
+// Apply filters
+applyFilterBtn.addEventListener('click', function() {
+    applyFilters();
+    closeFilterSidebar();
+});
+
+// Filter function
+function applyFilters() {
+    const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
+    const resultsList = document.getElementById('resultsList');
+    const resultItems = document.querySelectorAll('.result-item');
+    
+    // If no search results, don't filter
+    if (resultItems.length === 0) return;
+    
+    resultItems.forEach(item => {
+        let showItem = true;
+        
+        // Get item data (you'll need to add data attributes to your result items)
+        const itemPrice = parseInt(item.dataset.price) || 0;
+        const itemSection = item.dataset.section || '';
+        
+        
+        // Check section filter (if any sections selected)
+        if (currentFilters.sections.length > 0 && !currentFilters.sections.includes(itemSection)) {
+            showItem = false;
         }
         
-        // ===== EVENT LISTENERS =====
-        document.querySelector('.search-box').addEventListener('input', searchItems);
-        
-        // ===== INITIALIZATION =====
-        window.addEventListener('DOMContentLoaded', function() {
-            fixCorruptedQuoteData();
-            loadJSONFiles();
-        });
-    </script>
+        // Show/hide item
+        item.style.display = showItem ? 'block' : 'none';
+    });
+    
+    // Update results count
+    const visibleItems = document.querySelectorAll('.result-item[style="display: block"]');
+    const resultsTitle = document.getElementById('resultsTitle');
+    if (visibleItems.length > 0) {
+        resultsTitle.textContent = `Your Searched Products (${visibleItems.length} items)`;
+    } else {
+        resultsTitle.textContent = 'No items match your filters';
+    }
+}
+
+</script>
 </body>
 </html>

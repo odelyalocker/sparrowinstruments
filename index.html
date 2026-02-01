@@ -1999,111 +1999,105 @@
         }
         
         // ===== SHOW ALL ITEMS =====
-        function showAllItems() {
-            const resultsList = document.getElementById('resultsList');
-            const searchResults = document.getElementById('searchResults');
-            const resultsTitle = document.getElementById('resultsTitle');
-            const mainContent = document.querySelector('.main-content');
-            
+function showAllItems() {
+    const resultsList = document.getElementById('resultsList');
+    const searchResults = document.getElementById('searchResults');
+    const mainContent = document.querySelector('.main-content');
+    
+    resultsList.innerHTML = '';
+    
+    // Display all items
+    allItems.forEach(item => {
+        createResultItem(item, resultsList);
+    });
+    
+    searchResults.style.display = 'block';
+    mainContent.classList.add('hide-main');
+}
+        
+        // ===== SEARCH FUNCTION =====
+function searchItems() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+        const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
+        const resultsList = document.getElementById('resultsList');
+        const mainContent = document.querySelector('.main-content');
+        const searchResults = document.getElementById('searchResults');
+        
+        // If search box is empty, show all items
+        if (searchTerm === '') {
+            showAllItems();
+            return;
+        }
+        
+        // Get active filters
+        const hasActiveFilters = currentFilters.sections.length > 0 || currentFilters.subcategories.length > 0;
+        
+        // Filter items based on search term AND active filters
+        const matchedItems = allItems
+            .map(item => {
+                // Calculate relevance score
+                let score = 0;
+                const name = item.name.toLowerCase();
+                
+                if (name === searchTerm) score += 100;
+                if (name.startsWith(searchTerm)) score += 50;
+                if (name.includes(searchTerm)) score += 30;
+                
+                const searchWords = searchTerm.split(/[\s\-_.,;]+/).filter(w => w.length > 0);
+                const nameWords = name.split(/[\s\-_.,;]+/).filter(w => w.length > 0);
+                
+                searchWords.forEach(sw => {
+                    nameWords.forEach(nw => {
+                        if (nw === sw) score += 40;
+                        else if (nw.includes(sw) && sw.length >= 3) score += 20;
+                    });
+                });
+                
+                return { ...item, relevanceScore: score };
+            })
+            .filter(item => {
+                // Apply section/subcategory filters if any are active
+                if (hasActiveFilters) {
+                    const itemSection = item.section || 'General';
+                    const itemCategory = item.category || 'General';
+                    
+                    // Check section filters
+                    if (currentFilters.sections.length > 0) {
+                        if (!currentFilters.sections.includes(itemSection)) {
+                            return false;
+                        }
+                    }
+                    
+                    // Check subcategory filters
+                    if (currentFilters.subcategories.length > 0) {
+                        if (!currentFilters.subcategories.includes(itemCategory)) {
+                            return false;
+                        }
+                    }
+                }
+                
+                // Only show items with positive relevance score
+                return item.relevanceScore > 0;
+            })
+            .sort((a, b) => b.relevanceScore - a.relevanceScore);
+        
+        // Render Results
+        if (matchedItems.length > 0) {
             resultsList.innerHTML = '';
-            resultsTitle.textContent = `Our Products (${allItems.length} items)`;
-            
-            // Display all items
-            allItems.forEach(item => {
+            matchedItems.forEach(item => {
                 createResultItem(item, resultsList);
             });
             
             searchResults.style.display = 'block';
             mainContent.classList.add('hide-main');
+        } else {
+            resultsList.innerHTML = '<div class="no-results">Try different keywords</div>';
+            searchResults.style.display = 'block';
+            mainContent.classList.add('hide-main');
         }
-        
-        // ===== SEARCH FUNCTION =====
-        function searchItems() {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
-                const resultsList = document.getElementById('resultsList');
-                const mainContent = document.querySelector('.main-content');
-                const searchResults = document.getElementById('searchResults');
-                const resultsTitle = document.getElementById('resultsTitle');
-                
-                // If search box is empty, show all items
-                if (searchTerm === '') {
-                    showAllItems();
-                    return;
-                }
-                
-                // Get active filters
-                const hasActiveFilters = currentFilters.sections.length > 0 || currentFilters.subcategories.length > 0;
-                
-                // Filter items based on search term AND active filters
-                const matchedItems = allItems
-                    .map(item => {
-                        // Calculate relevance score
-                        let score = 0;
-                        const name = item.name.toLowerCase();
-                        
-                        if (name === searchTerm) score += 100;
-                        if (name.startsWith(searchTerm)) score += 50;
-                        if (name.includes(searchTerm)) score += 30;
-                        
-                        const searchWords = searchTerm.split(/[\s\-_.,;]+/).filter(w => w.length > 0);
-                        const nameWords = name.split(/[\s\-_.,;]+/).filter(w => w.length > 0);
-                        
-                        searchWords.forEach(sw => {
-                            nameWords.forEach(nw => {
-                                if (nw === sw) score += 40;
-                                else if (nw.includes(sw) && sw.length >= 3) score += 20;
-                            });
-                        });
-                        
-                        return { ...item, relevanceScore: score };
-                    })
-                    .filter(item => {
-                        // Apply section/subcategory filters if any are active
-                        if (hasActiveFilters) {
-                            const itemSection = item.section || 'General';
-                            const itemCategory = item.category || 'General';
-                            
-                            // Check section filters
-                            if (currentFilters.sections.length > 0) {
-                                if (!currentFilters.sections.includes(itemSection)) {
-                                    return false;
-                                }
-                            }
-                            
-                            // Check subcategory filters
-                            if (currentFilters.subcategories.length > 0) {
-                                if (!currentFilters.subcategories.includes(itemCategory)) {
-                                    return false;
-                                }
-                            }
-                        }
-                        
-                        // Only show items with positive relevance score
-                        return item.relevanceScore > 0;
-                    })
-                    .sort((a, b) => b.relevanceScore - a.relevanceScore);
-                
-                // Render Results
-                if (matchedItems.length > 0) {
-                    resultsTitle.textContent = `Search Results (${matchedItems.length} items)`;
-                    resultsList.innerHTML = '';
-                    matchedItems.forEach(item => {
-                        createResultItem(item, resultsList);
-                    });
-                    
-                    searchResults.style.display = 'block';
-                    mainContent.classList.add('hide-main');
-                } else {
-                    resultsTitle.textContent = `No results found for "${searchTerm}"`;
-                    resultsList.innerHTML = '<div class="no-results">Try different keywords</div>';
-                    searchResults.style.display = 'block';
-                    mainContent.classList.add('hide-main');
-                }
-            }, 300);
-        }
-        
+    }, 300);
+}        
         // ===== SETUP ZOOM FUNCTIONALITY =====
         function setupZoom(resultItem) {
             const container = resultItem.querySelector('.result-image');
@@ -2287,5 +2281,6 @@
     </script>
 </body>
 </html>
+
 
 

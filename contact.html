@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparrow Instruments - Added Items</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+        
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #FFFFFF;
+            color: white;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: none;
+            z-index: 1000;
+            min-height: 70px;
+        }
+        
+        /* Logo container in top-left corner */
+        .logo-container {
+            margin-right: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 55px;
+            width: 55px;
+            overflow: hidden;
+            border-radius: 50%;
+            background: transparent;
+            flex-shrink: 0;
+        }
+
+        .logo-container img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        /* Center content */
+        .header-center {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+            min-width: 0;
+        }
+        
+        /* Center tagline */
+        .center-tagline {
+            font-size: 24px;
+            color: #FF0000;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-align: center;
+            line-height: 1.3;
+        }
+        
+        /* Second tagline */
+        .trusted-tagline {
+            font-size: 14px;
+            color: #000000;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-align: center;
+            line-height: 1.3;
+            margin-top: 5px;
+        }
+        
+        /* Quote Image Container */
+        .quote-image-container {
+            margin-left: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 55px;
+            width: 55px;
+            overflow: hidden;
+            border-radius: 50%;
+            background: transparent;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .quote-image-container a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+
+        .quote-image-container img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .quote-image-container img:hover {
+            transform: scale(1.08);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) brightness(1.05);
+        }
+        
+        /* Black Header Section */
+        .black-header {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            background-color: #000000;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 999;
+            min-height: 70px;
+            top: 70px;
+        }
+        
+        /* Home button on left */
+        .home-button {
+            display: flex;
+            align-items: center;
+        }
+        
+        .home-button a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+        
+        .home-button a:hover {
+            color: #FFFFFF;
+        }
+
+        /* Icon styles */
+        .home-button a i,
+        .contact-button a i {
+            color: #FFFFFF;
+            font-size: 26px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .home-button a:hover i,
+        .contact-button a:hover i {
+            color: #FFFFFF;
+            transform: scale(1.1);
+            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+        }
+
+        /* Center title in black header */
+        .black-header-center {
+            flex-grow: 1;
+            text-align: center;
+        }
+        
+        .center-title {
+            font-size: 22px;
+            color: #FFFFFF;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        
+        /* Contact button on right */
+        .contact-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-button a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+        
+        .contact-button a:hover {
+            color: #FFFFFF;
+        }
+
+        /* Items Display Section */
+        .items-section {
+            position: relative;
+            width: 100%;
+            background: white;
+            z-index: 998;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-top: 2px solid #d32f2f;
+            overflow-y: auto;
+            margin-top: 140px;
+            min-height: calc(100vh - 190px);
+        }
+
+        .items-container {
+            padding: 30px;
+            width: 95%;
+            margin: 0 auto;
+            max-width: 1400px;
+            min-height: 100%;
+        }
+        
+        .empty-message {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: calc(100vh - 300px);
+            padding: 40px 20px;
+        }
+        
+        .empty-text {
+            color: #1565c0;
+            font-size: 22px;
+            font-weight: 500;
+            line-height: 1.5;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .items-list {
+            display: none;
+            gap: 20px;
+        }
+        
+        /* Result item styling - MATCHING index.html STYLE */
+        .result-item {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 2px solid #000000;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .result-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* Left Column: Image + Price - MATCHING index.html */
+        .result-left {
+            grid-column: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .result-image {
+            margin-bottom: 15px;
+            position: relative;
+            overflow: visible;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .price-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .mrp-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .mrp-label {
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .mrp-price {
+            color: #888;
+            text-decoration: line-through;
+            font-size: 16px;
+        }
+
+        .bestbuy-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bestbuy-label {
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .bestbuy-price {
+            color: #d32f2f;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        
+        /* Center Column: Name + Specifications + Warranty */
+        .result-center {
+            grid-column: 2;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-name {
+            color: #1565c0;
+            font-size: 24px;
+            font-weight: 800;
+            margin: 0 0 15px 0;
+            line-height: 1.2;
+        }
+
+        .specs-section {
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .specs-section strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .specs-section ul {
+            margin: 5px 0 5px 20px;
+            color: #555;
+        }
+
+        .specs-section li {
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+        
+        /* Quantity Selector - Green Section */
+        .quantity-section {
+            margin-top: auto;
+            padding: 15px;
+            background: #28a745; /* Green background */
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .quantity-label {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-btn {
+            background: white;
+            color: #28a745;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .quantity-btn:hover {
+            background: #f8f9fa;
+            transform: scale(1.1);
+        }
+        
+        .quantity-value {
+            font-size: 18px;
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        /* Right Column: Description + Remove Button */
+        .result-right {
+            grid-column: 3;
+            min-width: 0;
+            margin-top: 35px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .description-section {
+            margin-top: 0;
+            flex-grow: 1;
+            margin-bottom: 20px;
+        }
+
+        .description-section strong {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .description-section ul {
+            margin: 5px 0 5px 20px;
+            color: #555;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .description-section li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+        
+        /* Remove button - moved to third column */
+        .remove-btn-container {
+            margin-top: auto;
+        }
+        
+        .remove-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .remove-btn:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* NEW: Confirm Quote Section */
+        .confirm-quote-section {
+            display: none;
+            margin-top: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px solid #000000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .confirm-quote-section.visible {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .confirm-button-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .confirm-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 8px;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .confirm-btn:hover {
+            background: #218838;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(40, 167, 69, 0.4);
+        }
+        
+        .confirm-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .contact-form-section {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #000000;
+        }
+        
+        .contact-form-section.visible {
+            display: block;
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        .contact-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            align-items: end;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .form-group input {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #28a745;
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+        }
+        
+        .submit-btn-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .submit-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .submit-btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+        }
+        
+        .submit-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .success-message {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: #d4edda;
+            border: 2px solid #000000;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .success-message.visible {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .success-message p {
+            color: #000;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .success-message .contact-info {
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1.2px solid #28a745;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            color: white;
+            text-align: center;
+            padding: 7px;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .copyright {
+            font-size: 14px;
+            color: #FFFFFF;
+        }
+        
+        /* Footer text responsiveness */
+        .mobile-text {
+            display: none;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .result-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+            
+            .result-left {
+                grid-column: 1 / span 2;
+                display: flex;
+                gap: 20px;
+            }
+            
+            .result-image {
+                flex: 0 0 200px;
+                height: 200px;
+            }
+            
+            .price-box {
+                flex: 1;
+            }
+            
+            .result-center {
+                grid-column: 1;
+            }
+            
+            .result-right {
+                grid-column: 2;
+                margin-top: 0;
+            }
+            
+            .quantity-section {
+                margin-top: 20px;
+            }
+            
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .desktop-text {
+                display: none;
+            }
+            .mobile-text {
+                display: block;
+            }
+            
+            header {
+                padding: 6px 15px;
+                min-height: 65px;
+            }
+            
+            .logo-container {
+                margin-right: 15px;
+                height: 40px;
+                width: 40px;
+            }
+            
+            .quote-image-container {
+                margin-left: 15px;
+                height: 40px;
+                width: 40px;
+            }
+            
+            .header-center {
+                width: calc(100% - 110px);
+                padding: 0 10px;
+            }
+            
+            .center-tagline {
+                font-size: 20px;
+                line-height: 1.2;
+                margin-bottom: 2px;
+            }
+            
+            .trusted-tagline {
+                font-size: 12px;
+                margin-top: 2px;
+            }
+            
+            .black-header {
+                top: 65px;
+                padding: 10px 15px;
+                min-height: 65px;
+            }
+            
+            .center-title {
+                font-size: 18px;
+            }
+            
+            .home-button a i,
+            .contact-button a i {
+                font-size: 22px;
+            }
+            
+            /* Items Section Mobile */
+            .items-section {
+                margin-top: 130px;
+                min-height: calc(100vh - 180px);
+            }
+            
+            .result-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .result-left {
+                grid-column: 1;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .result-image {
+                flex: 0 0 auto;
+                text-align: center;
+                height: 200px;
+            }
+            
+            .result-image img {
+                width: 100%;
+                height: 100%;
+                margin: 0 auto;
+            }
+            
+            .result-center,
+            .result-right {
+                grid-column: 1;
+                margin-top: 0;
+            }
+            
+            .remove-btn {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+            
+            .empty-message {
+                height: calc(100vh - 280px);
+                padding: 30px 15px;
+            }
+            
+            .empty-text {
+                font-size: 18px;
+            }
+            
+            .quantity-section {
+                margin-top: 20px;
+            }
+            
+            .confirm-quote-section {
+                padding: 20px;
+                margin-top: 30px;
+            }
+            
+            .confirm-btn {
+                padding: 15px 30px;
+                font-size: 20px;
+            }
+            
+            .contact-form-section {
+                padding: 20px;
+            }
+            
+            .success-message {
+                padding: 20px;
+            }
+            .success-message .contact-info {
+                font-size: 20px;
+    }
+        }
+        
+        @media (max-width: 480px) {
+            header {
+                padding: 5px 12px;
+                min-height: 60px;
+            }
+            
+            .logo-container {
+                height: 35px;
+                width: 35px;
+                margin-right: 10px;
+            }
+            
+            .quote-image-container {
+                height: 35px;
+                width: 35px;
+                margin-left: 10px;
+            }
+            
+            .header-center {
+                width: calc(100% - 90px);
+                padding: 0 8px;
+            }
+            
+            .center-tagline {
+                font-size: 18px;
+            }
+            
+            .trusted-tagline {
+                font-size: 11px;
+            }
+            
+            .black-header {
+                top: 60px;
+                padding: 8px 12px;
+                min-height: 60px;
+            }
+            
+            .center-title {
+                font-size: 16px;
+                white-space: normal;
+                line-height: 1.2;
+                padding: 0 10px;
+            }
+            
+            .items-section {
+                margin-top: 120px;
+                min-height: calc(100vh - 170px);
+            }
+            
+            .empty-message {
+                height: calc(100vh - 260px);
+            }
+            
+            .empty-text {
+                font-size: 16px;
+            }
+            
+            .quantity-section {
+                padding: 12px;
+            }
+            
+            .quantity-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 16px;
+            }
+            
+            .confirm-btn {
+                padding: 12px 25px;
+                font-size: 18px;
+                width: 100%;
+            }
+            
+            .submit-btn {
+                padding: 12px 25px;
+                font-size: 16px;
+                width: 100%;
+            }
+            .success-message .contact-info {
+                font-size: 16px;
+        }
+        
+        @media (max-width: 360px) {
+            header {
+                min-height: 55px;
+            }
+            
+            .logo-container,
+            .quote-image-container {
+                height: 30px;
+                width: 30px;
+            }
+            
+            .logo-container {
+                margin-right: 8px;
+            }
+            
+            .quote-image-container {
+                margin-left: 8px;
+            }
+            
+            .header-center {
+                width: calc(100% - 76px);
+                padding: 0 6px;
+            }
+            
+            .center-tagline {
+                font-size: 16px;
+            }
+            
+            .trusted-tagline {
+                font-size: 9px;
+            }
+            
+            .black-header {
+                top: 55px;
+                min-height: 55px;
+                padding: 6px 8px;
+            }
+            
+            .items-section {
+                margin-top: 110px;
+                min-height: calc(100vh - 160px);
+            }
+            
+            .empty-message {
+                height: calc(100vh - 240px);
+            }
+            
+            .empty-text {
+                font-size: 15px;
+            }
+            
+            .quantity-btn {
+                width: 26px;
+                height: 26px;
+                font-size: 14px;
+            }
+            .success-message .contact-info {
+                font-size: 18px; /* Adjust for very small screens */
+    }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header>
+        <!-- Logo in top-left corner -->
+        <div class="logo-container">
+            <img src="/sparrowinstruments/images/silogo.jpg" alt="Sparrow Instruments Logo" style="background: transparent;">
+        </div>
+        
+        <!-- Center content with centered tagline -->
+        <div class="header-center">
+            <!-- First Tagline -->
+            <div class="center-tagline">Sparrow Instruments Pvt. Ltd.</div>
+            <!-- Second Tagline -->
+            <div class="trusted-tagline">Wholesaler of all Laboratory Equipment and Instruments</div>
+        </div>
+        
+        <!-- Quote Image in top-right corner -->
+        <div class="quote-image-container">
+            <a href="/sparrowinstruments/quote.html">
+                <img src="/sparrowinstruments/images/quote.jpg" alt="Request Quote" style="background: transparent;">
+            </a>
+        </div>
+    </header>
+    
+    <!-- Black Header Section -->
+    <div class="black-header">
+        <!-- Home button on left -->
+        <div class="home-button">
+            <a href="index.html">
+                <i class="fas fa-home"></i>
+            </a>
+        </div>
+        
+        <!-- Center title -->
+        <div class="black-header-center">
+            <div class="center-title">Quotation for Added Items</div>
+        </div>
+        
+        <!-- Contact button on right -->
+        <div class="contact-button">
+            <a href="contact.html">
+                <i class="fas fa-phone"></i>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Items Display Section -->
+    <div class="items-section" id="itemsSection">
+        <div class="items-container">
+            <!-- Items will appear here when available -->
+            <div class="items-list" id="itemsList">
+                <!-- Items will be dynamically inserted here -->
+            </div>
+            <!-- Empty message - shown when no items (DEFAULT STATE) -->
+            <div class="empty-message" id="emptyMessage">
+                <div class="empty-text">
+                    You have no items to Quote. Please search and add items for your quotation. Thanks.
+                </div>
+            </div>
+            
+            <!-- NEW: Confirm Quote Section -->
+            <div class="confirm-quote-section" id="confirmQuoteSection">
+                <div class="confirm-button-container">
+                    <button class="confirm-btn" id="confirmQuoteBtn">
+                        <i class="fas fa-check-circle"></i>
+                        Confirm Quote
+                    </button>
+                </div>
+                
+                <!-- Contact Form Section -->
+                <div class="contact-form-section" id="contactFormSection">
+                    <form class="contact-form" id="quoteForm">
+                        <div class="form-group">
+                            <label for="name">Name (Company/Person) :</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your name or company">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone :</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email ID :</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                        </div>
+                        <div class="form-group submit-btn-container">
+                            <button type="submit" class="submit-btn" id="submitQuoteBtn">
+                                <i class="fas fa-paper-plane"></i>
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Success Message -->
+                <div class="success-message" id="successMessage">
+                    <p>Your Requested Quotation has been submitted successfully. We will notify you within 24 business hours.</p>
+                    <p>Or, you can directly contact us through:</p>
+                    <div class="contact-info">
+                        Email: sales@sparrowinstruments.com<br>
+                        WhatsApp: +91-9876543210<br>
+                        Phone: +91-1234567890
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="copyright">
+                <span class="desktop-text">Sparrow Instruments is in service for the last 50 years • © 2023 All rights reserved.</span>
+                <span class="mobile-text">Sparrow Instruments: 50 years of service<br>© 2023 All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+<script>
+    // Load saved items from localStorage
+    function loadAddedItems() {
+        const savedItems = localStorage.getItem('sparrowQuoteItems');
+        const itemsList = document.getElementById('itemsList');
+        const emptyMessage = document.getElementById('emptyMessage');
+        const confirmQuoteSection = document.getElementById('confirmQuoteSection');
+        
+        console.log('🔍 Checking localStorage for quote items...');
+        console.log('Saved items:', savedItems);
+        
+        // DEFAULT: Show empty message, hide items list and confirm section
+        emptyMessage.style.display = 'flex';
+        itemsList.style.display = 'none';
+        confirmQuoteSection.classList.remove('visible');
+        itemsList.innerHTML = ''; // Clear any existing items
+        
+        // Reset form and success message
+        document.getElementById('contactFormSection').classList.remove('visible');
+        document.getElementById('successMessage').classList.remove('visible');
+        document.getElementById('quoteForm').reset();
+        
+        if (savedItems) {
+            try {
+                const quoteData = JSON.parse(savedItems);
+                const items = quoteData.items || [];
+                
+                console.log(`📦 Found ${items.length} items in quote`);
+                console.log('Items data:', items);
+                
+                if (items.length > 0) {
+                    // Show items and confirm section, hide empty message
+                    itemsList.style.display = 'block';
+                    emptyMessage.style.display = 'none';
+                    confirmQuoteSection.classList.add('visible');
+                    
+                    // Display items with full product data
+                    items.forEach((itemData, index) => {
+                        console.log(`🔄 Processing item ${index + 1}:`, itemData);
+                        
+                        // Check if itemData is an object with full product data
+                        if (typeof itemData === 'object' && itemData !== null) {
+                            console.log('✅ Item is an object, creating element...');
+                            const itemElement = createItemElement(itemData, index);
+                            itemsList.appendChild(itemElement);
+                        } 
+                        // Fallback for old format (just IDs) - but shouldn't happen now
+                        else {
+                            console.log('⚠️ Item is not an object, using fallback:', itemData);
+                            const basicItem = {
+                                id: itemData || `item_${index}`,
+                                name: `Item ${index + 1}`,
+                                image: 'placeholder.jpg',
+                                mrpPrice: 'Price on request',
+                                bestBuyPrice: 'Price on request',
+                                bestBuyLabel: 'Buy',
+                                warranty: 'Not specified',
+                                specifications: ['Specifications not available'],
+                                description: ['Please go back to the main catalog to see full details.']
+                            };
+                            const itemElement = createItemElement(basicItem, index);
+                            itemsList.appendChild(itemElement);
+                        }
+                    });
+                    
+                    console.log('✅ All items displayed');
+                } else {
+                    console.log('📭 No items in quote array');
+                }
+                
+            } catch (e) {
+                console.error('❌ Error loading saved items:', e);
+                // Keep default state (empty message) if there's an error
+            }
+        } else {
+            console.log('📭 No saved items found in localStorage');
+        }
+    }
+    
+    // Create item element for display
+    function createItemElement(product, index) {
+        console.log(`🎨 Creating element for item ${index}:`, product.name || product.id);
+        
+        const itemElement = document.createElement('div');
+        itemElement.className = 'result-item';
+        itemElement.dataset.itemId = product.id || `item_${index}`;
+        itemElement.dataset.quantity = product.quantity || 1;
+        
+        // Format specifications
+        let specsHTML = '';
+        if (Array.isArray(product.specifications)) {
+            specsHTML = product.specifications.map(s => `<li>${s}</li>`).join('');
+        } else if (product.specifications) {
+            specsHTML = `<li>${product.specifications}</li>`;
+        } else {
+            specsHTML = '<li>Specifications not specified</li>';
+        }
+        
+        // Format description
+        let descHTML = '';
+        if (Array.isArray(product.description)) {
+            descHTML = product.description.map(d => `<li>${d}</li>`).join('');
+        } else if (product.description) {
+            descHTML = `<li>${product.description}</li>`;
+        } else {
+            descHTML = '<li>Description not available</li>';
+        }
+        
+        // Format prices
+        const mrpPrice = product.mrpPrice || product.mrp || 'Price on request';
+        const bestBuyPrice = product.bestBuyPrice || product.price || 'Price on request';
+        const bestBuyLabel = product.bestBuyLabel || 'Buy';
+        
+        // Check for guaranteed competitive pricing
+        const isGuaranteedCompetitive = 
+            (bestBuyPrice && bestBuyPrice.toString().toLowerCase().includes('guaranteed competitive')) ||
+            (bestBuyLabel && bestBuyLabel.toString().toLowerCase().includes('guaranteed competitive'));
+        
+        const priceDisplay = isGuaranteedCompetitive ? 
+            'Guaranteed Competitive' : 
+            (bestBuyPrice ? `INR ${bestBuyPrice}/-` : 'Price on request');
+        
+        const mrpDisplay = mrpPrice ? `INR ${mrpPrice}/-` : 'Price on request';
+        
+        itemElement.innerHTML = `
+            <div class="result-content">
+                <div class="result-left">
+                    <div class="result-image">
+                        <img src="${product.image || product.img || 'placeholder.jpg'}" alt="${product.name || 'Product'}" onerror="this.src='placeholder.jpg'">
+                    </div>
+                    <div class="price-box">
+                        <div class="mrp-line">
+                            <span class="mrp-label">M.R.P.</span> 
+                            <span class="mrp-price">${mrpDisplay}</span>
+                        </div>
+                        <div class="bestbuy-line">
+                            <span class="bestbuy-label">${bestBuyLabel}</span> 
+                            <span class="bestbuy-price">${priceDisplay}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-center">
+                    <h4 class="item-name">${product.name || 'Product Name'}</h4>
+                    <div class="specs-section">
+                        <strong>Specifications:</strong>
+                        <ul>${specsHTML}</ul>
+                        <strong>Warranty:</strong> ${product.warranty || 'Not specified'}
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">No. of Items</span>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus-btn" data-item-id="${product.id || index}">-</button>
+                            <span class="quantity-value">${product.quantity || 1}</span>
+                            <button class="quantity-btn plus-btn" data-item-id="${product.id || index}">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-right">
+                    <div class="description-section">
+                        <strong>Descriptions:</strong>
+                        <ul>${descHTML}</ul>
+                    </div>
+                    <div class="remove-btn-container">
+                        <button class="remove-btn" data-item-id="${product.id || index}">
+                            <i class="fas fa-trash"></i>
+                            Remove Item
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Add event listeners
+        const removeBtn = itemElement.querySelector('.remove-btn');
+        removeBtn.addEventListener('click', function() {
+            console.log('🗑️ Removing item:', product.id || index);
+            removeItem(product.id || index);
+        });
+        
+        const minusBtn = itemElement.querySelector('.minus-btn');
+        const plusBtn = itemElement.querySelector('.plus-btn');
+        const quantityValue = itemElement.querySelector('.quantity-value');
+        
+        minusBtn.addEventListener('click', function() {
+            console.log('➖ Decreasing quantity for item:', product.id || index);
+            updateQuantity(product.id || index, -1, quantityValue);
+        });
+        
+        plusBtn.addEventListener('click', function() {
+            console.log('➕ Increasing quantity for item:', product.id || index);
+            updateQuantity(product.id || index, 1, quantityValue);
+        });
+        
+        console.log('✅ Item element created successfully');
+        return itemElement;
+    }
+    
+    // Update quantity function
+    function updateQuantity(itemId, change, quantityElement) {
+        console.log(`🔄 Updating quantity for item ${itemId}, change: ${change}`);
+        
+        const savedItems = localStorage.getItem('sparrowQuoteItems');
+        if (savedItems) {
+            try {
+                const quoteData = JSON.parse(savedItems);
+                const items = quoteData.items || [];
+                
+                console.log('📋 Current items in quote:', items);
+                
+                // Find the item index
+                const itemIndex = items.findIndex(item => item.id === itemId);
+                console.log('🔍 Item index found:', itemIndex);
+                
+                if (itemIndex !== -1) {
+                    // Get current quantity
+                    let currentItem = items[itemIndex];
+                    let currentQuantity = currentItem.quantity || 1;
+                    
+                    console.log('📊 Current quantity:', currentQuantity);
+                    
+                    // Calculate new quantity (minimum 1)
+                    let newQuantity = Math.max(1, currentQuantity + change);
+                    
+                    console.log('🎯 New quantity:', newQuantity);
+                    
+                    // Update the item quantity
+                    items[itemIndex].quantity = newQuantity;
+                    
+                    // Update localStorage
+                    quoteData.items = items;
+                    localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
+                    
+                    // Update display
+                    quantityElement.textContent = newQuantity;
+                    
+                    // Show toast
+                    showToast(`Quantity updated to ${newQuantity}`, 'success');
+                } else {
+                    console.error('❌ Item not found in quote:', itemId);
+                }
+            } catch (e) {
+                console.error('❌ Error updating quantity:', e);
+            }
+        }
+    }
+    
+    // Remove item from list
+    function removeItem(itemId) {
+        console.log(`🗑️ Attempting to remove item: ${itemId}`);
+        
+        const savedItems = localStorage.getItem('sparrowQuoteItems');
+        if (savedItems) {
+            try {
+                const quoteData = JSON.parse(savedItems);
+                const items = quoteData.items || [];
+                
+                console.log('📋 Items before removal:', items.length);
+                
+                // Filter out the item to remove
+                const updatedItems = items.filter(item => item.id !== itemId);
+                
+                console.log('📋 Items after removal:', updatedItems.length);
+                
+                quoteData.items = updatedItems;
+                quoteData.count = updatedItems.length;
+                
+                localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
+                
+                // Reload the items
+                loadAddedItems();
+                
+                // Show confirmation
+                showToast('Item removed from your list', 'info');
+            } catch (e) {
+                console.error('❌ Error removing item:', e);
+            }
+        }
+    }
+    
+    // NEW: Confirm Quote functionality
+    function setupConfirmQuote() {
+        const confirmBtn = document.getElementById('confirmQuoteBtn');
+        const contactFormSection = document.getElementById('contactFormSection');
+        const quoteForm = document.getElementById('quoteForm');
+        const successMessage = document.getElementById('successMessage');
+        const submitBtn = document.getElementById('submitQuoteBtn');
+        
+        confirmBtn.addEventListener('click', function() {
+            console.log('✅ Confirm Quote button clicked');
+            
+            // Hide confirm button, show contact form
+            confirmBtn.style.display = 'none';
+            contactFormSection.classList.add('visible');
+            
+            // Scroll to form
+            contactFormSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            showToast('Please fill in your contact details', 'info');
+        });
+        
+        quoteForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('📝 Form submitted');
+            
+            // Disable submit button to prevent double submission
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                items: getQuoteItems(),
+                timestamp: new Date().toISOString()
+            };
+            
+            console.log('📊 Form data:', formData);
+            
+            // Simulate form submission with delay
+            setTimeout(() => {
+                // Hide form, show success message
+                contactFormSection.classList.remove('visible');
+                successMessage.classList.add('visible');
+                
+                // Save submission to localStorage (for demo purposes)
+                saveQuoteSubmission(formData);
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                showToast('Quote submitted successfully!', 'success');
+                
+                // Reset form and button
+                quoteForm.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit';
+                
+            }, 1500); // 1.5 second delay to simulate processing
+        });
+    }
+    
+    // NEW: Get quote items from localStorage
+    function getQuoteItems() {
+        const savedItems = localStorage.getItem('sparrowQuoteItems');
+        if (savedItems) {
+            try {
+                const quoteData = JSON.parse(savedItems);
+                return quoteData.items || [];
+            } catch (e) {
+                console.error('❌ Error getting quote items:', e);
+                return [];
+            }
+        }
+        return [];
+    }
+    
+    // NEW: Save quote submission (for demo purposes)
+    function saveQuoteSubmission(formData) {
+        try {
+            // Get existing submissions or create new array
+            const existingSubmissions = JSON.parse(localStorage.getItem('sparrowQuoteSubmissions') || '[]');
+            
+            // Add new submission
+            existingSubmissions.push(formData);
+            
+            // Save back to localStorage
+            localStorage.setItem('sparrowQuoteSubmissions', JSON.stringify(existingSubmissions));
+            
+            console.log('💾 Quote submission saved:', formData);
+            console.log('📋 Total submissions:', existingSubmissions.length);
+            
+        } catch (e) {
+            console.error('❌ Error saving quote submission:', e);
+        }
+    }
+    
+    // Show toast notification
+    function showToast(message, type = 'info') {
+        // Remove existing toast
+        const existingToast = document.querySelector('.toast-notification');
+        if (existingToast) existingToast.remove();
+        
+        // Create toast
+        const toast = document.createElement('div');
+        toast.className = `toast-notification toast-${type}`;
+        toast.textContent = message;
+        
+        // Add styles
+        toast.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: ${type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : '#17a2b8'};
+            color: white;
+            padding: 15px 20px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            animation: slideIn 0.3s ease-out;
+        `;
+        
+        // Add keyframe animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Auto-remove after 3 seconds
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.style.animation = 'slideIn 0.3s ease-out reverse';
+                setTimeout(() => toast.remove(), 300);
+            }
+        }, 3000);
+        
+        document.body.appendChild(toast);
+    }
+    
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 Page loaded, starting quote item loading...');
+        loadAddedItems();
+        setupConfirmQuote();
+    });
+    
+    // Add debug helper
+    window.debugQuote = function() {
+        const saved = localStorage.getItem('sparrowQuoteItems');
+        console.log('🔍 Debug - localStorage sparrowQuoteItems:', saved);
+        if (saved) {
+            console.log('🔍 Parsed data:', JSON.parse(saved));
+        }
+        loadAddedItems();
+    }
+</script>
+</body>
+</html>

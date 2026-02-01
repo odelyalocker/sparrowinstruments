@@ -376,7 +376,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 30px;
-            align-items: end;
+            align-items: start;
         }
 
         .result-left {
@@ -573,7 +573,7 @@
         .result-right {
             grid-column: 3;
             min-width: 0;
-            margin-top: 35px;
+            margin-top: 45px;
             display: flex;
             flex-direction: column;
         }
@@ -704,13 +704,13 @@
         /* ===== TOAST NOTIFICATION ===== */
         .toast-notification {
             position: fixed;
-            top: 20px;
+            top: 150px;
             right: 20px;
             background: #28a745;
             color: white;
             padding: 15px 20px;
             border-radius: 6px;
-            z-index: 9999;
+            z-index: 99999;
             display: flex;
             align-items: center;
             gap: 15px;
@@ -749,7 +749,7 @@
             z-index: 1001;
             transition: left 0.3s ease;
             overflow-y: auto;
-            padding-bottom: 20px;
+            padding-bottom: 0;
         }
 
         .filter-sidebar.show {
@@ -760,7 +760,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            padding: 10px 14px;
             background: #f8f9fa;
             border-bottom: 1px solid #e0e0e0;
             position: sticky;
@@ -795,12 +795,12 @@
         }
 
         .filter-content {
-            padding: 20px;
+            padding: 10px 12px;
         }
 
         .filter-section {
-            margin-bottom: 25px;
-            padding-bottom: 20px;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
             border-bottom: 1px solid #eee;
         }
 
@@ -812,7 +812,7 @@
         .filter-section h4 {
             color: #333;
             font-size: 16px;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -824,7 +824,7 @@
 
         .clear-filter-btn {
             width: 100%;
-            padding: 12px;
+            padding: 7px;
             background: #f8f9fa;
             border: 2px solid #ddd;
             border-radius: 6px;
@@ -848,7 +848,7 @@
         .checkbox-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 6px;
         }
 
         .checkbox-item {
@@ -934,7 +934,7 @@
 
         .apply-filter-btn {
             width: 100%;
-            padding: 14px;
+            padding: 8px;
             background: #d32f2f;
             border: none;
             border-radius: 6px;
@@ -1472,7 +1472,7 @@
             <!-- Apply Filter Button -->
             <div class="filter-section">
                 <button class="apply-filter-btn" id="applyFilter">
-                    <i class="fas fa-check"></i> Apply Filters
+                    <i class="fas fa-check"></i> Apply
                 </button>
             </div>
         </div>
@@ -1911,11 +1911,7 @@
             localStorage.setItem('sparrowCartItems', JSON.stringify(cartItems));
             updateBadges();
             
-            showToast('Item added to cart! Redirecting...', 'success');
-            
-            setTimeout(() => {
-                window.location.href = '/sparrowinstruments/cart.html';
-            }, 1000);
+            showToast('Added to cart (' + cartItems.length + ' item' + (cartItems.length > 1 ? 's' : '') + ')', 'success');
         }
 
         // ===== SHOW ALL ITEMS =====
@@ -2067,24 +2063,27 @@
             container.addEventListener('mousemove', (e) => moveZoom(e.clientX, e.clientY));
             container.addEventListener('mouseleave', hideZoom);
             
-            let isTouchZooming = false;
-            
+            // ---- MOBILE: use fullscreen overlay instead of lens ----
+            const overlay = document.getElementById('mobileZoomOverlay');
+            const overlayImg = document.getElementById('mobileZoomImage');
+
             container.addEventListener('touchstart', (e) => {
                 if (e.cancelable) e.preventDefault();
-                isTouchZooming = true;
-                moveZoom(e.touches[0].clientX, e.touches[0].clientY);
+                // Show the fullscreen overlay with this image
+                overlayImg.src = img.src;
+                overlay.style.display = 'flex';
             }, { passive: false });
-            
-            container.addEventListener('touchmove', (e) => {
-                if (!isTouchZooming) return;
-                if (e.cancelable) e.preventDefault();
-                moveZoom(e.touches[0].clientX, e.touches[0].clientY);
+
+            function closeMobileOverlay() {
+                overlay.style.display = 'none';
+            }
+
+            overlay.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                closeMobileOverlay();
             }, { passive: false });
-            
-            container.addEventListener('touchend', (e) => {
-                isTouchZooming = false;
-                hideZoom();
-            });
+
+            overlay.addEventListener('click', closeMobileOverlay);
         }
         
         // ===== FILTER SIDEBAR FUNCTIONALITY =====
@@ -2222,6 +2221,10 @@
         
         // ===== INITIALIZATION =====
         window.addEventListener('DOMContentLoaded', function() {
+            // Clear previous localStorage so page always starts fresh
+            localStorage.removeItem('sparrowQuoteItems');
+            localStorage.removeItem('sparrowCartItems');
+
             fixCorruptedQuoteData();
             loadJSONFiles();
             updateBadges();

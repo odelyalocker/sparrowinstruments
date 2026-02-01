@@ -2277,14 +2277,13 @@
         document.querySelector('.search-box').addEventListener('input', searchItems);
         
         // ===== INITIALIZATION =====
-        window.addEventListener('DOMContentLoaded', function() {
-            localStorage.removeItem('sparrowQuoteItems');
-            localStorage.removeItem('sparrowCartItems');
-
-            fixCorruptedQuoteData();
-            loadJSONFiles();
-            updateBadges();
-        });
+window.addEventListener('DOMContentLoaded', function() {
+    fixCorruptedQuoteData();
+    loadJSONFiles();
+    updateBadges();
+});
+        
     </script>
 </body>
 </html>
+

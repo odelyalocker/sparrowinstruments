@@ -22,6 +22,7 @@
     ],
     "keywords": ["spectrometer", "optics", "physics", "wavelength", "prism", "lab equipment"]
   },
+  
   {
     "name": "Digital Multimeter",
     "category": "Physics Lab",
@@ -44,28 +45,7 @@
       "Comes with test leads, battery, and manual"
     ],
     "keywords": ["multimeter", "digital", "electrical", "physics", "measurement", "lab equipment"]
-  },
-  {
-    "name": "Laser Light Kit",
-    "category": "Physics Lab",
-    "image": "/sparrowinstruments/physimg/phys3.jpg",
-    "mrpPrice": "18,000",
-    "discount": "10%",
-    "bestBuyPrice": "16,200",
-    "warranty": "1 Year Manufacturer Warranty",
-    "specifications": [
-      "Laser: He-Ne, 632.8nm, 2mW output",
-      "Power supply: 230V AC input",
-      "Optical bench: 1 meter with scale",
-      "Accessories: Slits, gratings, lenses set",
-      "Safety: Class II laser product"
-    ],
-    "description": [
-      "Complete laser optics demonstration kit",
-      "For interference, diffraction, and polarization experiments",
-      "Includes multiple optical components on magnetic mounts",
-      "Ideal for college and university physics labs"
-    ],
-    "keywords": ["laser", "optics", "physics", "light", "interference", "lab equipment"]
   }
+
+
 ]

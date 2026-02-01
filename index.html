@@ -2062,28 +2062,37 @@
             container.addEventListener('mousemove', (e) => moveZoom(e.clientX, e.clientY));
             container.addEventListener('mouseleave', hideZoom);
             
-            // ---- MOBILE: use fullscreen overlay instead of lens ----
-            const overlay = document.getElementById('mobileZoomOverlay');
-            const overlayImg = document.getElementById('mobileZoomImage');
+// ---- MOBILE: use fullscreen overlay instead of lens ----
+const overlay = document.getElementById('mobileZoomOverlay');
+const overlayImg = document.getElementById('mobileZoomImage');
 
-            container.addEventListener('touchstart', (e) => {
-                if (e.cancelable) e.preventDefault();
-                // Show the fullscreen overlay with this image
-                overlayImg.src = img.src;
-                overlay.style.display = 'flex';
-            }, { passive: false });
+// FIXED: Remove preventDefault() and change to 'click' for mobile
+container.addEventListener('click', (e) => {
+    // Don't prevent default - let the click happen naturally
+    // Show the fullscreen overlay with this image
+    overlayImg.src = img.src;
+    overlay.style.display = 'flex';
+    
+    // Also prevent the click from bubbling up
+    e.stopPropagation();
+});
 
-            function closeMobileOverlay() {
-                overlay.style.display = 'none';
-            }
+function closeMobileOverlay() {
+    overlay.style.display = 'none';
+}
 
-            overlay.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                closeMobileOverlay();
-            }, { passive: false });
+// FIXED: Use click instead of touchstart for closing
+overlay.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeMobileOverlay();
+});
 
-            overlay.addEventListener('click', closeMobileOverlay);
-        }
+// Also close with escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.style.display === 'flex') {
+        closeMobileOverlay();
+    }
+});
         
         // ===== FILTER SIDEBAR FUNCTIONALITY =====
         const hamburgerMenu = document.querySelector('.hamburger-menu');
@@ -2231,36 +2240,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -131,11 +131,6 @@
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) brightness(1.05);
         }
         
-        /* Adjust main content position */
-        .main-content {
-            margin-top: 140px;
-        }
-        
         /* Black Header Section - MODIFIED */
         .black-header {
             position: fixed;
@@ -306,19 +301,37 @@
             background: white;
             z-index: 998;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            display: none;
+            display: block;
             border-top: 2px solid #d32f2f;
             overflow-y: auto;
             margin-top: 140px;
             min-height: 200px;
+            opacity: 1; /* Always visible */
+            transition: opacity 0.3s ease; /* Smooth transition */
         }
+.search-results:empty {
+    opacity: 0; /* Fade out when empty */
+    min-height: 0;
+    border: none;
+    box-shadow: none;
+}
 
-.results-container {
+    .results-container {
     padding: 10px 20px 20px 20px;
     width: 95%;
     margin: 0 auto;
+    transition: all 0.3s ease;
 }
-
+.search-results:empty .results-container {
+    padding: 0;
+}
+ .no-results {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    font-style: italic;
+}       
+ 
         /* Ensure results container doesn't add extra padding */
         .search-results > .results-container {
             width: 100%;
@@ -341,6 +354,7 @@
         
         /* Main Content Area */
         .main-content {
+            display: none; /* Hide main content by default */
             flex: 1;
             margin-bottom: 10px;
             background-color: white;
@@ -349,7 +363,9 @@
             color: #555;
             margin-top: 140px;
         }
-        
+            .main-content:not(.hide-main) {
+            display: block;
+        }
         /* Footer Styles */
         footer {
             background: linear-gradient(135deg, #d32f2f, #b71c1c);
@@ -2001,20 +2017,63 @@
         // ===== SHOW ALL ITEMS =====
 function showAllItems() {
     const resultsList = document.getElementById('resultsList');
-    const searchResults = document.getElementById('searchResults');
-    const mainContent = document.querySelector('.main-content');
     
+    // Clear results
     resultsList.innerHTML = '';
     
-    // Display all items
-    allItems.forEach(item => {
-        createResultItem(item, resultsList);
-    });
+    // If we have items, show them
+    if (allItems.length > 0) {
+        allItems.forEach(item => {
+            createResultItem(item, resultsList);
+        });
+    }
     
-    searchResults.style.display = 'block';
-    mainContent.classList.add('hide-main');
+    // Always hide main content when showing results
+    document.querySelector('.main-content').style.display = 'none';
 }
+
+function searchItems() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+        const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
+        const resultsList = document.getElementById('resultsList');
+        const mainContent = document.querySelector('.main-content');
         
+        // If search box is empty, show all items
+        if (searchTerm === '') {
+            showAllItems();
+            return;
+        }
+        
+        // Get active filters
+        const hasActiveFilters = currentFilters.sections.length > 0 || currentFilters.subcategories.length > 0;
+        
+        // Filter items
+        const matchedItems = allItems
+            .map(item => {
+                // ... (keep your scoring logic) ...
+                return { ...item, relevanceScore: score };
+            })
+            .filter(item => {
+                // ... (keep your filter logic) ...
+                return item.relevanceScore > 0;
+            })
+            .sort((a, b) => b.relevanceScore - a.relevanceScore);
+        
+        // Render Results
+        resultsList.innerHTML = ''; // Clear first
+        
+        if (matchedItems.length > 0) {
+            matchedItems.forEach(item => {
+                createResultItem(item, resultsList);
+            });
+            mainContent.style.display = 'none';
+        } else {
+            resultsList.innerHTML = '<div class="no-results">Try different keywords</div>';
+            mainContent.style.display = 'none';
+        }
+    }, 300);
+}        
         // ===== SEARCH FUNCTION =====
 function searchItems() {
     clearTimeout(searchTimeout);
@@ -2089,11 +2148,11 @@ function searchItems() {
                 createResultItem(item, resultsList);
             });
             
-            searchResults.style.display = 'block';
+            
             mainContent.classList.add('hide-main');
         } else {
             resultsList.innerHTML = '<div class="no-results">Try different keywords</div>';
-            searchResults.style.display = 'block';
+            
             mainContent.classList.add('hide-main');
         }
     }, 300);
@@ -2281,6 +2340,7 @@ function searchItems() {
     </script>
 </body>
 </html>
+
 
 
 

@@ -2204,7 +2204,7 @@ document.addEventListener('keydown', (e) => {
 
 // ===== UPDATE BADGE COUNTERS =====
 function updateBadges() {
-    // Cart badge only - quote badge removed
+    // Cart badge only (quote badge removed as requested)
     const cartItemsRaw = localStorage.getItem('sparrowCartItems');
     let cCount = 0;
     if (cartItemsRaw) {
@@ -2235,3 +2235,4 @@ function updateBadges() {
     </script>
 </body>
 </html>
+

@@ -167,7 +167,7 @@
 
 /* Icon styles for Home and Contact */
 .home-button a i,
-.contact-button a i,
+.cart-button a i,
 .about-button a i,
 .hamburger-menu i {
     color: #FFFFFF;
@@ -179,7 +179,7 @@
 .home-button a:hover i,
 .hamburger-menu:hover i,
 .about-button a:hover i,
-.contact-button a:hover i {
+.cart-button a:hover i {
     color: #FFFFFF;
     transform: scale(1.1); /* Slight zoom on hover */
     filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
@@ -215,7 +215,7 @@
 
 /* Adjust button containers for icons */
 .home-button,
-.contact-button {
+.cart-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -262,15 +262,15 @@
             background-color: #fff;
         }
         
-        /* Contact button on right */
-        .contact-button {
+        /* Cart button on right */
+        .cart-button {
     margin-left: 10px; /* Reduced from 20px to 10px */
     display: flex;
     align-items: center;
     justify-content: center;
         }
         
-        .contact-button a {
+        .cart-button a {
             color: #FFFFFF;
             text-decoration: none;
             font-size: 18px;
@@ -279,7 +279,7 @@
             white-space: nowrap;
         }
         
-        .contact-button a:hover {
+        .cart-button a:hover {
             color: #FFFFFF;
         }
 /* About button */
@@ -1263,7 +1263,7 @@
         justify-content: space-between;
     }
     
-    /* Home and Contact buttons - FIXED */
+    /* Home and Cart buttons - FIXED */
     .home-button {
         margin-right: 10px;
         order: 1;
@@ -1287,7 +1287,7 @@
     flex-shrink: 0;
     }
     
-    .contact-button {
+    .cart-button {
         margin-left: 5px;
         order: 5;
         flex-shrink: 0;
@@ -1298,12 +1298,12 @@
     }
     
     .home-button a,
-    .contact-button a {
+    .cart-button a {
         font-size: 16px;
         padding: 8px 0;
     }
     .home-button a i,
-    .contact-button a i,
+    .cart-button a i,
     .about-button a i,
     .hamburger-menu i {
     font-size: 22px; /* All icons now 22px on mobile */
@@ -1499,18 +1499,18 @@
     margin-right: 5px; /* Consistent spacing */
 }
 
-.contact-button {
+.cart-button {
     order: 5;
     margin-left: 0; /* No left margin since About has right margin */
 }
     .home-button a,
-    .contact-button a {
+    .cart-button a {
         font-size: 15px;
         white-space: nowrap;
         padding: 6px 0;
     }
     .home-button a i,
-    .contact-button a i,
+    .cart-button a i,
     .about-button a i,
     .hamburger-menu i {
     font-size: 20px;
@@ -1616,18 +1616,18 @@
     margin-right: 5px; /* Consistent spacing */
 }
 
-.contact-button {
+.cart-button {
     order: 4;
     margin-left: 0; /* No left margin since About has right margin */
 }
     .home-button a,
-    .contact-button a {
+    .cart-button a {
         font-size: 14px;
         white-space: nowrap;
         padding: 4px 0;
     }
     .home-button a i,
-    .contact-button a i,
+    .cart-button a i,
     .about-button a i,
     .hamburger-menu i {
     font-size: 18px; /* All icons now 18px */
@@ -1745,10 +1745,10 @@
         </a>
     </div>
     
-    <!-- Contact button on right (5) -->
-    <div class="contact-button">
+    <!-- Cart button on right (5) -->
+    <div class="cart-button">
         <a href="contact.html">
-            <i class="fas fa-phone"></i>
+            <i class="fas fa-shopping-cart"></i>
         </a>
     </div>
 </div>
@@ -2471,5 +2471,6 @@ function applyFilters() {
 </script>
 </body>
 </html>
+
 
 

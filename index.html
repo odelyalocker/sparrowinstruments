@@ -31,7 +31,6 @@
             padding: 8px 20px;
             display: flex;
             align-items: center;
-            box-shadow: none;
             z-index: 1000;
             min-height: 70px;
         }
@@ -55,7 +54,6 @@
             object-fit: contain;
             background: transparent;
             border: none;
-            box-shadow: none;
         }
 
         .header-center {
@@ -118,12 +116,11 @@
             border: none;
             cursor: pointer;
             transition: transform 0.3s ease, filter 0.3s ease;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
 
         .quote-image-container img:hover {
             transform: scale(1.08);
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) brightness(1.05);
+            filter: brightness(1.05);
         }
         
         .main-content {
@@ -172,7 +169,6 @@
         .cart-button a:hover i {
             color: #FFFFFF;
             transform: scale(1.1);
-            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         }
         
         .home-button a {
@@ -198,7 +194,6 @@
         .hamburger-menu:hover i {
             color: #FFFFFF;
             transform: scale(1.1);
-            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         }
 
         .home-button,
@@ -240,7 +235,6 @@
         .search-box:focus {
             border-color: #d32f2f;
             background-color: #fff;
-            box-shadow: 0 0 8px rgba(211, 47, 47, 0.5);
         }
         
         .search-box:hover {
@@ -288,7 +282,6 @@
             width: 100%;
             background: white;
             z-index: 998;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             display: none;
             border-top: 2px solid #d32f2f;
             overflow-y: auto;
@@ -297,16 +290,16 @@
         }
 
         .results-container {
-            padding: 10px 20px 20px 20px;
-            width: 95%;
+            padding: 10px 8px 10px 8px;
+            width: 100%;
             margin: 0 auto;
         }
 
         .search-results > .results-container {
             width: 100%;
-            max-width: 1400px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 20px 30px;
+            padding: 10px 8px;
         }
         
         .results-list {
@@ -329,6 +322,7 @@
             text-align: center;
             color: #555;
             margin-top: 140px;
+            display: none;
         }
         
         footer {
@@ -371,10 +365,10 @@
         /* ===== SEARCH RESULTS LAYOUT ===== */
         .result-item {
             background: white;
-            padding: 25px;
-            border-radius: 8px;
+            padding: 15px;
+            border-radius: 0;
             border: 2px solid #000000;
-            margin-bottom: 20px;
+            margin-bottom: 2px;
             width: 100%;
         }
 
@@ -481,7 +475,6 @@
         .get-quote-btn:hover {
             background: #218838;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         
         .get-quote-btn.added {
@@ -491,7 +484,6 @@
         
         .get-quote-btn.added:hover {
             transform: none;
-            box-shadow: none;
         }
         
         .add-to-cart-btn {
@@ -515,7 +507,6 @@
         .add-to-cart-btn:hover {
             background: #004494;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         
         .add-to-cart-btn.inactive {
@@ -526,7 +517,6 @@
         
         .add-to-cart-btn.inactive:hover {
             transform: none;
-            box-shadow: none;
             background: #6c757d;
         }
 
@@ -627,7 +617,6 @@
             background: white;
             border: 1px solid #ddd;
             border-radius: 8px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             overflow: hidden;
             display: none;
@@ -721,7 +710,6 @@
             color: white;
             padding: 15px 20px;
             border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             z-index: 9999;
             display: flex;
             align-items: center;
@@ -754,11 +742,10 @@
         .filter-sidebar {
             position: fixed;
             top: 140px;
-            left: -350px;
-            width: 320px;
+            left: -220px;
+            width: 200px;
             height: calc(100vh - 140px);
             background: white;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
             z-index: 1001;
             transition: left 0.3s ease;
             overflow-y: auto;
@@ -869,7 +856,7 @@
             align-items: center;
             cursor: pointer;
             color: #555;
-            font-size: 15px;
+            font-size: 18px;
             position: relative;
             padding-left: 30px;
             min-height: 24px;
@@ -922,14 +909,7 @@
             transform: rotate(45deg);
         }
 
-        .sub-checkbox {
-            margin-left: 25px !important;
-            padding-left: 35px !important;
-        }
 
-        .sub-checkbox .checkmark {
-            left: 10px;
-        }
 
         .section-label {
             font-weight: 600;
@@ -1033,7 +1013,8 @@
             }
             
             .filter-sidebar {
-                width: 300px;
+                width: 180px;
+                left: -180px;
             }
         }
 
@@ -1158,8 +1139,8 @@
             }
             
             .results-container {
-                width: 95%;
-                padding: 15px;
+                width: 100%;
+                padding: 8px 4px;
             }
             
             .result-content {
@@ -1186,8 +1167,12 @@
             .filter-sidebar {
                 top: 130px;
                 height: calc(100vh - 130px);
-                width: 280px;
-                left: -280px;
+                width: 180px;
+                left: -180px;
+            }
+            
+            .checkbox-item {
+                font-size: 17px;
             }
         }
 
@@ -1258,8 +1243,12 @@
             .filter-sidebar {
                 top: 120px;
                 height: calc(100vh - 120px);
-                width: 260px;
-                left: -260px;
+                width: 170px;
+                left: -170px;
+            }
+            
+            .checkbox-item {
+                font-size: 16px;
             }
         }
 
@@ -1331,8 +1320,12 @@
             .filter-sidebar {
                 top: 110px;
                 height: calc(100vh - 110px);
-                width: 240px;
-                left: -240px;
+                width: 160px;
+                left: -160px;
+            }
+            
+            .checkbox-item {
+                font-size: 15px;
             }
         }
         
@@ -1360,8 +1353,36 @@
         .add-to-cart-btn.inactive:hover,
         .add-to-cart-btn[disabled]:hover {
             transform: none !important;
-            box-shadow: none !important;
             background: #6c757d !important;
+        }
+
+        /* ===== BADGE COUNTERS ===== */
+        .badge-counter {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #d32f2f;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            pointer-events: none;
+            border: 2px solid white;
+        }
+        .badge-counter.hidden {
+            display: none;
+        }
+        .cart-button {
+            position: relative;
+        }
+        .cart-button a {
+            position: relative;
         }
     </style>
 </head>
@@ -1380,6 +1401,7 @@
         <div class="quote-image-container">
             <a href="/sparrowinstruments/quote.html">
                 <img src="/sparrowinstruments/images/quote.jpg" alt="Request Quote" style="background: transparent;">
+                <span class="badge-counter hidden" id="quoteBadge">0</span>
             </a>
         </div>
     </header>
@@ -1415,6 +1437,7 @@
         <div class="cart-button">
             <a href="cart.html">
                 <i class="fas fa-shopping-cart"></i>
+                <span class="badge-counter hidden" id="cartBadge">0</span>
             </a>
         </div>
     </div>
@@ -1440,7 +1463,7 @@
             
             <!-- Sections Filter -->
             <div class="filter-section">
-                <h4><i class="fas fa-th-list"></i> Sections</h4>
+                <h4><i class="fas fa-th-list"></i> Categories</h4>
                 <div class="checkbox-group" id="sectionsFilter">
                     <!-- Checkboxes will be generated by JavaScript -->
                 </div>
@@ -1511,7 +1534,7 @@
                 label: 'Education',
                 icon: 'edu',
                 faIcon: 'fa-graduation-cap',
-                subcategories: ['Physics', 'Chemistry', 'Biology']
+                subcategories: []
             },
             'Medical': {
                 label: 'Medical',
@@ -1629,7 +1652,6 @@
             }
         }
 
-        // ===== NEW: GENERATE PRIORITY CHECKBOXES =====
         // ===== GENERATE FILTER SIDEBAR =====
         function generateFilterSidebar() {
             const sectionsFilter = document.getElementById('sectionsFilter');
@@ -1649,19 +1671,7 @@
                 `;
                 sectionDiv.appendChild(mainCheckbox);
                 
-                // Sub-checkboxes if subcategories exist
-                if (sectionData.subcategories && sectionData.subcategories.length > 0) {
-                    sectionData.subcategories.forEach(subcategory => {
-                        const checkboxItem = document.createElement('label');
-                        checkboxItem.className = 'checkbox-item sub-checkbox';
-                        checkboxItem.innerHTML = `
-                            <input type="checkbox" value="${subcategory}" class="section-checkbox" data-section="${sectionKey}">
-                            <span class="checkmark"></span>
-                            ${subcategory}
-                        `;
-                        sectionDiv.appendChild(checkboxItem);
-                    });
-                }
+
                 
                 sectionsFilter.appendChild(sectionDiv);
             });
@@ -1675,28 +1685,15 @@
             
             sectionCheckboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
+                    const value = this.value;
                     if (this.checked) {
-                        const value = this.value;
-                        if (this.dataset.section) {
-                            if (!currentFilters.subcategories.includes(value)) {
-                                currentFilters.subcategories.push(value);
-                            }
-                        } else {
-                            if (!currentFilters.sections.includes(value)) {
-                                currentFilters.sections.push(value);
-                            }
+                        if (!currentFilters.sections.includes(value)) {
+                            currentFilters.sections.push(value);
                         }
                     } else {
-                        const value = this.value;
-                        if (this.dataset.section) {
-                            currentFilters.subcategories = currentFilters.subcategories.filter(
-                                item => item !== value
-                            );
-                        } else {
-                            currentFilters.sections = currentFilters.sections.filter(
-                                item => item !== value
-                            );
-                        }
+                        currentFilters.sections = currentFilters.sections.filter(
+                            item => item !== value
+                        );
                     }
                 });
             });
@@ -1895,6 +1892,7 @@
             quoteData.items = quoteItemsArray;
             quoteData.count = quoteCount;
             localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
+            updateBadges();
         }
         
         // ===== HANDLE CART BUTTON CLICK =====
@@ -1911,6 +1909,7 @@
                 addedAt: new Date().toISOString()
             });
             localStorage.setItem('sparrowCartItems', JSON.stringify(cartItems));
+            updateBadges();
             
             showToast('Item added to cart! Redirecting...', 'success');
             
@@ -2003,8 +2002,6 @@
                     })
                     .sort((a, b) => b.relevanceScore - a.relevanceScore);
 
-                // After relevance sort, apply priority grouping within same-score tiers
-                // We do a stable priority sort that respects relevance as primary
                 if (matchedItems.length > 0) {
                     resultsList.innerHTML = '';
                     matchedItems.forEach(item => {
@@ -2113,7 +2110,7 @@
             document.body.style.overflow = '';
         }
         
-        // Clear filter button — also clears priority
+        // Clear filter button
         clearFilterBtn.addEventListener('click', function() {
             const sectionCheckboxes = document.querySelectorAll('.section-checkbox');
             sectionCheckboxes.forEach(checkbox => {
@@ -2126,7 +2123,7 @@
             applyFilters();
         });
         
-        // Apply filter button — also re-renders with priority
+        // Apply filter button
         applyFilterBtn.addEventListener('click', function() {
             applyFilters();
             closeFilterSidebar();
@@ -2136,7 +2133,6 @@
         function applyFilters() {
             const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
 
-            // Re-run the full render with current filters + priority
             if (searchTerm === '') {
                 showAllItems();
             } else {
@@ -2188,6 +2184,39 @@
             }
         }
         
+
+        // ===== UPDATE BADGE COUNTERS =====
+        function updateBadges() {
+            // Quote badge
+            const savedQuotes = localStorage.getItem('sparrowQuoteItems');
+            let qCount = 0;
+            if (savedQuotes) {
+                try {
+                    const qData = JSON.parse(savedQuotes);
+                    qCount = (qData.items && qData.items.length) ? qData.items.length : 0;
+                } catch(e) {}
+            }
+            const quoteBadge = document.getElementById('quoteBadge');
+            if (quoteBadge) {
+                quoteBadge.textContent = qCount;
+                quoteBadge.classList.toggle('hidden', qCount === 0);
+            }
+
+            // Cart badge
+            const cartItemsRaw = localStorage.getItem('sparrowCartItems');
+            let cCount = 0;
+            if (cartItemsRaw) {
+                try {
+                    cCount = JSON.parse(cartItemsRaw).length || 0;
+                } catch(e) {}
+            }
+            const cartBadge = document.getElementById('cartBadge');
+            if (cartBadge) {
+                cartBadge.textContent = cCount;
+                cartBadge.classList.toggle('hidden', cCount === 0);
+            }
+        }
+
         // ===== EVENT LISTENERS =====
         document.querySelector('.search-box').addEventListener('input', searchItems);
         
@@ -2195,6 +2224,7 @@
         window.addEventListener('DOMContentLoaded', function() {
             fixCorruptedQuoteData();
             loadJSONFiles();
+            updateBadges();
         });
     </script>
 </body>

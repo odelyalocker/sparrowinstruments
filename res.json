@@ -2,7 +2,7 @@
   {
     "name": "Digital Centrifuge Machine",
     "category": "Scientific Lab",
-    "image": "/sparrowinstruments/sciimg/sci1.jpg",
+    "image": "/sparrowinstruments/imgres/res1.jpg",
     "mrpPrice": "85,000",
     "discount": "15%",
     "bestBuyPrice": "72,250",
@@ -26,7 +26,7 @@
   {
     "name": "UV-Vis Spectrophotometer",
     "category": "Scientific Lab",
-    "image": "/sparrowinstruments/sciimg/sci2.jpg",
+    "image": "/sparrowinstruments/imgres/res2.jpg",
     "mrpPrice": "1,25,000",
     "discount": "12%",
     "bestBuyPrice": "1,10,000",

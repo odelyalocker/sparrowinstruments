@@ -1556,7 +1556,7 @@
         <div class="mobile-zoom-hint">Touch and drag to zoom • Tap anywhere to close</div>
     </div>
 
-    <script>
+<script>
         // ===== GLOBAL VARIABLES =====
         let allItems = [];
         let searchTimeout;
@@ -1645,6 +1645,9 @@
             console.log('🚀 Loading Lab Data from JSON array...');
             allItems = []; // Clear all items
             
+            // Hide main content immediately to prevent bouncing
+            document.querySelector('.main-content').style.display = 'none';
+            
             try {
                 // Load each JSON file in the array
                 for (const file of jsonFiles) {
@@ -1692,6 +1695,8 @@
                 
             } catch (error) {
                 console.error('❌ Load Error:', error);
+                // Show main content if there's an error
+                document.querySelector('.main-content').style.display = 'block';
             }
         }
         
@@ -2015,148 +2020,104 @@
         }
         
         // ===== SHOW ALL ITEMS =====
-function showAllItems() {
-    const resultsList = document.getElementById('resultsList');
-    
-    // Clear results
-    resultsList.innerHTML = '';
-    
-    // If we have items, show them
-    if (allItems.length > 0) {
-        allItems.forEach(item => {
-            createResultItem(item, resultsList);
-        });
-    }
-    
-    // Always hide main content when showing results
-    document.querySelector('.main-content').style.display = 'none';
-}
-
-function searchItems() {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => {
-        const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
-        const resultsList = document.getElementById('resultsList');
-        const mainContent = document.querySelector('.main-content');
-        
-        // If search box is empty, show all items
-        if (searchTerm === '') {
-            showAllItems();
-            return;
-        }
-        
-        // Get active filters
-        const hasActiveFilters = currentFilters.sections.length > 0 || currentFilters.subcategories.length > 0;
-        
-        // Filter items
-        const matchedItems = allItems
-            .map(item => {
-                // ... (keep your scoring logic) ...
-                return { ...item, relevanceScore: score };
-            })
-            .filter(item => {
-                // ... (keep your filter logic) ...
-                return item.relevanceScore > 0;
-            })
-            .sort((a, b) => b.relevanceScore - a.relevanceScore);
-        
-        // Render Results
-        resultsList.innerHTML = ''; // Clear first
-        
-        if (matchedItems.length > 0) {
-            matchedItems.forEach(item => {
-                createResultItem(item, resultsList);
-            });
-            mainContent.style.display = 'none';
-        } else {
-            resultsList.innerHTML = '<div class="no-results">Try different keywords</div>';
-            mainContent.style.display = 'none';
-        }
-    }, 300);
-}        
-        // ===== SEARCH FUNCTION =====
-function searchItems() {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => {
-        const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
-        const resultsList = document.getElementById('resultsList');
-        const mainContent = document.querySelector('.main-content');
-        const searchResults = document.getElementById('searchResults');
-        
-        // If search box is empty, show all items
-        if (searchTerm === '') {
-            showAllItems();
-            return;
-        }
-        
-        // Get active filters
-        const hasActiveFilters = currentFilters.sections.length > 0 || currentFilters.subcategories.length > 0;
-        
-        // Filter items based on search term AND active filters
-        const matchedItems = allItems
-            .map(item => {
-                // Calculate relevance score
-                let score = 0;
-                const name = item.name.toLowerCase();
-                
-                if (name === searchTerm) score += 100;
-                if (name.startsWith(searchTerm)) score += 50;
-                if (name.includes(searchTerm)) score += 30;
-                
-                const searchWords = searchTerm.split(/[\s\-_.,;]+/).filter(w => w.length > 0);
-                const nameWords = name.split(/[\s\-_.,;]+/).filter(w => w.length > 0);
-                
-                searchWords.forEach(sw => {
-                    nameWords.forEach(nw => {
-                        if (nw === sw) score += 40;
-                        else if (nw.includes(sw) && sw.length >= 3) score += 20;
-                    });
+        function showAllItems() {
+            const resultsList = document.getElementById('resultsList');
+            
+            // Clear results
+            resultsList.innerHTML = '';
+            
+            // If we have items, show them
+            if (allItems.length > 0) {
+                allItems.forEach(item => {
+                    createResultItem(item, resultsList);
                 });
+            }
+            
+            // Always hide main content when showing results
+            document.querySelector('.main-content').style.display = 'none';
+        }
+        
+        // ===== SEARCH FUNCTION =====
+        function searchItems() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
+                const resultsList = document.getElementById('resultsList');
+                const mainContent = document.querySelector('.main-content');
                 
-                return { ...item, relevanceScore: score };
-            })
-            .filter(item => {
-                // Apply section/subcategory filters if any are active
-                if (hasActiveFilters) {
-                    const itemSection = item.section || 'General';
-                    const itemCategory = item.category || 'General';
-                    
-                    // Check section filters
-                    if (currentFilters.sections.length > 0) {
-                        if (!currentFilters.sections.includes(itemSection)) {
-                            return false;
-                        }
-                    }
-                    
-                    // Check subcategory filters
-                    if (currentFilters.subcategories.length > 0) {
-                        if (!currentFilters.subcategories.includes(itemCategory)) {
-                            return false;
-                        }
-                    }
+                // If search box is empty, show all items
+                if (searchTerm === '') {
+                    showAllItems();
+                    return;
                 }
                 
-                // Only show items with positive relevance score
-                return item.relevanceScore > 0;
-            })
-            .sort((a, b) => b.relevanceScore - a.relevanceScore);
-        
-        // Render Results
-        if (matchedItems.length > 0) {
-            resultsList.innerHTML = '';
-            matchedItems.forEach(item => {
-                createResultItem(item, resultsList);
-            });
-            
-            
-            mainContent.classList.add('hide-main');
-        } else {
-            resultsList.innerHTML = '<div class="no-results">Try different keywords</div>';
-            
-            mainContent.classList.add('hide-main');
+                // Get active filters
+                const hasActiveFilters = currentFilters.sections.length > 0 || currentFilters.subcategories.length > 0;
+                
+                // Filter items based on search term AND active filters
+                const matchedItems = allItems
+                    .map(item => {
+                        // Calculate relevance score
+                        let score = 0;
+                        const name = item.name.toLowerCase();
+                        
+                        if (name === searchTerm) score += 100;
+                        if (name.startsWith(searchTerm)) score += 50;
+                        if (name.includes(searchTerm)) score += 30;
+                        
+                        const searchWords = searchTerm.split(/[\s\-_.,;]+/).filter(w => w.length > 0);
+                        const nameWords = name.split(/[\s\-_.,;]+/).filter(w => w.length > 0);
+                        
+                        searchWords.forEach(sw => {
+                            nameWords.forEach(nw => {
+                                if (nw === sw) score += 40;
+                                else if (nw.includes(sw) && sw.length >= 3) score += 20;
+                            });
+                        });
+                        
+                        return { ...item, relevanceScore: score };
+                    })
+                    .filter(item => {
+                        // Apply section/subcategory filters if any are active
+                        if (hasActiveFilters) {
+                            const itemSection = item.section || 'General';
+                            const itemCategory = item.category || 'General';
+                            
+                            // Check section filters
+                            if (currentFilters.sections.length > 0) {
+                                if (!currentFilters.sections.includes(itemSection)) {
+                                    return false;
+                                }
+                            }
+                            
+                            // Check subcategory filters
+                            if (currentFilters.subcategories.length > 0) {
+                                if (!currentFilters.subcategories.includes(itemCategory)) {
+                                    return false;
+                                }
+                            }
+                        }
+                        
+                        // Only show items with positive relevance score
+                        return item.relevanceScore > 0;
+                    })
+                    .sort((a, b) => b.relevanceScore - a.relevanceScore);
+                
+                // Render Results
+                resultsList.innerHTML = ''; // Clear first
+                
+                if (matchedItems.length > 0) {
+                    matchedItems.forEach(item => {
+                        createResultItem(item, resultsList);
+                    });
+                    mainContent.style.display = 'none';
+                } else {
+                    resultsList.innerHTML = '<div class="no-results">Try different keywords</div>';
+                    mainContent.style.display = 'none';
+                }
+            }, 300);
         }
-    }, 300);
-}        
+        
         // ===== SETUP ZOOM FUNCTIONALITY =====
         function setupZoom(resultItem) {
             const container = resultItem.querySelector('.result-image');
@@ -2284,8 +2245,6 @@ function searchItems() {
             // If no search results, don't filter
             if (resultItems.length === 0) return;
             
-            let visibleCount = 0;
-            
             resultItems.forEach(item => {
                 let showItem = true;
                 
@@ -2313,20 +2272,7 @@ function searchItems() {
                 
                 // Show/hide item
                 item.style.display = showItem ? 'block' : 'none';
-                if (showItem) visibleCount++;
             });
-            
-            // Update results count
-            const resultsTitle = document.getElementById('resultsTitle');
-            if (visibleCount > 0) {
-                if (searchTerm === '') {
-                    resultsTitle.textContent = `Our Products (${visibleCount} items)`;
-                } else {
-                    resultsTitle.textContent = `Search Results (${visibleCount} items)`;
-                }
-            } else {
-                resultsTitle.textContent = 'No items match your filters';
-            }
         }
         
         // ===== EVENT LISTENERS =====
@@ -2338,9 +2284,7 @@ function searchItems() {
             loadJSONFiles();
         });
     </script>
+
+    
 </body>
 </html>
-
-
-
-

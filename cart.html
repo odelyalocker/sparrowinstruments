@@ -395,7 +395,7 @@
         .quantity-section {
             margin-top: auto;
             padding: 15px;
-            background: #28a745; /* Green background */
+            background: #28a745;
             border-radius: 8px;
             color: white;
             display: flex;
@@ -477,7 +477,7 @@
             word-break: break-word;
         }
         
-        /* Remove button - moved to third column */
+        /* Remove button */
         .remove-btn-container {
             margin-top: auto;
         }
@@ -505,7 +505,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* NEW: Confirm Quote Section */
+        /* Confirm Quote Section */
         .confirm-quote-section {
             display: none;
             margin-top: 40px;
@@ -875,7 +875,7 @@
             }
             .success-message .contact-info {
                 font-size: 20px;
-    }
+            }
         }
         
         @media (max-width: 480px) {
@@ -958,6 +958,7 @@
             }
             .success-message .contact-info {
                 font-size: 16px;
+            }
         }
         
         @media (max-width: 360px) {
@@ -1017,8 +1018,8 @@
                 font-size: 14px;
             }
             .success-message .contact-info {
-                font-size: 18px; /* Adjust for very small screens */
-    }
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -1060,13 +1061,13 @@
             <div class="center-title">Your Added Items in Cart</div>
         </div>
         
-<!-- Contact button on right -->
-    <div class="contact-button">
-        <a href="contact.html">
-            <i class="fas fa-phone"></i>
-        </a>
+        <!-- Contact button on right -->
+        <div class="contact-button">
+            <a href="contact.html">
+                <i class="fas fa-phone"></i>
+            </a>
+        </div>
     </div>
-</div>
     
     <!-- Items Display Section -->
     <div class="items-section" id="itemsSection">
@@ -1082,7 +1083,7 @@
                 </div>
             </div>
             
-            <!-- NEW: Confirm Quote Section -->
+            <!-- Confirm Quote Section -->
             <div class="confirm-quote-section" id="confirmQuoteSection">
                 <div class="confirm-button-container">
                     <button class="confirm-btn" id="confirmQuoteBtn">
@@ -1091,7 +1092,7 @@
                     </button>
                 </div>
                 
-                <!-- Cart Form Section -->
+                <!-- Contact Form Section -->
                 <div class="contact-form-section" id="contactFormSection">
                     <form class="contact-form" id="quoteForm">
                         <div class="form-group">
@@ -1118,7 +1119,7 @@
                 <!-- Success Message -->
                 <div class="success-message" id="successMessage">
                     <p>Your Requested Quotation has been submitted successfully. We will notify you within 24 business hours.</p>
-                    <p>Or, you can directly Cart us through:</p>
+                    <p>Or, you can directly Contact us through:</p>
                     <div class="contact-info">
                         Email: sales@sparrowinstruments.com<br>
                         WhatsApp: +91-9876543210<br>
@@ -1185,7 +1186,7 @@
                             const itemElement = createItemElement(itemData, index);
                             itemsList.appendChild(itemElement);
                         } 
-                        // Fallback for old format (just IDs) - but shouldn't happen now
+                        // Fallback for old format (just IDs)
                         else {
                             console.log('⚠️ Item is not an object, using fallback:', itemData);
                             const basicItem = {
@@ -1211,11 +1212,26 @@
                 
             } catch (e) {
                 console.error('❌ Error loading saved items:', e);
-                // Keep default state (empty message) if there's an error
             }
         } else {
             console.log('📭 No saved items found in localStorage');
         }
+    }
+    
+    // Helper: format a price value safely
+    // If the value is already a non-numeric string like "Price on request", return it as-is.
+    // Otherwise wrap it as "INR <value>/-"
+    function formatPrice(value) {
+        if (value === null || value === undefined || value === '') {
+            return 'Price on request';
+        }
+        const strVal = value.toString().trim();
+        // If it's a pure number or starts with a digit, treat as numeric price
+        if (/^\d/.test(strVal)) {
+            return `INR ${strVal}/-`;
+        }
+        // Otherwise it's already a readable label like "Price on request"
+        return strVal;
     }
     
     // Create item element for display
@@ -1247,21 +1263,27 @@
             descHTML = '<li>Description not available</li>';
         }
         
-        // Format prices
-        const mrpPrice = product.mrpPrice || product.mrp || 'Price on request';
-        const bestBuyPrice = product.bestBuyPrice || product.price || 'Price on request';
-        const bestBuyLabel = product.bestBuyLabel || 'Buy';
-        
-        // Check for guaranteed competitive pricing
-        const isGuaranteedCompetitive = 
-            (bestBuyPrice && bestBuyPrice.toString().toLowerCase().includes('guaranteed competitive')) ||
-            (bestBuyLabel && bestBuyLabel.toString().toLowerCase().includes('guaranteed competitive'));
-        
-        const priceDisplay = isGuaranteedCompetitive ? 
-            'Guaranteed Competitive' : 
-            (bestBuyPrice ? `INR ${bestBuyPrice}/-` : 'Price on request');
-        
-        const mrpDisplay = mrpPrice ? `INR ${mrpPrice}/-` : 'Price on request';
+        // --- FIX: Safe price formatting ---
+        const mrpRaw = product.mrpPrice || product.mrp || '';
+        const bestBuyRaw = product.bestBuyPrice || product.price || '';
+        const bestBuyLabel = product.bestBuyLabel || 'Best Buy';
+
+        // Check if label itself says "Guaranteed Competitive"
+        const labelIsCompetitive = bestBuyLabel.toString().toLowerCase().includes('guaranteed competitive');
+        // Check if price value says "Guaranteed Competitive"
+        const priceIsCompetitive = bestBuyRaw.toString().toLowerCase().includes('guaranteed competitive');
+        const isGuaranteedCompetitive = labelIsCompetitive || priceIsCompetitive;
+
+        // Build display strings
+        const mrpDisplay = formatPrice(mrpRaw);
+
+        let priceDisplay;
+        if (isGuaranteedCompetitive) {
+            priceDisplay = 'Guaranteed Competitive';
+        } else {
+            priceDisplay = formatPrice(bestBuyRaw);
+        }
+        // -----------------------------------
         
         itemElement.innerHTML = `
             <div class="result-content">
@@ -1353,7 +1375,6 @@
                 console.log('🔍 Item index found:', itemIndex);
                 
                 if (itemIndex !== -1) {
-                    // Get current quantity
                     let currentItem = items[itemIndex];
                     let currentQuantity = currentItem.quantity || 1;
                     
@@ -1374,7 +1395,6 @@
                     // Update display
                     quantityElement.textContent = newQuantity;
                     
-                    // Show toast
                     showToast(`Quantity updated to ${newQuantity}`, 'success');
                 } else {
                     console.error('❌ Item not found in quote:', itemId);
@@ -1410,7 +1430,6 @@
                 // Reload the items
                 loadAddedItems();
                 
-                // Show confirmation
                 showToast('Item removed from your list', 'info');
             } catch (e) {
                 console.error('❌ Error removing item:', e);
@@ -1418,7 +1437,7 @@
         }
     }
     
-    // NEW: Confirm Quote functionality
+    // Confirm Quote functionality
     function setupConfirmQuote() {
         const confirmBtn = document.getElementById('confirmQuoteBtn');
         const contactFormSection = document.getElementById('contactFormSection');
@@ -1429,14 +1448,14 @@
         confirmBtn.addEventListener('click', function() {
             console.log('✅ Confirm Quote button clicked');
             
-            // Hide confirm button, show Cart form
+            // Hide confirm button, show contact form
             confirmBtn.style.display = 'none';
             contactFormSection.classList.add('visible');
             
             // Scroll to form
             contactFormSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
             
-            showToast('Please fill in your Cart details', 'info');
+            showToast('Please fill in your contact details', 'info');
         });
         
         quoteForm.addEventListener('submit', function(e) {
@@ -1481,7 +1500,7 @@
         });
     }
     
-    // NEW: Get quote items from localStorage
+    // Get quote items from localStorage
     function getQuoteItems() {
         const savedItems = localStorage.getItem('sparrowQuoteItems');
         if (savedItems) {
@@ -1496,16 +1515,11 @@
         return [];
     }
     
-    // NEW: Save quote submission (for demo purposes)
+    // Save quote submission (for demo purposes)
     function saveQuoteSubmission(formData) {
         try {
-            // Get existing submissions or create new array
             const existingSubmissions = JSON.parse(localStorage.getItem('sparrowQuoteSubmissions') || '[]');
-            
-            // Add new submission
             existingSubmissions.push(formData);
-            
-            // Save back to localStorage
             localStorage.setItem('sparrowQuoteSubmissions', JSON.stringify(existingSubmissions));
             
             console.log('💾 Quote submission saved:', formData);
@@ -1569,7 +1583,7 @@
         setupConfirmQuote();
     });
     
-    // Add debug helper
+    // Debug helper
     window.debugQuote = function() {
         const saved = localStorage.getItem('sparrowQuoteItems');
         console.log('🔍 Debug - localStorage sparrowQuoteItems:', saved);

@@ -85,6 +85,7 @@
             margin-top: 5px;
         }
         
+        /* #5 FIX: quote-image-container cleaned — no badge, no relative positioning needed */
         .quote-image-container {
             margin-left: 20px;
             display: flex;
@@ -96,7 +97,6 @@
             border-radius: 50%;
             background: transparent;
             flex-shrink: 0;
-            position: relative;
         }
 
         .quote-image-container a {
@@ -105,7 +105,6 @@
             justify-content: center;
             height: 100%;
             width: 100%;
-            position: relative;
         }
 
         .quote-image-container img {
@@ -247,6 +246,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
         
         .cart-button a {
@@ -256,6 +256,7 @@
             font-weight: 500;
             transition: color 0.3s;
             white-space: nowrap;
+            position: relative;
         }
         
         .cart-button a:hover {
@@ -451,25 +452,30 @@
             font-weight: bold;
         }
 
+        /* #2 FIX: Both buttons now sit side by side in one row */
         .button-container {
             margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
         }
         
         .get-quote-btn {
             background: #28a745;
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 12px 16px;
             border-radius: 6px;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
-            width: 100%;
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            white-space: nowrap;
         }
         
         .get-quote-btn:hover {
@@ -490,18 +496,18 @@
             background: #0056b3;
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 12px 16px;
             border-radius: 6px;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
-            width: 100%;
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-top: 15px;
+            white-space: nowrap;
         }
         
         .add-to-cart-btn:hover {
@@ -910,8 +916,6 @@
             transform: rotate(45deg);
         }
 
-
-
         .section-label {
             font-weight: 600;
             color: #333;
@@ -1014,12 +1018,11 @@
             }
 
             .filter-sidebar {
-            position: fixed;
-            top: 120px;
-            left: -220px;
-            width: 200px;
-            height: calc(50vh - 200px);
-            
+                position: fixed;
+                top: 120px;
+                left: -220px;
+                width: 200px;
+                height: calc(50vh - 200px);
             }
         }
 
@@ -1172,10 +1175,19 @@
             .filter-sidebar {
                 height: calc(50vh - 120px);
                 width: 180px;
-                }
+            }
             
             .checkbox-item {
                 font-size: 17px;
+            }
+
+            /* On mobile, button row can wrap if needed */
+            .button-container {
+                flex-wrap: wrap;
+            }
+            .get-quote-btn,
+            .add-to-cart-btn {
+                min-width: 140px;
             }
         }
 
@@ -1246,7 +1258,7 @@
             .filter-sidebar {
                 height: calc(50vh - 120px);
                 width: 180px;
-                }
+            }
             
             .checkbox-item {
                 font-size: 16px;
@@ -1321,7 +1333,7 @@
             .filter-sidebar {
                 height: calc(60vh - 120px);
                 width: 180px;
-                }
+            }
             
             .checkbox-item {
                 font-size: 15px;
@@ -1335,8 +1347,9 @@
             justify-content: space-between;
             height: 100%;
         }
-        
-        .button-container {
+
+        /* result-right no longer needs its own button-container margin-top since buttons are in center col only */
+        .result-right .button-container {
             margin-top: auto;
             padding-top: 15px;
         }
@@ -1377,12 +1390,6 @@
         .badge-counter.hidden {
             display: none;
         }
-        .cart-button {
-            position: relative;
-        }
-        .cart-button a {
-            position: relative;
-        }
     </style>
 </head>
 <body>
@@ -1397,10 +1404,10 @@
             <div class="trusted-tagline">Wholesaler of all Laboratory Equipment and Instruments</div>
         </div>
         
+        <!-- #5 FIX: Badge span removed entirely from quote image -->
         <div class="quote-image-container">
             <a href="/sparrowinstruments/quote.html">
                 <img src="/sparrowinstruments/images/quote.jpg" alt="Request Quote" style="background: transparent;">
-                <span class="badge-counter hidden" id="quoteBadge">0</span>
             </a>
         </div>
     </header>
@@ -1458,8 +1465,6 @@
                 </button>
             </div>
 
-
-            
             <!-- Sections Filter -->
             <div class="filter-section">
                 <h4><i class="fas fa-th-list"></i> Categories</h4>
@@ -1660,7 +1665,6 @@
                 const sectionDiv = document.createElement('div');
                 sectionDiv.className = 'section-group';
                 
-                // Main section checkbox for every section
                 const mainCheckbox = document.createElement('label');
                 mainCheckbox.className = 'checkbox-item';
                 mainCheckbox.innerHTML = `
@@ -1669,8 +1673,6 @@
                     ${sectionData.label}
                 `;
                 sectionDiv.appendChild(mainCheckbox);
-                
-
                 
                 sectionsFilter.appendChild(sectionDiv);
             });
@@ -1772,6 +1774,8 @@
             const cartButtonClass = isGuaranteedCompetitive ? 'add-to-cart-btn inactive' : 'add-to-cart-btn';
             const cartButtonDisabled = isGuaranteedCompetitive ? 'disabled' : '';
             
+            // #2 FIX: Both buttons now rendered inside one .button-container in result-center
+            // result-right no longer has any button
             resultItem.innerHTML = `
                 <div class="result-content">
                     <div class="result-left">
@@ -1801,6 +1805,10 @@
                                 <i class="fas ${isQuoted ? 'fa-check' : 'fa-file-alt'}"></i>
                                 ${quoteButtonText}
                             </button>
+                            <button class="${cartButtonClass}" ${cartButtonDisabled} data-item-id="${item.id}">
+                                <i class="fas fa-shopping-cart"></i>
+                                Add to Cart
+                            </button>
                         </div>
                     </div>
                     
@@ -1808,12 +1816,6 @@
                         <div class="description-section">
                             <strong>Descriptions:</strong>
                             <ul>${descHTML}</ul>
-                        </div>
-                        <div class="button-container">
-                            <button class="${cartButtonClass}" ${cartButtonDisabled} data-item-id="${item.id}">
-                                <i class="fas fa-shopping-cart"></i>
-                                Add to Cart
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -1895,57 +1897,70 @@
         }
         
         // ===== HANDLE CART BUTTON CLICK =====
+        // #4 FIX: Now saves the full item object including all fields needed by cart.html
         function handleCartClick(itemId) {
             const item = allItems.find(i => i.id === itemId);
             if (!item) return;
             
             const cartItems = JSON.parse(localStorage.getItem('sparrowCartItems') || '[]');
-            cartItems.push({
+
+            // Build the full cart item with every field cart.html needs to render
+            // the item exactly as displayed here (border, image, name, specs, description)
+            const cartItem = {
                 id: item.id,
                 name: item.name,
-                price: item.bestBuyPrice || item.mrpPrice,
-                image: item.image,
+                image: item.image || 'placeholder.jpg',
+                mrpPrice: item.mrpPrice || '0',
+                bestBuyPrice: item.bestBuyPrice || 'INR 0/-',
+                bestBuyLabel: item.bestBuyLabel || 'Buy',
+                warranty: item.warranty || 'Not specified',
+                specifications: item.specifications || [],
+                description: item.description || [],
+                category: item.category || '',
+                section: item.section || '',
                 addedAt: new Date().toISOString()
-            });
+            };
+
+            cartItems.push(cartItem);
             localStorage.setItem('sparrowCartItems', JSON.stringify(cartItems));
             updateBadges();
             
             showToast('Added to cart (' + cartItems.length + ' item' + (cartItems.length > 1 ? 's' : '') + ')', 'success');
         }
 
-// ===== SHOW ALL ITEMS =====
-function showAllItems() {
-    const resultsList = document.getElementById('resultsList');
-    const searchResults = document.getElementById('searchResults');
-    const mainContent = document.querySelector('.main-content');
-    
-    resultsList.innerHTML = '';
+        // ===== SHOW ALL ITEMS =====
+        function showAllItems() {
+            const resultsList = document.getElementById('resultsList');
+            const searchResults = document.getElementById('searchResults');
+            const mainContent = document.querySelector('.main-content');
+            
+            resultsList.innerHTML = '';
 
-    const hasSectionFilters = currentFilters.sections.length > 0;
-    const hasSubcategoryFilters = currentFilters.subcategories.length > 0;
-    
-    // Create a shuffled copy of allItems
-    let displayItems = [...allItems]; // Create a copy
-    
-    // Shuffle the array using Fisher-Yates algorithm
-    for (let i = displayItems.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [displayItems[i], displayItems[j]] = [displayItems[j], displayItems[i]];
-    }
-    
-    displayItems.forEach(item => {
-        const itemSection = item.section || 'General';
-        const itemCategory = item.category || 'General';
+            const hasSectionFilters = currentFilters.sections.length > 0;
+            const hasSubcategoryFilters = currentFilters.subcategories.length > 0;
+            
+            // Create a shuffled copy of allItems
+            let displayItems = [...allItems];
+            
+            // Shuffle the array using Fisher-Yates algorithm
+            for (let i = displayItems.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [displayItems[i], displayItems[j]] = [displayItems[j], displayItems[i]];
+            }
+            
+            displayItems.forEach(item => {
+                const itemSection = item.section || 'General';
+                const itemCategory = item.category || 'General';
 
-        if (hasSectionFilters && !currentFilters.sections.includes(itemSection)) return;
-        if (hasSubcategoryFilters && !currentFilters.subcategories.includes(itemCategory)) return;
+                if (hasSectionFilters && !currentFilters.sections.includes(itemSection)) return;
+                if (hasSubcategoryFilters && !currentFilters.subcategories.includes(itemCategory)) return;
 
-        createResultItem(item, resultsList);
-    });
-    
-    searchResults.style.display = 'block';
-    mainContent.classList.add('hide-main');
-}
+                createResultItem(item, resultsList);
+            });
+            
+            searchResults.style.display = 'block';
+            mainContent.classList.add('hide-main');
+        }
         
         // ===== SEARCH FUNCTION =====
         function searchItems() {
@@ -2071,37 +2086,30 @@ function showAllItems() {
             container.addEventListener('mousemove', (e) => moveZoom(e.clientX, e.clientY));
             container.addEventListener('mouseleave', hideZoom);
             
-// ---- MOBILE: use fullscreen overlay instead of lens ----
-const overlay = document.getElementById('mobileZoomOverlay');
-const overlayImg = document.getElementById('mobileZoomImage');
+            // ---- MOBILE: use fullscreen overlay instead of lens ----
+            const overlay = document.getElementById('mobileZoomOverlay');
+            const overlayImg = document.getElementById('mobileZoomImage');
 
-// FIXED: Remove preventDefault() and change to 'click' for mobile
-container.addEventListener('click', (e) => {
-    // Don't prevent default - let the click happen naturally
-    // Show the fullscreen overlay with this image
-    overlayImg.src = img.src;
-    overlay.style.display = 'flex';
-    
-    // Also prevent the click from bubbling up
-    e.stopPropagation();
-});
+            container.addEventListener('click', (e) => {
+                overlayImg.src = img.src;
+                overlay.style.display = 'flex';
+                e.stopPropagation();
+            });
 
-function closeMobileOverlay() {
-    overlay.style.display = 'none';
-}
+            function closeMobileOverlay() {
+                overlay.style.display = 'none';
+            }
 
-// FIXED: Use click instead of touchstart for closing
-overlay.addEventListener('click', (e) => {
-    e.stopPropagation();
-    closeMobileOverlay();
-});
+            overlay.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeMobileOverlay();
+            });
 
-// Also close with escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.style.display === 'flex') {
-        closeMobileOverlay();
-    }
-});
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && overlay.style.display === 'flex') {
+                    closeMobileOverlay();
+                }
+            });
         }
         
         // ===== FILTER SIDEBAR FUNCTIONALITY =====
@@ -2153,8 +2161,7 @@ document.addEventListener('keydown', (e) => {
             if (searchTerm === '') {
                 showAllItems();
             } else {
-                searchItems(); // trigger search re-run (uses timeout internally)
-                // Force immediate re-run
+                searchItems();
                 clearTimeout(searchTimeout);
                 const resultsList = document.getElementById('resultsList');
                 const mainContent = document.querySelector('.main-content');
@@ -2204,22 +2211,7 @@ document.addEventListener('keydown', (e) => {
 
         // ===== UPDATE BADGE COUNTERS =====
         function updateBadges() {
-            // Quote badge
-            const savedQuotes = localStorage.getItem('sparrowQuoteItems');
-            let qCount = 0;
-            if (savedQuotes) {
-                try {
-                    const qData = JSON.parse(savedQuotes);
-                    qCount = (qData.items && qData.items.length) ? qData.items.length : 0;
-                } catch(e) {}
-            }
-            const quoteBadge = document.getElementById('quoteBadge');
-            if (quoteBadge) {
-                quoteBadge.textContent = qCount;
-                quoteBadge.classList.toggle('hidden', qCount === 0);
-            }
-
-            // Cart badge
+            // Cart badge only (quote badge removed per #5)
             const cartItemsRaw = localStorage.getItem('sparrowCartItems');
             let cCount = 0;
             if (cartItemsRaw) {
@@ -2239,7 +2231,6 @@ document.addEventListener('keydown', (e) => {
         
         // ===== INITIALIZATION =====
         window.addEventListener('DOMContentLoaded', function() {
-            // Clear previous localStorage so page always starts fresh
             localStorage.removeItem('sparrowQuoteItems');
             localStorage.removeItem('sparrowCartItems');
 

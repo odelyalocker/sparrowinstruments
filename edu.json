@@ -1,1 +1,50 @@
+[
+  {
+    "name": "Digital pH Meter",
+    "category": "Chemistry Lab",
+    "image": "/sparrowinstruments/chemimg/chem1.jpg",
+    "mrpPrice": "9,800",
+    "discount": "12%",
+    "bestBuyPrice": "8,624",
+    "warranty": "1 Year Manufacturer Warranty",
+    "specifications": [
+      "Range: 0.00 to 14.00 pH",
+      "Accuracy: ±0.01 pH",
+      "Resolution: 0.01 pH",
+      "ATC: 0 to 100°C automatic",
+      "Calibration: 2 or 3 point with memory"
+    ],
+    "description": [
+      "Professional benchtop pH meter with large LCD display",
+      "Automatic temperature compensation for accurate readings",
+      "Includes pH electrode, buffer solutions, and storage solution",
+      "Ideal for water testing, labs, and educational institutions"
+    ],
+    "keywords": ["ph meter", "digital", "chemistry", "laboratory", "water testing", "lab equipment"]
+  },
+  {
+    "name": "Magnetic Stirrer with Hot Plate",
+    "category": "Chemistry Lab",
+    "image": "/sparrowinstruments/chemimg/chem2.jpg",
+    "mrpPrice": "12,500",
+    "discount": "10%",
+    "bestBuyPrice": "11,250",
+    "warranty": "1 Year Manufacturer Warranty",
+    "specifications": [
+      "Stirring speed: 100 to 1500 rpm",
+      "Hot plate: 50 to 380°C",
+      "Platform: 150×150mm ceramic",
+      "Capacity: Up to 5 liters",
+      "Display: Digital for speed and temperature"
+    ],
+    "description": [
+      "Combination magnetic stirrer and hot plate",
+      "Ceramic top for chemical resistance and even heating",
+      "Over-temperature protection for safety",
+      "Includes PTFE-coated stir bar set"
+    ],
+    "keywords": ["magnetic stirrer", "hot plate", "chemistry", "laboratory", "heating", "stirring"]
+  }
 
+  
+]

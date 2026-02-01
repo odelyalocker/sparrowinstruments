@@ -609,19 +609,19 @@
         
         /* ===== WORKING HOVER ZOOM ===== */
         .zoom-container {
-            position: absolute;
-            left: 102%;
-            top: 0;
-            width: 600px;
-            height: 400px;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            z-index: 1000;
-            overflow: hidden;
-            display: none;
-            pointer-events: none;
-        }
+    position: absolute;
+    left: 102%;
+    top: 0;
+    width: 600px;
+    height: 400px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    z-index: 1000;
+    overflow: hidden;
+    display: none;
+    pointer-events: none;
+}
         
         .zoomed-image {
             position: absolute;
@@ -665,41 +665,41 @@
             opacity: 0.8;
         }
         
-        .mobile-zoom-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1999;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
+.mobile-zoom-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2000; /* Increase z-index */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
         
-        .mobile-zoom-image {
-            max-width: 95%;
-            max-height: 70vh;
-            object-fit: contain;
-            border-radius: 8px;
-        }
+ .mobile-zoom-image {
+    max-width: 95%;
+    max-height: 80vh; /* Increased height */
+    object-fit: contain;
+    border-radius: 8px;
+}
         
-        .mobile-zoom-hint {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            color: white;
-            font-size: 14px;
-            z-index: 2001;
-            background: rgba(0,0,0,0.7);
-            padding: 10px;
-            margin: 20px;
-            border-radius: 10px;
-        }
+ .mobile-zoom-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    z-index: 2001;
+    background: rgba(0,0,0,0.7);
+    padding: 10px;
+    margin: 20px;
+    border-radius: 10px;
+}
         
         /* ===== TOAST NOTIFICATION ===== */
         .toast-notification {
@@ -1174,6 +1174,12 @@
             
             .checkbox-item {
                 font-size: 17px;
+            }
+            .zoom-container {
+                display: none !important; /* Disable desktop zoom on mobile */
+            }
+            .result-image::after {
+                content: "👆 Tap to zoom"; /* Change hint text for mobile */
             }
         }
 
@@ -2233,4 +2239,5 @@
     </script>
 </body>
 </html>
+
 

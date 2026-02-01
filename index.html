@@ -748,7 +748,7 @@
             background: white;
             z-index: 1001;
             transition: left 0.3s ease;
-            overflow-y: auto;
+            overflow: hidden;
             padding-bottom: 0;
             display: flex;
             flex-direction: column;
@@ -799,6 +799,8 @@
         .filter-content {
             padding: 10px 12px 0 12px;
             flex: 0 0 auto;
+            overflow-y: auto;
+            max-height: calc(100vh - 220px);
         }
 
         .filter-section {
@@ -2236,4 +2238,5 @@
     </script>
 </body>
 </html>
+
 

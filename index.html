@@ -1400,7 +1400,7 @@
         <div class="quote-image-container">
             <a href="/sparrowinstruments/quote.html">
                 <img src="/sparrowinstruments/images/quote.jpg" alt="Request Quote" style="background: transparent;">
-
+                <span class="badge-counter hidden" id="quoteBadge">0</span>
             </a>
         </div>
     </header>
@@ -2202,22 +2202,37 @@ document.addEventListener('keydown', (e) => {
         }
         
 
-// ===== UPDATE BADGE COUNTERS =====
-function updateBadges() {
-    // Cart badge only (quote badge removed as requested)
-    const cartItemsRaw = localStorage.getItem('sparrowCartItems');
-    let cCount = 0;
-    if (cartItemsRaw) {
-        try {
-            cCount = JSON.parse(cartItemsRaw).length || 0;
-        } catch(e) {}
-    }
-    const cartBadge = document.getElementById('cartBadge');
-    if (cartBadge) {
-        cartBadge.textContent = cCount;
-        cartBadge.classList.toggle('hidden', cCount === 0);
-    }
-}
+        // ===== UPDATE BADGE COUNTERS =====
+        function updateBadges() {
+            // Quote badge
+            const savedQuotes = localStorage.getItem('sparrowQuoteItems');
+            let qCount = 0;
+            if (savedQuotes) {
+                try {
+                    const qData = JSON.parse(savedQuotes);
+                    qCount = (qData.items && qData.items.length) ? qData.items.length : 0;
+                } catch(e) {}
+            }
+            const quoteBadge = document.getElementById('quoteBadge');
+            if (quoteBadge) {
+                quoteBadge.textContent = qCount;
+                quoteBadge.classList.toggle('hidden', qCount === 0);
+            }
+
+            // Cart badge
+            const cartItemsRaw = localStorage.getItem('sparrowCartItems');
+            let cCount = 0;
+            if (cartItemsRaw) {
+                try {
+                    cCount = JSON.parse(cartItemsRaw).length || 0;
+                } catch(e) {}
+            }
+            const cartBadge = document.getElementById('cartBadge');
+            if (cartBadge) {
+                cartBadge.textContent = cCount;
+                cartBadge.classList.toggle('hidden', cCount === 0);
+            }
+        }
 
         // ===== EVENT LISTENERS =====
         document.querySelector('.search-box').addEventListener('input', searchItems);
@@ -2235,4 +2250,3 @@ function updateBadges() {
     </script>
 </body>
 </html>
-

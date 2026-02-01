@@ -151,28 +151,21 @@
             top: 70px;
         }
         
- /* Home button on left */
+/* Home button on left */
 .home-button {
     margin-right: 10px; /* Reduced from 20px */
     display: flex;
     align-items: center;
-    gap: 5px;
-    }
-        
-        .home-button a {
-            color: #FFFFFF;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: 500;
-            transition: color 0.3s;
-            white-space: nowrap;
-        }
-        
-        .home-button a:hover {
-            color: #FFFFFF;
-        }
+}
 
-        /* Icon styles for Home and Contact */
+/* Hamburger menu as separate entity */
+.hamburger-menu {
+    margin-right: 15px; /* Space between hamburger and search */
+    display: flex;
+    align-items: center;
+}
+
+/* Icon styles for Home and Contact */
 .home-button a i,
 .contact-button a i,
 .about-button a i,
@@ -187,10 +180,24 @@
 .hamburger-menu:hover i,
 .about-button a:hover i,
 .contact-button a:hover i {
-color: #FFFFFF;
-transform: scale(1.1); /* Slight zoom on hover */
-filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+    color: #FFFFFF;
+    transform: scale(1.1); /* Slight zoom on hover */
+    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
 }
+        
+        .home-button a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+        
+        .home-button a:hover {
+            color: #FFFFFF;
+        }
+
         
 /* Hamburger menu styling - ADD THIS */
 .hamburger-menu i {
@@ -1702,17 +1709,19 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
     
 <!-- Black Header Section - MODIFIED -->
 <div class="black-header">
-    <!-- Home button with hamburger menu on left -->
+    <!-- Home button (1) -->
     <div class="home-button">
         <a href="index.html">
             <i class="fas fa-home"></i>
         </a>
-        <div class="hamburger-menu">
-            <i class="fas fa-bars"></i>
-        </div>
     </div>
     
-    <!-- Search box in center -->
+    <!-- Hamburger menu (2) -->
+    <div class="hamburger-menu">
+        <i class="fas fa-bars"></i>
+    </div>
+    
+    <!-- Search box in center (3) -->
     <div class="black-header-search">
         <div class="search-container">
             <input type="text" 
@@ -1723,21 +1732,21 @@ filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         </div>
     </div>
     
-    <!-- About button -->
+    <!-- About button (4) -->
     <div class="about-button">
         <a href="/sparrowinstruments/about.html">
             <i class="fas fa-info-circle"></i>
         </a>
     </div>
     
-    <!-- Contact button on right -->
+    <!-- Contact button on right (5) -->
     <div class="contact-button">
         <a href="contact.html">
             <i class="fas fa-phone"></i>
         </a>
     </div>
 </div>
-
+    
 <!-- Filter Sidebar (Hamburger Menu) -->
 <div class="filter-sidebar" id="filterSidebar">
     <div class="filter-header">
@@ -2456,3 +2465,4 @@ function applyFilters() {
 </script>
 </body>
 </html>
+

@@ -744,14 +744,12 @@
             top: 140px;
             left: -220px;
             width: 200px;
-            height: calc(70vh - 100px);
+            height: calc(100vh - 120px);
             background: white;
             z-index: 1001;
             transition: left 0.3s ease;
-            overflow: hidden;
+            overflow-y: auto;
             padding-bottom: 0;
-            display: flex;
-            flex-direction: column;
         }
 
         .filter-sidebar.show {
@@ -797,8 +795,7 @@
         }
 
         .filter-content {
-            display: flex;
-            flex-direction: column;
+            padding: 10px 12px 0 12px;
         }
 
         .filter-section {
@@ -808,7 +805,9 @@
         }
 
         .filter-section:last-child {
-            margin-top: auto;
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 10px;
         }
 
         .filter-section h4 {
@@ -2234,7 +2233,3 @@
     </script>
 </body>
 </html>
-
-
-
-

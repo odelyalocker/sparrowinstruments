@@ -1654,6 +1654,98 @@ function isFreshSession() {
 }
         
         // ===== GLOBAL VARIABLES =====
+ // ===== SESSION MANAGEMENT =====
+const SESSION_PREFIX = 'sparrowSession_';
+
+// Generate a unique session ID
+function generateSessionId() {
+    return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+}
+
+// Get or create session ID
+function getSessionId() {
+    let sessionId = sessionStorage.getItem('sparrow_current_session');
+    
+    if (!sessionId) {
+        sessionId = generateSessionId();
+        sessionStorage.setItem('sparrow_current_session', sessionId);
+    }
+    
+    return sessionId;
+}
+
+// Save data with session tracking
+function saveWithSession(dataType, data) {
+    const sessionId = getSessionId();
+    const sessionKey = `${SESSION_PREFIX}${sessionId}_${dataType}`;
+    
+    localStorage.setItem(sessionKey, JSON.stringify({
+        data: data,
+        timestamp: Date.now(),
+        sessionId: sessionId
+    }));
+    
+    // Also save in regular key for backward compatibility
+    localStorage.setItem(dataType, JSON.stringify(data));
+}
+
+// Load data with session check
+function loadWithSession(dataType) {
+    const sessionId = getSessionId();
+    const sessionKey = `${SESSION_PREFIX}${sessionId}_${dataType}`;
+    
+    // Try session-specific data first
+    const sessionData = localStorage.getItem(sessionKey);
+    if (sessionData) {
+        try {
+            const parsed = JSON.parse(sessionData);
+            return parsed.data || [];
+        } catch (e) {
+            console.error('Error parsing session data:', e);
+        }
+    }
+    
+    // Fallback to regular localStorage
+    const regularData = localStorage.getItem(dataType);
+    if (regularData) {
+        try {
+            return JSON.parse(regularData);
+        } catch (e) {
+            console.error('Error parsing regular data:', e);
+        }
+    }
+    
+    return [];
+}
+
+// Clear ALL data for current session
+function clearSessionData() {
+    const sessionId = getSessionId();
+    const allKeys = Object.keys(localStorage);
+    
+    allKeys.forEach(key => {
+        if (key.includes(sessionId) || key.startsWith('sparrow')) {
+            localStorage.removeItem(key);
+        }
+    });
+    
+    sessionStorage.removeItem('sparrow_current_session');
+}
+
+// Check if this is a fresh browser session
+function isFreshSession() {
+    const sessionStart = sessionStorage.getItem('sparrow_session_start');
+    
+    if (!sessionStart) {
+        // First time in this browser session
+        sessionStorage.setItem('sparrow_session_start', Date.now().toString());
+        clearSessionData(); // Clear old data
+        return true;
+    }
+    
+    return false;
+}
+        
         let allItems = [];
         let searchTimeout;
         let quoteItems = new Set();
@@ -1845,6 +1937,10 @@ function loadSavedQuotes() {
         const ids = quoteData.map(item => item.id);
         quoteItems = new Set(ids);
         quoteCount = quoteData.length || 0;
+    } else {
+        // Reset if no data
+        quoteItems = new Set();
+        quoteCount = 0;
     }
 }
         
@@ -2420,4 +2516,5 @@ window.addEventListener('load', function() {
     </script>
 </body>
 </html>
+
 

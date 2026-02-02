@@ -1140,15 +1140,75 @@
     </footer>
 
 <script>
+    // ===== SESSION MANAGEMENT (SAME AS MAIN PAGE) =====
+    const SESSION_PREFIX = 'sparrowSession_';
+
+    // Get session ID
+    function getSessionId() {
+        let sessionId = sessionStorage.getItem('sparrow_current_session');
+        
+        if (!sessionId) {
+            // If user came directly to this page, create a session
+            sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            sessionStorage.setItem('sparrow_current_session', sessionId);
+        }
+        
+        return sessionId;
+    }
+
+    // Load data with session check
+    function loadWithSession(dataType) {
+        const sessionId = getSessionId();
+        const sessionKey = `${SESSION_PREFIX}${sessionId}_${dataType}`;
+        
+        // Try session-specific data first
+        const sessionData = localStorage.getItem(sessionKey);
+        if (sessionData) {
+            try {
+                const parsed = JSON.parse(sessionData);
+                return parsed.data || [];
+            } catch (e) {
+                console.error('Error parsing session data:', e);
+            }
+        }
+        
+        // Fallback to regular localStorage (for compatibility)
+        const regularData = localStorage.getItem(dataType);
+        if (regularData) {
+            try {
+                return JSON.parse(regularData);
+            } catch (e) {
+                console.error('Error parsing regular data:', e);
+            }
+        }
+        
+        return [];
+    }
+
+    // Save data with session tracking
+    function saveWithSession(dataType, data) {
+        const sessionId = getSessionId();
+        const sessionKey = `${SESSION_PREFIX}${sessionId}_${dataType}`;
+        
+        localStorage.setItem(sessionKey, JSON.stringify({
+            data: data,
+            timestamp: Date.now(),
+            sessionId: sessionId
+        }));
+        
+        // Also save in regular key for backward compatibility
+        localStorage.setItem(dataType, JSON.stringify(data));
+    }
+
     // Load saved items from localStorage
     function loadAddedItems() {
-        const savedItems = localStorage.getItem('sparrowQuoteItems');
+        const items = loadWithSession('sparrowQuoteItems');
         const itemsList = document.getElementById('itemsList');
         const emptyMessage = document.getElementById('emptyMessage');
         const confirmQuoteSection = document.getElementById('confirmQuoteSection');
         
         console.log('🔍 Checking localStorage for quote items...');
-        console.log('Saved items:', savedItems);
+        console.log('Loaded items:', items);
         
         // DEFAULT: Show empty message, hide items list and confirm section
         emptyMessage.style.display = 'flex';
@@ -1161,60 +1221,47 @@
         document.getElementById('successMessage').classList.remove('visible');
         document.getElementById('quoteForm').reset();
         
-        if (savedItems) {
-            try {
-                const quoteData = JSON.parse(savedItems);
-                const items = quoteData.items || [];
+        if (items && items.length > 0) {
+            console.log(`📦 Found ${items.length} items in quote`);
+            console.log('Items data:', items);
+            
+            // Show items and confirm section, hide empty message
+            itemsList.style.display = 'block';
+            emptyMessage.style.display = 'none';
+            confirmQuoteSection.classList.add('visible');
+            
+            // Display items with full product data
+            items.forEach((itemData, index) => {
+                console.log(`🔄 Processing item ${index + 1}:`, itemData);
                 
-                console.log(`📦 Found ${items.length} items in quote`);
-                console.log('Items data:', items);
-                
-                if (items.length > 0) {
-                    // Show items and confirm section, hide empty message
-                    itemsList.style.display = 'block';
-                    emptyMessage.style.display = 'none';
-                    confirmQuoteSection.classList.add('visible');
-                    
-                    // Display items with full product data
-                    items.forEach((itemData, index) => {
-                        console.log(`🔄 Processing item ${index + 1}:`, itemData);
-                        
-                        // Check if itemData is an object with full product data
-                        if (typeof itemData === 'object' && itemData !== null) {
-                            console.log('✅ Item is an object, creating element...');
-                            const itemElement = createItemElement(itemData, index);
-                            itemsList.appendChild(itemElement);
-                        } 
-                        // Fallback for old format (just IDs) - but shouldn't happen now
-                        else {
-                            console.log('⚠️ Item is not an object, using fallback:', itemData);
-                            const basicItem = {
-                                id: itemData || `item_${index}`,
-                                name: `Item ${index + 1}`,
-                                image: 'placeholder.jpg',
-                                mrpPrice: 'Price on request',
-                                bestBuyPrice: 'Price on request',
-                                bestBuyLabel: 'Buy',
-                                warranty: 'Not specified',
-                                specifications: ['Specifications not available'],
-                                description: ['Please go back to the main catalog to see full details.']
-                            };
-                            const itemElement = createItemElement(basicItem, index);
-                            itemsList.appendChild(itemElement);
-                        }
-                    });
-                    
-                    console.log('✅ All items displayed');
-                } else {
-                    console.log('📭 No items in quote array');
+                // Check if itemData is an object with full product data
+                if (typeof itemData === 'object' && itemData !== null) {
+                    console.log('✅ Item is an object, creating element...');
+                    const itemElement = createItemElement(itemData, index);
+                    itemsList.appendChild(itemElement);
+                } 
+                // Fallback for old format (just IDs) - but shouldn't happen now
+                else {
+                    console.log('⚠️ Item is not an object, using fallback:', itemData);
+                    const basicItem = {
+                        id: itemData || `item_${index}`,
+                        name: `Item ${index + 1}`,
+                        image: 'placeholder.jpg',
+                        mrpPrice: 'Price on request',
+                        bestBuyPrice: 'Price on request',
+                        bestBuyLabel: 'Buy',
+                        warranty: 'Not specified',
+                        specifications: ['Specifications not available'],
+                        description: ['Please go back to the main catalog to see full details.']
+                    };
+                    const itemElement = createItemElement(basicItem, index);
+                    itemsList.appendChild(itemElement);
                 }
-                
-            } catch (e) {
-                console.error('❌ Error loading saved items:', e);
-                // Keep default state (empty message) if there's an error
-            }
+            });
+            
+            console.log('✅ All items displayed');
         } else {
-            console.log('📭 No saved items found in localStorage');
+            console.log('📭 No items found in quote');
         }
     }
     
@@ -1340,48 +1387,39 @@
     function updateQuantity(itemId, change, quantityElement) {
         console.log(`🔄 Updating quantity for item ${itemId}, change: ${change}`);
         
-        const savedItems = localStorage.getItem('sparrowQuoteItems');
-        if (savedItems) {
-            try {
-                const quoteData = JSON.parse(savedItems);
-                const items = quoteData.items || [];
-                
-                console.log('📋 Current items in quote:', items);
-                
-                // Find the item index
-                const itemIndex = items.findIndex(item => item.id === itemId);
-                console.log('🔍 Item index found:', itemIndex);
-                
-                if (itemIndex !== -1) {
-                    // Get current quantity
-                    let currentItem = items[itemIndex];
-                    let currentQuantity = currentItem.quantity || 1;
-                    
-                    console.log('📊 Current quantity:', currentQuantity);
-                    
-                    // Calculate new quantity (minimum 1)
-                    let newQuantity = Math.max(1, currentQuantity + change);
-                    
-                    console.log('🎯 New quantity:', newQuantity);
-                    
-                    // Update the item quantity
-                    items[itemIndex].quantity = newQuantity;
-                    
-                    // Update localStorage
-                    quoteData.items = items;
-                    localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
-                    
-                    // Update display
-                    quantityElement.textContent = newQuantity;
-                    
-                    // Show toast
-                    showToast(`Quantity updated to ${newQuantity}`, 'success');
-                } else {
-                    console.error('❌ Item not found in quote:', itemId);
-                }
-            } catch (e) {
-                console.error('❌ Error updating quantity:', e);
-            }
+        const items = loadWithSession('sparrowQuoteItems');
+        
+        console.log('📋 Current items in quote:', items);
+        
+        // Find the item index
+        const itemIndex = items.findIndex(item => item.id === itemId);
+        console.log('🔍 Item index found:', itemIndex);
+        
+        if (itemIndex !== -1) {
+            // Get current quantity
+            let currentItem = items[itemIndex];
+            let currentQuantity = currentItem.quantity || 1;
+            
+            console.log('📊 Current quantity:', currentQuantity);
+            
+            // Calculate new quantity (minimum 1)
+            let newQuantity = Math.max(1, currentQuantity + change);
+            
+            console.log('🎯 New quantity:', newQuantity);
+            
+            // Update the item quantity
+            items[itemIndex].quantity = newQuantity;
+            
+            // Update localStorage using session-aware function
+            saveWithSession('sparrowQuoteItems', items);
+            
+            // Update display
+            quantityElement.textContent = newQuantity;
+            
+            // Show toast
+            showToast(`Quantity updated to ${newQuantity}`, 'success');
+        } else {
+            console.error('❌ Item not found in quote:', itemId);
         }
     }
     
@@ -1389,33 +1427,23 @@
     function removeItem(itemId) {
         console.log(`🗑️ Attempting to remove item: ${itemId}`);
         
-        const savedItems = localStorage.getItem('sparrowQuoteItems');
-        if (savedItems) {
-            try {
-                const quoteData = JSON.parse(savedItems);
-                const items = quoteData.items || [];
-                
-                console.log('📋 Items before removal:', items.length);
-                
-                // Filter out the item to remove
-                const updatedItems = items.filter(item => item.id !== itemId);
-                
-                console.log('📋 Items after removal:', updatedItems.length);
-                
-                quoteData.items = updatedItems;
-                quoteData.count = updatedItems.length;
-                
-                localStorage.setItem('sparrowQuoteItems', JSON.stringify(quoteData));
-                
-                // Reload the items
-                loadAddedItems();
-                
-                // Show confirmation
-                showToast('Item removed from your list', 'info');
-            } catch (e) {
-                console.error('❌ Error removing item:', e);
-            }
-        }
+        const items = loadWithSession('sparrowQuoteItems');
+        
+        console.log('📋 Items before removal:', items.length);
+        
+        // Filter out the item to remove
+        const updatedItems = items.filter(item => item.id !== itemId);
+        
+        console.log('📋 Items after removal:', updatedItems.length);
+        
+        // Save using session-aware function
+        saveWithSession('sparrowQuoteItems', updatedItems);
+        
+        // Reload the items
+        loadAddedItems();
+        
+        // Show confirmation
+        showToast('Item removed from your list', 'info');
     }
     
     // NEW: Confirm Quote functionality
@@ -1483,17 +1511,7 @@
     
     // NEW: Get quote items from localStorage
     function getQuoteItems() {
-        const savedItems = localStorage.getItem('sparrowQuoteItems');
-        if (savedItems) {
-            try {
-                const quoteData = JSON.parse(savedItems);
-                return quoteData.items || [];
-            } catch (e) {
-                console.error('❌ Error getting quote items:', e);
-                return [];
-            }
-        }
-        return [];
+        return loadWithSession('sparrowQuoteItems');
     }
     
     // NEW: Save quote submission (for demo purposes)
@@ -1571,13 +1589,25 @@
     
     // Add debug helper
     window.debugQuote = function() {
-        const saved = localStorage.getItem('sparrowQuoteItems');
-        console.log('🔍 Debug - localStorage sparrowQuoteItems:', saved);
+        const sessionId = getSessionId();
+        const sessionKey = `${SESSION_PREFIX}${sessionId}_sparrowQuoteItems`;
+        const saved = localStorage.getItem(sessionKey);
+        
+        console.log('🔍 Debug - Session ID:', sessionId);
+        console.log('🔍 Debug - Session Key:', sessionKey);
+        console.log('🔍 Debug - localStorage data:', saved);
+        
         if (saved) {
-            console.log('🔍 Parsed data:', JSON.parse(saved));
+            console.log('🔍 Parsed session data:', JSON.parse(saved));
         }
+        
+        // Also check regular key
+        const regular = localStorage.getItem('sparrowQuoteItems');
+        console.log('🔍 Debug - Regular key data:', regular);
+        
         loadAddedItems();
     }
 </script>
+
 </body>
 </html>

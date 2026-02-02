@@ -1207,29 +1207,12 @@
             .result-right {
                 grid-column: 1;
             }
- /* FIX FOR MOBILE BOTTOM SPACING */
-    .filter-sidebar {
-        top: 130px;
-        height: calc(100vh - 130px);
-        width: 180px;
-        /* KEY FIX: Add bottom padding INSIDE scrollable area */
-        padding-bottom: 40px !important; /* Increased for mobile */
-    }
-    
-    /* Ensure content has bottom padding */
-    .filter-content {
-        padding: 10px 12px 20px 12px !important; /* Increased bottom padding */
-    }
-    
-    /* Make sure last section has extra space */
-    .filter-section:last-child {
-        padding-bottom: 25px !important; /* Even more space for last item */
-    }
-    
-    /* Add margin to Apply button specifically */
-    #applyFilter {
-        margin-bottom: 15px !important;
-    }
+ 
+            .filter-sidebar {
+                top: 130px;
+                height: calc(50vh - 130px);
+                width: 180px;
+            }
             .checkbox-item {
                 font-size: 17px;
             }
@@ -2301,3 +2284,4 @@ window.addEventListener('DOMContentLoaded', function() {
     </script>
 </body>
 </html>
+

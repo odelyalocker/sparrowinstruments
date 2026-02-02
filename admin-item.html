@@ -88,12 +88,12 @@
         }
         
         .preview-img {
-            max-width: 300px;
-            max-height: 200px;
+            width: 300px;
+            height: 200px;
             border-radius: 5px;
             border: 2px solid #ddd;
             object-fit: contain;
-            background: white; /* White background for small images */
+            background: white;
         }
         
         .download-btn {
@@ -102,7 +102,7 @@
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
-            cursor: pointer;
+                    cursor: pointer;
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -188,8 +188,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 400px;
-            height: 266px; /* 3:2 aspect ratio */
+            width: 300px;
+            height: 200px;
             border: 2px dashed #1565c0;
             background: rgba(21, 101, 192, 0.1);
             pointer-events: none;
@@ -258,6 +258,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 30px;
             padding: 30px;
+            align-items: stretch;
         }
         
         .form-column {
@@ -265,6 +266,8 @@
             padding: 25px;
             border-radius: 8px;
             border: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
         }
         
         .form-group {
@@ -296,19 +299,13 @@
             font-size: 14px;
         }
         
-        /* CHANGED: Increased height for Specifications */
+        /* Increased height for Specifications and Descriptions */
         #specifications {
-            min-height: 180px; /* 50% more than 120px */
+            min-height: 150px;
         }
         
-        /* CHANGED: Increased height for Descriptions */
         #descriptions {
-            min-height: 180px; /* 50% more than 120px */
-        }
-        
-        /* CHANGED: Increased height for Keywords */
-        #keywords {
-            min-height: 100px; /* Double the normal height */
+            min-height: 150px;
         }
         
         .form-group input:focus,
@@ -366,62 +363,30 @@
             box-shadow: none;
         }
         
-        /* JSON Output */
-        .json-output {
-            padding: 20px 30px;
-            background: #1e1e1e;
-            color: #d4d4d4;
-            margin: 20px;
-            border-radius: 8px;
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 10001;
             display: none;
+            animation: slideIn 0.3s ease;
         }
         
-        .json-output h3 {
-            color: #569cd6;
-            margin-bottom: 15px;
-        }
-        
-        .json-code {
-            background: #252526;
-            padding: 15px;
-            border-radius: 5px;
-            font-family: 'Consolas', monospace;
-            font-size: 14px;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        
-        .copy-btn {
-            background: #007acc;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-            font-weight: 600;
-            margin-right: 10px;
-        }
-        
-        .save-txt-btn {
-            background: #9c27b0;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-            font-weight: 600;
-        }
-        
-        .copy-btn:hover {
-            background: #0062a3;
-        }
-        
-        .save-txt-btn:hover {
-            background: #7b1fa2;
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
         
         /* Responsive */
@@ -437,8 +402,8 @@
             }
             
             .crop-overlay {
-                width: 300px;
-                height: 200px; /* 3:2 aspect ratio */
+                width: 250px;
+                height: 166px;
             }
             
             .image-preview-container {
@@ -475,8 +440,8 @@
             }
             
             .crop-overlay {
-                width: 250px;
-                height: 166px; /* 3:2 aspect ratio */
+                width: 200px;
+                height: 133px;
             }
         }
     </style>
@@ -497,7 +462,7 @@
                 </button>
                 <div class="image-info">
                     <div>Selected: <span id="fileName">No file selected</span></div>
-                    <div>Will be saved as: <span id="saveName">bio?.jpg</span></div>
+                    <div>Will be saved as: <span id="saveName">edu1.jpg</span></div>
                 </div>
             </div>
             <input type="file" id="imageInput" accept="image/*" style="display: none;">
@@ -513,48 +478,50 @@
         <div class="two-columns">
             <!-- Left Column -->
             <div class="form-column">
-                <!-- CHANGED: Editable Image Path Field -->
-                <div class="form-group">
-                    <label for="imagePath">Image Path (exact path for JSON):</label>
-                    <input type="text" id="imagePath" placeholder="e.g., /sanjayparas/bioimg/bio3.jpg">
-                    <div style="font-size: 13px; color: #666; margin-top: 5px; font-style: italic;">
-                        Enter the exact path that will be saved in JSON
-                    </div>
-                </div>
-                
                 <div class="form-group">
                     <label for="category">Category:</label>
                     <select id="category">
                         <option value="">Select Category</option>
-                        <option value="Biology Lab">Biology Lab</option>
-                        <option value="Physics Lab">Physics Lab</option>
-                        <option value="Chemistry Lab">Chemistry Lab</option>
-                        <option value="Scientific Lab">Scientific Lab</option>
+                        <option value="Education">Education</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Scientific">Scientific</option>
+                        <option value="Industry">Industry</option>
+                        <option value="Research">Research</option>
+                        <option value="Project">Project</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="itemName">Item Name:</label>
-                    <input type="text" id="itemName" placeholder="e.g., Compound Microscope">
+                    <label for="imagePath">Image Path:</label>
+                    <input type="text" id="imagePath" placeholder="Will auto-fill based on category" readonly>
                 </div>
                 
-                <!-- CHANGED: MRP Price moved up -->
                 <div class="form-group">
-                    <label for="mrpPrice">MRP Price (INR):</label>
-                    <input type="text" id="mrpPrice" placeholder="e.g., 20,000">
-                </div>
-                
-                <!-- CHANGED: Best Buy Price moved down -->
-                <div class="form-group">
-                    <label for="bestPrice">Best Buy Price (INR):</label>
-                    <input type="text" id="bestPrice" placeholder="e.g., 19,000">
+                    <label for="itemName">Item Name (max 25 chars):</label>
+                    <input type="text" id="itemName" placeholder="e.g., Compound Microscope" maxlength="25">
+                    <div class="line-counter">
+                        <span id="itemNameCount">0</span>/25 characters
+                    </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="discount">Discount:</label>
-                    <input type="text" id="discount" placeholder="e.g., -5%">
+                    <label for="mrpPrice">MRP Price (INR):</label>
+                    <input type="text" id="mrpPrice" placeholder="e.g., 100000">
                 </div>
                 
+                <div class="form-group">
+                    <label for="discount">Discount (%):</label>
+                    <input type="number" id="discount" placeholder="e.g., 5" min="0" max="100" step="0.01">
+                </div>
+                
+                <div class="form-group">
+                    <label for="buyPrice">Buy Price (INR):</label>
+                    <input type="text" id="buyPrice" placeholder="Auto-calculated" readonly>
+                </div>
+            </div>
+            
+            <!-- Right Column -->
+            <div class="form-column">
                 <div class="form-group">
                     <label for="warranty">Warranty (max 40 chars):</label>
                     <input type="text" id="warranty" placeholder="e.g., 2 Years Manufacturer Warranty" maxlength="40">
@@ -562,64 +529,38 @@
                         <span id="warrantyCount">0</span>/40 characters
                     </div>
                 </div>
-            </div>
-            
-            <!-- Right Column -->
-            <div class="form-column">
-                <!-- Specifications with increased height -->
+                
                 <div class="form-group">
-                    <label for="specifications">Specifications (max 7 lines, 40 chars each):</label>
+                    <label for="specifications">Specifications (max 6 lines, 40 chars each):</label>
                     <textarea id="specifications" placeholder="Enter each specification on a new line:
 Magnification: 40x to 1000x
 Light Source: LED 3W
-Eyepiece: WF10x/18mm" maxlength="280" oninput="limitSpecsLines(this)"></textarea>
+Eyepiece: WF10x/18mm" maxlength="240" oninput="limitLines(this, 6)"></textarea>
                     <div class="line-counter">
-                        <span id="specsLineCount">0</span>/7 lines | Max line: <span id="specsMaxChars">0</span>/40 chars
+                        <span id="specsLineCount">0</span>/6 lines | Max line: <span id="specsMaxChars">0</span>/40 chars
                     </div>
                 </div>
                 
-                <!-- Descriptions with increased height -->
                 <div class="form-group">
-                    <label for="descriptions">Descriptions (max 9 lines, 40 chars each):</label>
+                    <label for="descriptions">Descriptions (max 6 lines, 40 chars each):</label>
                     <textarea id="descriptions" placeholder="Enter each description on a new line:
 Professional compound microscope with 1000x magnification
-Built-in LED illumination with adjustable intensity" maxlength="360" oninput="limitDescLines(this)"></textarea>
+Built-in LED illumination with adjustable intensity" maxlength="240" oninput="limitLines(this, 6)"></textarea>
                     <div class="line-counter">
-                        <span id="descLineCount">0</span>/9 lines | Max line: <span id="descMaxChars">0</span>/40 chars
+                        <span id="descLineCount">0</span>/6 lines | Max line: <span id="descMaxChars">0</span>/40 chars
                     </div>
                 </div>
                 
-                <!-- CHANGED: Keywords moved to right column with increased height -->
                 <div class="form-group">
                     <label for="keywords">Keywords (comma separated, 6-8 recommended):</label>
-                    <textarea id="keywords" placeholder="e.g., microscope, compound microscope, biology lab, magnification, lab equipment, scientific instrument"></textarea>
+                    <textarea id="keywords" placeholder="Default keywords will appear based on category"></textarea>
                 </div>
             </div>
         </div>
         
         <!-- Add Button -->
         <div class="add-section">
-            <button class="add-btn" id="addBtn" disabled>ADD ITEM</button>
-        </div>
-        
-        <!-- JSON Output -->
-        <div class="json-output" id="jsonOutput">
-            <h3>✅ Item Created Successfully!</h3>
-            <p><strong>📁 Save image as:</strong> <span id="finalImageName">bio?.jpg</span></p>
-            <p><strong>📝 Copy this JSON and add to your file:</strong></p>
-            <div class="json-code" id="jsonCode"></div>
-            <div style="margin-top: 15px;">
-                <button class="copy-btn" id="copyBtn">Copy JSON to Clipboard</button>
-                <button class="save-txt-btn" id="saveTxtBtn">Save as TXT File</button>
-            </div>
-            <p style="margin-top: 15px; color: #888;">
-                <strong>Next steps:</strong><br>
-                1. Click "Download Image" button to save the cropped image<br>
-                2. Save it with the suggested name in correct folder<br>
-                3. Add this JSON to the end of your biolabitems.json file<br>
-                4. OR use "Save as TXT File" to save all items<br>
-                5. Upload files to GitHub repository
-            </p>
+            <button class="add-btn" id="addBtn">ADD ITEM</button>
         </div>
     </div>
     
@@ -627,7 +568,7 @@ Built-in LED illumination with adjustable intensity" maxlength="360" oninput="li
     <div class="crop-modal" id="cropModal">
         <div class="crop-container">
             <div class="crop-header">
-                <h3>Crop Image (3:2 Aspect Ratio)</h3>
+                <h3>Crop Image (300x200 pixels)</h3>
                 <button class="close-crop" id="closeCrop">× Close</button>
             </div>
             
@@ -650,6 +591,11 @@ Built-in LED illumination with adjustable intensity" maxlength="360" oninput="li
             </div>
         </div>
     </div>
+    
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle"></i> Item added successfully!
+    </div>
 
     <script>
         // DOM Elements
@@ -659,22 +605,18 @@ Built-in LED illumination with adjustable intensity" maxlength="360" oninput="li
         const saveNameSpan = document.getElementById('saveName');
         const previewImg = document.getElementById('previewImg');
         const downloadBtn = document.getElementById('downloadBtn');
-        const imagePathInput = document.getElementById('imagePath');
         const categorySelect = document.getElementById('category');
+        const imagePathInput = document.getElementById('imagePath');
         const itemNameInput = document.getElementById('itemName');
-        const bestPriceInput = document.getElementById('bestPrice');
         const mrpPriceInput = document.getElementById('mrpPrice');
         const discountInput = document.getElementById('discount');
+        const buyPriceInput = document.getElementById('buyPrice');
         const warrantyInput = document.getElementById('warranty');
         const keywordsInput = document.getElementById('keywords');
         const specificationsInput = document.getElementById('specifications');
         const descriptionsInput = document.getElementById('descriptions');
         const addBtn = document.getElementById('addBtn');
-        const jsonOutputDiv = document.getElementById('jsonOutput');
-        const jsonCodeDiv = document.getElementById('jsonCode');
-        const copyBtn = document.getElementById('copyBtn');
-        const saveTxtBtn = document.getElementById('saveTxtBtn'); // NEW
-        const finalImageNameSpan = document.getElementById('finalImageName');
+        const successMessage = document.getElementById('successMessage');
         
         // Crop Modal Elements
         const cropModal = document.getElementById('cropModal');
@@ -687,148 +629,110 @@ Built-in LED illumination with adjustable intensity" maxlength="360" oninput="li
         const zoomLevelSpan = document.getElementById('zoomLevel');
         
         // Counters
+        const itemNameCount = document.getElementById('itemNameCount');
         const warrantyCount = document.getElementById('warrantyCount');
         const specsLineCount = document.getElementById('specsLineCount');
         const specsMaxChars = document.getElementById('specsMaxChars');
         const descLineCount = document.getElementById('descLineCount');
         const descMaxChars = document.getElementById('descMaxChars');
         
+        // Variables
         let selectedFile = null;
-        let itemCounter = 0;
+        let croppedImageData = null;
         let originalImage = null;
         let scale = 1;
         let isDragging = false;
         let startX, startY, initialX, initialY;
-        let croppedImageData = null;
-        let allCreatedItems = []; // NEW: Store all created items
         
-        // Load existing items count on startup
-        window.addEventListener('DOMContentLoaded', () => {
-            try {
-                fetch('biolabitems.json')
-                    .then(response => response.json())
-                    .then(items => {
-                        if (Array.isArray(items)) {
-                            itemCounter = items.length + 1;
-                            updateSaveName();
-                            allCreatedItems = [...items]; // Load existing items
-                        }
-                    })
-                    .catch(() => {
-                        itemCounter = 1;
-                        updateSaveName();
-                    });
-            } catch (error) {
-                itemCounter = 1;
-                updateSaveName();
-            }
-        });
+        let itemCounters = {
+            Education: 1,
+            Medical: 1,
+            Scientific: 1,
+            Industry: 1,
+            Research: 1,
+            Project: 1
+        };
         
-        // Event Listeners
-        browseBtn.addEventListener('click', () => imageInput.click());
-        imageInput.addEventListener('change', handleImageSelect);
-        categorySelect.addEventListener('change', updateImagePathHint);
-        warrantyInput.addEventListener('input', updateWarrantyCounter);
-        specificationsInput.addEventListener('input', updateSpecsCounter);
-        descriptionsInput.addEventListener('input', updateDescCounter);
-        addBtn.addEventListener('click', generateItem);
-        copyBtn.addEventListener('click', copyJSON);
-        saveTxtBtn.addEventListener('click', saveAsTxt); // NEW
-        downloadBtn.addEventListener('click', downloadImage);
+        // Default keywords for each category
+        const defaultKeywords = {
+            Education: "education, instruments, equipment",
+            Medical: "medical, laboratory, instruments, equipment",
+            Scientific: "scientific, laboratory, instruments, equipment",
+            Industry: "industry, laboratory, instruments, equipment",
+            Research: "research, laboratory, instruments, equipment",
+            Project: "project, laboratory, instruments, equipment"
+        };
         
-        // Crop Modal Events
-        closeCropBtn.addEventListener('click', closeCropModal);
-        cancelCropBtn.addEventListener('click', closeCropModal);
-        applyCropBtn.addEventListener('click', applyCrop);
-        zoomInBtn.addEventListener('click', zoomIn);
-        zoomOutBtn.addEventListener('click', zoomOut);
+        // File paths for each category
+        const filePaths = {
+            Education: "education.txt",
+            Medical: "medical.txt",
+            Scientific: "scientific.txt",
+            Industry: "industry.txt",
+            Research: "research.txt",
+            Project: "project.txt"
+        };
         
-        // Enable/Disable Add button based on required fields
-        const requiredFields = [itemNameInput, bestPriceInput, mrpPriceInput, imagePathInput];
-        requiredFields.forEach(field => {
-            field.addEventListener('input', validateForm);
-        });
-        categorySelect.addEventListener('change', validateForm);
+        // Image paths for each category (for JSON)
+        const jsonImagePaths = {
+            Education: "/sparrowinstruments/imgedu/edu",
+            Medical: "/sparrowinstruments/imgmed/med",
+            Scientific: "/sparrowinstruments/imgsci/sci",
+            Industry: "/sparrowinstruments/imgind/ind",
+            Research: "/sparrowinstruments/imgres/res",
+            Project: "/sparrowinstruments/imgpro/pro"
+        };
         
-        // NEW FUNCTION: Save all items as TXT file
-        function saveAsTxt() {
-            if (allCreatedItems.length === 0) {
-                alert('No items have been created yet. Please add items first.');
-                return;
+        // Initialize
+        function init() {
+            // Try to load existing counters from localStorage
+            const savedCounters = localStorage.getItem('itemCounters');
+            if (savedCounters) {
+                itemCounters = JSON.parse(savedCounters);
             }
             
-            // Create filename with timestamp
-            const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('T')[0];
-            const filename = `items_${timestamp}.txt`;
+            // Add event listeners
+            browseBtn.addEventListener('click', () => imageInput.click());
+            imageInput.addEventListener('change', handleImageSelect);
+            categorySelect.addEventListener('change', handleCategoryChange);
+            itemNameInput.addEventListener('input', updateItemNameCounter);
+            itemNameInput.addEventListener('input', capitalizeFirstLetters);
+            mrpPriceInput.addEventListener('input', formatMRPPrice);
+            mrpPriceInput.addEventListener('input', calculateBuyPrice);
+            discountInput.addEventListener('input', calculateBuyPrice);
+            warrantyInput.addEventListener('input', updateWarrantyCounter);
+            specificationsInput.addEventListener('input', updateSpecsCounter);
+            descriptionsInput.addEventListener('input', updateDescCounter);
+            addBtn.addEventListener('click', addItem);
+            downloadBtn.addEventListener('click', downloadImage);
             
-            // Create the text content
-            let txtContent = `// Items exported on: ${new Date().toLocaleString()}\n`;
-            txtContent += `// Total items: ${allCreatedItems.length}\n\n`;
+            // Crop Modal Events
+            closeCropBtn.addEventListener('click', closeCropModal);
+            cancelCropBtn.addEventListener('click', closeCropModal);
+            applyCropBtn.addEventListener('click', applyCrop);
+            zoomInBtn.addEventListener('click', zoomIn);
+            zoomOutBtn.addEventListener('click', zoomOut);
             
-            // Add each item as JSON
-            allCreatedItems.forEach((item, index) => {
-                txtContent += `// Item ${index + 1}: ${item.name}\n`;
-                txtContent += JSON.stringify(item, null, 2);
-                txtContent += '\n\n';
-            });
-            
-            // Create download link
-            const blob = new Blob([txtContent], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = filename;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-            
-            alert(`Saved ${allCreatedItems.length} items to ${filename}`);
+            // Initialize counters
+            updateItemNameCounter();
+            updateWarrantyCounter();
+            updateSpecsCounter();
+            updateDescCounter();
+            handleCategoryChange();
         }
         
-        // NEW FUNCTION: Update image path hint based on category
-        function updateImagePathHint() {
-            if (!categorySelect.value) {
-                imagePathInput.placeholder = "e.g., /sanjayparas/bioimg/bio3.jpg";
-                return;
-            }
-            
-            let folderPath = '';
-            let prefix = '';
-            
-            switch(categorySelect.value) {
-                case 'Biology Lab': 
-                    folderPath = '/sanjayparas/bioimg/';
-                    prefix = 'bio';
-                    break;
-                case 'Physics Lab': 
-                    folderPath = '/sanjayparas/physimg/';
-                    prefix = 'phys';
-                    break;
-                case 'Chemistry Lab': 
-                    folderPath = '/sanjayparas/chemimg/';
-                    prefix = 'chem';
-                    break;
-                case 'Scientific Lab': 
-                    folderPath = '/sanjayparas/scientificimg/';
-                    prefix = 'sci';
-                    break;
-            }
-            
-            const nextNum = itemCounter;
-            imagePathInput.placeholder = `e.g., ${folderPath}${prefix}${nextNum}.jpg`;
-        }
-        
-        // Functions
+        // Handle image selection
         function handleImageSelect(event) {
             const file = event.target.files[0];
             if (file) {
+                selectedFile = file;
                 fileNameSpan.textContent = file.name;
+                
+                // Show crop modal
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     originalImage = new Image();
                     originalImage.onload = function() {
-                        // Show crop modal with the image
                         cropImage.src = e.target.result;
                         showCropModal();
                     };
@@ -838,6 +742,7 @@ Built-in LED illumination with adjustable intensity" maxlength="360" oninput="li
             }
         }
         
+        // Show crop modal
         function showCropModal() {
             cropModal.style.display = 'flex';
             scale = 1;
@@ -856,9 +761,13 @@ Built-in LED illumination with adjustable intensity" maxlength="360" oninput="li
                 // Calculate scale to fit image in container
                 const scaleX = containerWidth / imgWidth;
                 const scaleY = containerHeight / imgHeight;
-                scale = Math.min(scaleX, scaleY) * 0.8; // 80% of fit scale
+                scale = Math.min(scaleX, scaleY) * 0.8;
                 
                 updateImageTransform();
+                
+                // Center the image
+                cropImage.style.left = (cropArea.clientWidth - (imgWidth * scale)) / 2 + 'px';
+                cropImage.style.top = (cropArea.clientHeight - (imgHeight * scale)) / 2 + 'px';
                 
                 // Add drag event listeners
                 cropImage.addEventListener('mousedown', startDrag);
@@ -871,6 +780,7 @@ Built-in LED illumination with adjustable intensity" maxlength="360" oninput="li
             }, 100);
         }
         
+        // Close crop modal
         function closeCropModal() {
             cropModal.style.display = 'none';
             // Remove event listeners
@@ -883,6 +793,7 @@ Built-in LED illumination with adjustable intensity" maxlength="360" oninput="li
             document.removeEventListener('touchend', stopDrag);
         }
         
+        // Drag functionality
         function startDrag(e) {
             isDragging = true;
             startX = e.clientX - cropImage.offsetLeft;
@@ -929,6 +840,7 @@ Built-in LED illumination with adjustable intensity" maxlength="360" oninput="li
             isDragging = false;
         }
         
+        // Zoom functionality
         function zoomIn() {
             scale += 0.1;
             updateImageTransform();
@@ -944,40 +856,30 @@ Built-in LED illumination with adjustable intensity" maxlength="360" oninput="li
         }
         
         function updateImageTransform() {
-            const cropArea = document.getElementById('cropArea');
             const imgWidth = cropImage.naturalWidth * scale;
             const imgHeight = cropImage.naturalHeight * scale;
             
             cropImage.style.width = imgWidth + 'px';
             cropImage.style.height = imgHeight + 'px';
-            
-            // Keep image within bounds
-            const currentLeft = parseInt(cropImage.style.left) || 0;
-            const currentTop = parseInt(cropImage.style.top) || 0;
-            
-            // Center if not positioned
-            if (!currentLeft && !currentTop) {
-                cropImage.style.left = (cropArea.clientWidth - imgWidth) / 2 + 'px';
-                cropImage.style.top = (cropArea.clientHeight - imgHeight) / 2 + 'px';
-            }
         }
         
         function updateZoomDisplay() {
             zoomLevelSpan.textContent = Math.round(scale * 100) + '%';
         }
         
+        // Apply crop
         function applyCrop() {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             
-            // Set canvas to 3:2 aspect ratio (600x400 for good quality)
-            const outputWidth = 600;
-            const outputHeight = 400;
+            // Set canvas to 300x200 pixels
+            const outputWidth = 300;
+            const outputHeight = 200;
             canvas.width = outputWidth;
             canvas.height = outputHeight;
             
             // Fill with white background first
-            ctx.fillStyle = '#FFFFFF'; // White background
+            ctx.fillStyle = '#FFFFFF';
             ctx.fillRect(0, 0, outputWidth, outputHeight);
             
             const cropArea = document.getElementById('cropArea');
@@ -994,14 +896,14 @@ Built-in LED illumination with adjustable intensity" maxlength="360" oninput="li
             const cropWidth = overlayRect.width / scale;
             const cropHeight = overlayRect.height / scale;
             
-            // Draw cropped image to canvas
+            // Draw cropped image to canvas with white background
             ctx.drawImage(
                 originalImage,
-                cropX, cropY, cropWidth, cropHeight, // Source rectangle
-                0, 0, outputWidth, outputHeight      // Destination rectangle
+                cropX, cropY, cropWidth, cropHeight,
+                0, 0, outputWidth, outputHeight
             );
             
-            // Convert to data URL with white background
+            // Convert to data URL
             croppedImageData = canvas.toDataURL('image/jpeg', 0.9);
             
             // Update preview
@@ -1011,102 +913,293 @@ Built-in LED illumination with adjustable intensity" maxlength="360" oninput="li
             // Show download button
             downloadBtn.style.display = 'flex';
             
-            // Store as selected file
-            selectedFile = dataURLtoBlob(croppedImageData);
-            fileNameSpan.textContent = 'cropped-image.jpg';
-            
             closeCropModal();
-            validateForm();
         }
         
-        function dataURLtoBlob(dataURL) {
-            const arr = dataURL.split(',');
-            const mime = arr[0].match(/:(.*?);/)[1];
-            const bstr = atob(arr[1]);
-            let n = bstr.length;
-            const u8arr = new Uint8Array(n);
+        // Handle category change
+        function handleCategoryChange() {
+            const category = categorySelect.value;
             
-            while (n--) {
-                u8arr[n] = bstr.charCodeAt(n);
+            if (category) {
+                // Update image path
+                const counter = itemCounters[category];
+                imagePathInput.value = jsonImagePaths[category] + counter + ".jpg";
+                
+                // Update keywords (set default but keep editable)
+                keywordsInput.value = defaultKeywords[category];
+                keywordsInput.readOnly = false; // Make editable
+                
+                // Update save name
+                updateSaveName();
+            } else {
+                imagePathInput.value = "";
+                keywordsInput.value = "";
+                keywordsInput.readOnly = false;
+                saveNameSpan.textContent = "Select category first";
             }
-            
-            return new Blob([u8arr], { type: mime });
         }
         
-        function downloadImage() {
-            if (!croppedImageData) {
-                alert('No cropped image available. Please crop an image first.');
+        // Update save name for image
+        function updateSaveName() {
+            const category = categorySelect.value;
+            if (!category) {
+                saveNameSpan.textContent = "Select category first";
                 return;
             }
             
-            // Get suggested image name
-            let prefix = '';
-            switch(categorySelect.value) {
-                case 'Biology Lab': prefix = 'bio'; break;
-                case 'Physics Lab': prefix = 'phys'; break;
-                case 'Chemistry Lab': prefix = 'chem'; break;
-                case 'Scientific Lab': prefix = 'sci'; break;
-                default: prefix = 'item';
+            const counter = itemCounters[category];
+            let fileName;
+            
+            switch(category) {
+                case 'Education': fileName = `edu${counter}.jpg`; break;
+                case 'Medical': fileName = `med${counter}.jpg`; break;
+                case 'Scientific': fileName = `sci${counter}.jpg`; break;
+                case 'Industry': fileName = `ind${counter}.jpg`; break;
+                case 'Research': fileName = `res${counter}.jpg`; break;
+                case 'Project': fileName = `pro${counter}.jpg`; break;
+                default: fileName = `item${counter}.jpg`;
             }
             
-            const nextNum = itemCounter;
-            const imageName = `${prefix}${nextNum}.jpg`;
+            saveNameSpan.textContent = fileName;
+        }
+        
+        // Download image to local directory
+        function downloadImage() {
+            if (!croppedImageData) {
+                alert('Please crop an image first');
+                return;
+            }
+            
+            const category = categorySelect.value;
+            if (!category) {
+                alert('Please select a category first');
+                return;
+            }
+            
+            const counter = itemCounters[category];
+            let fileName;
+            
+            switch(category) {
+                case 'Education': fileName = `edu${counter}.jpg`; break;
+                case 'Medical': fileName = `med${counter}.jpg`; break;
+                case 'Scientific': fileName = `sci${counter}.jpg`; break;
+                case 'Industry': fileName = `ind${counter}.jpg`; break;
+                case 'Research': fileName = `res${counter}.jpg`; break;
+                case 'Project': fileName = `pro${counter}.jpg`; break;
+                default: fileName = `item${counter}.jpg`;
+            }
             
             // Create download link
             const link = document.createElement('a');
             link.href = croppedImageData;
-            link.download = imageName;
+            link.download = fileName;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
             
-            // Update save name
-            saveNameSpan.textContent = imageName;
-            finalImageNameSpan.textContent = imageName;
-            
-            alert(`Image downloaded as ${imageName}. Save it to your image folder.`);
+            // Increment counter for next item
+            itemCounters[category]++;
+            localStorage.setItem('itemCounters', JSON.stringify(itemCounters));
+            updateSaveName();
+            handleCategoryChange(); // Update image path for next item
         }
         
-        function updateSaveName() {
-            if (!categorySelect.value) {
-                saveNameSpan.textContent = 'Select category first';
+        // Format MRP price as user types - Simple formatting
+        function formatMRPPrice() {
+            let value = mrpPriceInput.value.replace(/[^0-9]/g, '');
+            
+            if (value) {
+                // Convert to number
+                let num = parseInt(value, 10);
+                if (!isNaN(num) && num > 0) {
+                    // Format with Indian numbering system
+                    mrpPriceInput.value = num.toLocaleString('en-IN');
+                }
+            }
+        }
+        
+        // Calculate buy price based on MRP and discount
+        function calculateBuyPrice() {
+            // Extract numeric value from MRP
+            const mrpText = mrpPriceInput.value;
+            const mrp = parseFloat(mrpText.replace(/[^0-9]/g, ''));
+            const discount = parseFloat(discountInput.value) || 0;
+            
+            if (!isNaN(mrp) && !isNaN(discount)) {
+                const buyPrice = mrp * (1 - discount / 100);
+                const roundedPrice = Math.ceil(buyPrice * 100) / 100; // Round up to 2 decimal places
+                buyPriceInput.value = roundedPrice.toLocaleString('en-IN', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }) + "/-";
+            } else {
+                buyPriceInput.value = "";
+            }
+        }
+        
+        // Capitalize first letter of each word in item name
+        function capitalizeFirstLetters() {
+            const words = itemNameInput.value.split(' ');
+            const capitalized = words.map(word => {
+                if (word.length > 0) {
+                    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                }
+                return word;
+            });
+            itemNameInput.value = capitalized.join(' ');
+        }
+        
+        // Show success message
+        function showSuccessMessage() {
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Add item to text file - FIXED VERSION
+        function addItem() {
+            const category = categorySelect.value;
+            if (!category) {
+                alert('Please select a category');
                 return;
             }
             
-            let prefix = '';
-            switch(categorySelect.value) {
-                case 'Biology Lab': prefix = 'bio'; break;
-                case 'Physics Lab': prefix = 'phys'; break;
-                case 'Chemistry Lab': prefix = 'chem'; break;
-                case 'Scientific Lab': prefix = 'sci'; break;
-                default: prefix = 'item';
+            // Validate required fields
+            if (!itemNameInput.value.trim()) {
+                alert('Please enter Item Name');
+                itemNameInput.focus();
+                return;
             }
             
-            const nextNum = itemCounter;
-            const imageName = `${prefix}${nextNum}.jpg`;
+            // Get MRP value and format for JSON
+            const mrpValue = mrpPriceInput.value.replace(/[^0-9]/g, '');
+            if (!mrpValue) {
+                alert('Please enter MRP Price');
+                mrpPriceInput.focus();
+                return;
+            }
             
-            saveNameSpan.textContent = imageName;
-            finalImageNameSpan.textContent = imageName;
+            // Format MRP for display in JSON
+            const mrpNumber = parseInt(mrpValue, 10);
+            const formattedMRP = mrpNumber.toLocaleString('en-IN') + ".00/-";
+            
+            // Get discount value
+            const discountValue = discountInput.value || "0";
+            
+            // Get specifications and descriptions as arrays
+            const specsArray = specificationsInput.value
+                .split('\n')
+                .filter(line => line.trim() !== '')
+                .map(line => line.substring(0, 40)); // Limit to 40 chars
+            
+            const descArray = descriptionsInput.value
+                .split('\n')
+                .filter(line => line.trim() !== '')
+                .map(line => line.substring(0, 40)); // Limit to 40 chars
+            
+            // Get keywords as array
+            const keywordsArray = keywordsInput.value
+                .split(',')
+                .map(keyword => keyword.trim())
+                .filter(keyword => keyword !== '');
+            
+            // Create item object
+            const item = {
+                name: itemNameInput.value.substring(0, 25), // Limit to 25 chars
+                category: category,
+                image: imagePathInput.value,
+                mrpPrice: formattedMRP,
+                discount: discountValue + "%",
+                bestBuyPrice: buyPriceInput.value,
+                warranty: warrantyInput.value.substring(0, 40), // Limit to 40 chars
+                specifications: specsArray,
+                description: descArray,
+                keywords: keywordsArray
+            };
+            
+            // Format as JSON
+            const itemJSON = JSON.stringify(item, null, 2) + ",\n";
+            
+            // Save to file using FileSaver.js approach
+            saveItemToFile(category, itemJSON);
+            
+            // Show success message
+            showSuccessMessage();
+            
+            // Reset form for next item
+            resetForm();
         }
         
-        // NEW FUNCTION: Limit Specifications to 7 lines
-        function limitSpecsLines(textarea) {
-            const lines = textarea.value.split('\n');
-            if (lines.length > 7) {
-                textarea.value = lines.slice(0, 7).join('\n');
-            }
+        // Save item to text file - Working version
+        function saveItemToFile(category, content) {
+            const fileName = filePaths[category];
+            
+            // Check if file exists in localStorage
+            const storageKey = `sparrowweb_${category.toLowerCase()}`;
+            let existingContent = localStorage.getItem(storageKey) || '';
+            
+            // Append new content
+            existingContent += content;
+            
+            // Save to localStorage (simulating file save)
+            localStorage.setItem(storageKey, existingContent);
+            
+            // Also create a downloadable file
+            const blob = new Blob([existingContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = fileName;
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+            // Update counter
+            itemCounters[category]++;
+            localStorage.setItem('itemCounters', JSON.stringify(itemCounters));
+        }
+        
+        // Reset form
+        function resetForm() {
+            itemNameInput.value = '';
+            mrpPriceInput.value = '';
+            discountInput.value = '';
+            buyPriceInput.value = '';
+            warrantyInput.value = '';
+            specificationsInput.value = '';
+            descriptionsInput.value = '';
+            // Keep category and keywords (but reset to defaults)
+            handleCategoryChange();
+            
+            // Update counters
+            updateItemNameCounter();
+            updateWarrantyCounter();
             updateSpecsCounter();
-            validateForm();
+            updateDescCounter();
         }
         
-        // NEW FUNCTION: Limit Descriptions to 9 lines
-        function limitDescLines(textarea) {
+        // Line limiting function
+        function limitLines(textarea, maxLines) {
             const lines = textarea.value.split('\n');
-            if (lines.length > 9) {
-                textarea.value = lines.slice(0, 9).join('\n');
+            if (lines.length > maxLines) {
+                textarea.value = lines.slice(0, maxLines).join('\n');
             }
-            updateDescCounter();
-            validateForm();
+            
+            // Update appropriate counter
+            if (textarea.id === 'specifications') {
+                updateSpecsCounter();
+            } else if (textarea.id === 'descriptions') {
+                updateDescCounter();
+            }
+        }
+        
+        // Update counters
+        function updateItemNameCounter() {
+            const count = itemNameInput.value.length;
+            itemNameCount.textContent = count;
         }
         
         function updateWarrantyCounter() {
@@ -1118,8 +1211,6 @@ Built-in LED illumination with adjustable intensity" maxlength="360" oninput="li
             } else {
                 warrantyCount.classList.remove('error');
             }
-            
-            validateForm();
         }
         
         function updateSpecsCounter() {
@@ -1130,15 +1221,13 @@ Built-in LED illumination with adjustable intensity" maxlength="360" oninput="li
             specsLineCount.textContent = lineCount;
             specsMaxChars.textContent = maxLineLength;
             
-            if (lineCount > 7 || maxLineLength > 40) {
+            if (lineCount > 6 || maxLineLength > 40) {
                 specsLineCount.classList.add('error');
                 specsMaxChars.classList.add('error');
             } else {
                 specsLineCount.classList.remove('error');
                 specsMaxChars.classList.remove('error');
             }
-            
-            validateForm();
         }
         
         function updateDescCounter() {
@@ -1149,146 +1238,17 @@ Built-in LED illumination with adjustable intensity" maxlength="360" oninput="li
             descLineCount.textContent = lineCount;
             descMaxChars.textContent = maxLineLength;
             
-            if (lineCount > 9 || maxLineLength > 40) {
+            if (lineCount > 6 || maxLineLength > 40) {
                 descLineCount.classList.add('error');
                 descMaxChars.classList.add('error');
             } else {
                 descLineCount.classList.remove('error');
                 descMaxChars.classList.remove('error');
             }
-            
-            validateForm();
         }
         
-        function validateForm() {
-            const isCategorySelected = categorySelect.value !== '';
-            const isItemNameFilled = itemNameInput.value.trim() !== '';
-            const isBestPriceFilled = bestPriceInput.value.trim() !== '';
-            const isMrpPriceFilled = mrpPriceInput.value.trim() !== '';
-            const isImagePathFilled = imagePathInput.value.trim() !== '';
-            const hasImage = selectedFile !== null;
-            
-            const specsLines = specificationsInput.value.split('\n').filter(line => line.trim() !== '');
-            const descLines = descriptionsInput.value.split('\n').filter(line => line.trim() !== '');
-            
-            const specsValid = specsLines.length >= 1 && specsLines.length <= 7 && 
-                               specsLines.every(line => line.length <= 40);
-            const descValid = descLines.length >= 1 && descLines.length <= 9 && 
-                              descLines.every(line => line.length <= 40);
-            
-            const warrantyValid = warrantyInput.value.length <= 40;
-            
-            const isValid = isCategorySelected && isItemNameFilled && 
-                           isBestPriceFilled && isMrpPriceFilled && 
-                           isImagePathFilled && hasImage && specsValid && descValid && warrantyValid;
-            
-            addBtn.disabled = !isValid;
-            return isValid;
-        }
-        
-        function generateItem() {
-            if (!validateForm()) {
-                alert('Please fill all required fields correctly:\n' +
-                      '- Image Path: Enter the exact path for JSON\n' +
-                      '- Specifications: 1-7 lines, max 40 chars per line\n' +
-                      '- Descriptions: 1-9 lines, max 40 chars per line\n' +
-                      '- Warranty: max 40 characters');
-                return;
-            }
-            
-            // Use the manually entered image path
-            const imagePath = imagePathInput.value.trim();
-            
-            const newItem = {
-                name: itemNameInput.value.trim(),
-                category: categorySelect.value,
-                image: imagePath,
-                bestBuyPrice: bestPriceInput.value.trim(),
-                mrpPrice: mrpPriceInput.value.trim(),
-                discount: discountInput.value.trim(),
-                warranty: warrantyInput.value.trim(),
-                specifications: specificationsInput.value
-                    .split('\n')
-                    .map(line => line.trim())
-                    .filter(line => line !== ''),
-                description: descriptionsInput.value
-                    .split('\n')
-                    .map(line => line.trim())
-                    .filter(line => line !== ''),
-                keywords: keywordsInput.value
-                    .split(',')
-                    .map(keyword => keyword.trim().toLowerCase())
-                    .filter(keyword => keyword !== '')
-            };
-            
-            // Add to all items array
-            allCreatedItems.push(newItem);
-            
-            const jsonString = JSON.stringify(newItem, null, 2);
-            jsonCodeDiv.textContent = jsonString;
-            
-            // Extract just the filename for display
-            const pathParts = imagePath.split('/');
-            const fileName = pathParts[pathParts.length - 1];
-            finalImageNameSpan.textContent = fileName;
-            
-            jsonOutputDiv.style.display = 'block';
-            
-            jsonOutputDiv.scrollIntoView({ behavior: 'smooth' });
-            
-            itemCounter++;
-            updateSaveName();
-            updateImagePathHint();
-            
-            // Reset form for next item
-            resetForm();
-        }
-        
-        function resetForm() {
-            // Clear all inputs except category
-            itemNameInput.value = '';
-            bestPriceInput.value = '';
-            mrpPriceInput.value = '';
-            discountInput.value = '';
-            warrantyInput.value = '';
-            keywordsInput.value = '';
-            specificationsInput.value = '';
-            descriptionsInput.value = '';
-            imagePathInput.value = '';
-            
-            // Clear image
-            imageInput.value = '';
-            previewImg.style.display = 'none';
-            downloadBtn.style.display = 'none';
-            fileNameSpan.textContent = 'No file selected';
-            selectedFile = null;
-            croppedImageData = null;
-            
-            // Update counters
-            updateWarrantyCounter();
-            updateSpecsCounter();
-            updateDescCounter();
-            validateForm();
-        }
-        
-        function copyJSON() {
-            const jsonText = jsonCodeDiv.textContent;
-            navigator.clipboard.writeText(jsonText)
-                .then(() => {
-                    const originalText = copyBtn.textContent;
-                    copyBtn.textContent = '✅ Copied!';
-                    setTimeout(() => {
-                        copyBtn.textContent = originalText;
-                    }, 2000);
-                })
-                .catch(err => {
-                    console.error('Failed to copy: ', err);
-                    alert('Failed to copy JSON. Please select and copy manually.');
-                });
-        }
-        
-        // Initialize image path hint
-        updateImagePathHint();
+        // Initialize the application
+        init();
     </script>
 </body>
 </html>

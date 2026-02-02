@@ -1208,14 +1208,25 @@
             .result-right {
                 grid-column: 1;
             }
-            .filter-content {
-                padding: 10px 12px 10px 12px; /* Add 10px bottom padding */
-            }
-            .filter-sidebar {
-                top: 130px;
-                height: calc(100vh - 130px);
-                width: 180px;
-            }
+.filter-sidebar {
+        top: 130px;
+        /* Use min-height instead of height for flexibility */
+        min-height: calc(100vh - 130px);
+        height: auto;
+        max-height: calc(100vh - 130px);
+        width: 180px;
+        /* Add safe area support */
+        padding-bottom: max(20px, env(safe-area-inset-bottom, 20px));
+    }
+    
+    .filter-content {
+        padding: 10px 12px 10px 12px;
+    }
+    
+    /* Ensure last item has space */
+    .filter-section:last-child {
+        padding-bottom: 15px; /* Increase for mobile */
+    }            
 
             .checkbox-item {
                 font-size: 17px;
@@ -2288,6 +2299,7 @@ window.addEventListener('DOMContentLoaded', function() {
     </script>
 </body>
 </html>
+
 
 
 

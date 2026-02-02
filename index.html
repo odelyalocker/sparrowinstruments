@@ -2346,28 +2346,34 @@ function handleCartClick(itemId) {
             }
         }
         
-
-        // ===== UPDATE BADGE COUNTERS =====
-        function updateBadges() {
-            // Cart badge only (quote badge removed per #5)
-            const cartItemsRaw = localStorage.getItem('sparrowCartItems');
-            let cCount = 0;
-            if (cartItemsRaw) {
-                try {
-                    cCount = JSON.parse(cartItemsRaw).length || 0;
-                } catch(e) {}
-            }
-            const cartBadge = document.getElementById('cartBadge');
-            if (cartBadge) {
-                cartBadge.textContent = cCount;
-                cartBadge.classList.toggle('hidden', cCount === 0);
-            }
-        }
+// ===== UPDATE BADGE COUNTERS =====
+function updateBadges() {
+    // Load cart items with session check
+    const cartItems = loadWithSession('sparrowCartItems');
+    const cCount = Array.isArray(cartItems) ? cartItems.length : 0;
+    
+    const cartBadge = document.getElementById('cartBadge');
+    if (cartBadge) {
+        cartBadge.textContent = cCount;
+        cartBadge.classList.toggle('hidden', cCount === 0);
+    }
+    
+    // Load quote items with session check
+    const quoteData = loadWithSession('sparrowQuoteItems');
+    const qCount = Array.isArray(quoteData) ? quoteData.length : 0;
+    
+    // If you have a quote badge, update it too
+    const quoteBadge = document.getElementById('quoteBadge');
+    if (quoteBadge) {
+        quoteBadge.textContent = qCount;
+        quoteBadge.classList.toggle('hidden', qCount === 0);
+    }
+}
 
         // ===== EVENT LISTENERS =====
         document.querySelector('.search-box').addEventListener('input', searchItems);
         
-        // ===== INITIALIZATION =====
+ // ===== INITIALIZATION =====
 window.addEventListener('DOMContentLoaded', function() {
     fixCorruptedQuoteData();
     loadJSONFiles();
@@ -2377,6 +2383,7 @@ window.addEventListener('DOMContentLoaded', function() {
     </script>
 </body>
 </html>
+
 
 
 

@@ -15,7 +15,7 @@
         body {
             background-color: #f0f2f5;
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
         }
         
         .admin-container {
@@ -31,20 +31,55 @@
         .admin-header {
             background: linear-gradient(135deg, #1565c0, #0d47a1);
             color: white;
-            padding: 25px 30px;
+            padding: 12px 20px;
             text-align: center;
             border-bottom: 5px solid #d32f2f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .admin-header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
+            font-size: 26px;
+            margin: 0;
+            font-weight: 700;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .add-btn {
+            background: #4CAF50;
+            color: black;
+            border: none;
+            padding: 10px 25px;
+            font-size: 16px;
             font-weight: 800;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+        
+        .add-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.25);
+        }
+        
+        .add-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
         
         /* Image Upload */
         .image-section {
-            padding: 20px 30px;
+            padding: 15px 25px;
             background: #f8f9fa;
             border-bottom: 1px solid #e0e0e0;
         }
@@ -52,18 +87,18 @@
         .upload-container {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
         }
         
         .browse-btn {
             background: #1565c0;
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 10px 20px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 15px;
             transition: all 0.3s;
         }
         
@@ -74,16 +109,16 @@
         
         .image-info {
             color: #666;
-            font-size: 14px;
+            font-size: 13px;
         }
         
         .image-preview-container {
-            margin-top: 15px;
+            margin-top: 12px;
             text-align: center;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 20px;
+            justify-content: flex-start;
+            gap: 15px;
             flex-wrap: wrap;
         }
         
@@ -100,13 +135,13 @@
             background: #4CAF50;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 5px;
-                    cursor: pointer;
+            cursor: pointer;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.3s;
         }
         
@@ -116,7 +151,7 @@
         }
         
         .download-btn i {
-            font-size: 16px;
+            font-size: 14px;
         }
         
         /* Crop Modal */
@@ -135,7 +170,7 @@
         
         .crop-container {
             background: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
             width: 90%;
             max-width: 800px;
@@ -147,21 +182,21 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 1px solid #ddd;
         }
         
         .crop-header h3 {
             color: #333;
-            font-size: 20px;
+            font-size: 18px;
         }
         
         .close-crop {
             background: #d32f2f;
             color: white;
             border: none;
-            padding: 8px 15px;
+            padding: 6px 12px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: 600;
@@ -169,9 +204,9 @@
         
         .crop-area {
             width: 100%;
-            height: 400px;
+            height: 350px;
             background: #f0f0f0;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             position: relative;
             overflow: hidden;
         }
@@ -200,23 +235,23 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 20px;
+            margin-top: 15px;
         }
         
         .zoom-controls {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
         
         .zoom-btn {
             background: #1565c0;
             color: white;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -229,14 +264,14 @@
         
         .crop-actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
         
         .crop-btn {
             background: #4CAF50;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: 600;
@@ -246,7 +281,7 @@
             background: #f44336;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: 600;
@@ -256,14 +291,14 @@
         .two-columns {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            padding: 30px;
+            gap: 25px;
+            padding: 25px;
             align-items: stretch;
         }
         
         .form-column {
             background: #f8f9fa;
-            padding: 25px;
+            padding: 20px;
             border-radius: 8px;
             border: 1px solid #e0e0e0;
             display: flex;
@@ -271,23 +306,23 @@
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 600;
             color: #333;
-            font-size: 16px;
+            font-size: 15px;
         }
         
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 12px 15px;
-            font-size: 16px;
+            padding: 10px 12px;
+            font-size: 15px;
             border: 2px solid #ccc;
             border-radius: 6px;
             transition: all 0.3s;
@@ -296,16 +331,16 @@
         .form-group textarea {
             resize: vertical;
             font-family: monospace;
-            font-size: 14px;
+            font-size: 13px;
         }
         
-        /* Increased height for Specifications and Descriptions */
+        /* Height for Specifications and Descriptions */
         #specifications {
-            min-height: 150px;
+            min-height: 120px;
         }
         
         #descriptions {
-            min-height: 150px;
+            min-height: 120px;
         }
         
         .form-group input:focus,
@@ -319,9 +354,10 @@
         /* Line Counter */
         .line-counter {
             text-align: right;
-            font-size: 14px;
+            font-size: 12px;
             color: #666;
-            margin-top: 5px;
+            margin-top: 4px;
+            font-family: monospace;
         }
         
         .line-counter.error {
@@ -329,38 +365,31 @@
             font-weight: bold;
         }
         
-        /* Add Button */
-        .add-section {
-            padding: 20px 30px;
-            text-align: right;
-            border-top: 1px solid #e0e0e0;
+        /* Default Keywords Container */
+        .default-keywords-container {
+            padding: 20px 25px;
             background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
         }
         
-        .add-btn {
-            background: #4CAF50;
-            color: black;
-            border: none;
-            padding: 15px 40px;
-            font-size: 18px;
-            font-weight: 800;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        .default-keywords-container .form-group {
+            margin-bottom: 0;
         }
         
-        .add-btn:hover {
-            background: #45a049;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+        .default-keywords-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
         }
         
-        .add-btn:disabled {
-            background: #cccccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+        #defaultKeywords {
+            min-height: 100px;
+            font-family: monospace;
+            font-size: 13px;
+            background-color: #f0f0f0;
+            color: #333;
         }
         
         /* Success Message */
@@ -370,7 +399,7 @@
             right: 20px;
             background: #4CAF50;
             color: white;
-            padding: 15px 25px;
+            padding: 12px 20px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             z-index: 10001;
@@ -408,31 +437,50 @@
             
             .image-preview-container {
                 flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px;
+            }
+            
+            .admin-header h1 {
+                font-size: 22px;
+            }
+            
+            .header-right {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .add-btn {
+                width: 100%;
+                max-width: 200px;
             }
         }
         
         @media (max-width: 600px) {
-            .admin-header {
-                padding: 20px;
+            body {
+                padding: 10px;
             }
             
-            .admin-header h1 {
-                font-size: 26px;
+            .admin-header {
+                padding: 12px;
             }
             
             .upload-container {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .add-btn {
-                width: 100%;
+                gap: 8px;
             }
             
             .crop-controls {
                 flex-direction: column;
-                gap: 15px;
+                gap: 12px;
             }
             
             .crop-area {
@@ -443,6 +491,16 @@
                 width: 200px;
                 height: 133px;
             }
+            
+            .image-preview-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .preview-img {
+                width: 100%;
+                max-width: 300px;
+            }
         }
     </style>
     <!-- Font Awesome for download icon -->
@@ -452,6 +510,9 @@
     <div class="admin-container">
         <div class="admin-header">
             <h1>Admin - Add Items (Offline)</h1>
+            <div class="header-right">
+                <button class="add-btn" id="addBtn">Add to List</button>
+            </div>
         </div>
         
         <!-- Image Upload -->
@@ -467,7 +528,6 @@
             </div>
             <input type="file" id="imageInput" accept="image/*" style="display: none;">
             <div class="image-preview-container">
-                <img id="previewImg" class="preview-img" style="display: none;">
                 <button class="download-btn" id="downloadBtn" style="display: none;">
                     <i class="fas fa-download"></i> Download Image
                 </button>
@@ -493,15 +553,12 @@
                 
                 <div class="form-group">
                     <label for="imagePath">Image Path:</label>
-                    <input type="text" id="imagePath" placeholder="Will auto-fill based on category" readonly>
+                    <input type="text" id="imagePath" placeholder="Auto-Fill" readonly>
                 </div>
                 
                 <div class="form-group">
                     <label for="itemName">Item Name (max 25 chars):</label>
-                    <input type="text" id="itemName" placeholder="e.g., Compound Microscope" maxlength="25">
-                    <div class="line-counter">
-                        <span id="itemNameCount">0</span>/25 characters
-                    </div>
+                    <input type="text" id="itemName" placeholder="Type here..." maxlength="25">
                 </div>
                 
                 <div class="form-group">
@@ -516,7 +573,7 @@
                 
                 <div class="form-group">
                     <label for="buyPrice">Buy Price (INR):</label>
-                    <input type="text" id="buyPrice" placeholder="Auto-calculated" readonly>
+                    <input type="text" id="buyPrice" placeholder="Auto-Fill" readonly>
                 </div>
             </div>
             
@@ -524,18 +581,12 @@
             <div class="form-column">
                 <div class="form-group">
                     <label for="warranty">Warranty (max 40 chars):</label>
-                    <input type="text" id="warranty" placeholder="e.g., 2 Years Manufacturer Warranty" maxlength="40">
-                    <div class="line-counter">
-                        <span id="warrantyCount">0</span>/40 characters
-                    </div>
+                    <input type="text" id="warranty" placeholder="Type here..." maxlength="40">
                 </div>
                 
                 <div class="form-group">
                     <label for="specifications">Specifications (max 6 lines, 40 chars each):</label>
-                    <textarea id="specifications" placeholder="Enter each specification on a new line:
-Magnification: 40x to 1000x
-Light Source: LED 3W
-Eyepiece: WF10x/18mm" maxlength="240" oninput="limitLines(this, 6)"></textarea>
+                    <textarea id="specifications" placeholder="Type here..." maxlength="240"></textarea>
                     <div class="line-counter">
                         <span id="specsLineCount">0</span>/6 lines | Max line: <span id="specsMaxChars">0</span>/40 chars
                     </div>
@@ -543,24 +594,20 @@ Eyepiece: WF10x/18mm" maxlength="240" oninput="limitLines(this, 6)"></textarea>
                 
                 <div class="form-group">
                     <label for="descriptions">Descriptions (max 6 lines, 40 chars each):</label>
-                    <textarea id="descriptions" placeholder="Enter each description on a new line:
-Professional compound microscope with 1000x magnification
-Built-in LED illumination with adjustable intensity" maxlength="240" oninput="limitLines(this, 6)"></textarea>
+                    <textarea id="descriptions" placeholder="Type here..." maxlength="240"></textarea>
                     <div class="line-counter">
                         <span id="descLineCount">0</span>/6 lines | Max line: <span id="descMaxChars">0</span>/40 chars
                     </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="keywords">Keywords (comma separated, 6-8 recommended):</label>
-                    <textarea id="keywords" placeholder="Default keywords will appear based on category"></textarea>
-                </div>
             </div>
         </div>
         
-        <!-- Add Button -->
-        <div class="add-section">
-            <button class="add-btn" id="addBtn">ADD ITEM</button>
+        <!-- Default Keywords Container -->
+        <div class="default-keywords-container">
+            <div class="form-group">
+                <label for="defaultKeywords">Default Keywords (Auto-filled based on category):</label>
+                <textarea id="defaultKeywords" placeholder="Default keywords will appear here..." readonly></textarea>
+            </div>
         </div>
     </div>
     
@@ -586,7 +633,7 @@ Built-in LED illumination with adjustable intensity" maxlength="240" oninput="li
                 
                 <div class="crop-actions">
                     <button class="cancel-btn" id="cancelCrop">Cancel</button>
-                    <button class="crop-btn" id="applyCrop">Crop & Save</button>
+                    <button class="crop-btn" id="applyCrop">Crop Image</button>
                 </div>
             </div>
         </div>
@@ -603,7 +650,6 @@ Built-in LED illumination with adjustable intensity" maxlength="240" oninput="li
         const imageInput = document.getElementById('imageInput');
         const fileNameSpan = document.getElementById('fileName');
         const saveNameSpan = document.getElementById('saveName');
-        const previewImg = document.getElementById('previewImg');
         const downloadBtn = document.getElementById('downloadBtn');
         const categorySelect = document.getElementById('category');
         const imagePathInput = document.getElementById('imagePath');
@@ -612,11 +658,17 @@ Built-in LED illumination with adjustable intensity" maxlength="240" oninput="li
         const discountInput = document.getElementById('discount');
         const buyPriceInput = document.getElementById('buyPrice');
         const warrantyInput = document.getElementById('warranty');
-        const keywordsInput = document.getElementById('keywords');
+        const defaultKeywordsInput = document.getElementById('defaultKeywords');
         const specificationsInput = document.getElementById('specifications');
         const descriptionsInput = document.getElementById('descriptions');
         const addBtn = document.getElementById('addBtn');
         const successMessage = document.getElementById('successMessage');
+        
+        // Counter Elements
+        const specsLineCount = document.getElementById('specsLineCount');
+        const specsMaxChars = document.getElementById('specsMaxChars');
+        const descLineCount = document.getElementById('descLineCount');
+        const descMaxChars = document.getElementById('descMaxChars');
         
         // Crop Modal Elements
         const cropModal = document.getElementById('cropModal');
@@ -627,14 +679,6 @@ Built-in LED illumination with adjustable intensity" maxlength="240" oninput="li
         const zoomInBtn = document.getElementById('zoomIn');
         const zoomOutBtn = document.getElementById('zoomOut');
         const zoomLevelSpan = document.getElementById('zoomLevel');
-        
-        // Counters
-        const itemNameCount = document.getElementById('itemNameCount');
-        const warrantyCount = document.getElementById('warrantyCount');
-        const specsLineCount = document.getElementById('specsLineCount');
-        const specsMaxChars = document.getElementById('specsMaxChars');
-        const descLineCount = document.getElementById('descLineCount');
-        const descMaxChars = document.getElementById('descMaxChars');
         
         // Variables
         let selectedFile = null;
@@ -655,12 +699,12 @@ Built-in LED illumination with adjustable intensity" maxlength="240" oninput="li
         
         // Default keywords for each category
         const defaultKeywords = {
-            Education: "education, instruments, equipment",
-            Medical: "medical, laboratory, instruments, equipment",
-            Scientific: "scientific, laboratory, instruments, equipment",
-            Industry: "industry, laboratory, instruments, equipment",
-            Research: "research, laboratory, instruments, equipment",
-            Project: "project, laboratory, instruments, equipment"
+            Education: "Kolkata West Bengal education lab equipment, Patna Bihar school laboratory instruments, Guwahati Assam biology lab apparatus, Bhubaneswar Odisha physics lab tools, Ranchi Jharkhand chemistry lab supplies, Siliguri North Bengal educational instruments, Northeast India Eastern region academic equipment, Durgapur Asansol industrial area school tools, Jamshedpur industrial city lab apparatus, Rourkela steel city educational supplies, Eastern India school laboratory equipment, Bengal Bihar Odisha Assam academic instruments, Kolkata Howrah school science equipment, Patna Gaya educational tools, Guwahati Dibrugarh Northeast lab supplies",
+            Medical: "Kolkata West Bengal medical laboratory equipment, Patna Bihar clinical diagnostic instruments, Guwahati Assam hospital lab supplies, Bhubaneswar Odisha pathology lab tools, Ranchi Jharkhand medical research equipment, Siliguri North Bengal healthcare instruments, Northeast India Eastern region medical apparatus, Durgapur Asansol hospital laboratory tools, Jamshedpur industrial city medical equipment, Rourkela steel city clinical supplies, Eastern India medical laboratory instruments, Bengal Bihar Odisha Assam healthcare tools, Kolkata medical college equipment, Patna AIIMS diagnostic instruments, Guwahati medical university lab supplies",
+            Scientific: "Kolkata West Bengal scientific research equipment, Patna Bihar laboratory testing instruments, Guwahati Assam analytical laboratory apparatus, Bhubaneswar Odisha research lab tools, Ranchi Jharkhand measurement instruments, Siliguri North Bengal scientific lab supplies, Northeast India Eastern region experimental equipment, Durgapur Asansol industrial testing devices, Jamshedpur Tata research instruments, Rourkela industrial measurement tools, Eastern India scientific laboratory equipment, Bengal Bihar Odisha Assam research apparatus, Kolkata IIT research instruments, Patna NIT laboratory tools, Guwahati university scientific equipment",
+            Industry: "Kolkata West Bengal industrial laboratory equipment, Patna Bihar quality control instruments, Guwahati Assam testing lab apparatus, Bhubaneswar Odisha manufacturing lab tools, Ranchi Jharkhand industrial research equipment, Siliguri North Bengal factory lab supplies, Northeast India Eastern region production devices, Durgapur Asansol steel plant instruments, Jamshedpur industrial testing equipment, Rourkela factory quality tools, Eastern India industrial laboratory instruments, Bengal Bihar Odisha Assam manufacturing apparatus, Kolkata industrial area testing equipment, Patna industrial estate lab tools, Guwahati industrial growth center supplies",
+            Research: "Kolkata West Bengal research laboratory equipment, Patna Bihar scientific research instruments, Guwahati Assam experimental lab apparatus, Bhubaneswar Odisha R&D lab tools, Ranchi Jharkhand academic research equipment, Siliguri North Bengal innovation lab supplies, Northeast India Eastern region advanced instruments, Durgapur Asansol research center tools, Jamshedpur R&D laboratory equipment, Rourkela innovation center apparatus, Eastern India research laboratory instruments, Bengal Bihar Odisha Assam experimental tools, Kolkata CSIR research equipment, Patna research institute instruments, Guwahati agricultural research supplies",
+            Project: "Kolkata West Bengal project laboratory equipment, Patna Bihar engineering lab instruments, Guwahati Assam student project apparatus, Bhubaneswar Odisha DIY lab tools, Ranchi Jharkhand prototype testing equipment, Siliguri North Bengal experimental project supplies, Northeast India Eastern region model making tools, Durgapur Asansol engineering college equipment, Jamshedpur student project instruments, Rourkela prototype development tools, Eastern India project laboratory apparatus, Bengal Bihar Odisha Assam engineering tools, Kolkata engineering college project equipment, Patna polytechnic institute tools, Guwahati university project supplies"
         };
         
         // File paths for each category
@@ -695,14 +739,15 @@ Built-in LED illumination with adjustable intensity" maxlength="240" oninput="li
             browseBtn.addEventListener('click', () => imageInput.click());
             imageInput.addEventListener('change', handleImageSelect);
             categorySelect.addEventListener('change', handleCategoryChange);
-            itemNameInput.addEventListener('input', updateItemNameCounter);
             itemNameInput.addEventListener('input', capitalizeFirstLetters);
             mrpPriceInput.addEventListener('input', formatMRPPrice);
             mrpPriceInput.addEventListener('input', calculateBuyPrice);
             discountInput.addEventListener('input', calculateBuyPrice);
-            warrantyInput.addEventListener('input', updateWarrantyCounter);
+            
+            // Specifications and Descriptions counters
             specificationsInput.addEventListener('input', updateSpecsCounter);
             descriptionsInput.addEventListener('input', updateDescCounter);
+            
             addBtn.addEventListener('click', addItem);
             downloadBtn.addEventListener('click', downloadImage);
             
@@ -713,12 +758,10 @@ Built-in LED illumination with adjustable intensity" maxlength="240" oninput="li
             zoomInBtn.addEventListener('click', zoomIn);
             zoomOutBtn.addEventListener('click', zoomOut);
             
-            // Initialize counters
-            updateItemNameCounter();
-            updateWarrantyCounter();
+            // Initialize
+            handleCategoryChange();
             updateSpecsCounter();
             updateDescCounter();
-            handleCategoryChange();
         }
         
         // Handle image selection
@@ -906,11 +949,7 @@ Built-in LED illumination with adjustable intensity" maxlength="240" oninput="li
             // Convert to data URL
             croppedImageData = canvas.toDataURL('image/jpeg', 0.9);
             
-            // Update preview
-            previewImg.src = croppedImageData;
-            previewImg.style.display = 'block';
-            
-            // Show download button
+            // Show download button only (no preview image)
             downloadBtn.style.display = 'flex';
             
             closeCropModal();
@@ -925,16 +964,14 @@ Built-in LED illumination with adjustable intensity" maxlength="240" oninput="li
                 const counter = itemCounters[category];
                 imagePathInput.value = jsonImagePaths[category] + counter + ".jpg";
                 
-                // Update keywords (set default but keep editable)
-                keywordsInput.value = defaultKeywords[category];
-                keywordsInput.readOnly = false; // Make editable
+                // Update default keywords (non-editable)
+                defaultKeywordsInput.value = defaultKeywords[category];
                 
                 // Update save name
                 updateSaveName();
             } else {
                 imagePathInput.value = "";
-                keywordsInput.value = "";
-                keywordsInput.readOnly = false;
+                defaultKeywordsInput.value = "";
                 saveNameSpan.textContent = "Select category first";
             }
         }
@@ -1057,6 +1094,70 @@ Built-in LED illumination with adjustable intensity" maxlength="240" oninput="li
             }, 3000);
         }
         
+        // Update Specifications counter
+        function updateSpecsCounter() {
+            const lines = specificationsInput.value.split('\n').filter(line => line.trim() !== '');
+            const lineCount = lines.length;
+            const maxLineLength = lines.length > 0 ? Math.max(...lines.map(line => line.length)) : 0;
+            
+            specsLineCount.textContent = lineCount;
+            specsMaxChars.textContent = maxLineLength;
+            
+            // Check if limits exceeded
+            if (lineCount > 6 || maxLineLength > 40) {
+                specsLineCount.classList.add('error');
+                specsMaxChars.classList.add('error');
+            } else {
+                specsLineCount.classList.remove('error');
+                specsMaxChars.classList.remove('error');
+            }
+            
+            // Enforce line limit
+            if (lines.length > 6) {
+                specificationsInput.value = lines.slice(0, 6).join('\n');
+                updateSpecsCounter(); // Update counter again
+            }
+            
+            // Enforce character limit per line
+            if (maxLineLength > 40) {
+                const newLines = lines.map(line => line.substring(0, 40));
+                specificationsInput.value = newLines.join('\n');
+                updateSpecsCounter(); // Update counter again
+            }
+        }
+        
+        // Update Descriptions counter
+        function updateDescCounter() {
+            const lines = descriptionsInput.value.split('\n').filter(line => line.trim() !== '');
+            const lineCount = lines.length;
+            const maxLineLength = lines.length > 0 ? Math.max(...lines.map(line => line.length)) : 0;
+            
+            descLineCount.textContent = lineCount;
+            descMaxChars.textContent = maxLineLength;
+            
+            // Check if limits exceeded
+            if (lineCount > 6 || maxLineLength > 40) {
+                descLineCount.classList.add('error');
+                descMaxChars.classList.add('error');
+            } else {
+                descLineCount.classList.remove('error');
+                descMaxChars.classList.remove('error');
+            }
+            
+            // Enforce line limit
+            if (lines.length > 6) {
+                descriptionsInput.value = lines.slice(0, 6).join('\n');
+                updateDescCounter(); // Update counter again
+            }
+            
+            // Enforce character limit per line
+            if (maxLineLength > 40) {
+                const newLines = lines.map(line => line.substring(0, 40));
+                descriptionsInput.value = newLines.join('\n');
+                updateDescCounter(); // Update counter again
+            }
+        }
+        
         // Add item to text file - FIXED VERSION
         function addItem() {
             const category = categorySelect.value;
@@ -1098,8 +1199,8 @@ Built-in LED illumination with adjustable intensity" maxlength="240" oninput="li
                 .filter(line => line.trim() !== '')
                 .map(line => line.substring(0, 40)); // Limit to 40 chars
             
-            // Get keywords as array
-            const keywordsArray = keywordsInput.value
+            // Get keywords from default keywords (split by commas)
+            const keywordsArray = defaultKeywordsInput.value
                 .split(',')
                 .map(keyword => keyword.trim())
                 .filter(keyword => keyword !== '');
@@ -1171,80 +1272,12 @@ Built-in LED illumination with adjustable intensity" maxlength="240" oninput="li
             warrantyInput.value = '';
             specificationsInput.value = '';
             descriptionsInput.value = '';
-            // Keep category and keywords (but reset to defaults)
+            // Keep category and default keywords
             handleCategoryChange();
             
             // Update counters
-            updateItemNameCounter();
-            updateWarrantyCounter();
             updateSpecsCounter();
             updateDescCounter();
-        }
-        
-        // Line limiting function
-        function limitLines(textarea, maxLines) {
-            const lines = textarea.value.split('\n');
-            if (lines.length > maxLines) {
-                textarea.value = lines.slice(0, maxLines).join('\n');
-            }
-            
-            // Update appropriate counter
-            if (textarea.id === 'specifications') {
-                updateSpecsCounter();
-            } else if (textarea.id === 'descriptions') {
-                updateDescCounter();
-            }
-        }
-        
-        // Update counters
-        function updateItemNameCounter() {
-            const count = itemNameInput.value.length;
-            itemNameCount.textContent = count;
-        }
-        
-        function updateWarrantyCounter() {
-            const count = warrantyInput.value.length;
-            warrantyCount.textContent = count;
-            
-            if (count > 40) {
-                warrantyCount.classList.add('error');
-            } else {
-                warrantyCount.classList.remove('error');
-            }
-        }
-        
-        function updateSpecsCounter() {
-            const lines = specificationsInput.value.split('\n').filter(line => line.trim() !== '');
-            const lineCount = lines.length;
-            const maxLineLength = lines.length > 0 ? Math.max(...lines.map(line => line.length)) : 0;
-            
-            specsLineCount.textContent = lineCount;
-            specsMaxChars.textContent = maxLineLength;
-            
-            if (lineCount > 6 || maxLineLength > 40) {
-                specsLineCount.classList.add('error');
-                specsMaxChars.classList.add('error');
-            } else {
-                specsLineCount.classList.remove('error');
-                specsMaxChars.classList.remove('error');
-            }
-        }
-        
-        function updateDescCounter() {
-            const lines = descriptionsInput.value.split('\n').filter(line => line.trim() !== '');
-            const lineCount = lines.length;
-            const maxLineLength = lines.length > 0 ? Math.max(...lines.map(line => line.length)) : 0;
-            
-            descLineCount.textContent = lineCount;
-            descMaxChars.textContent = maxLineLength;
-            
-            if (lineCount > 6 || maxLineLength > 40) {
-                descLineCount.classList.add('error');
-                descMaxChars.classList.add('error');
-            } else {
-                descLineCount.classList.remove('error');
-                descMaxChars.classList.remove('error');
-            }
         }
         
         // Initialize the application

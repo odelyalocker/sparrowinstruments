@@ -523,7 +523,7 @@
                 </button>
                 <div class="image-info">
                     <div>Selected: <span id="fileName">No file selected</span></div>
-                    <div>Will be saved as: <span id="saveName">edu1.jpg</span></div>
+                    <div>Will be saved as: <span id="saveName">Select category first</span></div>
                 </div>
             </div>
             <input type="file" id="imageInput" accept="image/*" style="display: none;">
@@ -549,6 +549,13 @@
                         <option value="Research">Research</option>
                         <option value="Project">Project</option>
                     </select>
+                </div>
+                
+                <!-- NEW: Image Start Number Input -->
+                <div class="form-group">
+                    <label for="imageStartNo">Image Start Number:</label>
+                    <input type="number" id="imageStartNo" placeholder="e.g., 20 for Education" min="1">
+                    <small style="color: #666; font-size: 12px;">Enter starting number for this category (e.g., 20 for edu20-1.jpg)</small>
                 </div>
                 
                 <div class="form-group">
@@ -652,6 +659,7 @@
         const saveNameSpan = document.getElementById('saveName');
         const downloadBtn = document.getElementById('downloadBtn');
         const categorySelect = document.getElementById('category');
+        const imageStartNoInput = document.getElementById('imageStartNo');
         const imagePathInput = document.getElementById('imagePath');
         const itemNameInput = document.getElementById('itemName');
         const mrpPriceInput = document.getElementById('mrpPrice');
@@ -688,13 +696,34 @@
         let isDragging = false;
         let startX, startY, initialX, initialY;
         
-        let itemCounters = {
-            Education: 1,
-            Medical: 1,
-            Scientific: 1,
-            Industry: 1,
-            Research: 1,
-            Project: 1
+        // MODIFIED: Store per-category image counters with start number
+        let imageCounters = {
+            Education: { startNo: 1, counter: 1 },
+            Medical: { startNo: 1, counter: 1 },
+            Scientific: { startNo: 1, counter: 1 },
+            Industry: { startNo: 1, counter: 1 },
+            Research: { startNo: 1, counter: 1 },
+            Project: { startNo: 1, counter: 1 }
+        };
+        
+        // Image prefixes for each category
+        const imagePrefixes = {
+            Education: "edu",
+            Medical: "med",
+            Scientific: "sci",
+            Industry: "ind",
+            Research: "res",
+            Project: "pro"
+        };
+        
+        // Image directory paths for each category
+        const imageDirectories = {
+            Education: "/sparrowinstruments/imgedu/",
+            Medical: "/sparrowinstruments/imgmed/",
+            Scientific: "/sparrowinstruments/imgsci/",
+            Industry: "/sparrowinstruments/imgind/",
+            Research: "/sparrowinstruments/imgres/",
+            Project: "/sparrowinstruments/imgpro/"
         };
         
         // Default keywords for each category
@@ -717,46 +746,37 @@
             Project: "project.txt"
         };
         
-        // Image paths for each category (for JSON)
-        const jsonImagePaths = {
-            Education: "/sparrowinstruments/imgedu/edu",
-            Medical: "/sparrowinstruments/imgmed/med",
-            Scientific: "/sparrowinstruments/imgsci/sci",
-            Industry: "/sparrowinstruments/imgind/ind",
-            Research: "/sparrowinstruments/imgres/res",
-            Project: "/sparrowinstruments/imgpro/pro"
-        };
-        
         // Initialize
         function init() {
-    // Clear localStorage on first page load of this session
-    if (!sessionStorage.getItem('pageLoaded')) {
-        localStorage.clear();
-        sessionStorage.setItem('pageLoaded', 'true');
-        console.log('LocalStorage cleared on first load');
-    }
-    
-    // Try to load existing counters from localStorage
-    const savedCounters = localStorage.getItem('itemCounters');
-    if (savedCounters) {
-        itemCounters = JSON.parse(savedCounters);
-    } else {
-        // Reset counters if not found
-        itemCounters = {
-            Education: 1,
-            Medical: 1,
-            Scientific: 1,
-            Industry: 1,
-            Research: 1,
-            Project: 1
-        };
-        localStorage.setItem('itemCounters', JSON.stringify(itemCounters));
-    }
+            // Clear localStorage on first page load of this session
+            if (!sessionStorage.getItem('pageLoaded')) {
+                localStorage.clear();
+                sessionStorage.setItem('pageLoaded', 'true');
+                console.log('LocalStorage cleared on first load');
+            }
+            
+            // Try to load existing counters from localStorage
+            const savedCounters = localStorage.getItem('imageCounters');
+            if (savedCounters) {
+                imageCounters = JSON.parse(savedCounters);
+            } else {
+                // Reset counters if not found
+                imageCounters = {
+                    Education: { startNo: 1, counter: 1 },
+                    Medical: { startNo: 1, counter: 1 },
+                    Scientific: { startNo: 1, counter: 1 },
+                    Industry: { startNo: 1, counter: 1 },
+                    Research: { startNo: 1, counter: 1 },
+                    Project: { startNo: 1, counter: 1 }
+                };
+                localStorage.setItem('imageCounters', JSON.stringify(imageCounters));
+            }
             
             // Add event listeners
             browseBtn.addEventListener('click', () => imageInput.click());
             imageInput.addEventListener('change', handleImageSelect);
             categorySelect.addEventListener('change', handleCategoryChange);
+            imageStartNoInput.addEventListener('input', handleStartNoChange);
             itemNameInput.addEventListener('input', capitalizeFirstLetters);
             mrpPriceInput.addEventListener('input', formatMRPPrice);
             mrpPriceInput.addEventListener('input', calculateBuyPrice);
@@ -978,44 +998,54 @@
             const category = categorySelect.value;
             
             if (category) {
-                // Update image path
-                const counter = itemCounters[category];
-                imagePathInput.value = jsonImagePaths[category] + counter + ".jpg";
+                // Update start number input with saved value
+                imageStartNoInput.value = imageCounters[category].startNo;
+                
+                // Update image path and save name
+                updateImagePaths(category);
                 
                 // Update default keywords (non-editable)
                 defaultKeywordsInput.value = defaultKeywords[category];
-                
-                // Update save name
-                updateSaveName();
             } else {
+                imageStartNoInput.value = '';
                 imagePathInput.value = "";
                 defaultKeywordsInput.value = "";
                 saveNameSpan.textContent = "Select category first";
             }
         }
         
-        // Update save name for image
-        function updateSaveName() {
+        // Handle start number change
+        function handleStartNoChange() {
             const category = categorySelect.value;
-            if (!category) {
-                saveNameSpan.textContent = "Select category first";
-                return;
-            }
+            if (!category) return;
             
-            const counter = itemCounters[category];
-            let fileName;
+            const startNo = parseInt(imageStartNoInput.value) || 1;
             
-            switch(category) {
-                case 'Education': fileName = `edu${counter}.jpg`; break;
-                case 'Medical': fileName = `med${counter}.jpg`; break;
-                case 'Scientific': fileName = `sci${counter}.jpg`; break;
-                case 'Industry': fileName = `ind${counter}.jpg`; break;
-                case 'Research': fileName = `res${counter}.jpg`; break;
-                case 'Project': fileName = `pro${counter}.jpg`; break;
-                default: fileName = `item${counter}.jpg`;
-            }
+            // Update the start number for this category
+            imageCounters[category].startNo = startNo;
+            imageCounters[category].counter = 1; // Reset counter when start number changes
             
-            saveNameSpan.textContent = fileName;
+            // Save to localStorage
+            localStorage.setItem('imageCounters', JSON.stringify(imageCounters));
+            
+            // Update image paths
+            updateImagePaths(category);
+        }
+        
+        // Update image paths and save name
+        function updateImagePaths(category) {
+            const startNo = imageCounters[category].startNo;
+            const counter = imageCounters[category].counter;
+            
+            // Generate image name in format: edu20-1.jpg
+            const prefix = imagePrefixes[category];
+            const imageName = `${prefix}${startNo}-${counter}.jpg`;
+            
+            // Update image path
+            imagePathInput.value = imageDirectories[category] + imageName;
+            
+            // Update save name
+            saveNameSpan.textContent = imageName;
         }
         
         // Download image to local directory
@@ -1031,18 +1061,13 @@
                 return;
             }
             
-            const counter = itemCounters[category];
-            let fileName;
+            // Get current counter values
+            const startNo = imageCounters[category].startNo;
+            const counter = imageCounters[category].counter;
             
-            switch(category) {
-                case 'Education': fileName = `edu${counter}.jpg`; break;
-                case 'Medical': fileName = `med${counter}.jpg`; break;
-                case 'Scientific': fileName = `sci${counter}.jpg`; break;
-                case 'Industry': fileName = `ind${counter}.jpg`; break;
-                case 'Research': fileName = `res${counter}.jpg`; break;
-                case 'Project': fileName = `pro${counter}.jpg`; break;
-                default: fileName = `item${counter}.jpg`;
-            }
+            // Generate image name in format: edu20-1.jpg
+            const prefix = imagePrefixes[category];
+            const fileName = `${prefix}${startNo}-${counter}.jpg`;
             
             // Create download link
             const link = document.createElement('a');
@@ -1052,11 +1077,12 @@
             link.click();
             document.body.removeChild(link);
             
-            // Increment counter for next item
-            itemCounters[category]++;
-            localStorage.setItem('itemCounters', JSON.stringify(itemCounters));
-            updateSaveName();
-            handleCategoryChange(); // Update image path for next item
+            // Increment counter for next item (but keep same start number)
+            imageCounters[category].counter++;
+            localStorage.setItem('imageCounters', JSON.stringify(imageCounters));
+            
+            // Update image paths for next item
+            updateImagePaths(category);
         }
         
         // Format MRP price as user types - Simple formatting
@@ -1246,7 +1272,7 @@
             // Show success message
             showSuccessMessage();
             
-            // Reset form for next item
+            // Reset form for next item (but keep category and start number)
             resetForm();
         }
         
@@ -1276,12 +1302,11 @@
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
             
-            // Update counter
-            itemCounters[category]++;
-            localStorage.setItem('itemCounters', JSON.stringify(itemCounters));
+            // Note: We don't increment the counter here anymore
+            // The counter is only incremented when downloading the image
         }
         
-        // Reset form
+        // Reset form (but keep category and start number)
         function resetForm() {
             itemNameInput.value = '';
             mrpPriceInput.value = '';
@@ -1290,8 +1315,6 @@
             warrantyInput.value = '';
             specificationsInput.value = '';
             descriptionsInput.value = '';
-            // Keep category and default keywords
-            handleCategoryChange();
             
             // Update counters
             updateSpecsCounter();

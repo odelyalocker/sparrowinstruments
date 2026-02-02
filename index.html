@@ -2373,16 +2373,43 @@ function updateBadges() {
         // ===== EVENT LISTENERS =====
         document.querySelector('.search-box').addEventListener('input', searchItems);
         
- // ===== INITIALIZATION =====
+// ===== INITIALIZATION =====
 window.addEventListener('DOMContentLoaded', function() {
+    // Check if fresh session and clear if needed
+    isFreshSession();
+    
+    // Initialize your app
     fixCorruptedQuoteData();
     loadJSONFiles();
     updateBadges();
+    
+    console.log('Session ID:', getSessionId());
+});
+
+// ===== BROWSER CLOSE DETECTION =====
+window.addEventListener('beforeunload', function() {
+    // Set a flag when user leaves
+    sessionStorage.setItem('sparrow_last_unload', Date.now().toString());
+});
+
+// Check on page load if browser was closed
+window.addEventListener('load', function() {
+    const lastUnload = sessionStorage.getItem('sparrow_last_unload');
+    if (lastUnload) {
+        const timeClosed = Date.now() - parseInt(lastUnload);
+        // If more than 30 seconds, browser was likely closed
+        if (timeClosed > 30000) {
+            console.log('Browser was closed, starting fresh session');
+            sessionStorage.removeItem('sparrow_current_session');
+            sessionStorage.removeItem('sparrow_session_start');
+        }
+    }
 });
         
     </script>
 </body>
 </html>
+
 
 
 

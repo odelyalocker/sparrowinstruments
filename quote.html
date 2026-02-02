@@ -36,7 +36,6 @@
             min-height: 70px;
         }
         
-        /* Logo container in top-left corner */
         .logo-container {
             margin-right: 30px;
             display: flex;
@@ -59,7 +58,6 @@
             box-shadow: none;
         }
 
-        /* Center content */
         .header-center {
             flex-grow: 1;
             display: flex;
@@ -70,7 +68,6 @@
             min-width: 0;
         }
         
-        /* Center tagline */
         .center-tagline {
             font-size: 24px;
             color: #FF0000;
@@ -80,7 +77,6 @@
             line-height: 1.3;
         }
         
-        /* Second tagline */
         .trusted-tagline {
             font-size: 14px;
             color: #000000;
@@ -91,7 +87,6 @@
             margin-top: 5px;
         }
         
-        /* Quote Image Container */
         .quote-image-container {
             margin-left: 20px;
             display: flex;
@@ -147,7 +142,6 @@
             top: 70px;
         }
         
-        /* Home button on left */
         .home-button {
             display: flex;
             align-items: center;
@@ -166,7 +160,6 @@
             color: #FFFFFF;
         }
 
-        /* Icon styles */
         .home-button a i,
         .contact-button a i {
             color: #FFFFFF;
@@ -182,7 +175,6 @@
             filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
         }
 
-        /* Center title in black header */
         .black-header-center {
             flex-grow: 1;
             text-align: center;
@@ -196,7 +188,6 @@
             white-space: nowrap;
         }
         
-        /* Contact button on right */
         .contact-button {
             display: flex;
             align-items: center;
@@ -229,11 +220,11 @@
             min-height: calc(100vh - 190px);
         }
 
+        /* FIX #2: Full-width container */
         .items-container {
-            padding: 30px;
-            width: 95%;
+            padding: 20px 10px;
+            width: 100%;
             margin: 0 auto;
-            max-width: 1400px;
             min-height: 100%;
         }
         
@@ -261,7 +252,7 @@
             gap: 20px;
         }
         
-        /* Result item styling - MATCHING index.html STYLE */
+        /* FIX #2: Full-width result items */
         .result-item {
             background: white;
             padding: 25px;
@@ -278,7 +269,6 @@
             align-items: start;
         }
 
-        /* Left Column: Image + Price - MATCHING index.html */
         .result-left {
             grid-column: 1;
             display: flex;
@@ -353,7 +343,6 @@
             font-weight: bold;
         }
         
-        /* Center Column: Name + Specifications + Warranty */
         .result-center {
             grid-column: 2;
             min-width: 0;
@@ -391,12 +380,20 @@
             line-height: 1.4;
         }
         
-        /* Quantity Selector - Green Section */
-        .quantity-section {
+        /* FIX #1: Inline buttons container at bottom */
+        .action-buttons-container {
             margin-top: auto;
-            padding: 15px;
-            background: #28a745; /* Green background */
-            border-radius: 8px;
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        /* FIX #1: Quantity section as inline button */
+        .quantity-section {
+            flex: 1;
+            padding: 12px 15px;
+            background: #28a745;
+            border-radius: 6px;
             color: white;
             display: flex;
             align-items: center;
@@ -404,7 +401,7 @@
         }
         
         .quantity-label {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
         }
         
@@ -442,7 +439,30 @@
             text-align: center;
         }
         
-        /* Right Column: Description + Remove Button */
+        /* FIX #1: Remove button inline */
+        .remove-btn {
+            flex: 1;
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        
+        .remove-btn:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+        
         .result-right {
             grid-column: 3;
             min-width: 0;
@@ -476,36 +496,8 @@
             line-height: 1.5;
             word-break: break-word;
         }
-        
-        /* Remove button - moved to third column */
-        .remove-btn-container {
-            margin-top: auto;
-        }
-        
-        .remove-btn {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .remove-btn:hover {
-            background: #c82333;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
 
-        /* NEW: Confirm Quote Section */
+        /* FIX #3 & #4: Full-width confirm section with centered content */
         .confirm-quote-section {
             display: none;
             margin-top: 40px;
@@ -514,6 +506,7 @@
             border-radius: 10px;
             border: 2px solid #000000;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
         }
         
         .confirm-quote-section.visible {
@@ -521,9 +514,13 @@
             animation: fadeIn 0.5s ease-in;
         }
         
+        /* FIX #3: Centered confirm button */
         .confirm-button-container {
             text-align: center;
             margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .confirm-btn {
@@ -552,6 +549,7 @@
             transform: translateY(-1px);
         }
         
+        /* FIX #4: Full-width form section with centered content */
         .contact-form-section {
             display: none;
             margin-top: 30px;
@@ -559,6 +557,7 @@
             background: white;
             border-radius: 8px;
             border: 1px solid #000000;
+            width: 100%;
         }
         
         .contact-form-section.visible {
@@ -566,16 +565,22 @@
             animation: slideDown 0.5s ease-out;
         }
         
+        /* FIX #4: Centered form with proper layout */
         .contact-form {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
             gap: 20px;
             align-items: end;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .form-group {
             display: flex;
             flex-direction: column;
+            flex: 1;
+            min-width: 250px;
         }
         
         .form-group label {
@@ -601,8 +606,9 @@
         
         .submit-btn-container {
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
+            flex: 0 0 auto;
         }
         
         .submit-btn {
@@ -641,6 +647,7 @@
             border: 2px solid #000000;
             border-radius: 8px;
             text-align: center;
+            width: 100%;
         }
         
         .success-message.visible {
@@ -684,7 +691,6 @@
             color: #FFFFFF;
         }
         
-        /* Footer text responsiveness */
         .mobile-text {
             display: none;
         }
@@ -737,12 +743,24 @@
                 margin-top: 0;
             }
             
-            .quantity-section {
+            .action-buttons-container {
                 margin-top: 20px;
             }
             
             .contact-form {
-                grid-template-columns: 1fr;
+                flex-direction: column;
+            }
+            
+            .form-group {
+                min-width: 100%;
+            }
+            
+            .submit-btn-container {
+                width: 100%;
+            }
+            
+            .submit-btn {
+                width: 100%;
             }
         }
 
@@ -803,10 +821,13 @@
                 font-size: 22px;
             }
             
-            /* Items Section Mobile */
             .items-section {
                 margin-top: 130px;
                 min-height: calc(100vh - 180px);
+            }
+            
+            .items-container {
+                padding: 15px 8px;
             }
             
             .result-content {
@@ -838,9 +859,15 @@
                 margin-top: 0;
             }
             
+            /* Mobile inline buttons */
+            .action-buttons-container {
+                flex-direction: column;
+                margin-top: 20px;
+            }
+            
+            .quantity-section,
             .remove-btn {
-                padding: 10px 15px;
-                font-size: 14px;
+                width: 100%;
             }
             
             .empty-message {
@@ -850,10 +877,6 @@
             
             .empty-text {
                 font-size: 18px;
-            }
-            
-            .quantity-section {
-                margin-top: 20px;
             }
             
             .confirm-quote-section {
@@ -875,7 +898,7 @@
             }
             .success-message .contact-info {
                 font-size: 20px;
-    }
+            }
         }
         
         @media (max-width: 480px) {
@@ -958,6 +981,7 @@
             }
             .success-message .contact-info {
                 font-size: 16px;
+            }
         }
         
         @media (max-width: 360px) {
@@ -1017,28 +1041,22 @@
                 font-size: 14px;
             }
             .success-message .contact-info {
-                font-size: 18px; /* Adjust for very small screens */
-    }
+                font-size: 18px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Fixed Header -->
     <header>
-        <!-- Logo in top-left corner -->
         <div class="logo-container">
             <img src="/sparrowinstruments/images/silogo.jpg" alt="Sparrow Instruments Logo" style="background: transparent;">
         </div>
         
-        <!-- Center content with centered tagline -->
         <div class="header-center">
-            <!-- First Tagline -->
             <div class="center-tagline">Sparrow Instruments Pvt. Ltd.</div>
-            <!-- Second Tagline -->
             <div class="trusted-tagline">Wholesaler of all Laboratory Equipment and Instruments</div>
         </div>
         
-        <!-- Quote Image in top-right corner -->
         <div class="quote-image-container">
             <a href="/sparrowinstruments/quote.html">
                 <img src="/sparrowinstruments/images/quote.jpg" alt="Request Quote" style="background: transparent;">
@@ -1046,21 +1064,17 @@
         </div>
     </header>
     
-    <!-- Black Header Section -->
     <div class="black-header">
-        <!-- Home button on left -->
         <div class="home-button">
             <a href="index.html">
                 <i class="fas fa-home"></i>
             </a>
         </div>
         
-        <!-- Center title -->
         <div class="black-header-center">
             <div class="center-title">Get Quotation for Added Items</div>
         </div>
         
-        <!-- Contact button on right -->
         <div class="contact-button">
             <a href="contact.html">
                 <i class="fas fa-phone"></i>
@@ -1068,21 +1082,16 @@
         </div>
     </div>
     
-    <!-- Items Display Section -->
     <div class="items-section" id="itemsSection">
         <div class="items-container">
-            <!-- Items will appear here when available -->
             <div class="items-list" id="itemsList">
-                <!-- Items will be dynamically inserted here -->
             </div>
-            <!-- Empty message - shown when no items (DEFAULT STATE) -->
             <div class="empty-message" id="emptyMessage">
                 <div class="empty-text">
                     You have no items to get Quote. Please search and add items to get quotation. Thanks.
                 </div>
             </div>
             
-            <!-- NEW: Confirm Quote Section -->
             <div class="confirm-quote-section" id="confirmQuoteSection">
                 <div class="confirm-button-container">
                     <button class="confirm-btn" id="confirmQuoteBtn">
@@ -1091,7 +1100,6 @@
                     </button>
                 </div>
                 
-                <!-- Contact Form Section -->
                 <div class="contact-form-section" id="contactFormSection">
                     <form class="contact-form" id="quoteForm">
                         <div class="form-group">
@@ -1106,7 +1114,7 @@
                             <label for="email">Email ID :</label>
                             <input type="email" id="email" name="email" required placeholder="Enter your email address">
                         </div>
-                        <div class="form-group submit-btn-container">
+                        <div class="submit-btn-container">
                             <button type="submit" class="submit-btn" id="submitQuoteBtn">
                                 <i class="fas fa-paper-plane"></i>
                                 Submit
@@ -1115,7 +1123,6 @@
                     </form>
                 </div>
                 
-                <!-- Success Message -->
                 <div class="success-message" id="successMessage">
                     <p>Your Requested Quotation has been submitted successfully. We will notify you within 24 business hours.</p>
                     <p>Or, you can directly contact us through:</p>
@@ -1129,7 +1136,6 @@
         </div>
     </div>
     
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="copyright">
@@ -1140,69 +1146,27 @@
     </footer>
 
 <script>
-    // ===== SESSION MANAGEMENT (SAME AS MAIN PAGE) =====
-    const SESSION_PREFIX = 'sparrowSession_';
-
-    // Get session ID
-    function getSessionId() {
-        let sessionId = sessionStorage.getItem('sparrow_current_session');
-        
-        if (!sessionId) {
-            // If user came directly to this page, create a session
-            sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-            sessionStorage.setItem('sparrow_current_session', sessionId);
+    // Simple load/save functions matching index.html
+    function loadData(key) {
+        try {
+            const data = localStorage.getItem(key);
+            return data ? JSON.parse(data) : [];
+        } catch (e) {
+            console.error('Error loading data:', e);
+            return [];
         }
-        
-        return sessionId;
+    }
+    
+    function saveData(key, data) {
+        try {
+            localStorage.setItem(key, JSON.stringify(data));
+        } catch (e) {
+            console.error('Error saving data:', e);
+        }
     }
 
-    // Load data with session check
-    function loadWithSession(dataType) {
-        const sessionId = getSessionId();
-        const sessionKey = `${SESSION_PREFIX}${sessionId}_${dataType}`;
-        
-        // Try session-specific data first
-        const sessionData = localStorage.getItem(sessionKey);
-        if (sessionData) {
-            try {
-                const parsed = JSON.parse(sessionData);
-                return parsed.data || [];
-            } catch (e) {
-                console.error('Error parsing session data:', e);
-            }
-        }
-        
-        // Fallback to regular localStorage (for compatibility)
-        const regularData = localStorage.getItem(dataType);
-        if (regularData) {
-            try {
-                return JSON.parse(regularData);
-            } catch (e) {
-                console.error('Error parsing regular data:', e);
-            }
-        }
-        
-        return [];
-    }
-
-    // Save data with session tracking
-    function saveWithSession(dataType, data) {
-        const sessionId = getSessionId();
-        const sessionKey = `${SESSION_PREFIX}${sessionId}_${dataType}`;
-        
-        localStorage.setItem(sessionKey, JSON.stringify({
-            data: data,
-            timestamp: Date.now(),
-            sessionId: sessionId
-        }));
-        
-        // Also save in regular key for backward compatibility
-        localStorage.setItem(dataType, JSON.stringify(data));
-    }
-
-    // Load saved items from localStorage
     function loadAddedItems() {
-        const items = loadWithSession('sparrowQuoteItems');
+        const items = loadData('sparrowQuoteItems');
         const itemsList = document.getElementById('itemsList');
         const emptyMessage = document.getElementById('emptyMessage');
         const confirmQuoteSection = document.getElementById('confirmQuoteSection');
@@ -1210,53 +1174,25 @@
         console.log('🔍 Checking localStorage for quote items...');
         console.log('Loaded items:', items);
         
-        // DEFAULT: Show empty message, hide items list and confirm section
         emptyMessage.style.display = 'flex';
         itemsList.style.display = 'none';
         confirmQuoteSection.classList.remove('visible');
-        itemsList.innerHTML = ''; // Clear any existing items
+        itemsList.innerHTML = '';
         
-        // Reset form and success message
         document.getElementById('contactFormSection').classList.remove('visible');
         document.getElementById('successMessage').classList.remove('visible');
         document.getElementById('quoteForm').reset();
         
-        if (items && items.length > 0) {
+        if (Array.isArray(items) && items.length > 0) {
             console.log(`📦 Found ${items.length} items in quote`);
-            console.log('Items data:', items);
             
-            // Show items and confirm section, hide empty message
             itemsList.style.display = 'block';
             emptyMessage.style.display = 'none';
             confirmQuoteSection.classList.add('visible');
             
-            // Display items with full product data
             items.forEach((itemData, index) => {
-                console.log(`🔄 Processing item ${index + 1}:`, itemData);
-                
-                // Check if itemData is an object with full product data
-                if (typeof itemData === 'object' && itemData !== null) {
-                    console.log('✅ Item is an object, creating element...');
-                    const itemElement = createItemElement(itemData, index);
-                    itemsList.appendChild(itemElement);
-                } 
-                // Fallback for old format (just IDs) - but shouldn't happen now
-                else {
-                    console.log('⚠️ Item is not an object, using fallback:', itemData);
-                    const basicItem = {
-                        id: itemData || `item_${index}`,
-                        name: `Item ${index + 1}`,
-                        image: 'placeholder.jpg',
-                        mrpPrice: 'Price on request',
-                        bestBuyPrice: 'Price on request',
-                        bestBuyLabel: 'Buy',
-                        warranty: 'Not specified',
-                        specifications: ['Specifications not available'],
-                        description: ['Please go back to the main catalog to see full details.']
-                    };
-                    const itemElement = createItemElement(basicItem, index);
-                    itemsList.appendChild(itemElement);
-                }
+                const itemElement = createItemElement(itemData, index);
+                itemsList.appendChild(itemElement);
             });
             
             console.log('✅ All items displayed');
@@ -1265,16 +1201,23 @@
         }
     }
     
-    // Create item element for display
+    function formatPrice(value) {
+        if (value === null || value === undefined || value === '') {
+            return 'Price on request';
+        }
+        const strVal = value.toString().trim();
+        if (/^\d/.test(strVal)) {
+            return `INR ${strVal}/-`;
+        }
+        return strVal;
+    }
+    
     function createItemElement(product, index) {
-        console.log(`🎨 Creating element for item ${index}:`, product.name || product.id);
-        
         const itemElement = document.createElement('div');
         itemElement.className = 'result-item';
         itemElement.dataset.itemId = product.id || `item_${index}`;
         itemElement.dataset.quantity = product.quantity || 1;
         
-        // Format specifications
         let specsHTML = '';
         if (Array.isArray(product.specifications)) {
             specsHTML = product.specifications.map(s => `<li>${s}</li>`).join('');
@@ -1284,7 +1227,6 @@
             specsHTML = '<li>Specifications not specified</li>';
         }
         
-        // Format description
         let descHTML = '';
         if (Array.isArray(product.description)) {
             descHTML = product.description.map(d => `<li>${d}</li>`).join('');
@@ -1294,21 +1236,22 @@
             descHTML = '<li>Description not available</li>';
         }
         
-        // Format prices
-        const mrpPrice = product.mrpPrice || product.mrp || 'Price on request';
-        const bestBuyPrice = product.bestBuyPrice || product.price || 'Price on request';
-        const bestBuyLabel = product.bestBuyLabel || 'Buy';
-        
-        // Check for guaranteed competitive pricing
-        const isGuaranteedCompetitive = 
-            (bestBuyPrice && bestBuyPrice.toString().toLowerCase().includes('guaranteed competitive')) ||
-            (bestBuyLabel && bestBuyLabel.toString().toLowerCase().includes('guaranteed competitive'));
-        
-        const priceDisplay = isGuaranteedCompetitive ? 
-            'Guaranteed Competitive' : 
-            (bestBuyPrice ? `INR ${bestBuyPrice}/-` : 'Price on request');
-        
-        const mrpDisplay = mrpPrice ? `INR ${mrpPrice}/-` : 'Price on request';
+        const mrpRaw = product.mrpPrice || product.mrp || '';
+        const bestBuyRaw = product.bestBuyPrice || product.price || '';
+        const bestBuyLabel = product.bestBuyLabel || 'Best Buy';
+
+        const labelIsCompetitive = bestBuyLabel.toString().toLowerCase().includes('guaranteed competitive');
+        const priceIsCompetitive = bestBuyRaw.toString().toLowerCase().includes('guaranteed competitive');
+        const isGuaranteedCompetitive = labelIsCompetitive || priceIsCompetitive;
+
+        const mrpDisplay = formatPrice(mrpRaw);
+
+        let priceDisplay;
+        if (isGuaranteedCompetitive) {
+            priceDisplay = 'Guaranteed Competitive';
+        } else {
+            priceDisplay = formatPrice(bestBuyRaw);
+        }
         
         itemElement.innerHTML = `
             <div class="result-content">
@@ -1334,13 +1277,19 @@
                         <ul>${specsHTML}</ul>
                         <strong>Warranty:</strong> ${product.warranty || 'Not specified'}
                     </div>
-                    <div class="quantity-section">
-                        <span class="quantity-label">No. of Items</span>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn minus-btn" data-item-id="${product.id || index}">-</button>
-                            <span class="quantity-value">${product.quantity || 1}</span>
-                            <button class="quantity-btn plus-btn" data-item-id="${product.id || index}">+</button>
+                    <div class="action-buttons-container">
+                        <div class="quantity-section">
+                            <span class="quantity-label">No. of Items</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn" data-item-id="${product.id || index}">-</button>
+                                <span class="quantity-value">${product.quantity || 1}</span>
+                                <button class="quantity-btn plus-btn" data-item-id="${product.id || index}">+</button>
+                            </div>
                         </div>
+                        <button class="remove-btn" data-item-id="${product.id || index}">
+                            <i class="fas fa-trash"></i>
+                            Remove Item
+                        </button>
                     </div>
                 </div>
                 <div class="result-right">
@@ -1348,20 +1297,12 @@
                         <strong>Descriptions:</strong>
                         <ul>${descHTML}</ul>
                     </div>
-                    <div class="remove-btn-container">
-                        <button class="remove-btn" data-item-id="${product.id || index}">
-                            <i class="fas fa-trash"></i>
-                            Remove Item
-                        </button>
-                    </div>
                 </div>
             </div>
         `;
         
-        // Add event listeners
         const removeBtn = itemElement.querySelector('.remove-btn');
         removeBtn.addEventListener('click', function() {
-            console.log('🗑️ Removing item:', product.id || index);
             removeItem(product.id || index);
         });
         
@@ -1370,83 +1311,41 @@
         const quantityValue = itemElement.querySelector('.quantity-value');
         
         minusBtn.addEventListener('click', function() {
-            console.log('➖ Decreasing quantity for item:', product.id || index);
             updateQuantity(product.id || index, -1, quantityValue);
         });
         
         plusBtn.addEventListener('click', function() {
-            console.log('➕ Increasing quantity for item:', product.id || index);
             updateQuantity(product.id || index, 1, quantityValue);
         });
         
-        console.log('✅ Item element created successfully');
         return itemElement;
     }
     
-    // Update quantity function
     function updateQuantity(itemId, change, quantityElement) {
-        console.log(`🔄 Updating quantity for item ${itemId}, change: ${change}`);
-        
-        const items = loadWithSession('sparrowQuoteItems');
-        
-        console.log('📋 Current items in quote:', items);
-        
-        // Find the item index
+        const items = loadData('sparrowQuoteItems');
         const itemIndex = items.findIndex(item => item.id === itemId);
-        console.log('🔍 Item index found:', itemIndex);
         
         if (itemIndex !== -1) {
-            // Get current quantity
-            let currentItem = items[itemIndex];
-            let currentQuantity = currentItem.quantity || 1;
-            
-            console.log('📊 Current quantity:', currentQuantity);
-            
-            // Calculate new quantity (minimum 1)
+            let currentQuantity = items[itemIndex].quantity || 1;
             let newQuantity = Math.max(1, currentQuantity + change);
             
-            console.log('🎯 New quantity:', newQuantity);
-            
-            // Update the item quantity
             items[itemIndex].quantity = newQuantity;
+            saveData('sparrowQuoteItems', items);
             
-            // Update localStorage using session-aware function
-            saveWithSession('sparrowQuoteItems', items);
-            
-            // Update display
             quantityElement.textContent = newQuantity;
-            
-            // Show toast
             showToast(`Quantity updated to ${newQuantity}`, 'success');
-        } else {
-            console.error('❌ Item not found in quote:', itemId);
         }
     }
     
-    // Remove item from list
     function removeItem(itemId) {
-        console.log(`🗑️ Attempting to remove item: ${itemId}`);
-        
-        const items = loadWithSession('sparrowQuoteItems');
-        
-        console.log('📋 Items before removal:', items.length);
-        
-        // Filter out the item to remove
+        const items = loadData('sparrowQuoteItems');
         const updatedItems = items.filter(item => item.id !== itemId);
         
-        console.log('📋 Items after removal:', updatedItems.length);
-        
-        // Save using session-aware function
-        saveWithSession('sparrowQuoteItems', updatedItems);
-        
-        // Reload the items
+        saveData('sparrowQuoteItems', updatedItems);
         loadAddedItems();
-        
-        // Show confirmation
         showToast('Item removed from your list', 'info');
     }
     
-    // NEW: Confirm Quote functionality
     function setupConfirmQuote() {
         const confirmBtn = document.getElementById('confirmQuoteBtn');
         const contactFormSection = document.getElementById('contactFormSection');
@@ -1455,97 +1354,57 @@
         const submitBtn = document.getElementById('submitQuoteBtn');
         
         confirmBtn.addEventListener('click', function() {
-            console.log('✅ Confirm Quote button clicked');
-            
-            // Hide confirm button, show contact form
             confirmBtn.style.display = 'none';
             contactFormSection.classList.add('visible');
-            
-            // Scroll to form
             contactFormSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
             showToast('Please fill in your contact details', 'info');
         });
         
         quoteForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            console.log('📝 Form submitted');
             
-            // Disable submit button to prevent double submission
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
             
-            // Get form data
             const formData = {
                 name: document.getElementById('name').value,
                 phone: document.getElementById('phone').value,
                 email: document.getElementById('email').value,
-                items: getQuoteItems(),
+                items: loadData('sparrowQuoteItems'),
                 timestamp: new Date().toISOString()
             };
             
-            console.log('📊 Form data:', formData);
-            
-            // Simulate form submission with delay
             setTimeout(() => {
-                // Hide form, show success message
                 contactFormSection.classList.remove('visible');
                 successMessage.classList.add('visible');
                 
-                // Save submission to localStorage (for demo purposes)
-                saveQuoteSubmission(formData);
+                try {
+                    const existingSubmissions = JSON.parse(localStorage.getItem('sparrowQuoteSubmissions') || '[]');
+                    existingSubmissions.push(formData);
+                    localStorage.setItem('sparrowQuoteSubmissions', JSON.stringify(existingSubmissions));
+                } catch (e) {
+                    console.error('Error saving submission:', e);
+                }
                 
-                // Scroll to success message
                 successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                
                 showToast('Quote submitted successfully!', 'success');
                 
-                // Reset form and button
                 quoteForm.reset();
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit';
                 
-            }, 1500); // 1.5 second delay to simulate processing
+            }, 1500);
         });
     }
     
-    // NEW: Get quote items from localStorage
-    function getQuoteItems() {
-        return loadWithSession('sparrowQuoteItems');
-    }
-    
-    // NEW: Save quote submission (for demo purposes)
-    function saveQuoteSubmission(formData) {
-        try {
-            // Get existing submissions or create new array
-            const existingSubmissions = JSON.parse(localStorage.getItem('sparrowQuoteSubmissions') || '[]');
-            
-            // Add new submission
-            existingSubmissions.push(formData);
-            
-            // Save back to localStorage
-            localStorage.setItem('sparrowQuoteSubmissions', JSON.stringify(existingSubmissions));
-            
-            console.log('💾 Quote submission saved:', formData);
-            console.log('📋 Total submissions:', existingSubmissions.length);
-            
-        } catch (e) {
-            console.error('❌ Error saving quote submission:', e);
-        }
-    }
-    
-    // Show toast notification
     function showToast(message, type = 'info') {
-        // Remove existing toast
         const existingToast = document.querySelector('.toast-notification');
         if (existingToast) existingToast.remove();
         
-        // Create toast
         const toast = document.createElement('div');
         toast.className = `toast-notification toast-${type}`;
         toast.textContent = message;
         
-        // Add styles
         toast.style.cssText = `
             position: fixed;
             top: 20px;
@@ -1559,7 +1418,6 @@
             animation: slideIn 0.3s ease-out;
         `;
         
-        // Add keyframe animation
         const style = document.createElement('style');
         style.textContent = `
             @keyframes slideIn {
@@ -1569,7 +1427,6 @@
         `;
         document.head.appendChild(style);
         
-        // Auto-remove after 3 seconds
         setTimeout(() => {
             if (toast.parentNode) {
                 toast.style.animation = 'slideIn 0.3s ease-out reverse';
@@ -1580,34 +1437,11 @@
         document.body.appendChild(toast);
     }
     
-    // Initialize when page loads
     document.addEventListener('DOMContentLoaded', function() {
         console.log('🚀 Page loaded, starting quote item loading...');
         loadAddedItems();
         setupConfirmQuote();
     });
-    
-    // Add debug helper
-    window.debugQuote = function() {
-        const sessionId = getSessionId();
-        const sessionKey = `${SESSION_PREFIX}${sessionId}_sparrowQuoteItems`;
-        const saved = localStorage.getItem(sessionKey);
-        
-        console.log('🔍 Debug - Session ID:', sessionId);
-        console.log('🔍 Debug - Session Key:', sessionKey);
-        console.log('🔍 Debug - localStorage data:', saved);
-        
-        if (saved) {
-            console.log('🔍 Parsed session data:', JSON.parse(saved));
-        }
-        
-        // Also check regular key
-        const regular = localStorage.getItem('sparrowQuoteItems');
-        console.log('🔍 Debug - Regular key data:', regular);
-        
-        loadAddedItems();
-    }
 </script>
-
 </body>
 </html>

@@ -1878,104 +1878,110 @@ function loadSavedQuotes() {
             document.body.appendChild(toast);
         }
         
-        // ===== CREATE RESULT ITEM =====
-        function createResultItem(item, resultsList) {
-            const resultItem = document.createElement('div');
-            resultItem.className = 'result-item';
-            resultItem.dataset.itemId = item.id;
-            resultItem.dataset.section = item.section || 'General';
-            resultItem.dataset.category = item.category || 'General';
-            resultItem.dataset.price = parsePrice(item.bestBuyPrice || item.mrpPrice);
-            
-            const specsHTML = Array.isArray(item.specifications) ? 
-                item.specifications.map(s => `<li>${s}</li>`).join('') : '';
-            const descHTML = Array.isArray(item.description) ? 
-                item.description.map(d => `<li>${d}</li>`).join('') : 
-                `<li>${item.description || ''}</li>`;
-            
-            const isQuoted = quoteItems.has(item.id);
-            const quoteButtonText = isQuoted ? 'Added to Quote' : 'Get Quote';
-            const quoteButtonClass = isQuoted ? 'get-quote-btn added' : 'get-quote-btn';
-            
-            const buyPriceText = item.bestBuyPrice || '';
-            const buyLabelText = item.bestBuyLabel || 'Buy';
-            const isGuaranteedCompetitive = 
-                buyPriceText.toString().toLowerCase().includes('guaranteed competitive') ||
-                buyLabelText.toString().toLowerCase().includes('guaranteed competitive');
-            
-            const cartButtonClass = isGuaranteedCompetitive ? 'add-to-cart-btn inactive' : 'add-to-cart-btn';
-            const cartButtonDisabled = isGuaranteedCompetitive ? 'disabled' : '';
-            
-            // #2 FIX: Both buttons now rendered inside one .button-container in result-center
-            // result-right no longer has any button
-            resultItem.innerHTML = `
-                <div class="result-content">
-                    <div class="result-left">
-                        <div class="result-image">
-                            <img src="${item.image || 'placeholder.jpg'}" alt="${item.name}">
-                        </div>
-                        <div class="price-box">
-                            <div class="mrp-line">
-                                <span class="mrp-label">M.R.P.</span> 
-                                <span class="mrp-price">INR ${item.mrpPrice || '0'}/-</span>
-                            </div>
-                            <div class="bestbuy-line">
-                                <span class="bestbuy-label">${buyLabelText}</span> 
-                                <span class="bestbuy-price">${item.bestBuyPrice || 'INR 0/-'}</span>
-                            </div>
-                        </div>
+// ===== CREATE RESULT ITEM =====
+function createResultItem(item, resultsList) {
+    const resultItem = document.createElement('div');
+    resultItem.className = 'result-item';
+    resultItem.dataset.itemId = item.id;
+    resultItem.dataset.section = item.section || 'General';
+    resultItem.dataset.category = item.category || 'General';
+    resultItem.dataset.price = parsePrice(item.bestBuyPrice || item.mrpPrice);
+    
+    const specsHTML = Array.isArray(item.specifications) ? 
+        item.specifications.map(s => `<li>${s}</li>`).join('') : '';
+    const descHTML = Array.isArray(item.description) ? 
+        item.description.map(d => `<li>${d}</li>`).join('') : 
+        `<li>${item.description || ''}</li>`;
+    
+    // Check if item is in quote
+    const isQuoted = quoteItems.has(item.id);
+    const quoteButtonText = isQuoted ? 'Added to Quote' : 'Get Quote';
+    const quoteButtonClass = isQuoted ? 'get-quote-btn added' : 'get-quote-btn';
+    
+    // NEW: Check if item is in cart
+    const cartItems = loadWithSession('sparrowCartItems');
+    const isInCart = Array.isArray(cartItems) && cartItems.some(cartItem => cartItem.id === item.id);
+    const cartButtonText = isInCart ? 'Added to Cart' : 'Add to Cart';
+    const cartButtonIcon = isInCart ? 'fa-check' : 'fa-shopping-cart';
+    
+    const buyPriceText = item.bestBuyPrice || '';
+    const buyLabelText = item.bestBuyLabel || 'Buy';
+    const isGuaranteedCompetitive = 
+        buyPriceText.toString().toLowerCase().includes('guaranteed competitive') ||
+        buyLabelText.toString().toLowerCase().includes('guaranteed competitive');
+    
+    const cartButtonClass = isGuaranteedCompetitive ? 'add-to-cart-btn inactive' : 
+        (isInCart ? 'add-to-cart-btn added' : 'add-to-cart-btn');
+    const cartButtonDisabled = isGuaranteedCompetitive ? 'disabled' : '';
+    
+    resultItem.innerHTML = `
+        <div class="result-content">
+            <div class="result-left">
+                <div class="result-image">
+                    <img src="${item.image || 'placeholder.jpg'}" alt="${item.name}">
+                </div>
+                <div class="price-box">
+                    <div class="mrp-line">
+                        <span class="mrp-label">M.R.P.</span> 
+                        <span class="mrp-price">INR ${item.mrpPrice || '0'}/-</span>
                     </div>
-                    
-                    <div class="result-center">
-                        <h4 class="item-name">${item.name}</h4>
-                        <div class="specs-section">
-                            ${specsHTML ? `<strong>Specifications:</strong><ul>${specsHTML}</ul>` : ''}
-                            <strong>Warranty:</strong> ${item.warranty || 'Not specified'}
-                        </div>
-                        <div class="button-container">
-                            <button class="${quoteButtonClass}" data-item-id="${item.id}">
-                                <i class="fas ${isQuoted ? 'fa-check' : 'fa-file-alt'}"></i>
-                                ${quoteButtonText}
-                            </button>
-                            <button class="${cartButtonClass}" ${cartButtonDisabled} data-item-id="${item.id}">
-                                <i class="fas fa-shopping-cart"></i>
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="result-right">
-                        <div class="description-section">
-                            <strong>Descriptions:</strong>
-                            <ul>${descHTML}</ul>
-                        </div>
+                    <div class="bestbuy-line">
+                        <span class="bestbuy-label">${buyLabelText}</span> 
+                        <span class="bestbuy-price">${item.bestBuyPrice || 'INR 0/-'}</span>
                     </div>
                 </div>
-            `;
+            </div>
             
-            resultsList.appendChild(resultItem);
+            <div class="result-center">
+                <h4 class="item-name">${item.name}</h4>
+                <div class="specs-section">
+                    ${specsHTML ? `<strong>Specifications:</strong><ul>${specsHTML}</ul>` : ''}
+                    <strong>Warranty:</strong> ${item.warranty || 'Not specified'}
+                </div>
+                <div class="button-container">
+                    <button class="${quoteButtonClass}" data-item-id="${item.id}">
+                        <i class="fas ${isQuoted ? 'fa-check' : 'fa-file-alt'}"></i>
+                        ${quoteButtonText}
+                    </button>
+                    <button class="${cartButtonClass}" ${cartButtonDisabled} data-item-id="${item.id}">
+                        <i class="fas ${cartButtonIcon}"></i>
+                        ${cartButtonText}
+                    </button>
+                </div>
+            </div>
             
-            setupZoom(resultItem);
-            
-            const quoteBtn = resultItem.querySelector('.get-quote-btn');
-            const cartBtn = resultItem.querySelector('.add-to-cart-btn');
-            
-            quoteBtn.addEventListener('click', function() {
-                const itemId = this.dataset.itemId;
-                handleQuoteClick(itemId, this);
-            });
-            
-            if (!isGuaranteedCompetitive) {
-                cartBtn.addEventListener('click', function() {
-                    const itemId = this.dataset.itemId;
-                    handleCartClick(itemId);
-                });
-            } else {
-                cartBtn.setAttribute('disabled', 'disabled');
-                cartBtn.style.cursor = 'not-allowed';
-                cartBtn.style.opacity = '0.6';
-            }
-        }
+            <div class="result-right">
+                <div class="description-section">
+                    <strong>Descriptions:</strong>
+                    <ul>${descHTML}</ul>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    resultsList.appendChild(resultItem);
+    
+    setupZoom(resultItem);
+    
+    const quoteBtn = resultItem.querySelector('.get-quote-btn');
+    const cartBtn = resultItem.querySelector('.add-to-cart-btn');
+    
+    quoteBtn.addEventListener('click', function() {
+        const itemId = this.dataset.itemId;
+        handleQuoteClick(itemId, this);
+    });
+    
+    if (!isGuaranteedCompetitive) {
+        cartBtn.addEventListener('click', function() {
+            const itemId = this.dataset.itemId;
+            handleCartClick(itemId, this); // Pass the button element
+        });
+    } else {
+        cartBtn.setAttribute('disabled', 'disabled');
+        cartBtn.style.cursor = 'not-allowed';
+        cartBtn.style.opacity = '0.6';
+    }
+}
         
         // ===== HANDLE QUOTE BUTTON CLICK =====
  // ===== HANDLE QUOTE BUTTON CLICK =====
@@ -2033,8 +2039,7 @@ function handleQuoteClick(itemId, button) {
     updateBadges();
 }
         
-// ===== HANDLE CART BUTTON CLICK =====
-function handleCartClick(itemId) {
+function handleCartClick(itemId, button) { // Added button parameter
     const item = allItems.find(i => i.id === itemId);
     if (!item) return;
     
@@ -2062,6 +2067,12 @@ function handleCartClick(itemId) {
     // Save using session-aware function
     saveWithSession('sparrowCartItems', cartItems);
     updateBadges();
+    
+    // Update the button
+    if (button) {
+        button.innerHTML = '<i class="fas fa-check"></i> Added to Cart';
+        button.classList.add('added');
+    }
     
     showToast('Added to cart (' + cartItems.length + ' item' + (cartItems.length > 1 ? 's' : '') + ')', 'success');
 }
@@ -2409,3 +2420,4 @@ window.addEventListener('load', function() {
     </script>
 </body>
 </html>
+

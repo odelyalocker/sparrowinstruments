@@ -1839,15 +1839,12 @@ function isFreshSession() {
         
 // ===== LOAD SAVED QUOTES =====
 function loadSavedQuotes() {
-    const savedQuotes = localStorage.getItem('sparrowQuoteItems');
-    if (savedQuotes) {
-        try {
-            const quoteData = JSON.parse(savedQuotes);
-            quoteItems = new Set(quoteData.items || []);
-            quoteCount = quoteData.count || 0;
-        } catch (e) {
-            console.error('Error loading saved quotes:', e);
-        }
+    const quoteData = loadWithSession('sparrowQuoteItems');
+    if (Array.isArray(quoteData)) {
+        // Get just the IDs for the quoteItems Set
+        const ids = quoteData.map(item => item.id);
+        quoteItems = new Set(ids);
+        quoteCount = quoteData.length || 0;
     }
 }
         
@@ -2376,5 +2373,6 @@ window.addEventListener('DOMContentLoaded', function() {
     </script>
 </body>
 </html>
+
 
 

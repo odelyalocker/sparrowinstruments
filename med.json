@@ -29,9 +29,9 @@
     "name": "Digital Microscope Camera",
     "category": "Biology Lab",
     "image": "/sparrowinstruments/imgmed/med2.jpg",
-    "mrpPrice": "15,000",
+    "mrpPrice": "15,000/-",
     "discount": "10%",
-    "bestBuyPrice": "13,500",
+    "bestBuyPrice": "13,500/-",
     "warranty": "1 Year Manufacturer Warranty",
     "specifications": [
       "Sensor: 5MP CMOS",

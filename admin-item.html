@@ -729,11 +729,29 @@
         
         // Initialize
         function init() {
-            // Try to load existing counters from localStorage
-            const savedCounters = localStorage.getItem('itemCounters');
-            if (savedCounters) {
-                itemCounters = JSON.parse(savedCounters);
-            }
+    // Clear localStorage on first page load of this session
+    if (!sessionStorage.getItem('pageLoaded')) {
+        localStorage.clear();
+        sessionStorage.setItem('pageLoaded', 'true');
+        console.log('LocalStorage cleared on first load');
+    }
+    
+    // Try to load existing counters from localStorage
+    const savedCounters = localStorage.getItem('itemCounters');
+    if (savedCounters) {
+        itemCounters = JSON.parse(savedCounters);
+    } else {
+        // Reset counters if not found
+        itemCounters = {
+            Education: 1,
+            Medical: 1,
+            Scientific: 1,
+            Industry: 1,
+            Research: 1,
+            Project: 1
+        };
+        localStorage.setItem('itemCounters', JSON.stringify(itemCounters));
+    }
             
             // Add event listeners
             browseBtn.addEventListener('click', () => imageInput.click());

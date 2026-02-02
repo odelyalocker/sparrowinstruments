@@ -1203,31 +1203,33 @@
                 flex: 0 0 auto;
                 height: 200px;
             }
-            
             .result-center,
             .result-right {
                 grid-column: 1;
             }
-.filter-sidebar {
+ /* FIX FOR MOBILE BOTTOM SPACING */
+    .filter-sidebar {
         top: 130px;
-        /* Use min-height instead of height for flexibility */
-        min-height: calc(100vh - 130px);
-        height: auto;
-        max-height: calc(100vh - 130px);
+        height: calc(100vh - 130px);
         width: 180px;
-        /* Add safe area support */
-        padding-bottom: max(20px, env(safe-area-inset-bottom, 20px));
+        /* KEY FIX: Add bottom padding INSIDE scrollable area */
+        padding-bottom: 40px !important; /* Increased for mobile */
     }
     
+    /* Ensure content has bottom padding */
     .filter-content {
-        padding: 10px 12px 10px 12px;
+        padding: 10px 12px 20px 12px !important; /* Increased bottom padding */
     }
     
-    /* Ensure last item has space */
+    /* Make sure last section has extra space */
     .filter-section:last-child {
-        padding-bottom: 15px; /* Increase for mobile */
-    }            
-
+        padding-bottom: 25px !important; /* Even more space for last item */
+    }
+    
+    /* Add margin to Apply button specifically */
+    #applyFilter {
+        margin-bottom: 15px !important;
+    }
             .checkbox-item {
                 font-size: 17px;
             }
@@ -2299,7 +2301,3 @@ window.addEventListener('DOMContentLoaded', function() {
     </script>
 </body>
 </html>
-
-
-
-

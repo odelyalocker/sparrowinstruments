@@ -3,9 +3,9 @@
     "name": "Optical Spectrometer",
     "category": "Physics Lab",
     "image": "/sparrowinstruments/imgsci/sci1.jpg",
-    "mrpPrice": "42,500",
+    "mrpPrice": "42,500/-",
     "discount": "8%",
-    "bestBuyPrice": "39,100",
+    "bestBuyPrice": "39,100/-",
     "warranty": "2 Years Manufacturer Warranty",
     "specifications": [
       "Prism type: Constant deviation",
@@ -27,9 +27,9 @@
     "name": "Digital Multimeter",
     "category": "Physics Lab",
     "image": "/sparrowinstruments/imgsci/sci2.jpg",
-    "mrpPrice": "3,200",
+    "mrpPrice": "3,200/-",
     "discount": "15%",
-    "bestBuyPrice": "2,720",
+    "bestBuyPrice": "2,720/-",
     "warranty": "1 Year Manufacturer Warranty",
     "specifications": [
       "DC Voltage: 200mV to 1000V",

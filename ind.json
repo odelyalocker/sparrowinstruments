@@ -3,9 +3,9 @@
     "name": "Digital Hematology Analyzer",
     "category": "Medical Lab",
     "image": "/sparrowinstruments/imgind/ind1.jpg",
-    "mrpPrice": "2,85,000",
+    "mrpPrice": "2,85,000/-",
     "discount": "18%",
-    "bestBuyPrice": "2,33,700",
+    "bestBuyPrice": "2,33,700/-",
     "warranty": "2 Years Manufacturer Warranty",
     "specifications": [
       "Parameters: 22 parameters + 3 histograms",
@@ -27,9 +27,9 @@
     "name": "Clinical Centrifuge",
     "category": "Medical Lab",
     "image": "/sparrowinstruments/imgind/ind2.jpg",
-    "mrpPrice": "32,000",
+    "mrpPrice": "32,000/-",
     "discount": "12%",
-    "bestBuyPrice": "28,160",
+    "bestBuyPrice": "28,160/-",
     "warranty": "1 Year Manufacturer Warranty",
     "specifications": [
       "Max speed: 5000 rpm",

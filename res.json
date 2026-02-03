@@ -3,9 +3,9 @@
     "name": "Digital Centrifuge Machine",
     "category": "Scientific Lab",
     "image": "/sparrowinstruments/imgres/res1.jpg",
-    "mrpPrice": "85,000",
+    "mrpPrice": "85,000/-",
     "discount": "15%",
-    "bestBuyPrice": "72,250",
+    "bestBuyPrice": "72,250/-",
     "warranty": "2 Years Manufacturer Warranty",
     "specifications": [
       "Max speed: 6000 rpm",
@@ -27,9 +27,9 @@
     "name": "UV-Vis Spectrophotometer",
     "category": "Scientific Lab",
     "image": "/sparrowinstruments/imgres/res2.jpg",
-    "mrpPrice": "1,25,000",
+    "mrpPrice": "1,25,000/-",
     "discount": "12%",
-    "bestBuyPrice": "1,10,000",
+    "bestBuyPrice": "1,10,000/-",
     "warranty": "2 Years Manufacturer Warranty",
     "specifications": [
       "Wavelength range: 190-1100nm",

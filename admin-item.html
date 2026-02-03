@@ -29,7 +29,7 @@
         
         /* Header */
         .admin-header {
-            background: linear-gradient(135deg, #1565c0, #0d47a1);
+            background: #0D47A1;
             color: white;
             padding: 12px 20px;
             text-align: center;
@@ -52,11 +52,11 @@
         }
         
         .add-btn {
-            background: #4CAF50;
-            color: black;
+            background: white;
+            color: #0D47A1;
             border: none;
             padding: 10px 25px;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 800;
             border-radius: 6px;
             cursor: pointer;
@@ -65,7 +65,7 @@
         }
         
         .add-btn:hover {
-            background: #45a049;
+            background: white;
             transform: translateY(-2px);
             box-shadow: 0 5px 10px rgba(0,0,0,0.25);
         }
@@ -132,7 +132,7 @@
         }
         
         .download-btn {
-            background: #4CAF50;
+            background: #0D47A1;
             color: white;
             border: none;
             padding: 8px 16px;
@@ -146,7 +146,7 @@
         }
         
         .download-btn:hover {
-            background: #45a049;
+            background: #0D47A1;
             transform: translateY(-2px);
         }
         
@@ -341,6 +341,14 @@
         
         #descriptions {
             min-height: 120px;
+        }
+        
+        /* NEW: Keywords for Items textarea */
+        #itemKeywords {
+            min-height: 100px;
+            font-family: monospace;
+            font-size: 13px;
+            background-color: #f0f0f0;
         }
         
         .form-group input:focus,
@@ -551,7 +559,7 @@
                     </select>
                 </div>
                 
-                <!-- NEW: Image Start Number Input -->
+                <!-- Image Start Number Input -->
                 <div class="form-group">
                     <label for="imageStartNo">Image Start Number:</label>
                     <input type="number" id="imageStartNo" placeholder="e.g., 20 for Education" min="1">
@@ -604,6 +612,15 @@
                     <textarea id="descriptions" placeholder="Type here..." maxlength="240"></textarea>
                     <div class="line-counter">
                         <span id="descLineCount">0</span>/6 lines | Max line: <span id="descMaxChars">0</span>/40 chars
+                    </div>
+                </div>
+                
+                <!-- NEW: Keywords for Items Box -->
+                <div class="form-group">
+                    <label for="itemKeywords">Keywords for Items (Auto-generated from Item Name):</label>
+                    <textarea id="itemKeywords" placeholder="Item-specific keywords will appear here..." readonly></textarea>
+                    <div class="line-counter">
+                        <span id="keywordsCount">0</span> keywords generated
                     </div>
                 </div>
             </div>
@@ -669,6 +686,7 @@
         const defaultKeywordsInput = document.getElementById('defaultKeywords');
         const specificationsInput = document.getElementById('specifications');
         const descriptionsInput = document.getElementById('descriptions');
+        const itemKeywordsInput = document.getElementById('itemKeywords'); // NEW
         const addBtn = document.getElementById('addBtn');
         const successMessage = document.getElementById('successMessage');
         
@@ -677,6 +695,7 @@
         const specsMaxChars = document.getElementById('specsMaxChars');
         const descLineCount = document.getElementById('descLineCount');
         const descMaxChars = document.getElementById('descMaxChars');
+        const keywordsCount = document.getElementById('keywordsCount'); // NEW
         
         // Crop Modal Elements
         const cropModal = document.getElementById('cropModal');
@@ -696,7 +715,7 @@
         let isDragging = false;
         let startX, startY, initialX, initialY;
         
-        // MODIFIED: Store per-category image counters with start number
+        // Store per-category image counters with start number
         let imageCounters = {
             Education: { startNo: 1, counter: 1 },
             Medical: { startNo: 1, counter: 1 },
@@ -727,13 +746,28 @@
         };
         
         // Default keywords for each category
-        const defaultKeywords = {
-            Education: "Kolkata West Bengal education lab equipment, Patna Bihar school laboratory instruments, Guwahati Assam biology lab apparatus, Bhubaneswar Odisha physics lab tools, Ranchi Jharkhand chemistry lab supplies, Siliguri North Bengal educational instruments, Northeast India Eastern region academic equipment, Durgapur Asansol industrial area school tools, Jamshedpur industrial city lab apparatus, Rourkela steel city educational supplies, Eastern India school laboratory equipment, Bengal Bihar Odisha Assam academic instruments, Kolkata Howrah school science equipment, Patna Gaya educational tools, Guwahati Dibrugarh Northeast lab supplies",
-            Medical: "Kolkata West Bengal medical laboratory equipment, Patna Bihar clinical diagnostic instruments, Guwahati Assam hospital lab supplies, Bhubaneswar Odisha pathology lab tools, Ranchi Jharkhand medical research equipment, Siliguri North Bengal healthcare instruments, Northeast India Eastern region medical apparatus, Durgapur Asansol hospital laboratory tools, Jamshedpur industrial city medical equipment, Rourkela steel city clinical supplies, Eastern India medical laboratory instruments, Bengal Bihar Odisha Assam healthcare tools, Kolkata medical college equipment, Patna AIIMS diagnostic instruments, Guwahati medical university lab supplies",
-            Scientific: "Kolkata West Bengal scientific research equipment, Patna Bihar laboratory testing instruments, Guwahati Assam analytical laboratory apparatus, Bhubaneswar Odisha research lab tools, Ranchi Jharkhand measurement instruments, Siliguri North Bengal scientific lab supplies, Northeast India Eastern region experimental equipment, Durgapur Asansol industrial testing devices, Jamshedpur Tata research instruments, Rourkela industrial measurement tools, Eastern India scientific laboratory equipment, Bengal Bihar Odisha Assam research apparatus, Kolkata IIT research instruments, Patna NIT laboratory tools, Guwahati university scientific equipment",
-            Industry: "Kolkata West Bengal industrial laboratory equipment, Patna Bihar quality control instruments, Guwahati Assam testing lab apparatus, Bhubaneswar Odisha manufacturing lab tools, Ranchi Jharkhand industrial research equipment, Siliguri North Bengal factory lab supplies, Northeast India Eastern region production devices, Durgapur Asansol steel plant instruments, Jamshedpur industrial testing equipment, Rourkela factory quality tools, Eastern India industrial laboratory instruments, Bengal Bihar Odisha Assam manufacturing apparatus, Kolkata industrial area testing equipment, Patna industrial estate lab tools, Guwahati industrial growth center supplies",
-            Research: "Kolkata West Bengal research laboratory equipment, Patna Bihar scientific research instruments, Guwahati Assam experimental lab apparatus, Bhubaneswar Odisha R&D lab tools, Ranchi Jharkhand academic research equipment, Siliguri North Bengal innovation lab supplies, Northeast India Eastern region advanced instruments, Durgapur Asansol research center tools, Jamshedpur R&D laboratory equipment, Rourkela innovation center apparatus, Eastern India research laboratory instruments, Bengal Bihar Odisha Assam experimental tools, Kolkata CSIR research equipment, Patna research institute instruments, Guwahati agricultural research supplies",
-            Project: "Kolkata West Bengal project laboratory equipment, Patna Bihar engineering lab instruments, Guwahati Assam student project apparatus, Bhubaneswar Odisha DIY lab tools, Ranchi Jharkhand prototype testing equipment, Siliguri North Bengal experimental project supplies, Northeast India Eastern region model making tools, Durgapur Asansol engineering college equipment, Jamshedpur student project instruments, Rourkela prototype development tools, Eastern India project laboratory apparatus, Bengal Bihar Odisha Assam engineering tools, Kolkata engineering college project equipment, Patna polytechnic institute tools, Guwahati university project supplies"
+const defaultKeywords = {
+    Education: "Sparrow Instruments Kolkata West Bengal, Sparrow Instruments authorized dealer wholesaler retailer Kolkata, sparrow instruments kolkata west bengal, sparrow equipment kolkata west bengal, Kolkata West Bengal education lab equipment, Patna Bihar school laboratory instruments, Sparrow Instruments school laboratory equipment Kolkata, Guwahati Assam biology lab apparatus, Bhubaneswar Odisha physics lab tools, Ranchi Jharkhand chemistry lab supplies, Siliguri North Bengal educational instruments, sparrow educational tools kolkata, Northeast India Eastern region academic equipment, Durgapur Asansol industrial area school tools, Jamshedpur industrial city lab apparatus, Rourkela steel city educational supplies, Eastern India school laboratory equipment, sparrow scientific tools kolkata west bengal, Bengal Bihar Odisha Assam academic instruments, Kolkata Howrah school science equipment, Patna Gaya educational tools, Guwahati Dibrugarh Northeast lab supplies, sparrow medical kit kolkata west bengal, Sparrow Instruments educational lab equipment Kolkata West Bengal, Sparrow Instruments education lab equipment Pune Maharashtra, Pune school laboratory instruments supplier, Pune educational tools Maharashtra, Kharagpur West Bengal school science equipment, Sparrow Instruments Kharagpur educational dealer, Kharagpur laboratory instruments West Bengal",
+    
+    Medical: "Sparrow Instruments medical equipment Kolkata, Sparrow Instruments authorized medical dealer Kolkata West Bengal, sparrow medical kit kolkata west bengal, Kolkata West Bengal medical laboratory equipment, Patna Bihar clinical diagnostic instruments, Sparrow Instruments hospital equipment supplier Kolkata, Guwahati Assam hospital lab supplies, Bhubaneswar Odisha pathology lab tools, Ranchi Jharkhand medical research equipment, Siliguri North Bengal healthcare instruments, sparrow instruments kolkata west bengal, Northeast India Eastern region medical apparatus, Durgapur Asansol hospital laboratory tools, Jamshedpur industrial city medical equipment, Rourkela steel city clinical supplies, Eastern India medical laboratory instruments, Bengal Bihar Odisha Assam healthcare tools, Kolkata medical college equipment, Patna AIIMS diagnostic instruments, Guwahati medical university lab supplies, Sparrow Instruments clinical diagnostic tools Kolkata, sparrow equipment kolkata west bengal, Sparrow Instruments medical equipment Pune Maharashtra, Pune clinical laboratory instruments supplier, Pune healthcare tools Maharashtra, Kharagpur West Bengal medical diagnostic equipment, Sparrow Instruments Kharagpur medical dealer, Kharagpur hospital supplies West Bengal",
+    
+    Scientific: "Sparrow Instruments scientific equipment Kolkata, Sparrow Instruments research lab tools Kolkata West Bengal, sparrow scientific tools kolkata west bengal, Kolkata West Bengal scientific research equipment, Patna Bihar laboratory testing instruments, Sparrow Instruments analytical laboratory apparatus Kolkata, Guwahati Assam analytical laboratory apparatus, Bhubaneswar Odisha research lab tools, Ranchi Jharkhand measurement instruments, Siliguri North Bengal scientific lab supplies, sparrow instruments kolkata west bengal, Northeast India Eastern region experimental equipment, Durgapur Asansol industrial testing devices, Jamshedpur Tata research instruments, Rourkela industrial measurement tools, Eastern India scientific laboratory equipment, Bengal Bihar Odisha Assam research apparatus, Kolkata IIT research instruments, Patna NIT laboratory tools, Guwahati university scientific equipment, Sparrow Instruments measurement instruments Kolkata, sparrow equipment kolkata west bengal, Sparrow Instruments scientific equipment Pune Maharashtra, Pune research laboratory instruments supplier, Pune analytical tools Maharashtra, Kharagpur West Bengal scientific testing equipment, Sparrow Instruments Kharagpur scientific dealer, Kharagpur research supplies West Bengal",
+    
+    Industry: "Sparrow Instruments industrial equipment Kolkata, Sparrow Instruments authorized industrial dealer Kolkata West Bengal, sparrow instruments kolkata west bengal, Kolkata West Bengal industrial laboratory equipment, Patna Bihar quality control instruments, Sparrow Instruments factory testing equipment Kolkata, Guwahati Assam testing lab apparatus, Bhubaneswar Odisha manufacturing lab tools, Ranchi Jharkhand industrial research equipment, Siliguri North Bengal factory lab supplies, sparrow equipment kolkata west bengal, Northeast India Eastern region production devices, Durgapur Asansol steel plant instruments, Jamshedpur industrial testing equipment, Rourkela factory quality tools, Eastern India industrial laboratory instruments, Bengal Bihar Odisha Assam manufacturing apparatus, Kolkata industrial area testing equipment, Patna industrial estate lab tools, Guwahati industrial growth center supplies, Sparrow Instruments quality control tools Kolkata, Sparrow Instruments industrial equipment Pune Maharashtra, Pune factory testing instruments supplier, Pune manufacturing tools Maharashtra, Kharagpur West Bengal industrial testing equipment, Sparrow Instruments Kharagpur industrial dealer, Kharagpur factory supplies West Bengal",
+    
+    Research: "Sparrow Instruments research equipment Kolkata, Sparrow Instruments R&D laboratory tools Kolkata West Bengal, sparrow scientific tools kolkata west bengal, Kolkata West Bengal research laboratory equipment, Patna Bihar scientific research instruments, Sparrow Instruments experimental lab apparatus Kolkata, Guwahati Assam experimental lab apparatus, Bhubaneswar Odisha R&D lab tools, Ranchi Jharkhand academic research equipment, Siliguri North Bengal innovation lab supplies, sparrow instruments kolkata west bengal, Northeast India Eastern region advanced instruments, Durgapur Asansol research center tools, Jamshedpur R&D laboratory equipment, Rourkela innovation center apparatus, Eastern India research laboratory instruments, Bengal Bihar Odisha Assam experimental tools, Kolkata CSIR research equipment, Patna research institute instruments, Guwahati agricultural research supplies, Sparrow Instruments innovation lab supplies Kolkata, Sparrow Instruments research equipment Pune Maharashtra, Pune experimental laboratory instruments supplier, Pune innovation tools Maharashtra, Kharagpur West Bengal research testing equipment, Sparrow Instruments Kharagpur research dealer, Kharagpur experimental supplies West Bengal",
+    
+    Project: "Sparrow Instruments project equipment Kolkata, Sparrow Instruments engineering lab instruments Kolkata West Bengal, sparrow equipment kolkata west bengal, Kolkata West Bengal project laboratory equipment, Patna Bihar engineering lab instruments, Sparrow Instruments student project apparatus Kolkata, Guwahati Assam student project apparatus, Bhubaneswar Odisha DIY lab tools, Ranchi Jharkhand prototype testing equipment, Siliguri North Bengal experimental project supplies, sparrow instruments kolkata west bengal, Northeast India Eastern region model making tools, Durgapur Asansol engineering college equipment, Jamshedpur student project instruments, Rourkela prototype development tools, Eastern India project laboratory apparatus, Bengal Bihar Odisha Assam engineering tools, Kolkata engineering college project equipment, Patna polytechnic institute tools, Guwahati university project supplies, Sparrow Instruments prototype development tools Kolkata, Sparrow Instruments project equipment Pune Maharashtra, Pune engineering lab instruments supplier, Pune DIY tools Maharashtra, Kharagpur West Bengal student project equipment, Sparrow Instruments Kharagpur project dealer, Kharagpur prototype supplies West Bengal"
+};
+        
+        // NEW: Category-specific keyword templates
+        const categoryKeywordTemplates = {
+            Education: ["educational equipment", "lab instruments", "school laboratory tools", "science equipment", "educational kit", "learning tools", "academic instruments", "lab apparatus", "science lab equipment", "educational apparatus"],
+            Medical: ["medical equipment", "clinical instruments", "hospital tools", "diagnostic equipment", "medical kit", "healthcare instruments", "clinical tools", "medical apparatus", "diagnostic kit", "hospital equipment"],
+            Scientific: ["scientific equipment", "research instruments", "lab testing tools", "analytical equipment", "measurement instruments", "research tools", "scientific apparatus", "testing equipment", "analytical instruments", "lab tools"],
+            Industry: ["industrial equipment", "factory instruments", "manufacturing tools", "quality control equipment", "industrial kit", "production instruments", "factory tools", "industrial apparatus", "manufacturing equipment", "quality tools"],
+            Research: ["research equipment", "lab research instruments", "experimental tools", "R&D equipment", "research kit", "scientific instruments", "experimental equipment", "lab apparatus", "research tools", "development instruments"],
+            Project: ["project equipment", "engineering instruments", "student tools", "DIY equipment", "project kit", "engineering tools", "student instruments", "project apparatus", "prototype equipment", "model making tools"]
         };
         
         // File paths for each category
@@ -778,6 +812,7 @@
             categorySelect.addEventListener('change', handleCategoryChange);
             imageStartNoInput.addEventListener('input', handleStartNoChange);
             itemNameInput.addEventListener('input', capitalizeFirstLetters);
+            itemNameInput.addEventListener('input', generateItemKeywords); // NEW
             mrpPriceInput.addEventListener('input', formatMRPPrice);
             mrpPriceInput.addEventListener('input', calculateBuyPrice);
             discountInput.addEventListener('input', calculateBuyPrice);
@@ -800,6 +835,50 @@
             handleCategoryChange();
             updateSpecsCounter();
             updateDescCounter();
+        }
+        
+        // NEW: Generate item-specific keywords
+        function generateItemKeywords() {
+            const itemName = itemNameInput.value.trim();
+            const category = categorySelect.value;
+            
+            if (!itemName || !category) {
+                itemKeywordsInput.value = "";
+                keywordsCount.textContent = "0";
+                return;
+            }
+            
+            // Get templates for this category
+            const templates = categoryKeywordTemplates[category] || categoryKeywordTemplates.Education;
+            
+            // Generate 10 specific keywords
+            const keywords = [
+                // Product + Category + Location
+                `${itemName} ${templates[0]} Kolkata`,
+                `${itemName} ${templates[1]} West Bengal`,
+                
+                // Brand + Product
+                `Sparrow Instruments ${itemName}`,
+                `${itemName} by Sparrow Instruments`,
+                
+                // Product + Category
+                `${itemName} ${templates[2]}`,
+                `${itemName} ${templates[3]}`,
+                
+                // Location + Product + Category
+                `Kolkata ${itemName} ${templates[4]}`,
+                `West Bengal ${itemName} ${templates[5]}`,
+                
+                // Brand + Product + Location
+                `Sparrow Instruments ${itemName} Kolkata`,
+                
+                // Product + Generic
+                `${itemName} equipment Kolkata West Bengal`
+            ];
+            
+            // Join keywords with commas
+            itemKeywordsInput.value = keywords.join(", ");
+            keywordsCount.textContent = keywords.length;
         }
         
         // Handle image selection
@@ -1006,11 +1085,18 @@
                 
                 // Update default keywords (non-editable)
                 defaultKeywordsInput.value = defaultKeywords[category];
+                
+                // Regenerate item keywords if item name exists
+                if (itemNameInput.value.trim()) {
+                    generateItemKeywords();
+                }
             } else {
                 imageStartNoInput.value = '';
                 imagePathInput.value = "";
                 defaultKeywordsInput.value = "";
+                itemKeywordsInput.value = "";
                 saveNameSpan.textContent = "Select category first";
+                keywordsCount.textContent = "0";
             }
         }
         
@@ -1202,7 +1288,7 @@
             }
         }
         
-        // Add item to text file - FIXED VERSION
+        // Add item to text file - MODIFIED to include item keywords
         function addItem() {
             const category = categorySelect.value;
             if (!category) {
@@ -1243,11 +1329,19 @@
                 .filter(line => line.trim() !== '')
                 .map(line => line.substring(0, 40)); // Limit to 40 chars
             
-            // Get keywords from default keywords (split by commas)
-            const keywordsArray = defaultKeywordsInput.value
+            // Get keywords from both default keywords AND item keywords
+            const defaultKeywordsArray = defaultKeywordsInput.value
                 .split(',')
                 .map(keyword => keyword.trim())
                 .filter(keyword => keyword !== '');
+            
+            const itemKeywordsArray = itemKeywordsInput.value
+                .split(',')
+                .map(keyword => keyword.trim())
+                .filter(keyword => keyword !== '');
+            
+            // Combine both keyword arrays (item keywords first for priority)
+            const keywordsArray = [...itemKeywordsArray, ...defaultKeywordsArray];
             
             // Create item object
             const item = {
@@ -1301,9 +1395,6 @@
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
-            
-            // Note: We don't increment the counter here anymore
-            // The counter is only incremented when downloading the image
         }
         
         // Reset form (but keep category and start number)
@@ -1315,6 +1406,8 @@
             warrantyInput.value = '';
             specificationsInput.value = '';
             descriptionsInput.value = '';
+            itemKeywordsInput.value = '';
+            keywordsCount.textContent = "0";
             
             // Update counters
             updateSpecsCounter();

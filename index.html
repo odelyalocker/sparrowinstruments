@@ -85,7 +85,7 @@
             margin-top: 5px;
         }
         
-        /* #5 FIX: quote-image-container cleaned — no badge, no relative positioning needed */
+        /* ===== CHANGE 1b: quote-image-container restyled for icon + badge ===== */
         .quote-image-container {
             margin-left: 20px;
             display: flex;
@@ -93,10 +93,8 @@
             justify-content: center;
             height: 55px;
             width: 55px;
-            overflow: hidden;
-            border-radius: 50%;
-            background: transparent;
             flex-shrink: 0;
+            position: relative;
         }
 
         .quote-image-container a {
@@ -105,21 +103,51 @@
             justify-content: center;
             height: 100%;
             width: 100%;
+            text-decoration: none;
+            border-radius: 50%;
+            background: #f0f0f0;
+            border: 2px solid #ddd;
+            transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
         }
 
-        .quote-image-container img {
-            height: 100%;
-            width: 100%;
-            object-fit: contain;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-
-        .quote-image-container img:hover {
+        .quote-image-container a:hover {
+            background: #e8e8e8;
+            border-color: #d32f2f;
             transform: scale(1.08);
-            filter: brightness(1.05);
+        }
+
+        .quote-image-container a i {
+            color: #d32f2f;
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .quote-image-container a:hover i {
+            color: #b71c1c;
+        }
+
+        /* Quote badge — positioned top-right of the circular container */
+        .quote-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: #d32f2f;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            min-width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            pointer-events: none;
+            border: 2px solid white;
+            padding: 0 5px;
+        }
+        .quote-badge.hidden {
+            display: none;
         }
         
         .main-content {
@@ -1093,6 +1121,18 @@
                 order: 3;
                 flex-shrink: 0;
             }
+
+            .quote-image-container a i {
+                font-size: 18px;
+            }
+
+            .quote-badge {
+                top: -3px;
+                right: -3px;
+                min-width: 17px;
+                height: 17px;
+                font-size: 10px;
+            }
             
             .header-center {
                 width: calc(100% - 110px);
@@ -1242,6 +1282,18 @@
                 width: 35px;
                 margin-left: 10px;
             }
+
+            .quote-image-container a i {
+                font-size: 16px;
+            }
+
+            .quote-badge {
+                top: -3px;
+                right: -3px;
+                min-width: 16px;
+                height: 16px;
+                font-size: 9px;
+            }
             
             .header-center {
                 width: calc(100% - 90px);
@@ -1317,6 +1369,18 @@
             
             .quote-image-container {
                 margin-left: 8px;
+            }
+
+            .quote-image-container a i {
+                font-size: 14px;
+            }
+
+            .quote-badge {
+                top: -3px;
+                right: -3px;
+                min-width: 15px;
+                height: 15px;
+                font-size: 9px;
             }
             
             .header-center {
@@ -1440,11 +1504,12 @@
             <div class="trusted-tagline">Wholesaler of all Laboratory Equipment and Instruments</div>
         </div>
         
-        <!-- #5 FIX: Badge span removed entirely from quote image -->
+        <!-- CHANGE 1a: quote.jpg replaced with fa-file-invoice-dollar icon + red badge -->
         <div class="quote-image-container">
             <a href="/sparrowinstruments/quote.html">
-                <img src="/sparrowinstruments/images/quote.jpg" alt="Request Quote" style="background: transparent;">
+                <i class="fas fa-file-invoice-dollar"></i>
             </a>
+            <span class="quote-badge hidden" id="quoteBadge">0</span>
         </div>
     </header>
     
@@ -1906,8 +1971,8 @@ function loadSavedQuotes() {
             const cartButtonClass = isGuaranteedCompetitive ? 'add-to-cart-btn inactive' : 'add-to-cart-btn';
             const cartButtonDisabled = isGuaranteedCompetitive ? 'disabled' : '';
             
-            // #2 FIX: Both buttons now rendered inside one .button-container in result-center
-            // result-right no longer has any button
+            // CHANGE 2: Removed hardcoded "/-" from MRP line.
+            // Both mrpPrice and bestBuyPrice already contain "/-" from the JSON files.
             resultItem.innerHTML = `
                 <div class="result-content">
                     <div class="result-left">
@@ -1917,7 +1982,7 @@ function loadSavedQuotes() {
                         <div class="price-box">
                             <div class="mrp-line">
                                 <span class="mrp-label">M.R.P.</span> 
-                                <span class="mrp-price">INR ${item.mrpPrice || '0'}/-</span>
+                                <span class="mrp-price">${item.mrpPrice || 'INR 0/-'}</span>
                             </div>
                             <div class="bestbuy-line">
                                 <span class="bestbuy-label">${buyLabelText}</span> 
@@ -2362,7 +2427,7 @@ function updateBadges() {
     const quoteData = loadWithSession('sparrowQuoteItems');
     const qCount = Array.isArray(quoteData) ? quoteData.length : 0;
     
-    // If you have a quote badge, update it too
+    // Update the quote badge in the header
     const quoteBadge = document.getElementById('quoteBadge');
     if (quoteBadge) {
         quoteBadge.textContent = qCount;
